@@ -1,6 +1,7 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.Printer;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -14,7 +15,8 @@ public class Calculator {
      * Default constructor of the class.
      * Does nothing since the class does not have any variables that need to be initialised.
      */
-    public Calculator() {}
+    public Calculator() {
+    }
 
     /*
      For the moment the calculator only contains a print method and an eval method
@@ -27,8 +29,9 @@ public class Calculator {
 
     /**
      * Prints an arithmetic expression provided as input parameter.
+     *
      * @param e the arithmetic Expression to be printed
-     * @see #printExpressionDetails(Expression) 
+     * @see #printExpressionDetails(Expression)
      */
     public void print(Expression e) {
         System.out.println("The result of evaluating expression " + e);
@@ -38,6 +41,7 @@ public class Calculator {
 
     /**
      * Prints verbose details of an arithmetic expression provided as input parameter.
+     *
      * @param e the arithmetic Expression to be printed
      * @see #print(Expression)
      */
@@ -51,6 +55,7 @@ public class Calculator {
 
     /**
      * Evaluates an arithmetic expression and returns its result
+     *
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
@@ -69,4 +74,10 @@ public class Calculator {
      or to simplify some expression
      public Expression simplify(Expression e)
     */
+
+    public String format(Expression e, Notation notation) {
+        Printer visitor = new Printer(Notation.PREFIX);
+        e.accept(visitor);
+        return visitor.getComputedValue();
+    }
 }
