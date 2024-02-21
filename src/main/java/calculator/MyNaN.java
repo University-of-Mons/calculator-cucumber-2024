@@ -11,6 +11,11 @@ public class MyNaN extends MyNumber {
     }
 
     @Override
+    public String toString() {
+        return "NaN";
+    }
+
+    @Override
     public boolean equals(Object o) {
         // No object should be equal to null (not including this check can result in an exception if a MyNumber is tested against null)
         if (o == null) return false;
