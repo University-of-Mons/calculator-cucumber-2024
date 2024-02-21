@@ -33,13 +33,13 @@ public class Main {
 
 	    List<Expression> params = new ArrayList<>();
 	    Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
-	    e = new Plus(params,Notation.PREFIX);
+	    e = new Plus(params);
 		c.printExpressionDetails(e);
 		c.eval(e);
 	
 		List<Expression> params2 = new ArrayList<>();
 		Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
-		e = new Minus(params2, Notation.INFIX);
+		e = new Minus(params2);
 		c.print(e);
 		c.eval(e);
 
@@ -51,8 +51,8 @@ public class Main {
 
 		List<Expression> params4 = new ArrayList<>();
 		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
-		e = new Divides(params4,Notation.POSTFIX);
-		c.print(e);
+		e = new Divides(params4);
+		c.print(e,Notation.POSTFIX);
 		c.eval(e);
 	}
 

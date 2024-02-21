@@ -15,7 +15,8 @@ public class Calculator {
      * Default constructor of the class.
      * Does nothing since the class does not have any variables that need to be initialised.
      */
-    public Calculator() {}
+    public Calculator() {
+    }
 
     /*
      For the moment the calculator only contains a print method and an eval method
@@ -28,14 +29,11 @@ public class Calculator {
 
     /**
      * Prints an arithmetic expression provided as input parameter.
+     *
      * @param e the arithmetic Expression to be printed
-     * @see #printExpressionDetails(Expression) 
+     * @see #printExpressionDetails(Expression)
      */
-    public void print(Expression e) {
-        Notation n = Notation.INFIX;
-        if (e.countOps() !=0){
-            n = ((Operation) e).notation;
-        }
+    public void print(Expression e, Notation n) {
         Printer v = new Printer(n);
         e.accept(v);
 
@@ -44,8 +42,15 @@ public class Calculator {
         System.out.println();
     }
 
+    public void print(Expression e) {
+        Notation n = Notation.INFIX;
+        print(e, n);
+    }
+
+
     /**
      * Prints verbose details of an arithmetic expression provided as input parameter.
+     *
      * @param e the arithmetic Expression to be printed
      * @see #print(Expression)
      */
@@ -59,6 +64,7 @@ public class Calculator {
 
     /**
      * Evaluates an arithmetic expression and returns its result
+     *
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */

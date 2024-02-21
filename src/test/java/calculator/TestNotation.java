@@ -18,8 +18,6 @@ class TestNotation {
      */
     void testNotation(String s, Operation o, Notation n) {
         assertEquals(s, o.toString(n));
-        o.notation = n;
-        assertEquals(s, o.toString());
     }
 
     /* This is an auxilary method to avoid code duplication.
@@ -58,10 +56,10 @@ class TestNotation {
     }
 
     /*
-    Test the mixing of notation in operator does not affect output
+    Test the nesting of expression
      */
     @Test
-    void testMixedNotation() {
+    void testNestedExpression() {
         List<Expression> params = new ArrayList<>();
         Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
         List<Expression> params2 = new ArrayList<>();
@@ -69,10 +67,10 @@ class TestNotation {
 
         List<Expression> params4 = new ArrayList<>();
         try {
-            Collections.addAll(params4, new Plus(params,Notation.PREFIX), new Minus(params2,Notation.INFIX), new MyNumber(5));
-            Operation o = new Divides(params4, Notation.POSTFIX);
+            Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
+            Operation o = new Divides(params4);
 
-            assertEquals("((3, 4, 5)+, (5, 3)-, 5)/",o.toString());
+            assertEquals("((3, 4, 5)+, (5, 3)-, 5)/",o.toString(Notation.POSTFIX));
             assertEquals("/(+(3, 4, 5), -(5, 3), 5)",o.toString(Notation.PREFIX));
             assertEquals("((3 + 4 + 5) / (5 - 3) / 5)",o.toString(Notation.INFIX));
         } catch (IllegalConstruction e) {
