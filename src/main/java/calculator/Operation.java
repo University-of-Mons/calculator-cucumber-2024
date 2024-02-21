@@ -1,10 +1,10 @@
 package calculator;
 
+import visitor.Printer;
 import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -25,6 +25,9 @@ public abstract class Operation implements Expression
    */
   protected String symbol;
 
+  public String getSymbol() {
+	return symbol;
+  }
   /**
    * The neutral element of the operation (e.g. 1 for *, 0 for +)
    */
@@ -100,7 +103,6 @@ public abstract class Operation implements Expression
 	 * @param v	The visitor object
 	 */
   public void accept(Visitor v) {
-  	for(Expression a:args) { a.accept(v); }
   	v.visit(this);
   }
 
@@ -159,20 +161,9 @@ public abstract class Operation implements Expression
    * @return	The String that is the result of the conversion.
    */
   public final String toString(Notation n) {
-	   Stream<String> s = args.stream().map(Object::toString);
-	   return switch (n) {
-		   case INFIX -> "( " +
-				   s.reduce((s1, s2) -> s1 + " " + symbol + " " + s2).get() +
-				   " )";
-		   case PREFIX -> symbol + " " +
-				   "(" +
-				   s.reduce((s1, s2) -> s1 + ", " + s2).get() +
-				   ")";
-		   case POSTFIX -> "(" +
-				   s.reduce((s1, s2) -> s1 + ", " + s2).get() +
-				   ")" +
-				   " " + symbol;
-	   };
+	  Printer p = new Printer(n);
+	  this.accept(p);
+	  return p.getResult();
   }
 
 	/**

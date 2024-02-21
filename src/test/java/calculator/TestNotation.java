@@ -23,11 +23,11 @@ class TestNotation {
      */
 	void testNotations(String symbol,int value1,int value2,Operation op) {
 		//prefix notation:
-		testNotation(symbol +" (" + value1 + ", " + value2 + ")", op, Notation.PREFIX);
+		testNotation(symbol +"(" + value1 + ", " + value2 + ")", op, Notation.PREFIX);
 		//infix notation:
-		testNotation("( " + value1 + " " + symbol + " " + value2 + " )", op, Notation.INFIX);
+		testNotation("(" + value1 + " " + symbol + " " + value2 + ")", op, Notation.INFIX);
 		//postfix notation:
-		testNotation("(" + value1 + ", " + value2 + ") " + symbol, op, Notation.POSTFIX);
+		testNotation("(" + value1 + ", " + value2 + ")" + symbol, op, Notation.POSTFIX);
 	}
 
 	@ParameterizedTest
