@@ -1,3 +1,8 @@
+.github
+doc
+target
+pom.xml
+
 # Default ignored files
 *.iws
 *.iml

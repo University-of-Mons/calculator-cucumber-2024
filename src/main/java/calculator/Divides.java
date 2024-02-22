@@ -48,7 +48,9 @@ public final class Divides extends Operation {
      * @param r The second integer that should divide the first
      * @return The integer that is the result of the division
      */
-    public int op(int l, int r) {
-        return (l / r);
+    public MyNumber op(int l, int r) {
+        if (l instance of NotANumber || r instanceof NotANumber)
+            return new NotANumber();
+        return new MyNumber(l.getValue() / r.getValue());
     }
 }

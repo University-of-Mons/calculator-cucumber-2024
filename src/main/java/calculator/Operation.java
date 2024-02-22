@@ -81,7 +81,7 @@ public abstract class Operation implements Expression {
      * @param r second argument of the binary operation
      * @return result of computing the binary operation
      */
-    public abstract int op(int l, int r);
+    public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
 
     /**
@@ -141,6 +141,76 @@ public abstract class Operation implements Expression {
                 .mapToInt(Expression::countNbs)
                 .reduce(Integer::sum)
                 .getAsInt();
+    }
+
+    /**
+     * Convert the arithmetic operation into a String to allow it to be printed,
+     * using the default notation (prefix, infix or postfix) that is specified in some variable.
+     *
+     * @return The String that is the result of the conversion.
+     */
+    @Override
+    public final String toString() {
+        return toString(notation);
+    }
+
+    /**
+     * Convert the arithmetic operation into a String to allow it to be printed,
+     * using the notation n (prefix, infix or postfix) that is specified as a parameter.
+     *
+     * @param n The notation to be used for representing the operation (prefix, infix or postfix)
+     * @return The String that is the result of the conversion.
+     */
+    public final String toString(Notation n) {
+        Stream<String> s = args.stream().map(Object::toString);
+        return switch (n) {
+            case INFIX -> "( " +
+                    s.reduce((s1, s2) -> s1 + " " + symbol + " " + s2).get() +
+                    " )";
+            case PREFIX -> symbol + " " +
+                    "(" +
+                    s.reduce((s1, s2) -> s1 + ", " + s2).get() +
+                    ")";
+            case POSTFIX -> "(" +
+                    s.reduce((s1, s2) -> s1 + ", " + s2).get() +
+                    ")" +
+                    " " + symbol;
+        };
+    }
+
+    /**
+     * Two operation objects are equal if their list of arguments is equal and they correspond to the same operation.
+     *
+     * @param o The object to compare with
+     * @return The result of the equality comparison
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false; // No object should be equal to null
+
+        if (this == o) return true; // If it's the same object, they're obviously equal
+
+        if (getClass() != o.getClass())
+            return false; // getClass() instead of instanceof() because an addition is not the same as a multiplication
+
+        Operation other = (Operation) o;
+        return this.args.equals(other.getArgs());
+    }
+
+    /**
+     * The method hashCode needs to be overridden it the equals method is overridden;
+     * otherwise there may be problems when you use your object in hashed collections
+     * such as HashMap, HashSet, LinkedHashSet.
+     *
+     * @return The result of computing the hash.
+     */
+    @Override
+    public int hashCode() {
+        int result = 5, prime = 31;
+        result = prime * result + neutral;
+        result = prime * result + symbol.hashCode();
+        result = prime * result + args.hashCode();
+        return result;
     }
 
     /**

@@ -77,9 +77,14 @@ class TestDivides {
     }
 
     @Test
-    void testNullParamList() {
-        params = null;
-        assertThrows(IllegalConstruction.class, () -> op = new Divides(params));
+    void testDivideByZeroShouldReturnNaN() {
+        List<Expression> p = Arrays.asList(new MyNumber(1), new MyNumber(0));
+        try {
+            Divides e = new Divides(p, Notation.INFIX);
+            Calculator c = new Calculator();
+            assertInstanceOf(NotANumber.class, c.eval(e));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
     }
-
 }

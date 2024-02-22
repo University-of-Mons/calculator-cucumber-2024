@@ -17,7 +17,7 @@ public class MyNumber implements Expression {
      *
      * @return The integer number contained in the object
      */
-    public Integer getValue() {
+    public int getValue() {
         return value;
     }
 
