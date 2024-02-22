@@ -116,4 +116,8 @@ public class CalculatorSteps {
 		assertEquals(val, c.eval(op));
 	}
 
+	@Then("It throws an arithmetic exception")
+	public void thenTheErrorOperationEvaluatesTo() {
+		assertThrows(ArithmeticException.class, () -> c.eval(op));
+	}
 }
