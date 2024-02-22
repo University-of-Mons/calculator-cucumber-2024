@@ -91,3 +91,29 @@ Feature: Integer Arithmetic Expressions
       | "-" | 8| 5|     3|
       | "*" | 7| 2|    14|
       | "/" | 6| 2|     3|
+
+
+
+Scenario: Printing the sum of two integer numbers
+    Given the sum of two numbers 8 and 6
+    Then its INFIX notation is ( 8 + 6 )
+    And its PREFIX notation is + (8, 6)
+    And its POSTFIX notation is (8, 6) +
+
+Scenario: Printing the difference of two integer numbers
+    Given the difference of two numbers 8 and 6
+    Then its INFIX notation is ( 8 - 6 )
+    And its PREFIX notation is - (8, 6)
+    And its POSTFIX notation is (8, 6) -
+
+Scenario: Printing the product of two integer numbers
+    Given the product of two numbers 8 and 6
+    Then its INFIX notation is ( 8 * 6 )
+    And its PREFIX notation is * (8, 6)
+    And its POSTFIX notation is (8, 6) *
+
+Scenario: Printing the quotient of two integer numbers
+    Given the quotient of two numbers 8 and 6
+    Then its INFIX notation is ( 8 / 6 )
+    And its PREFIX notation is / (8, 6)
+    And its POSTFIX notation is (8, 6) /
