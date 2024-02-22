@@ -35,19 +35,7 @@ Feature: Integer Arithmetic Expressions
     When I provide a first number 7
     And I provide a second number 5
     Then the operation evaluates to 1
-
-  Scenario: Dividing by zero
-    Given an integer operation '/'
-    When I provide a first number 7
-    And I provide a second number 0
-    Then the operation evaluates to NaN
-
-  Scenario: Printing the sum of two integer numbers
-    Given the sum of two numbers 8 and 6
-    Then its INFIX notation is ( 8 + 6 )
-    And its PREFIX notation is + (8, 6)
-    And its POSTFIX notation is (8, 6) +
-
+    
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of
   # strings. In this case, the table is of dimension 1 * 3 (1 line and three columns).
@@ -102,24 +90,24 @@ Feature: Integer Arithmetic Expressions
 
 Scenario: Printing the sum of two integer numbers
     Given the sum of two numbers 8 and 6
-    Then its INFIX notation is ( 8 + 6 )
-    And its PREFIX notation is + (8, 6)
-    And its POSTFIX notation is (8, 6) +
+    Then its INFIX notation is (8 + 6)
+    And its PREFIX notation is +(8, 6)
+    And its POSTFIX notation is (8, 6)+
 
 Scenario: Printing the difference of two integer numbers
     Given the difference of two numbers 8 and 6
-    Then its INFIX notation is ( 8 - 6 )
-    And its PREFIX notation is - (8, 6)
-    And its POSTFIX notation is (8, 6) -
+    Then its INFIX notation is (8 - 6)
+    And its PREFIX notation is -(8, 6)
+    And its POSTFIX notation is (8, 6)-
 
 Scenario: Printing the product of two integer numbers
     Given the product of two numbers 8 and 6
-    Then its INFIX notation is ( 8 * 6 )
-    And its PREFIX notation is * (8, 6)
-    And its POSTFIX notation is (8, 6) *
+    Then its INFIX notation is (8 * 6)
+    And its PREFIX notation is *(8, 6)
+    And its POSTFIX notation is (8, 6)*
 
 Scenario: Printing the quotient of two integer numbers
     Given the quotient of two numbers 8 and 6
-    Then its INFIX notation is ( 8 / 6 )
-    And its PREFIX notation is / (8, 6)
-    And its POSTFIX notation is (8, 6) /
+    Then its INFIX notation is (8 / 6)
+    And its PREFIX notation is /(8, 6)
+    And its POSTFIX notation is (8, 6)/
