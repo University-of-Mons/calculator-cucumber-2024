@@ -3,6 +3,8 @@ package calculator;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import visitor.ExpressionVisitor;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -44,8 +46,9 @@ public class NotationSteps {
     }
 
     void testNotation(String s,Operation o,Notation n) {
-        assertEquals(s, o.toString(n));
-        o.notation = n;
-        assertEquals(s, o.toString());
+        ExpressionVisitor ev = new ExpressionVisitor();
+        ev.setNotation(n);
+        o.accept(ev);
+        assertEquals(s, ev.getExpression());
     }
 }
