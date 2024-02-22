@@ -12,29 +12,18 @@ import java.util.List;
  */
 public final class Times extends Operation
  {
-  /**
-   * Class constructor specifying a number of Expressions to multiply.
-   *
-   * @param elist The list of Expressions to multiply
-   * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
-   * @see #Times(List<Expression>,Notation)
-   */
-  public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
-  	this(elist, null);
-  }
 
   /**
    * Class constructor specifying a number of Expressions to multiply,
    * as well as the Notation used to represent the operation.
    *
    * @param elist The list of Expressions to multiply
-   * @param n The Notation to be used to represent the operation
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
    * @see #Times(List<Expression>)
-   * @see Operation#Operation(List<Expression>,Notation)
+   * @see Operation#Operation(List<Expression>)
    */
-  public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
-  	super(elist,n);
+  public Times(List<Expression> elist) throws IllegalConstruction {
+  	super(elist);
   	symbol = "*";
   	neutral = 1;
   }
