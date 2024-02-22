@@ -36,12 +36,6 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 5
     Then the operation evaluates to 1
 
-  Scenario: Dividing an integer by zero
-    Given an integer operation '/'
-    When I provide a first number 7
-    And I provide a second number 0
-    Then the operation evaluates to "NaN"
-
   Scenario: Printing the sum of two integer numbers
     Given the sum of two numbers 8 and 6
     Then its INFIX notation is ( 8 + 6 )
@@ -107,20 +101,3 @@ Feature: Integer Arithmetic Expressions
       | "-" | 8  | 5  | 3      |
       | "*" | 7  | 2  | 14     |
       | "/" | 6  | 2  | 3      |
-
-  # BDD Scenario covering the TestNotation.java JUnit test class
-  # This evaluates the notation INFIX, PREFIX and POSTFIX for each operation
-  Scenario Outline: Evaluating the notations for each operation
-    Given an integer operation <op>
-    When I provide a first number <n1>
-    And I provide a second number <n2>
-    Then its INFIX notation is ( <n1> <op2> <n2> )
-    And its PREFIX notation is <op2> (<n1>, <n2>)
-    And its POSTFIX notation is (<n1>, <n2>) <op2>
-
-    Examples:
-      | op  | n1 | n2 | op2 |
-      | '+' | 8  | 6  | +   |
-      | '-' | 8  | 6  | -   |
-      | '*' | 8  | 6  | *   |
-      | '/' | 8  | 6  | /   |

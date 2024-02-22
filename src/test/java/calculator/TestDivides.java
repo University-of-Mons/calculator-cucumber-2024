@@ -86,6 +86,5 @@ class TestDivides {
         } catch (IllegalConstruction e) {
             fail();
         }
-
     }
 }

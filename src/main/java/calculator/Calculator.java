@@ -1,6 +1,7 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.Printer;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -73,4 +74,10 @@ public class Calculator {
      or to simplify some expression
      public Expression simplify(Expression e)
     */
+
+    public String format(Expression e, Notation notation) {
+        Printer visitor = new Printer(notation);
+        e.accept(visitor);
+        return visitor.getComputedValue();
+    }
 }

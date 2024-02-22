@@ -4,6 +4,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import visitor.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +81,8 @@ public class CalculatorSteps {
     @Then("^its (.*) notation is (.*)$")
     public void thenItsNotationIs(String notation, String s) {
         if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
-            op.notation = Notation.valueOf(notation);
-            assertEquals(s, op.toString());
+            c = new Calculator();
+            assertEquals(s, c.format(op, Notation.valueOf(notation)));
         } else fail(notation + " is not a correct notation! ");
     }
 
@@ -111,6 +112,24 @@ public class CalculatorSteps {
 
     @Then("the operation evaluates to {int}")
     public void thenTheOperationEvaluatesTo(int val) {
+        assertEquals(new MyNumber(val), c.eval(op));
+    }
+  
+    // The list of numbers is intended to be used as a list of parameters for the operation
+    // The goal is to test if a nested operation is correctly represented in a given notation
+    @Given("the sum of the following list of numbers")
+    public void theSumOfTheFollowingListOfNumbers(List<List<String>> numbers) {
+        params = new ArrayList<>();
+        numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+        try {
+            op = new Plus(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Given("the difference of the following list of numbers")
+    public void theDifferenceOfTheFollowingListOfNumbers() {
         assertEquals(new MyNumber(val), c.eval(op));
     }
 
