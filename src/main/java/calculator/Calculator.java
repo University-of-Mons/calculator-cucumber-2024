@@ -32,7 +32,11 @@ public class Calculator {
      */
     public void print(Expression e) {
         System.out.println("The result of evaluating expression " + e);
-        System.out.println("is: " + eval(e) + ".");
+        try {
+            System.out.println("is: " + eval(e) + ".");
+        }catch (ArithmeticException ex) {
+            System.out.println("is: NaN.");
+        }
         System.out.println();
     }
 
@@ -54,7 +58,7 @@ public class Calculator {
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
-    public int eval(Expression e) {
+    public int eval(Expression e) throws ArithmeticException{
         // create a new visitor to evaluate expressions
         Evaluator v = new Evaluator();
         // and ask the expression to accept this visitor to start the evaluation process
