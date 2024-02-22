@@ -42,6 +42,16 @@ Feature: Integer Arithmetic Expressions
     And its PREFIX notation is + (8, 6)
     And its POSTFIX notation is (8, 6) +
 
+  # In this scenario we provide a list of numbers as input.
+  # The goal is to check if the code represents nested operations correctly.
+  # We only check for the sum as it is the same method that is used for the other operations.
+  Scenario: Printing the nested sum of three integer numbers
+    Given the sum of the following list of numbers
+      | 8 | 6 | 2 |
+    Then its PREFIX notation is + (8, + (6, 2))
+    And its INFIX notation is ( 8 + ( 6 + 2 ) )
+    And its POSTFIX notation is (8, (6, 2) +) +
+
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of
   # strings. In this case, the table is of dimension 1 * 3 (1 line and three columns).

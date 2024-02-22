@@ -215,6 +215,7 @@ public abstract class Operation implements Expression {
 
     /**
      * Symbol getter.
+     * @return the symbol of the operation
      */
     public String getSymbol() {
         return symbol;
