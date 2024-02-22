@@ -28,31 +28,31 @@ public class Main {
 	try{
 
 		e = new MyNumber(8);
-		c.print(e);
+		c.print(e, Notation.PREFIX);
 		c.eval(e);
 
 	    List<Expression> params = new ArrayList<>();
 	    Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
-	    e = new Plus(params,Notation.PREFIX);
-		c.printExpressionDetails(e);
+	    e = new Plus(params);
+		c.printExpressionDetails(e,Notation.PREFIX);
 		c.eval(e);
 	
 		List<Expression> params2 = new ArrayList<>();
 		Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
-		e = new Minus(params2, Notation.INFIX);
-		c.print(e);
+		e = new Minus(params2);
+		c.print(e,Notation.INFIX);
 		c.eval(e);
 
 		List<Expression> params3 = new ArrayList<>();
 		Collections.addAll(params3, new Plus(params), new Minus(params2));
 		e = new Times(params3);
-		c.printExpressionDetails(e);
+		c.printExpressionDetails(e,Notation.PREFIX);
 		c.eval(e);
 
 		List<Expression> params4 = new ArrayList<>();
 		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
-		e = new Divides(params4,Notation.POSTFIX);
-		c.print(e);
+		e = new Divides(params4);
+		c.print(e,Notation.POSTFIX);
 		c.eval(e);
 	}
 
