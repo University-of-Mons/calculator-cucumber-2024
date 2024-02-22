@@ -36,7 +36,7 @@ public class Main {
 	    e = new Plus(params,Notation.PREFIX);
 		c.printExpressionDetails(e);
 		c.eval(e);
-	
+
 		List<Expression> params2 = new ArrayList<>();
 		Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
 		e = new Minus(params2, Notation.INFIX);

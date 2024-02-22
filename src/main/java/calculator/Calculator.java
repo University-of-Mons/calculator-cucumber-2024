@@ -1,6 +1,7 @@
 package calculator;
 
 import visitor.Evaluator;
+import visitor.ExpressionVisitor;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -31,7 +32,7 @@ public class Calculator {
      * @see #printExpressionDetails(Expression) 
      */
     public void print(Expression e) {
-        System.out.println("The result of evaluating expression " + e);
+        System.out.println("The result of evaluating expression " + printExpression(e));
         System.out.println("is: " + eval(e) + ".");
         System.out.println();
     }
@@ -63,6 +64,11 @@ public class Calculator {
         return v.getResult();
     }
 
+    public String printExpression(Expression e) {
+        ExpressionVisitor v = new ExpressionVisitor();
+        e.accept(v);
+        return v.getResult();
+    }
     /*
      We could also have other methods, e.g. to verify whether an expression is syntactically correct
      public Boolean validate(Expression e)

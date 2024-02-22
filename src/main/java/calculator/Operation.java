@@ -140,41 +140,6 @@ public abstract class Operation implements Expression
 			   .getAsInt();  
   }
 
-  /**
-   * Convert the arithmetic operation into a String to allow it to be printed,
-   * using the default notation (prefix, infix or postfix) that is specified in some variable.
-   *
-   * @return	The String that is the result of the conversion.
-   */
-  @Override
-  public final String toString() {
-  	return toString(notation);
-  }
-
-  /**
-   * Convert the arithmetic operation into a String to allow it to be printed,
-   * using the notation n (prefix, infix or postfix) that is specified as a parameter.
-   *
-   * @param n	The notation to be used for representing the operation (prefix, infix or postfix)
-   * @return	The String that is the result of the conversion.
-   */
-  public final String toString(Notation n) {
-	   Stream<String> s = args.stream().map(Object::toString);
-	   return switch (n) {
-		   case INFIX -> "( " +
-				   s.reduce((s1, s2) -> s1 + " " + symbol + " " + s2).get() +
-				   " )";
-		   case PREFIX -> symbol + " " +
-				   "(" +
-				   s.reduce((s1, s2) -> s1 + ", " + s2).get() +
-				   ")";
-		   case POSTFIX -> "(" +
-				   s.reduce((s1, s2) -> s1 + ", " + s2).get() +
-				   ")" +
-				   " " + symbol;
-	   };
-  }
-
 	/**
 	 * Two operation objects are equal if their list of arguments is equal and they correspond to the same operation.
 	 *
