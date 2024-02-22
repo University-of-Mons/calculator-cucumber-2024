@@ -5,7 +5,7 @@ import visitor.ExpressionVisitor;
 
 /**
  * This class represents the core logic of a Calculator.
- * It can be used to print and evaluate artihmetic expressions.
+ * It can be used to print and evaluate arithmetic expressions.
  *
  * @author tommens
  */
@@ -29,13 +29,14 @@ public class Calculator {
     /**
      * Prints an arithmetic expression provided as input parameter.
      * @param e the arithmetic Expression to be printed
-     * @see #printExpressionDetails(Expression) 
+     * @param notation the notation to be used
+     * @see #printExpressionDetails(Expression, Notation)
      */
     public void print(Expression e, Notation notation) {
         ExpressionVisitor ev = new ExpressionVisitor();
         ev.setNotation(notation);
         e.accept(ev);
-        System.out.println("The result of evaluating expression " + ev.getResult());
+        System.out.println("The result of evaluating expression " + ev.getExpression());
         System.out.println("is: " + eval(e) + ".");
         System.out.println();
     }
@@ -43,7 +44,8 @@ public class Calculator {
     /**
      * Prints verbose details of an arithmetic expression provided as input parameter.
      * @param e the arithmetic Expression to be printed
-     * @see #print(Expression)
+     * @param n the notation to be used
+     * @see #print(Expression, Notation)
      */
     public void printExpressionDetails(Expression e, Notation n) {
         print(e,n);

@@ -8,29 +8,39 @@ import calculator.Operation;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+/** ExpressionVisitor is a concrete visitor that serves to
+ * compute the expression string matching the notation of arithmetic expressions.
+ */
 public class ExpressionVisitor extends Visitor {
 
+    /**
+     * Default constructor of the class. Does not initialise anything.
+     */
     public ExpressionVisitor() {}
 
-    /** The result of the evaluation will be stored in this private variable */
-    private String result;
+    /** The expression will be stored in this private variable */
+    private String expression;
+    /** The notation used will be stored in this private variable */
     private Notation notation;
-    /** getter method to obtain the result of the evaluation
+    /** Getter method to obtain the expression
      *
-     * @return an Integer object containing the result of the evaluation
+     * @return a String object containing the expression
      */
-    public String getResult() { return result; }
+    public String getExpression() { return expression; }
 
-    /** Use the visitor design pattern to visit a number.
-     *
-     * @param n The number being visited
+    /** Setter method to set the notation
+     * @param notation The notation to be used
      */
     public void setNotation(calculator.Notation notation) {
         this.notation = notation;
     }
 
+    /** Use the visitor design pattern to visit a number.
+     *
+     * @param n The number being visited
+     */
     public void visit(MyNumber n) {
-        result = n.toString();
+        expression = n.toString();
     }
 
     /** Use the visitor design pattern to visit an operation
@@ -41,10 +51,10 @@ public class ExpressionVisitor extends Visitor {
         ArrayList<String> s = new ArrayList<>();
         for(Expression a:o.args) {
             a.accept(this);
-            s.add(result);
+            s.add(expression);
         }
         Stream<String> stream = s.stream();
-        result = switch (notation) {
+        expression = switch (notation) {
                 case INFIX -> "( " +
                         stream.reduce((s1, s2) -> s1 + " " + o.getSymbol() + " " + s2).get() +
                         " )";

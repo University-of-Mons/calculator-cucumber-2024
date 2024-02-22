@@ -18,10 +18,9 @@ public final class Times extends Operation
    * as well as the Notation used to represent the operation.
    *
    * @param elist The list of Expressions to multiply
-   * @param n The Notation to be used to represent the operation
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
    * @see #Times(List<Expression>)
-   * @see Operation#Operation(List<Expression>,Notation)
+   * @see Operation#Operation(List<Expression>)
    */
   public Times(List<Expression> elist) throws IllegalConstruction {
   	super(elist);

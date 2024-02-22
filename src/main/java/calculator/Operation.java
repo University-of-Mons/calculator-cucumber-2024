@@ -34,7 +34,6 @@ public abstract class Operation implements Expression
    * The notation used to render operations as strings.
    * By default, the infix notation will be used.
    */
-  //public Notation notation = Notation.INFIX;
 
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
@@ -53,13 +52,22 @@ public abstract class Operation implements Expression
     }
 
 	/**
-	 * getter method to return the number of arguments of an arithmetic operation.
+	 * Getter method to return the number of arguments of an arithmetic operation.
 	 *
 	 * @return	The number of arguments of the arithmetic operation.
 	 */
 	public List<Expression> getArgs() {
   	return args;
   }
+
+  /**
+	 * Getter method to return the symbol of an arithmetic operation.
+	 *
+	 * @return The symbol of the arithmetic operation.
+	 */
+	public String getSymbol(){
+		return symbol;
+	}
 
 	/**
 	 * Abstract method representing the actual binary arithmetic operation to compute
@@ -86,7 +94,6 @@ public abstract class Operation implements Expression
 	 * @param v	The visitor object
 	 */
   public void accept(Visitor v) {
-  	for(Expression a:args) { a.accept(v); }
   	v.visit(this);
   }
 
@@ -158,10 +165,6 @@ public abstract class Operation implements Expression
 		result = prime * result + symbol.hashCode();
 		result = prime * result + args.hashCode();
 		return result;
-	}
-
-	public String getSymbol(){
-		return symbol;
 	}
 
 }

@@ -18,10 +18,9 @@ public final class Divides extends Operation
      * as well as the notation used to represent the operation.
      *
      * @param elist The list of Expressions to divide
-     * @param n The Notation to be used to represent the operation
      * @throws IllegalConstruction  If an empty list of expressions if passed as parameter
      * @see #Divides(List<Expression>)
-     * @see Operation#Operation(List<Expression>,Notation)
+     * @see Operation#Operation(List<Expression>)
      */
   public Divides(List<Expression> elist) throws IllegalConstruction {
 	super(elist);
