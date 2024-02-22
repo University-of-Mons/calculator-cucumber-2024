@@ -17,13 +17,13 @@ public final class Plus extends Operation
    * Class constructor specifying a number of Expressions to add,
    * as well as the Notation used to represent the operation.
    *
-   * @param elist The list of Expressions to add
+   * @param expressionList The list of Expressions to add
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
-   * @see #Plus(List<Expression>)
-   * @see Operation#Operation(List<Expression>)
+   * @see #Plus(List)
+   * @see Operation#Operation(List)
    */
-  public Plus(List<Expression> elist) throws IllegalConstruction {
-  	super(elist);
+  public Plus(List<Expression> expressionList) throws IllegalConstruction {
+  	super(expressionList);
   	symbol = "+";
   	neutral = 0;
   }

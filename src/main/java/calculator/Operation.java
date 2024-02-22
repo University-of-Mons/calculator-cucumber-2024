@@ -4,7 +4,7 @@ import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.OptionalInt;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -18,7 +18,7 @@ public abstract class Operation implements Expression
 	/**
 	 * The list of expressions passed as an argument to the arithmetic operation
 	 */
-	public List<Expression> args;
+	private final List<Expression> args;
 
   /**
    * The character used to represent the arithmetic operation (e.g. "+", "*")
@@ -30,24 +30,21 @@ public abstract class Operation implements Expression
    */
   protected int neutral;
 
-  /**
-   * The notation used to render operations as strings.
-   * By default, the infix notation will be used.
-   */
+  String errorMessage = "Error in counting numbers";
 
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
    *
-   * @param elist	The list of expressions passed as argument to the arithmetic operation
+   * @param expressionList	The list of expressions passed as argument to the arithmetic operation
    * @throws IllegalConstruction	Exception thrown if a null list of expressions is passed as argument
    */
-  protected /*constructor*/ Operation(List<Expression> elist)
+  protected /*constructor*/ Operation(List<Expression> expressionList)
 		  throws IllegalConstruction
 	{
-		if (elist == null) {
+		if (expressionList == null) {
 			throw new IllegalConstruction(); }
 		else {
-			args = new ArrayList<>(elist);
+			args = new ArrayList<>(expressionList);
 		}
     }
 
@@ -106,10 +103,13 @@ public abstract class Operation implements Expression
 	 */
 	public final int countDepth() {
 	    // use of Java 8 functional programming capabilities
-	return 1 + args.stream()
+	OptionalInt optional = args.stream()
 			   .mapToInt(Expression::countDepth)
-			   .max()
-			   .getAsInt();  
+			   .max();
+		if (optional.isPresent()){
+			return 1 + optional.getAsInt();
+		}
+		throw new ArithmeticException(errorMessage);
   }
 
 	/**
@@ -120,22 +120,28 @@ public abstract class Operation implements Expression
 	 */
 	public final int countOps() {
 	    // use of Java 8 functional programming capabilities
-	return 1 + args.stream()
+	OptionalInt optional = args.stream()
 			   .mapToInt(Expression::countOps)
-			   .reduce(Integer::sum)
-			   .getAsInt();
+			   .reduce(Integer::sum);
+		if (optional.isPresent()){
+			return 1 + optional.getAsInt();
+		}
+		throw new ArithmeticException(errorMessage);
   }
 
   public final int countNbs() {
-	    // use of Java 8 functional programming capabilities
-	return args.stream()
+		// use of Java 8 functional programming capabilities
+	OptionalInt optional = args.stream()
 			   .mapToInt(Expression::countNbs)
-			   .reduce(Integer::sum)
-			   .getAsInt();  
+			   .reduce(Integer::sum);
+	if (optional.isPresent()){
+		return optional.getAsInt();
+	}
+      throw new ArithmeticException(errorMessage);
   }
 
 	/**
-	 * Two operation objects are equal if their list of arguments is equal and they correspond to the same operation.
+	 * Two operation objects are equal if their list of arguments is equal and if they correspond to the same operation.
 	 *
 	 * @param o	The object to compare with
 	 * @return	The result of the equality comparison
@@ -159,13 +165,12 @@ public abstract class Operation implements Expression
 	 * @return	The result of computing the hash.
 	 */
 	@Override
-	public int hashCode()
-	{
-		int result = 5, prime = 31;
+	public int hashCode() {
+		int result = 5;
+		int prime = 31;
 		result = prime * result + neutral;
 		result = prime * result + symbol.hashCode();
 		result = prime * result + args.hashCode();
 		return result;
 	}
-
 }

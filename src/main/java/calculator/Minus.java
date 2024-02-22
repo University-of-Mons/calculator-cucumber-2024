@@ -17,13 +17,13 @@ public final class Minus extends Operation
    * Class constructor specifying a number of Expressions to subtract,
    * as well as the Notation used to represent the operation.
    *
-   * @param elist The list of Expressions to subtract
+   * @param expressionList The list of Expressions to subtract
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
-   * @see #Minus(List<Expression>)
-   * @see Operation#Operation(List<Expression>)
+   * @see #Minus(List)
+   * @see Operation#Operation(List)
    */
-  public Minus(List<Expression> elist) throws IllegalConstruction {
-  	super(elist);
+  public Minus(List<Expression> expressionList) throws IllegalConstruction {
+  	super(expressionList);
   	symbol = "-";
   	neutral = 0;
   }

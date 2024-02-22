@@ -10,7 +10,6 @@ import visitor.Visitor;
  * @see MyNumber
  */
 public interface Expression {
-
    /**
     * accept is a method needed to implement the visitor design pattern
     *

@@ -7,6 +7,10 @@ import calculator.Operation;
  * Visitor design pattern
  */
 public abstract class Visitor {
+    /**
+     * Constructor for the Visitor class
+     */
+    protected Visitor() {}
 
     /**
      * The Visitor can traverse a number (a subtype of Expression)

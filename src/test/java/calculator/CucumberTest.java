@@ -13,5 +13,5 @@ import org.junit.platform.suite.api.Suite;
 @SelectClasspathResource("calculator")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "calculator")
 public class CucumberTest {
-
+    //Nothing to do here
 }

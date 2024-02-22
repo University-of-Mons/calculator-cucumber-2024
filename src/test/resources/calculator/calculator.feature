@@ -14,32 +14,32 @@ Feature: Integer Arithmetic Expressions
 
   Scenario: Adding two integer numbers
     Given an integer operation '+'
-    When I provide a first number 4
-    And I provide a second number 5
+    When I provide a number 4
+    And I provide a number 5
     Then the operation evaluates to 9
 
   Scenario: Subtracting two integer numbers
     Given an integer operation '-'
-    When I provide a first number 7
-    And I provide a second number 5
+    When I provide a number 7
+    And I provide a number 5
     Then the operation evaluates to 2
 
   Scenario: Multiplying two integer numbers
     Given an integer operation '*'
-    When I provide a first number 7
-    And I provide a second number 5
+    When I provide a number 7
+    And I provide a number 5
     Then the operation evaluates to 35
 
   Scenario: Dividing two integer numbers
     Given an integer operation '/'
-    When I provide a first number 7
-    And I provide a second number 5
+    When I provide a number 7
+    And I provide a number 5
     Then the operation evaluates to 1
 
   Scenario: Dividing by zero
     Given an integer operation '/'
-    When I provide a first number 8
-    And I provide a second number 0
+    When I provide a number 8
+    And I provide a number 0
     Then It throws an arithmetic exception
 
   Scenario: Printing the sum of two integer numbers
@@ -64,8 +64,8 @@ Feature: Integer Arithmetic Expressions
   # The scenario will be executed with each of the provided inputs.
   Scenario Outline: Adding two integer numbers
     Given an integer operation '+'
-    When I provide a first number <n1>
-    And I provide a second number <n2>
+    When I provide a number <n1>
+    And I provide a number <n2>
     Then the operation evaluates to <result>
 
     Examples:
@@ -75,8 +75,8 @@ Feature: Integer Arithmetic Expressions
 
   Scenario Outline: Dividing two integer numbers
     Given an integer operation '/'
-    When I provide a first number <n1>
-    And I provide a second number <n2>
+    When I provide a number <n1>
+    And I provide a number <n2>
     Then the operation evaluates to <result>
 
     Examples:
@@ -87,8 +87,8 @@ Feature: Integer Arithmetic Expressions
 
   Scenario Outline: Evaluating arithmetic operations with two integer parameters
     Given an integer operation <op>
-    When I provide a first number <n1>
-    And I provide a second number <n2>
+    When I provide a number <n1>
+    And I provide a number <n2>
     Then the operation evaluates to <result>
 
     Examples:

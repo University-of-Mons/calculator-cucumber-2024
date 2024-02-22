@@ -17,13 +17,13 @@ public final class Times extends Operation
    * Class constructor specifying a number of Expressions to multiply,
    * as well as the Notation used to represent the operation.
    *
-   * @param elist The list of Expressions to multiply
+   * @param expressionList The list of Expressions to multiply
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
-   * @see #Times(List<Expression>)
-   * @see Operation#Operation(List<Expression>)
+   * @see #Times(List)
+   * @see Operation#Operation(List)
    */
-  public Times(List<Expression> elist) throws IllegalConstruction {
-  	super(elist);
+  public Times(List<Expression> expressionList) throws IllegalConstruction {
+  	super(expressionList);
   	symbol = "*";
   	neutral = 1;
   }

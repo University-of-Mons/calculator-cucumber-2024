@@ -17,13 +17,13 @@ public final class Divides extends Operation
      * Class constructor specifying a number of Expressions to divide,
      * as well as the notation used to represent the operation.
      *
-     * @param elist The list of Expressions to divide
+     * @param expressionList The list of Expressions to divide
      * @throws IllegalConstruction  If an empty list of expressions if passed as parameter
-     * @see #Divides(List<Expression>)
-     * @see Operation#Operation(List<Expression>)
+     * @see #Divides(List)
+     * @see Operation#Operation(List)
      */
-  public Divides(List<Expression> elist) throws IllegalConstruction {
-	super(elist);
+  public Divides(List<Expression> expressionList) throws IllegalConstruction {
+	super(expressionList);
 	symbol = "/";
 	neutral = 1;
   }
