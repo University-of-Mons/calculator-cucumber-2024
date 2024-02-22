@@ -76,7 +76,7 @@ public class Calculator {
     */
 
     public String format(Expression e, Notation notation) {
-        Printer visitor = new Printer(Notation.PREFIX);
+        Printer visitor = new Printer(notation);
         e.accept(visitor);
         return visitor.getComputedValue();
     }

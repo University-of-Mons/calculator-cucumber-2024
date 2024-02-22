@@ -44,10 +44,14 @@ public class Printer extends Visitor {
             case PREFIX -> {
                 bobTheBuilder.append(o.getSymbol());
                 bobTheBuilder.append(" (");
+                int index = 0;
                 for (Expression expression : o.getArgs()) {
                     expression.accept(this);
                     bobTheBuilder.append(computedValue);
-                    bobTheBuilder.append(" ");
+                    if (index != o.getArgs().size() - 1){
+                        bobTheBuilder.append(" ");
+                        index++;
+                    }
                 }
                 bobTheBuilder.append(")");
             }
@@ -59,6 +63,7 @@ public class Printer extends Visitor {
                     bobTheBuilder.append(computedValue);
                     // If condition prevents the existence of a trailing symbol ('1 + 2 + 3' instead of '1 + 2 + 3 +')
                     if (index != o.getArgs().size() - 1) {
+                        bobTheBuilder.append(" ");
                         bobTheBuilder.append(o.getSymbol());
                         bobTheBuilder.append(" ");
                         index++;
@@ -68,10 +73,14 @@ public class Printer extends Visitor {
             }
             case POSTFIX -> {
                 bobTheBuilder.append("(");
+                int index = 0;
                 for (Expression expression : o.getArgs()) {
                     expression.accept(this);
                     bobTheBuilder.append(computedValue);
-                    bobTheBuilder.append(" ");
+                    if (index != o.getArgs().size() - 1) {
+                        bobTheBuilder.append(" ");
+                        index++;
+                    }
                 }
                 bobTheBuilder.append(") ");
                 bobTheBuilder.append(o.getSymbol());

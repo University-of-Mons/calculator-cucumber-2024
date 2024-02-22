@@ -44,16 +44,36 @@ public class TestPrinter {
 
     @ParameterizedTest
     @ValueSource(strings = {"*", "+", "/", "-"})
+    void TestEvaluateInfix(String symbol){
+        List <Expression> params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        try{
+            //construct another type of operation depending on the input value
+            //of the parameterised test
+            switch (symbol) {
+                case "+" -> assertEquals("(8 + 6)", calc.format(new Plus(params), Notation.INFIX));
+                case "-" -> assertEquals("(8 - 6)", calc.format(new Minus(params), Notation.INFIX));
+                case "*" -> assertEquals("(8 * 6)", calc.format(new Times(params), Notation.INFIX));
+                case "/" -> assertEquals("(8 / 6)", calc.format(new Divides(params), Notation.INFIX));
+                default -> fail();
+            }
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"*", "+", "/", "-"})
     void testPrintPostfix(String symbol) {
-        List<Expression> params = Arrays.asList(new MyNumber(value1), new MyNumber(value2), new MyNumber(value3));
+        List<Expression> params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
         try {
             //construct another type of operation depending on the input value
             //of the parameterised test
             switch (symbol) {
-                case "+" -> assertEquals("((8 6) + ) 5 ) +", calc.format(new Plus(params), Notation.POSTFIX));
-                case "-" -> assertEquals("((8 6) - ) 5 ) -", calc.format(new Minus(params), Notation.POSTFIX));
-                case "*" -> assertEquals("((8 6) * ) 5 ) *", calc.format(new Times(params), Notation.POSTFIX));
-                case "/" -> assertEquals("((8 6) / ) 5 ) /", calc.format(new Divides(params), Notation.POSTFIX));
+                case "+" -> assertEquals("(8 6) +", calc.format(new Plus(params), Notation.POSTFIX));
+                case "-" -> assertEquals("(8 6) -", calc.format(new Minus(params), Notation.POSTFIX));
+                case "*" -> assertEquals("(8 6) *", calc.format(new Times(params), Notation.POSTFIX));
+                case "/" -> assertEquals("(8 6) /", calc.format(new Divides(params), Notation.POSTFIX));
                 default -> fail();
             }
         } catch (IllegalConstruction e) {
