@@ -54,6 +54,13 @@ public class Main {
             e = new Divides(params4, Notation.POSTFIX);
             c.print(e);
             c.eval(e);
+
+            List<Expression> divide0 = new ArrayList<>();
+            Collections.addAll(divide0, new MyNumber(5), new MyNumber(0));
+            e = new Divides(divide0);
+            c.print(e);
+            c.eval(e);
+
         } catch (IllegalConstruction exception) {
             System.out.println("cannot create operations without parameters");
         }
