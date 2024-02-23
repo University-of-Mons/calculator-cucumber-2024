@@ -95,7 +95,7 @@ public class CalculatorSteps {
 		op.addMoreParams(params);
 	}
 
-	@When("^I provide not a number")
+	@When("^I provide MyNotANumber")
 	public void whenIProvideNotANumber() {
 		//add extra parameter to the operation
 		params = new ArrayList<>();

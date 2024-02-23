@@ -102,7 +102,7 @@ Feature: Integer Arithmetic Expressions
 
   Scenario Outline: Evaluating arithmetic operations with one integer and not a number
     Given an integer operation <op>
-    When I provide not a number
+    When I provide MyNotANumber
     And I provide a number <n1>
     Then the operation evaluates to MyNotANumber
 
