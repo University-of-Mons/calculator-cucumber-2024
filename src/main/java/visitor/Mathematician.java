@@ -20,7 +20,6 @@ public class Mathematician extends Visitor {
      */
     @Override
     public void visit(MyNumber n) {
-        System.out.println("I am number " + n + " and I am being visited. Incrementing numbersCount by 1.");
         this.numbersCount += 1;
     }
 
@@ -32,7 +31,6 @@ public class Mathematician extends Visitor {
      */
     @Override
     public void visit(Operation o) {
-        System.out.println("In sub expression " + o + " we found " + this.numbersCount + " numbers.");
     }
 
     /**

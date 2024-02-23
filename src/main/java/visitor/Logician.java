@@ -19,7 +19,6 @@ public class Logician extends Visitor {
      */
     @Override
     public void visit(MyNumber n) {
-        System.out.println("I am number " + n + " and I am being visited.");
     }
 
     /**
@@ -31,7 +30,6 @@ public class Logician extends Visitor {
     @Override
     public void visit(Operation o) {
         this.operationsCount += o.getArgs().size() - 1;
-        System.out.println("In sub expression " + o + " we found " + this.operationsCount + " operations.");
     }
 
     /**

@@ -56,7 +56,6 @@ public class TestLogician {
                         fail();
                     }
                     Expression e = new Times(params);
-                    System.out.println(e);
                     assertEquals(2, calc.operationsCount(new Times(params)));
                 }
                 case "/" -> {

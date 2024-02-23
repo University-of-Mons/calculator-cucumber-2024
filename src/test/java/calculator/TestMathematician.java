@@ -56,7 +56,6 @@ public class TestMathematician {
                         fail();
                     }
                     Expression e = new Times(params);
-                    System.out.println(e);
                     assertEquals(3, calc.numbersCount(new Times(params)));
                 }
                 case "/" -> {
