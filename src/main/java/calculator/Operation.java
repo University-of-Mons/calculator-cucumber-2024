@@ -91,7 +91,7 @@ public abstract class Operation implements Expression
 	 * @param v	The visitor object
 	 */
 
-  public void accept(Visitor v) throws ArithmeticException{
+  public void accept(Visitor v) {
   	v.visit(this);
   }
 

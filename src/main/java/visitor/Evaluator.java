@@ -41,7 +41,7 @@ public class Evaluator extends Visitor {
      *
      * @param o The operation being visited
      */
-    public void visit(Operation o) throws ArithmeticException{
+    public void visit(Operation o) {
         ArrayList<MyNumber> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.getArgs()) {
