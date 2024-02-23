@@ -95,6 +95,14 @@ public class CalculatorSteps {
 		op.addMoreParams(params);
 	}
 
+	@When("^I provide MyNotANumber")
+	public void whenIProvideNotANumber() {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new MyNotANumber());
+		op.addMoreParams(params);
+	}
+
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
 		try {
@@ -105,7 +113,7 @@ public class CalculatorSteps {
 				case "difference"	->	op = new Minus(params);
 				default -> fail();
 			}
-			assertEquals(val, c.eval(op));
+			assertEquals(new MyNumber(val), c.eval(op));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -113,11 +121,11 @@ public class CalculatorSteps {
 
 	@Then("the operation evaluates to {int}")
 	public void thenTheOperationEvaluatesTo(int val) {
-		assertEquals(val, c.eval(op));
+		assertEquals(new MyNumber(val), c.eval(op));
 	}
 
-	@Then("It throws an arithmetic exception")
-	public void thenTheErrorOperationEvaluatesTo() {
-		assertThrows(ArithmeticException.class, () -> c.eval(op));
+	@Then("the operation evaluates to MyNotANumber")
+	public void thenTheOperationEvaluatesToMyNotANumber() {
+    	assertTrue(c.eval(op) instanceof MyNotANumber);
 	}
 }

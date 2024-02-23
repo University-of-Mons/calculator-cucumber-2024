@@ -29,12 +29,16 @@ public final class Plus extends Operation
   }
 
   /**
-   * The actual computation of the (binary) arithmetic addition of two integers
-   * @param l The first integer
-   * @param r The second integer that should be added to the first
-   * @return The integer that is the result of the addition
+   * The actual computation of the (binary) arithmetic addition of two integers.
+   * If either of the numbers is a MyNotANumber instance, the method returns a new MyNotANumber instance.
+   *
+   * @param l The first number.
+   * @param r The second number that should be added to the first.
+   * @return The result of the addition, or a new MyNotANumber if either input number is a MyNotANumber.
    */
-  public int op(int l, int r) {
-  	return (l+r);
+  public MyNumber op(MyNumber l, MyNumber r) {
+    if (l instanceof MyNotANumber || r instanceof MyNotANumber)
+        return new MyNotANumber();
+    return new MyNumber(l.getValue() + r.getValue());
   }
 }

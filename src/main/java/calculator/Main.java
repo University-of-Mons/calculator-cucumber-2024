@@ -19,6 +19,7 @@ public class Main {
 	 * The constructor is private because this class is not meant to be instantiated.
 	 */
 	private Main() {
+	// nothing to be done
 	}
 
 	/**
@@ -32,8 +33,7 @@ public class Main {
   	Expression e;
   	Calculator c = new Calculator();
 
-	try{
-
+	try {
 		e = new MyNumber(8);
 		c.print(e, Notation.PREFIX);
 		c.eval(e);
@@ -62,11 +62,9 @@ public class Main {
 		c.print(e,Notation.POSTFIX);
 		c.eval(e);
 	}
-
 	catch(IllegalConstruction exception) {
 		Logger logger = Logger.getLogger(Main.class.getName());
 		logger.log(Level.INFO,() -> "cannot create operations without parameters");
-		}
+	}
  	}
-
 }

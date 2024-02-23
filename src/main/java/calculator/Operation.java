@@ -72,7 +72,7 @@ public abstract class Operation implements Expression
 	 * @param r	second argument of the binary operation
 	 * @return	result of computing the binary operation
 	 */
-   public abstract int op(int l, int r);
+   public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
 
 	/** Add more parameters to the existing list of parameters
@@ -91,7 +91,7 @@ public abstract class Operation implements Expression
 	 * @param v	The visitor object
 	 */
 
-  public void accept(Visitor v) throws ArithmeticException{
+  public void accept(Visitor v) {
   	v.visit(this);
   }
 

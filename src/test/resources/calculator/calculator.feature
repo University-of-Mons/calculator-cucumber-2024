@@ -36,11 +36,11 @@ Feature: Integer Arithmetic Expressions
     And I provide a number 5
     Then the operation evaluates to 1
 
-  Scenario: Dividing by zero
+  Scenario: Dividing an integer by zero
     Given an integer operation '/'
-    When I provide a number 8
+    When I provide a number 5
     And I provide a number 0
-    Then It throws an arithmetic exception
+    Then the operation evaluates to MyNotANumber
 
   Scenario: Printing the sum of two integer numbers
     Given the sum of two numbers 8 and 6
@@ -85,6 +85,8 @@ Feature: Integer Arithmetic Expressions
       |7|5|1|
       |5|7|0|
 
+
+
   Scenario Outline: Evaluating arithmetic operations with two integer parameters
     Given an integer operation <op>
     When I provide a number <n1>
@@ -97,3 +99,16 @@ Feature: Integer Arithmetic Expressions
       | "-" | 8| 5|     3|
       | "*" | 7| 2|    14|
       | "/" | 6| 2|     3|
+
+  Scenario Outline: Evaluating arithmetic operations with one integer and not a number
+    Given an integer operation <op>
+    When I provide MyNotANumber
+    And I provide a number <n1>
+    Then the operation evaluates to MyNotANumber
+
+    Examples:
+      | op  |n1|
+      | "+" | 4|
+      | "-" | 9|
+      | "*" | 7|
+      | "/" | 5|

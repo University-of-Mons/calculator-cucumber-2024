@@ -10,8 +10,7 @@ import java.util.List;
  * @see Times
  * @see Plus
  */
-public final class Divides extends Operation
-{
+public final class Divides extends Operation {
 
     /**
      * Class constructor specifying a number of Expressions to divide,
@@ -28,15 +27,17 @@ public final class Divides extends Operation
 	neutral = 1;
   }
 
-    /**
-     * The actual computation of the (binary) arithmetic division of two integers
-     * @param l The first integer
-     * @param r The second integer that should divide the first
-     * @return The integer that is the result of the division
-     */
-
-  public int op(int l, int r) throws ArithmeticException {
-      return l / r;
+/**
+   * The actual computation of the (binary) arithmetic division of two integers.
+   * If either of the numbers is a MyNotANumber instance or the second number is zero, the method returns a new MyNotANumber instance.
+   *
+   * @param l The first number.
+   * @param r The second number that the first number should be divided by.
+   * @return The result of the division, or a new MyNotANumber if either input number is a MyNotANumber or the second number is zero.
+   */
+  public MyNumber op(MyNumber l, MyNumber r) {
+      if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0)
+          return new MyNotANumber();
+      return new MyNumber(l.getValue() / r.getValue());
   }
-
 }
