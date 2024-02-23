@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.Diver;
 import visitor.Evaluator;
 import visitor.Printer;
 
@@ -79,5 +80,11 @@ public class Calculator {
         Printer visitor = new Printer(notation);
         e.accept(visitor);
         return visitor.getComputedValue();
+    }
+
+    public int depth(Expression e) {
+        Diver visitor = new Diver();
+        e.accept(visitor);
+        return visitor.getDepth();
     }
 }

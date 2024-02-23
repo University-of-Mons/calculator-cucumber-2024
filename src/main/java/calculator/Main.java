@@ -26,7 +26,6 @@ public class Main {
         Calculator c = new Calculator();
 
         try {
-
             e = new MyNumber(8);
             c.print(e);
             c.eval(e);
