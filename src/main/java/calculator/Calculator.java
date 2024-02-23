@@ -48,7 +48,7 @@ public class Calculator {
      */
     public void printExpressionDetails(Expression e) {
         print(e);
-        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
+        System.out.print("It contains " + new Calculator().depth(e) + " levels of nested expressions, ");
         System.out.print(e.countOps() + " operations");
         System.out.println(" and " + e.countNbs() + " numbers.");
         System.out.println();

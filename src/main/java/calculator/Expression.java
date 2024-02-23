@@ -19,13 +19,6 @@ public interface Expression {
     void accept(Visitor v);
 
     /**
-     * Counts the depth of nested expressions in an arithmetic expression
-     *
-     * @return The depth of an arithmetic expression
-     */
-    int countDepth();
-
-    /**
      * Counts the number of operations recursively contained in an arithmetic expression
      *
      * @return The number of operations contained in an arithmetic expression

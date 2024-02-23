@@ -30,11 +30,6 @@ class TestOperation {
     }
 
     @Test
-    void testCountDepth() {
-        assertEquals(2, o.countDepth());
-    }
-
-    @Test
     void testCountOps() {
         assertEquals(3, o.countOps());
     }

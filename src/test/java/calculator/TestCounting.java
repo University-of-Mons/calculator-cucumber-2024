@@ -29,8 +29,6 @@ class TestCounting {
     @Test
     void testNumberCounting() {
         e = new MyNumber(value1);
-        //test whether a number has zero depth (i.e. no nested expressions)
-        assertEquals(0, e.countDepth());
         //test whether a number contains zero operations
         assertEquals(0, e.countOps());
         //test whether a number contains 1 number
@@ -55,8 +53,6 @@ class TestCounting {
         } catch (IllegalConstruction e) {
             fail();
         }
-        //test whether a binary operation has depth 1
-        assertEquals(1, e.countDepth(), "counting depth of an Operation");
         //test whether a binary operation contains 1 operation
         assertEquals(1, e.countOps());
         //test whether a binary operation contains 2 numbers
