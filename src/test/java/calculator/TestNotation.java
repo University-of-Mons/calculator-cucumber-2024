@@ -60,15 +60,14 @@ class TestNotation {
 
 	@ParameterizedTest
 	@EnumSource(Notation.class)
-	void testCompositeExpressionpusjNotations(Notation notation){
+	void testCompositeExpressionsNotations(Notation notation){
 		try {
 			MyNumber num1 = new MyNumber(3);
 			MyNumber num2 = new MyNumber(4);
 			MyNumber num3 = new MyNumber(5);
 			MyNumber num4 = new MyNumber(5);
 			MyNumber num5 = new MyNumber(4);
-			MyNumber num6 = new MyNumber(7
-			);
+			MyNumber num6 = new MyNumber(7);
 
 			// Creator of Operator
 			Plus plus = new Plus(Arrays.asList(num1, num2, num3));

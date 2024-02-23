@@ -45,4 +45,24 @@ class TestEvaluator {
         }
     }
 
+    @Test
+    void NotANumberForCompositorExpression(){
+        try {
+            MyNumber num1 = new MyNumber(3);
+            MyNumber num2 = new MyNumber(4);
+            MyNumber num3 = new MyNotANumber();
+            MyNumber num4 = new MyNumber(5);
+            MyNumber num5 = new MyNumber(4);
+            MyNumber num6 = new MyNumber(7);
+
+            Plus plus = new Plus(Arrays.asList(num1, num2, num3));
+            Minus minus = new Minus(Arrays.asList(num4, num5));
+            Divides divides = new Divides(Arrays.asList(plus, minus, num6));
+
+            Calculator c= new Calculator();
+            assertInstanceOf(MyNotANumber.class, c.eval(divides));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
 }
