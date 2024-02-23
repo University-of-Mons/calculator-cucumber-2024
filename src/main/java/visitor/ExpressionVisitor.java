@@ -6,6 +6,7 @@ import calculator.Notation;
 import calculator.Operation;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /** ExpressionVisitor is a concrete visitor that serves to
@@ -16,12 +17,17 @@ public class ExpressionVisitor extends Visitor {
     /**
      * Default constructor of the class. Does not initialise anything.
      */
-    public ExpressionVisitor() {}
+    public ExpressionVisitor() {
+        // Nothing to be done
+    }
 
     /** The expression will be stored in this private variable */
     private String expression;
     /** The notation used will be stored in this private variable */
     private Notation notation;
+
+    String errorMessage = "No expression found";
+
     /** Getter method to obtain the expression
      *
      * @return a String object containing the expression
@@ -49,24 +55,37 @@ public class ExpressionVisitor extends Visitor {
      */
     public void visit(Operation o) {
         ArrayList<String> s = new ArrayList<>();
-        for(Expression a:o.args) {
+        for(Expression a:o.getArgs()) {
             a.accept(this);
             s.add(expression);
         }
         Stream<String> stream = s.stream();
-        expression = switch (notation) {
-                case INFIX -> "( " +
-                        stream.reduce((s1, s2) -> s1 + " " + o.getSymbol() + " " + s2).get() +
-                        " )";
-                case PREFIX -> o.getSymbol() + " " +
-                        "(" +
-                        stream.reduce((s1, s2) -> s1 + ", " + s2).get() +
-                        ")";
-                case POSTFIX -> "(" +
-                        stream.reduce((s1, s2) -> s1 + ", " + s2).get() +
-                        ")" +
-                        " " + o.getSymbol();
-        };
+        Optional<String> optional;
+        switch (notation) {
+            case INFIX :
+                optional = stream.reduce((s1, s2) -> s1 + " " + o.getSymbol() + " " + s2);
+                if (optional.isPresent()) {
+                    expression = "( " + optional.get() + " )";
+                } else {
+                    throw new IllegalStateException(errorMessage);
+                }
+                break;
+            case PREFIX :
+                optional = stream.reduce((s1, s2) -> s1 + ", " + s2);
+                if (optional.isPresent()) {
+                    expression = o.getSymbol() + " " + "(" + optional.get() + ")";
+                } else {
+                    throw new IllegalStateException(errorMessage);
+                }
+                break;
+            case POSTFIX :
+                optional = stream.reduce((s1, s2) -> s1 + ", " + s2);
+                if (optional.isPresent()) {
+                    expression = "(" + optional.get() + ")" + " " + o.getSymbol();
+                } else {
+                    throw new IllegalStateException(errorMessage);
+                }
+                break;
+        }
     }
-
 }

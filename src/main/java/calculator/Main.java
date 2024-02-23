@@ -3,6 +3,8 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A very simple calculator in Java
@@ -13,6 +15,12 @@ import java.util.List;
  * @author tommens
  */
 public class Main {
+	/**
+	 * The constructor is private because this class is not meant to be instantiated.
+	 */
+	private Main() {
+	// nothing to be done
+	}
 
 	/**
 	 * This is the main method of the application.
@@ -25,8 +33,7 @@ public class Main {
   	Expression e;
   	Calculator c = new Calculator();
 
-	try{
-
+	try {
 		e = new MyNumber(8);
 		c.print(e, Notation.PREFIX);
 		c.eval(e);
@@ -55,10 +62,9 @@ public class Main {
 		c.print(e,Notation.POSTFIX);
 		c.eval(e);
 	}
-
 	catch(IllegalConstruction exception) {
-		System.out.println("cannot create operations without parameters");
-		}
+		Logger logger = Logger.getLogger(Main.class.getName());
+		logger.log(Level.INFO,() -> "cannot create operations without parameters");
+	}
  	}
-
 }

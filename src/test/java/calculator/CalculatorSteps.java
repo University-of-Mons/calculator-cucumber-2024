@@ -56,7 +56,7 @@ public class CalculatorSteps {
 		params = new ArrayList<>();
 		// Since we only use one line of input, we use get(0) to take the first line of the list,
 		// which is a list of strings, that we will manually convert to integers:
-		numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+		numbers.getFirst().forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
 	    params.forEach(n -> System.out.println("value ="+ n));
 		op = null;
 	}
@@ -87,11 +87,19 @@ public class CalculatorSteps {
 		else fail(notation + " is not a correct notation! ");
 	}
 
-	@When("^I provide a (.*) number (\\d+)$")
-	public void whenIProvideANumber(String s, int val) {
+	@When("^I provide a number (\\d+)$")
+	public void whenIProvideANumber(int val) {
 		//add extra parameter to the operation
 		params = new ArrayList<>();
 		params.add(new MyNumber(val));
+		op.addMoreParams(params);
+	}
+
+	@When("^I provide MyNotANumber")
+	public void whenIProvideNotANumber() {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new MyNotANumber());
 		op.addMoreParams(params);
 	}
 
@@ -105,7 +113,7 @@ public class CalculatorSteps {
 				case "difference"	->	op = new Minus(params);
 				default -> fail();
 			}
-			assertEquals(val, c.eval(op));
+			assertEquals(new MyNumber(val), c.eval(op));
 		} catch (IllegalConstruction e) {
 			fail();
 		}
@@ -113,11 +121,11 @@ public class CalculatorSteps {
 
 	@Then("the operation evaluates to {int}")
 	public void thenTheOperationEvaluatesTo(int val) {
-		assertEquals(val, c.eval(op));
+		assertEquals(new MyNumber(val), c.eval(op));
 	}
 
-	@Then("It throws an arithmetic exception")
-	public void thenTheErrorOperationEvaluatesTo() {
-		assertThrows(ArithmeticException.class, () -> c.eval(op));
+	@Then("the operation evaluates to MyNotANumber")
+	public void thenTheOperationEvaluatesToMyNotANumber() {
+    	assertTrue(c.eval(op) instanceof MyNotANumber);
 	}
 }

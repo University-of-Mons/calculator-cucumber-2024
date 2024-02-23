@@ -4,7 +4,7 @@ import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.OptionalInt;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -18,7 +18,7 @@ public abstract class Operation implements Expression
 	/**
 	 * The list of expressions passed as an argument to the arithmetic operation
 	 */
-	public List<Expression> args;
+	private final List<Expression> args;
 
   /**
    * The character used to represent the arithmetic operation (e.g. "+", "*")
@@ -30,24 +30,21 @@ public abstract class Operation implements Expression
    */
   protected int neutral;
 
-  /**
-   * The notation used to render operations as strings.
-   * By default, the infix notation will be used.
-   */
+  String errorMessage = "Error in counting numbers";
 
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
    *
-   * @param elist	The list of expressions passed as argument to the arithmetic operation
+   * @param expressionList	The list of expressions passed as argument to the arithmetic operation
    * @throws IllegalConstruction	Exception thrown if a null list of expressions is passed as argument
    */
-  protected /*constructor*/ Operation(List<Expression> elist)
+  protected /*constructor*/ Operation(List<Expression> expressionList)
 		  throws IllegalConstruction
 	{
-		if (elist == null) {
+		if (expressionList == null) {
 			throw new IllegalConstruction(); }
 		else {
-			args = new ArrayList<>(elist);
+			args = new ArrayList<>(expressionList);
 		}
     }
 
@@ -75,7 +72,7 @@ public abstract class Operation implements Expression
 	 * @param r	second argument of the binary operation
 	 * @return	result of computing the binary operation
 	 */
-   public abstract int op(int l, int r);
+   public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
 
 	/** Add more parameters to the existing list of parameters
@@ -94,7 +91,7 @@ public abstract class Operation implements Expression
 	 * @param v	The visitor object
 	 */
 
-  public void accept(Visitor v) throws ArithmeticException{
+  public void accept(Visitor v) {
   	v.visit(this);
   }
 
@@ -123,13 +120,12 @@ public abstract class Operation implements Expression
 	 * @return	The result of computing the hash.
 	 */
 	@Override
-	public int hashCode()
-	{
-		int result = 5, prime = 31;
+	public int hashCode() {
+		int result = 5;
+		int prime = 31;
 		result = prime * result + neutral;
 		result = prime * result + symbol.hashCode();
 		result = prime * result + args.hashCode();
 		return result;
 	}
-
 }

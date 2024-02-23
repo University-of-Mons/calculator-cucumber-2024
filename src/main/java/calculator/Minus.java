@@ -17,24 +17,28 @@ public final class Minus extends Operation
    * Class constructor specifying a number of Expressions to subtract,
    * as well as the Notation used to represent the operation.
    *
-   * @param elist The list of Expressions to subtract
+   * @param expressionList The list of Expressions to subtract
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
-   * @see #Minus(List<Expression>)
-   * @see Operation#Operation(List<Expression>)
+   * @see #Minus(List)
+   * @see Operation#Operation(List)
    */
-  public Minus(List<Expression> elist) throws IllegalConstruction {
-  	super(elist);
+  public Minus(List<Expression> expressionList) throws IllegalConstruction {
+  	super(expressionList);
   	symbol = "-";
   	neutral = 0;
   }
 
     /**
-     * The actual computation of the (binary) arithmetic subtraction of two integers
-     * @param l The first integer
-     * @param r The second integer that should be subtracted from the first
-     * @return The integer that is the result of the subtraction
+     * The actual computation of the (binary) arithmetic subtraction of two integers.
+     * If either of the numbers is a MyNotANumber instance, the method returns a new MyNotANumber instance.
+     *
+     * @param l The first number.
+     * @param r The second number that should be subtracted from the first.
+     * @return The result of the subtraction, or a new MyNotANumber if either input number is a MyNotANumber.
      */
-  public int op(int l, int r) {
-  	return (l-r);
+  public MyNumber op(MyNumber l, MyNumber r) {
+    if (l instanceof MyNotANumber || r instanceof MyNotANumber)
+        return new MyNotANumber();
+    return new MyNumber(l.getValue() - r.getValue());
   }
 }
