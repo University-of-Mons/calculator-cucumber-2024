@@ -101,6 +101,11 @@ public abstract class Operation implements Expression {
      * @param visitor The visitor object
      */
     public void accept(Visitor visitor) {
+        System.out.print("I am ");
+        System.out.print(this);
+        System.out.print(" and my args are ");
+        System.out.print(args);
+        System.out.println(". I am accepting the visitor.");
         for (Expression a : args) {
             a.accept(visitor);
         }

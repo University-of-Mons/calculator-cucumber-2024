@@ -42,6 +42,7 @@ public class Diver extends Visitor {
         // Get max of the array list
         this.depth = max(depths) + 1;
     }
+
     /**
      * Depth getter
      *

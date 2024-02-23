@@ -2,6 +2,7 @@ package calculator;
 
 import visitor.Diver;
 import visitor.Evaluator;
+import visitor.Mathematician;
 import visitor.Printer;
 
 /**
@@ -86,5 +87,11 @@ public class Calculator {
         Diver visitor = new Diver();
         e.accept(visitor);
         return visitor.getDepth();
+    }
+
+    public int numbersCount(Expression e) {
+        Mathematician visitor = new Mathematician();
+        e.accept(visitor);
+        return visitor.getNumbersCount();
     }
 }
