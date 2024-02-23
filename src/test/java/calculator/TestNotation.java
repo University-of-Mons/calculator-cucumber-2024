@@ -2,10 +2,13 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import visitor.ExpressionVisitor;
 
+import java.lang.runtime.SwitchBootstraps;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,4 +58,33 @@ class TestNotation {
 		testNotations(symbol, value1, value2, op);
 	}
 
+	@ParameterizedTest
+	@EnumSource(Notation.class)
+	void testCompositeExpressionpusjNotations(Notation notation){
+		try {
+			MyNumber num1 = new MyNumber(3);
+			MyNumber num2 = new MyNumber(4);
+			MyNumber num3 = new MyNumber(5);
+			MyNumber num4 = new MyNumber(5);
+			MyNumber num5 = new MyNumber(4);
+			MyNumber num6 = new MyNumber(7
+			);
+
+			// Creator of Operator
+			Plus plus = new Plus(Arrays.asList(num1, num2, num3));
+			Minus minus = new Minus(Arrays.asList(num4, num5));
+			Divides divides = new Divides(Arrays.asList(plus, minus, num6));
+
+			String expected = "";
+			switch(notation) {
+				case PREFIX -> expected ="/ (+ (3, 4, 5), - (5, 4), 7)";
+				case INFIX -> expected = "( ( 3 + 4 + 5 ) / ( 5 - 4 ) / 7 )";
+				case POSTFIX -> expected = "((3, 4, 5) +, (5, 4) -, 7) /";
+				default -> fail();
+			}
+			testNotation(expected, divides, notation);
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
 }
