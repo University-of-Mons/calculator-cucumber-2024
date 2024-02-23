@@ -24,11 +24,4 @@ public interface Expression {
      * @return The number of operations contained in an arithmetic expression
      */
     int countOps();
-
-    /**
-     * Counts the number of values recursively contained in an arithmetic expression
-     *
-     * @return The number of values contained in an arithmetic expression
-     */
-    int countNbs();
 }

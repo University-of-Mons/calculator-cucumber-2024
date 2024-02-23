@@ -50,15 +50,6 @@ public class MyNumber implements Expression {
     }
 
     /**
-     * The number of numbers contained in a number expression is always 1
-     *
-     * @return The number of numbers contained in  a number expression
-     */
-    public int countNbs() {
-        return 1;
-    }
-
-    /**
      * Convert a number into a String to allow it to be printed.
      *
      * @return The String that is the result of the conversion.

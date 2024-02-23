@@ -33,10 +33,4 @@ class TestOperation {
     void testCountOps() {
         assertEquals(3, o.countOps());
     }
-
-    @Test
-    void testCountNbs() {
-        assertEquals(Integer.valueOf(6), o.countNbs());
-    }
-
 }

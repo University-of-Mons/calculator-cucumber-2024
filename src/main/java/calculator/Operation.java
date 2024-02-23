@@ -126,14 +126,6 @@ public abstract class Operation implements Expression {
                 .getAsInt();
     }
 
-    public final int countNbs() {
-        // use of Java 8 functional programming capabilities
-        return args.stream()
-                .mapToInt(Expression::countNbs)
-                .reduce(Integer::sum)
-                .getAsInt();
-    }
-
     /**
      * Convert the arithmetic operation into a String to allow it to be printed,
      * using the default notation (prefix, infix or postfix) that is specified in some variable.

@@ -31,8 +31,6 @@ class TestCounting {
         e = new MyNumber(value1);
         //test whether a number contains zero operations
         assertEquals(0, e.countOps());
-        //test whether a number contains 1 number
-        assertEquals(1, e.countNbs());
     }
 
     @ParameterizedTest
@@ -55,8 +53,6 @@ class TestCounting {
         }
         //test whether a binary operation contains 1 operation
         assertEquals(1, e.countOps());
-        //test whether a binary operation contains 2 numbers
-        assertEquals(2, e.countNbs());
     }
 
 }
