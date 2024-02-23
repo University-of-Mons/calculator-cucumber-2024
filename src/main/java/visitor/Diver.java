@@ -38,17 +38,9 @@ public class Diver extends Visitor {
         for (Expression expression : o.getArgs()) {
             expression.accept(this);
             depths.add(this.depth);
-            System.out.print("Depth of sub-expression ");
-            System.out.print(expression);
-            System.out.print(" has been computed to be ");
-            System.out.println(this.depth);
         }
         // Get max of the array list
         this.depth = max(depths) + 1;
-        System.out.print("Depth of ");
-        System.out.print(o);
-        System.out.print(" has been computed to be ");
-        System.out.println(this.depth);
     }
     /**
      * Depth getter
