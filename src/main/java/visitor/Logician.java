@@ -1,5 +1,6 @@
 package visitor;
 
+import calculator.Expression;
 import calculator.MyNumber;
 import calculator.Operation;
 
@@ -30,6 +31,9 @@ public class Logician extends Visitor {
     @Override
     public void visit(Operation o) {
         this.operationsCount += o.getArgs().size() - 1;
+        for (Expression a : o.getArgs()) {
+            a.accept(this);
+        }
     }
 
     /**

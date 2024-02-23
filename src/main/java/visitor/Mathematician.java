@@ -31,6 +31,9 @@ public class Mathematician extends Visitor {
      */
     @Override
     public void visit(Operation o) {
+        for (Expression a : o.getArgs()) {
+            a.accept(this);
+        }
     }
 
     /**

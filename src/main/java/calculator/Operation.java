@@ -101,9 +101,6 @@ public abstract class Operation implements Expression {
      * @param visitor The visitor object
      */
     public void accept(Visitor visitor) {
-        for (Expression a : args) {
-            a.accept(visitor);
-        }
         visitor.visit(this);
     }
 
