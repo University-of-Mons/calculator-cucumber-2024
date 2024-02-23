@@ -48,6 +48,16 @@ Feature: Integer Arithmetic Expressions
     And its PREFIX notation is + (8, 6)
     And its POSTFIX notation is (8, 6) +
 
+  Scenario: Evaluation arithmetic operations with a NaN member
+    Given the following list of integer numbers
+        | 8 | 2 | 2 |
+    Then the sum with NaN member evaluates to NaN
+    And the product with NaN member evaluates to NaN
+    And the difference with NaN member evaluates to NaN
+    And the quotient with NaN member evaluates to NaN
+
+
+
   # In this scenario we provide a list of numbers as input.
   # The goal is to check if the code represents nested operations correctly.
   # We only check for the sum as it is the same method that is used for the other operations.

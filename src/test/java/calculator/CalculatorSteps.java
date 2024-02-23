@@ -95,6 +95,7 @@ public class CalculatorSteps {
 
     @Then("^the (.*) is (\\d+)$")
     public void thenTheOperationIs(String s, int val) {
+        System.out.println("op = " + op);
         try {
             switch (s) {
                 case "sum" -> op = new Plus(params);
@@ -130,5 +131,23 @@ public class CalculatorSteps {
     @Then("the operation evaluates to {string}")
     public void thenTheOperationEvaluatesTo(String val) {
         assertEquals(val, c.eval(op).toString());
+    }
+
+    @Then("the (.*) with NaN member evaluates to (.*)$")
+    public void thenTheOperationWithNaNMemberEvaluatesTo(String s, String val) {
+        try {
+            // Add a NaN member to the list of parameters
+            params.add(new NotANumber());
+            switch (s) {
+                case "sum" -> op = new Plus(params);
+                case "product" -> op = new Times(params);
+                case "quotient" -> op = new Divides(params);
+                case "difference" -> op = new Minus(params);
+                default -> fail();
+            }
+            assertEquals(val, c.eval(op).toString());
+        } catch (IllegalConstruction e) {
+            fail();
+        }
     }
 }
