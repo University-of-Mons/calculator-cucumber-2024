@@ -3,6 +3,7 @@ package calculator;
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+import visitor.CountingVisitor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,17 +29,26 @@ class TestOperation {
 
 	@Test
 	void testCountDepth() {
-		assertEquals(2, o.countDepth());
+		CountingVisitor cv = new CountingVisitor();
+		cv.setMode(Counting.DEPTH);
+		o.accept(cv);
+		assertEquals(2, cv.getValue());
 	}
 
 	@Test
 	void testCountOps() {
-		assertEquals(3, o.countOps());
+		CountingVisitor cv = new CountingVisitor();
+		cv.setMode(Counting.COUNT_OPS);
+		o.accept(cv);
+		assertEquals(3, cv.getValue());
 	}
 
 	@Test
 	void testCountNbs() {
-		assertEquals(Integer.valueOf(6), o.countNbs());
+		CountingVisitor cv = new CountingVisitor();
+		cv.setMode(Counting.COUNT_NBS);
+		o.accept(cv);
+		assertEquals(Integer.valueOf(6), cv.getValue());
 	}
 
 }
