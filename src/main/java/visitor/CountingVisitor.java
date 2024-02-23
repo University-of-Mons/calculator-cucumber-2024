@@ -34,7 +34,7 @@ public class CountingVisitor extends Visitor{
 
      public void visit(Operation o){
          ArrayList<Integer> i = new ArrayList<>();
-         for(Expression e : o.args) {
+         for(Expression e : o.getArgs()) {
              e.accept(this);
              i.add(getValue());
          }
