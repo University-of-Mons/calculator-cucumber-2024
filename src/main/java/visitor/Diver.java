@@ -51,10 +51,6 @@ public class Diver extends Visitor {
         return depth;
     }
 
-    private int max(int a, int b) {
-        return Math.max(a, b);
-    }
-
     private int max(ArrayList<Integer> list) {
         return list.stream()
                 .mapToInt(Integer::intValue)
