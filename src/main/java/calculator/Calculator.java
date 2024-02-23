@@ -1,5 +1,6 @@
 package calculator;
 
+import visitor.CountingVisitor;
 import visitor.Evaluator;
 import visitor.ExpressionVisitor;
 
@@ -52,9 +53,16 @@ public class Calculator {
      */
     public void printExpressionDetails(Expression e, Notation n) {
         print(e,n);
-        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
-        System.out.print(e.countOps() + " operations");
-        System.out.println(" and " + e.countNbs() + " numbers.");
+        CountingVisitor cv = new CountingVisitor();
+        cv.setMode(Counting.DEPTH);
+        e.accept(cv);
+        System.out.print("It contains " + cv.getValue() + " levels of nested expressions, ");
+        cv.setMode(Counting.COUNT_OPS);
+        e.accept(cv);
+        System.out.print(cv.getValue() + " operations");
+        cv.setMode(Counting.COUNT_NBS);
+        e.accept(cv);
+        System.out.println(" and " + cv.getValue() + " numbers.");
         System.out.println();
     }
 
