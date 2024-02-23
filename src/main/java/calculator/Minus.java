@@ -48,8 +48,8 @@ public final class Minus extends Operation {
      * @param r The second integer that should be subtracted from the first
      * @return The integer that is the result of the subtraction
      */
-    public MyNumber op(int l, int r) {
-        if (l instance of NotANumber || r instanceof NotANumber)
+    public MyNumber op(MyNumber l, MyNumber r) {
+        if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         return new MyNumber(l.getValue() - r.getValue());
     }

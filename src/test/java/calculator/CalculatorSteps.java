@@ -4,7 +4,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import visitor.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,11 +125,6 @@ public class CalculatorSteps {
         } catch (IllegalConstruction e) {
             fail();
         }
-    }
-
-    @Given("the difference of the following list of numbers")
-    public void theDifferenceOfTheFollowingListOfNumbers() {
-        assertEquals(new MyNumber(val), c.eval(op));
     }
 
     @Then("the operation evaluates to {string}")
