@@ -113,20 +113,6 @@ public abstract class Operation implements Expression {
     }
 
     /**
-     * Count the number of operations contained in an arithmetic expression recursively,
-     * using Java 8 functional programming capabilities (streams, maps, etc...)
-     *
-     * @return The number of operations contained in an arithmetic expression being traversed
-     */
-    public final int countOps() {
-        // use of Java 8 functional programming capabilities
-        return 1 + args.stream()
-                .mapToInt(Expression::countOps)
-                .reduce(Integer::sum)
-                .getAsInt();
-    }
-
-    /**
      * Convert the arithmetic operation into a String to allow it to be printed,
      * using the default notation (prefix, infix or postfix) that is specified in some variable.
      *

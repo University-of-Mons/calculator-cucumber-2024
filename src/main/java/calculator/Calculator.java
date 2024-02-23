@@ -1,9 +1,6 @@
 package calculator;
 
-import visitor.Diver;
-import visitor.Evaluator;
-import visitor.Mathematician;
-import visitor.Printer;
+import visitor.*;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -51,7 +48,7 @@ public class Calculator {
         print(e);
         Calculator calc = new Calculator();
         System.out.print("It contains " + calc.depth(e) + " levels of nested expressions, ");
-        System.out.print(e.countOps() + " operations");
+        System.out.print(calc.numbersCount(e) + " operations");
         System.out.println(" and " + calc.numbersCount(e) + " numbers.");
         System.out.println();
     }
@@ -94,5 +91,11 @@ public class Calculator {
         Mathematician visitor = new Mathematician();
         e.accept(visitor);
         return visitor.getNumbersCount();
+    }
+
+    public int operationsCount(Expression e) {
+        Logician visitor = new Logician();
+        e.accept(visitor);
+        return visitor.getOperationsCount();
     }
 }

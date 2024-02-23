@@ -28,9 +28,4 @@ class TestOperation {
     void testEquals() {
         assertEquals(o, o2);
     }
-
-    @Test
-    void testCountOps() {
-        assertEquals(3, o.countOps());
-    }
 }

@@ -41,15 +41,6 @@ public class MyNumber implements Expression {
     }
 
     /**
-     * The number of operations contained in a number expression is always 0
-     *
-     * @return The number of operations contained in a number expression
-     */
-    public int countOps() {
-        return 0;
-    }
-
-    /**
      * Convert a number into a String to allow it to be printed.
      *
      * @return The String that is the result of the conversion.

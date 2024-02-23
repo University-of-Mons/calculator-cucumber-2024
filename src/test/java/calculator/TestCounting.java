@@ -26,13 +26,6 @@ class TestCounting {
         e = null;
     }
 
-    @Test
-    void testNumberCounting() {
-        e = new MyNumber(value1);
-        //test whether a number contains zero operations
-        assertEquals(0, e.countOps());
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {"*", "+", "/", "-"})
     void testOperationCounting(String symbol) {
@@ -51,8 +44,5 @@ class TestCounting {
         } catch (IllegalConstruction e) {
             fail();
         }
-        //test whether a binary operation contains 1 operation
-        assertEquals(1, e.countOps());
     }
-
 }

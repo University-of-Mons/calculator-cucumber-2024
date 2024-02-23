@@ -17,11 +17,4 @@ public interface Expression {
      * @param v The visitor object being passed as a parameter
      */
     void accept(Visitor v);
-
-    /**
-     * Counts the number of operations recursively contained in an arithmetic expression
-     *
-     * @return The number of operations contained in an arithmetic expression
-     */
-    int countOps();
 }
