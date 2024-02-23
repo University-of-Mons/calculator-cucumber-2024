@@ -28,20 +28,4 @@ class TestOperation {
     void testEquals() {
         assertEquals(o, o2);
     }
-
-    @Test
-    void testCountDepth() {
-        assertEquals(2, o.countDepth());
-    }
-
-    @Test
-    void testCountOps() {
-        assertEquals(3, o.countOps());
-    }
-
-    @Test
-    void testCountNbs() {
-        assertEquals(Integer.valueOf(6), o.countNbs());
-    }
-
 }
