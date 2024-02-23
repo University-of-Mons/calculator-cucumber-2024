@@ -36,6 +36,12 @@ Feature: Integer Arithmetic Expressions
     And I provide a number 5
     Then the operation evaluates to 1
 
+  Scenario: Dividing an integer by zero
+    Given an integer operation '/'
+    When I provide a number 5
+    And I provide a number 0
+    Then the operation evaluates to MyNotANumber
+
   Scenario: Printing the sum of two integer numbers
     Given the sum of two numbers 8 and 6
     Then its INFIX notation is ( 8 + 6 )
@@ -78,6 +84,8 @@ Feature: Integer Arithmetic Expressions
       |35|5|7|
       |7|5|1|
       |5|7|0|
+
+
 
   Scenario Outline: Evaluating arithmetic operations with two integer parameters
     Given an integer operation <op>
