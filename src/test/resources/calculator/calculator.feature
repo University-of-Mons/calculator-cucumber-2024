@@ -99,3 +99,16 @@ Feature: Integer Arithmetic Expressions
       | "-" | 8| 5|     3|
       | "*" | 7| 2|    14|
       | "/" | 6| 2|     3|
+
+  Scenario Outline: Evaluating arithmetic operations with one integer and not a number
+    Given an integer operation <op>
+    When I provide not a number
+    And I provide a number <n1>
+    Then the operation evaluates to MyNotANumber
+
+    Examples:
+      | op  |n1|
+      | "+" | 4|
+      | "-" | 9|
+      | "*" | 7|
+      | "/" | 5|

@@ -95,6 +95,14 @@ public class CalculatorSteps {
 		op.addMoreParams(params);
 	}
 
+	@When("^I provide not a number")
+	public void whenIProvideNotANumber() {
+		//add extra parameter to the operation
+		params = new ArrayList<>();
+		params.add(new MyNotANumber());
+		op.addMoreParams(params);
+	}
+
 	@Then("^the (.*) is (\\d+)$")
 	public void thenTheOperationIs(String s, int val) {
 		try {
