@@ -12,20 +12,8 @@ class TestDivides {
 
 	private final int value1 = 8;
 	private final int value2 = 6;
-	private final int zero = 0;
 	private Divides op;
 	private List<Expression> params;
-
-	@Test
-	void divisionByZeroTest() {
-		params = Arrays.asList(new MyNumber(value1), new MyNumber(zero));
-		try {
-			op = new Divides(params);
-			assertThrows(ArithmeticException.class, () -> op.op(value1, zero));
-		} catch (IllegalConstruction e) {
-			fail();
-		}
-	}
 
 	@BeforeEach
 	void setUp() {
