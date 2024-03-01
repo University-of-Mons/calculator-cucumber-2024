@@ -1,16 +1,16 @@
-package visitor;
+package back.visitor;
 
-import calculator.Expression;
-import calculator.MyNumber;
-import calculator.Operation;
+import back.calculator.Expression;
+import back.calculator.MyNumber;
+import back.calculator.Operation;
 
-public class Mathematician extends Visitor {
-    private int numbersCount = 0;
+public class Logician extends Visitor {
+    private int operationsCount = 0;
 
     /**
-     * Mathematician visitor constructor.
+     * Logician visitor constructor.
      */
-    public Mathematician() {
+    public Logician() {
     }
 
     /**
@@ -20,7 +20,6 @@ public class Mathematician extends Visitor {
      */
     @Override
     public void visit(MyNumber n) {
-        this.numbersCount += 1;
     }
 
     /**
@@ -31,6 +30,7 @@ public class Mathematician extends Visitor {
      */
     @Override
     public void visit(Operation o) {
+        this.operationsCount += o.getArgs().size() - 1;
         for (Expression a : o.getArgs()) {
             a.accept(this);
         }
@@ -41,7 +41,7 @@ public class Mathematician extends Visitor {
      *
      * @return The depth
      */
-    public int getNumbersCount() {
-        return numbersCount;
+    public int getOperationsCount() {
+        return operationsCount;
     }
 }

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>calculator</groupId>
     <artifactId>calculator-cucumber</artifactId>
-    <version>0.5.0</version>
+    <version>0.7.0</version>
     <name>Calculator with JUnit5 and Cucumber tests</name>
 
     <properties>
@@ -58,6 +58,18 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -70,7 +82,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>calculator.Main</mainClass>
+                            <mainClass>back/calculator/Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -103,7 +115,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
-                    <mainClass>calculator.Main</mainClass>
+                    <mainClass>back.calculator.Main</mainClass>
                 </configuration>
             </plugin>
 
