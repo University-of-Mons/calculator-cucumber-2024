@@ -1,0 +1,15 @@
+.button, .text-field {
+    -fx-color: white;
+}
+
+#btnClear, #btnNegate, #btnFraction {
+    -fx-color: #bdc3c7; /* Gris clair */
+}
+
+#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnEquals {
+    -fx-color: #FFA500;
+}
+
+#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9 {
+    -fx-color: #ecf0f1; /* Gris très clair */
+}

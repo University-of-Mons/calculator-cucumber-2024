@@ -1,21 +1,37 @@
 package calculator;
 
+import java.util.Objects;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GuiMain extends Application {
 
+    private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
+
     @Override
     public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/GuiMainView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png")));
+            stage.getIcons().add(icon);
+            stage.setTitle("Calculator Cucumber");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+            root.requestFocus();
+        } catch (Exception e) {
+            logger.error("Erreur lors du chargement de l'interface utilisateur", e);
+        }
     }
 
     public static void main(String[] args) {
