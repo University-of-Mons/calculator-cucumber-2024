@@ -1,0 +1,40 @@
+@import "base-theme.css";
+
+.pane {
+    -fx-background-color: -surface-0;
+}
+
+.button-number {
+    -fx-background-color: -surface-1;
+    -fx-text-fill: -foreground-primary;
+    -fx-max-height: 64;
+    -fx-max-width: 64;
+    -fx-pref-height: 64;
+    -fx-pref-width: 64;
+}
+
+.button-operator {
+    -fx-background-color: -surface-operator;
+    -fx-text-fill: -accent-color;
+    -fx-max-height: 64;
+    -fx-max-width: 64;
+    -fx-pref-height: 64;
+    -fx-pref-width: 64;
+}
+
+.button-option {
+    -fx-background-color: -surface-option;
+    -fx-text-fill: -foreground-secondary;
+    -fx-max-height: 64;
+    -fx-max-width: 64;
+    -fx-pref-height: 64;
+    -fx-pref-width: 64;
+}
+
+.label-primary {
+    -fx-text-fill: -foreground-primary;
+}
+
+.label-secondary {
+    -fx-text-fill: -foreground-secondary;
+}
