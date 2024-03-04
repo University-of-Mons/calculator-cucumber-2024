@@ -27,7 +27,7 @@ public class SceneLoader {
         FXMLLoader FXMLLoader = new FXMLLoader(url);
         try {
             Parent sceneParent = FXMLLoader.load();
-            return new Scene(sceneParent, 1280, 720);
+            return new Scene(sceneParent, 400, 500);
         } catch (IOException e) {
             System.out.println("FATAL ERROR while trying to load scene " + url);
             e.printStackTrace();
