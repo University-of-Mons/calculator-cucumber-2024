@@ -18,6 +18,8 @@ public class Main extends Application {
 
     private static Stage stage;
 
+    public static String userInput = "";
+
     @Override
     public void start(Stage stage_){
         stage = stage_;

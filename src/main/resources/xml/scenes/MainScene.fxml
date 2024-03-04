@@ -28,75 +28,75 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="9" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="9" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="/" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="/" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="250.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="√" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <Button layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="√" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="π" textAlignment="CENTER" GridPane.columnIndex="4">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="π" textAlignment="CENTER" GridPane.columnIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="^" textAlignment="CENTER" GridPane.columnIndex="3">
+                  <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="^" textAlignment="CENTER" GridPane.columnIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text=")" textAlignment="CENTER" GridPane.columnIndex="2">
+                  <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text=")" textAlignment="CENTER" GridPane.columnIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="250.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="(" textAlignment="CENTER" GridPane.columnIndex="1">
+                  <Button layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="(" textAlignment="CENTER" GridPane.columnIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="7" textAlignment="CENTER" GridPane.rowIndex="1">
+                  <Button layoutX="330.0" layoutY="10.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="7" textAlignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="90.0" layoutY="58.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="x²" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                  <Button layoutX="90.0" layoutY="58.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="x²" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="170.0" layoutY="58.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="*" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <Button layoutX="170.0" layoutY="58.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="*" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="250.0" layoutY="58.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Button layoutX="250.0" layoutY="58.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="330.0" layoutY="58.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button layoutX="330.0" layoutY="58.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="10.0" layoutY="58.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="4" textAlignment="CENTER" GridPane.rowIndex="2">
+                  <Button layoutX="10.0" layoutY="58.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="4" textAlignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="250.0" layoutY="105.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="-" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                  <Button layoutX="250.0" layoutY="105.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="-" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="170.0" layoutY="105.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Button layoutX="170.0" layoutY="105.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="90.0" layoutY="105.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button layoutX="90.0" layoutY="105.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="10.0" layoutY="105.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="1" textAlignment="CENTER" GridPane.rowIndex="3">
+                  <Button layoutX="10.0" layoutY="105.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="1" textAlignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
@@ -104,19 +104,19 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="250.0" layoutY="152.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="+" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <Button layoutX="250.0" layoutY="152.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="+" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="170.0" layoutY="152.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="\%" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <Button layoutX="170.0" layoutY="152.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="\%" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="90.0" layoutY="152.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="." textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Button layoutX="90.0" layoutY="152.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="." textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button layoutX="10.0" layoutY="152.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="0" textAlignment="CENTER" GridPane.rowIndex="4">
+                  <Button layoutX="10.0" layoutY="152.0" mnemonicParsing="false" onAction="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="0" textAlignment="CENTER" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
