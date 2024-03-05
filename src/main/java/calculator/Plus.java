@@ -12,7 +12,7 @@ import java.util.List;
  * @see Times
  * @see Divides
  */
-public final class Plus extends Operation {
+public final class Plus<T> extends Operation<T> {
 
     /**
      * Class constructor specifying a number of Expressions to add.
@@ -33,7 +33,7 @@ public final class Plus extends Operation {
      * @param r The second integer that should be added to the first
      * @return The integer that is the result of the addition
      */
-    public int op(int l, int r) {
+    public Value<T> op(Value<T> l,Value<T> r) {
         return (l + r);
     }
 }

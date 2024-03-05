@@ -1,5 +1,6 @@
 package calculator;
 
+import lombok.extern.slf4j.Slf4j;
 import visitor.Evaluator;
 import visitor.Printer;
 
@@ -9,7 +10,8 @@ import visitor.Printer;
  *
  * @author tommens
  */
-public class Calculator {
+@Slf4j
+public class Calculator<T> {
 
     /**
      * Default constructor of the class.
@@ -68,17 +70,16 @@ public class Calculator {
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
-    public MyNumber eval(Expression e) {
+    public Value<T> eval(Expression e) {
         try {
             // create a new visitor to evaluate expressions
-            Evaluator v = new Evaluator();
+            Evaluator<T> v = new Evaluator<>();
             // and ask the expression to accept this visitor to start the evaluation process
             e.accept(v);
             // and return the result of the evaluation at the end of the process
-            return new MyNumber(v.getResult());
-        }
-        catch (ArithmeticException _e){
-            return new MyNaN();
+            return v.getResult();
+        } catch (ArithmeticException e_) {
+            return new MyNaN<>();
         }
 
     }

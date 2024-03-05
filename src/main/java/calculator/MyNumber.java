@@ -9,7 +9,7 @@ import visitor.Visitor;
  * @see Expression
  * @see Operation
  */
-public class MyNumber implements Expression
+public class MyNumber extends Value<Integer>
 {
   private final int value;
 
@@ -25,49 +25,10 @@ public class MyNumber implements Expression
      * @param v The integer value to be contained in the object
      */
     public /*constructor*/ MyNumber(int v) {
-	  value=v;
+        super(v);
+        value=v;
 	  }
 
-    /**
-     * accept method to implement the visitor design pattern to traverse arithmetic expressions.
-     * Each number will pass itself to the visitor object to get processed by the visitor.
-     *
-     * @param v	The visitor object
-     */
-  public void accept(Visitor v) {
-      v.visit(this);
-  }
-
-
-    /** The depth of a number expression is always 0
-     *
-     * @return The depth of a number expression
-     */
-  public int countDepth() {
-	  return 0;
-  }
-
-    /** The number of operations contained in a number expression is always 0
-     *
-     * @return The number of operations contained in a number expression
-     */
-  public int countOps() {
-	  return 0;
-  }
-
-    /** The number of numbers contained in a number expression is always 1
-     *
-     * @return The number of numbers contained in  a number expression
-     */
-  public int countNbs() {
-	  return 1;
-  }
-
-    /**
-     * Convert a number into a String to allow it to be printed.
-     *
-     * @return	The String that is the result of the conversion.
-     */
   @Override
   public String toString() {
 	  return Integer.toString(value);
@@ -108,4 +69,23 @@ public class MyNumber implements Expression
 		return value;
   }
 
+    @Override
+    public Value<Integer> plus(Value<Integer> other) {
+        return new MyNumber(this.getValue()+other.getValue());
+    }
+
+    @Override
+    public Value<Integer> minus(Value<Integer> other) {
+        return new MyNumber(this.getValue()-other.getValue());
+    }
+
+    @Override
+    public Value<Integer> times(Value<Integer> other) {
+        return new MyNumber(this.getValue()*other.getValue());
+    }
+
+    @Override
+    public Value<Integer> div(Value<Integer> other) {
+        return new MyNumber(this.getValue()/other.getValue());
+    }
 }

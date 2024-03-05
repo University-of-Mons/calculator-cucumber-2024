@@ -12,7 +12,7 @@ import java.util.List;
  * @see Plus
  * @see Divides
  */
-public final class Times extends Operation {
+public final class Times<T> extends Operation<T> {
     /**
      * Class constructor specifying a number of Expressions to multiply.
      *
@@ -33,7 +33,7 @@ public final class Times extends Operation {
      * @param r The second integer that should be multiplied with the first
      * @return The integer that is the result of the multiplication
      */
-    public int op(int l, int r) {
+    public Value<T> op(Value<T> l, Value<T> r) {
         return (l * r);
     }
 }

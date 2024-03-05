@@ -1,15 +1,12 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
 
 /**
  * Evaluation is a concrete visitor that serves to
  * compute and evaluate the results of arithmetic expressions.
  */
-public class Printer extends Visitor {
+public class Printer<T> extends Visitor<T> {
 
     private final Notation n;
     /**
@@ -39,7 +36,7 @@ public class Printer extends Visitor {
      *
      * @param n The number being visited
      */
-    public void visit(MyNumber n) {
+    public void visit(Value<T> n) {
         result.append(n.getValue());
     }
 
@@ -48,7 +45,7 @@ public class Printer extends Visitor {
      *
      * @param o The operation being visited
      */
-    public void visit(Operation o) {
+    public void visit(Operation<T> o) {
         if (n.equals(Notation.PREFIX)) {
             result.append(o.getSymbol());
         }

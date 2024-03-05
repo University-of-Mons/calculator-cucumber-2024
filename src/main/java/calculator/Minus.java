@@ -10,7 +10,7 @@ import java.util.List;
  * @see Times
  * @see Divides
  */
-public final class Minus extends Operation
+public final class Minus<T> extends Operation<T>
  {
 
  /**
@@ -31,7 +31,7 @@ public final class Minus extends Operation
      * @param r The second integer that should be subtracted from the first
      * @return The integer that is the result of the subtraction
      */
-  public int op(int l, int r) {
+  public Value<T> op(Value<T> l, Value<T> r) {
   	return (l-r);
   }
 }

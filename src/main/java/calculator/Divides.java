@@ -12,7 +12,7 @@ import java.util.List;
  * @see Times
  * @see Plus
  */
-public final class Divides extends Operation {
+public final class Divides<T> extends Operation<T> {
 
 
     /**
@@ -35,6 +35,6 @@ public final class Divides extends Operation {
      * @return The integer that is the result of the division
      */
 
-  public int op(int l, int r) throws ArithmeticException
-    { return (l/r); }
+  public Value<T> op(Value<T> l, Value<T> r) throws ArithmeticException
+    { return (l / r); }
 }
