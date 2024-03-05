@@ -39,9 +39,7 @@ public class Calculator<T> {
         Printer v = new Printer(n);
         e.accept(v);
 
-        System.out.println("The result of evaluating expression " + v.getResult());
-        System.out.println("is: " + eval(e) + ".");
-        System.out.println();
+        log.info("The result of evaluating expression {}%nis; {}.",v.getResult(),eval(e));
     }
 
     public void print(Expression e) {
@@ -58,10 +56,7 @@ public class Calculator<T> {
      */
     public void printExpressionDetails(Expression e) {
         print(e);
-        System.out.print("It contains " + e.countDepth() + " levels of nested expressions, ");
-        System.out.print(e.countOps() + " operations");
-        System.out.println(" and " + e.countNbs() + " numbers.");
-        System.out.println();
+        log.info("It contains {} levels of nested expressions, {} operations and {} numbers.",e.countDepth(),e.countOps(),e.countNbs());
     }
 
     /**

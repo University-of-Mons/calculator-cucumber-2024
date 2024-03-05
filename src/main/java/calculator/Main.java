@@ -1,5 +1,7 @@
 package calculator;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
  *
  * @author tommens
  */
+@Slf4j
 public class Main {
 
 	/**
@@ -57,7 +60,7 @@ public class Main {
 	}
 
 	catch(IllegalConstruction exception) {
-		System.out.println("cannot create operations without parameters");
+		log.error("cannot create operations without parameters");
 		}
  	}
 
