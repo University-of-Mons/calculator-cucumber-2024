@@ -75,8 +75,4 @@ public class Controller {
             currentExpression.setText(currentExpressionText);
         }
     }
-
-    private void handleDigitButton(Button button, String character) {
-
-    }
 }
