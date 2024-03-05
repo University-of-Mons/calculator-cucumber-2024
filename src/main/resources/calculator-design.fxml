@@ -8,99 +8,98 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="400.0" styleClass="pane" stylesheets="@styling.css" xmlns="http://javafx.com/javafx/20-internal" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboard" prefHeight="800.0" prefWidth="400.0" styleClass="pane" stylesheets="@styling.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
    <children>
       <FlowPane alignment="CENTER" hgap="20.0" layoutY="292.0" prefHeight="500.0" prefWidth="400.0" vgap="20.0">
          <children>
             <Button layoutX="194.0" layoutY="42.0" mnemonicParsing="false" styleClass="button-option" text="A">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="42.0" mnemonicParsing="false" styleClass="button-option" text="U">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="42.0" mnemonicParsing="false" styleClass="button-operator" text="/">
                <font>
-                  <Font name="JetBrainsMono NF Regular" size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="42.0" mnemonicParsing="false" styleClass="button-operator" text="*">
                <font>
-                  <Font name="JetBrainsMono NF Regular" size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="42.0" mnemonicParsing="false" styleClass="button-number" text="1">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="124.0" mnemonicParsing="false" styleClass="button-number" text="2">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="124.0" mnemonicParsing="false" styleClass="button-number" text="3">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="124.0" mnemonicParsing="false" styleClass="button-operator" text="-">
                <font>
-                  <Font name="JetBrainsMono NF Regular" size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="124.0" mnemonicParsing="false" styleClass="button-number" text="4">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="206.0" mnemonicParsing="false" styleClass="button-number" text="5">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="206.0" mnemonicParsing="false" styleClass="button-number" text="6">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="206.0" mnemonicParsing="false" styleClass="button-operator" text="+">
                <font>
-                  <Font name="JetBrainsMono NF Regular" size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="206.0" mnemonicParsing="false" styleClass="button-number" text="7">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="288.0" mnemonicParsing="false" styleClass="button-number" text="8">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="288.0" mnemonicParsing="false" styleClass="button-number" text="9">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="315.0" layoutY="288.0" maxHeight="20.0" maxWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-max-height: 60; -fx-max-width: 60; -fx-pref-height: 60; -fx-pref-width: 60;" styleClass="button-operator" text="=">
                <font>
-                  <Font name="JetBrainsMono NF Regular" size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="304.0" layoutY="356.0" maxHeight="20.0" maxWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-max-height: 60; -fx-max-width: 60; -fx-pref-height: 60; -fx-pref-width: 60;" styleClass="button-number" text="0">
                <font>
-                  <Font name="JetBrainsMono NF Regular" size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
             <Button layoutX="179.0" layoutY="399.0" maxHeight="20.0" maxWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-max-height: 60; -fx-max-width: 60; -fx-pref-height: 60; -fx-pref-width: 60;" styleClass="button-number" text=".">
                <font>
-                  <Font name="JetBrainsMono NF Regular" size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Button>
          </children>
@@ -112,32 +111,32 @@
          <children>
             <Label styleClass="label-secondary" stylesheets="@styling.css" text="10 + 10">
                <font>
-                  <Font name="Inter Regular" size="16.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
             <Label layoutX="284.0" layoutY="10.0" styleClass="label-secondary" stylesheets="@styling.css" text="=20">
                <font>
-                  <Font name="Inter Regular" size="16.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
             <Label layoutX="284.0" layoutY="26.0" styleClass="label-secondary" stylesheets="@styling.css" text="Ans + 10">
                <font>
-                  <Font name="Inter Regular" size="16.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
             <Label layoutX="284.0" layoutY="42.0" styleClass="label-secondary" stylesheets="@styling.css" text="=30">
                <font>
-                  <Font name="Inter Regular" size="16.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
             <Label layoutX="284.0" layoutY="58.0" styleClass="label-secondary" stylesheets="@styling.css" text="30 / 3">
                <font>
-                  <Font name="Inter Regular" size="16.0" />
+                  <Font name="Arial" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="284.0" layoutY="74.0" styleClass="label-primary" stylesheets="@styling.css" text="=10">
+            <Label fx:id="currentExpression" layoutX="284.0" layoutY="74.0" styleClass="label-primary" stylesheets="@styling.css" text="=10">
                <font>
-                  <Font size="32.0" />
+                  <Font name="Arial" size="32.0" />
                </font>
             </Label>
          </children>
