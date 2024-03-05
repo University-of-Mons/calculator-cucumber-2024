@@ -38,3 +38,11 @@
 .label-secondary {
     -fx-text-fill: -foreground-secondary;
 }
+
+.button:hover {
+    -fx-background-color: -accent-color;
+}
+
+.button-operator:hover {
+    -fx-text-fill: -foreground-primary;
+}

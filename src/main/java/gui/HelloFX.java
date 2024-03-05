@@ -1,4 +1,4 @@
-package calculator;
+package gui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

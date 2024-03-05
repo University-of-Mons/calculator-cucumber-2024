@@ -1,4 +1,4 @@
-package calculator;
+package gui;
 
 public class Gui {
     public static void main(final String[] args) {
