@@ -25,8 +25,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-  	Expression e;
-  	Calculator c = new Calculator();
+  	Expression<Integer> e;
+  	Calculator<Integer> c = new Calculator<>();
 
 	try{
 
@@ -34,27 +34,27 @@ public class Main {
 		c.print(e);
 		c.eval(e);
 
-	    List<Expression> params = new ArrayList<>();
+	    List<Expression<Integer>> params = new ArrayList<>();
 	    Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
-	    e = new Plus(params);
+	    e = new Plus<>(params);
 		c.printExpressionDetails(e);
 		c.eval(e);
 	
-		List<Expression> params2 = new ArrayList<>();
+		List<Expression<Integer>> params2 = new ArrayList<>();
 		Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
-		e = new Minus(params2);
+		e = new Minus<>(params2);
 		c.print(e);
 		c.eval(e);
 
-		List<Expression> params3 = new ArrayList<>();
-		Collections.addAll(params3, new Plus(params), new Minus(params2));
-		e = new Times(params3);
+		List<Expression<Integer>> params3 = new ArrayList<>();
+		Collections.addAll(params3, new Plus<>(params), new Minus<>(params2));
+		e = new Times<>(params3);
 		c.printExpressionDetails(e);
 		c.eval(e);
 
-		List<Expression> params4 = new ArrayList<>();
-		Collections.addAll(params4, new Plus(params), new Minus(params2), new MyNumber(5));
-		e = new Divides(params4);
+		List<Expression<Integer>> params4 = new ArrayList<>();
+		Collections.addAll(params4, new Plus<>(params), new Minus<>(params2), new MyNumber(5));
+		e = new Divides<>(params4);
 		c.print(e,Notation.POSTFIX);
 		c.eval(e);
 	}

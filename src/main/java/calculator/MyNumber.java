@@ -1,7 +1,5 @@
 package calculator;
 
-import visitor.Visitor;
-
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
@@ -17,7 +15,8 @@ public class MyNumber extends Value<Integer>
      *
      * @return The integer number contained in the object
      */
-  public Integer getValue() { return value; }
+    @Override
+  public Integer getVal() { return value; }
 
     /**
      * Constructor method
@@ -71,21 +70,21 @@ public class MyNumber extends Value<Integer>
 
     @Override
     public Value<Integer> plus(Value<Integer> other) {
-        return new MyNumber(this.getValue()+other.getValue());
+        return new MyNumber(this.getVal()+other.getVal());
     }
 
     @Override
     public Value<Integer> minus(Value<Integer> other) {
-        return new MyNumber(this.getValue()-other.getValue());
+        return new MyNumber(this.getVal()-other.getVal());
     }
 
     @Override
     public Value<Integer> times(Value<Integer> other) {
-        return new MyNumber(this.getValue()*other.getValue());
+        return new MyNumber(this.getVal()*other.getVal());
     }
 
     @Override
     public Value<Integer> div(Value<Integer> other) {
-        return new MyNumber(this.getValue()/other.getValue());
+        return new MyNumber(this.getVal()/other.getVal());
     }
 }

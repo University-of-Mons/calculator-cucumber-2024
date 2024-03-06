@@ -1,7 +1,6 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.MyNumber;
 import calculator.Operation;
 import calculator.Value;
 
@@ -11,11 +10,6 @@ import java.util.ArrayList;
  * compute and evaluate the results of arithmetic expressions.
  */
 public class Evaluator<T> extends Visitor<T> {
-
-    /**
-     * Default constructor of the class. Does not initialise anything.
-     */
-    public Evaluator() {}
 
     /** The result of the evaluation will be stored in this private variable */
     private Value<T> computedValue;
@@ -41,12 +35,12 @@ public class Evaluator<T> extends Visitor<T> {
     public void visit(Operation<T> o) {
         ArrayList<Value<T>> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
-        for(Expression a:o.args) {
+        for(Expression<T> a:o.args) {
             a.accept(this);
             evaluatedArgs.add(computedValue);
         }
         //second loop to accumulate all the evaluated subresults
-        Value<T> temp = evaluatedArgs.get(0);
+        Value<T> temp = evaluatedArgs.getFirst();
         int max = evaluatedArgs.size();
         for(int counter=1; counter<max; counter++) {
             temp = o.op(temp,evaluatedArgs.get(counter));

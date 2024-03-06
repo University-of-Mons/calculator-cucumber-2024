@@ -19,7 +19,7 @@ public final class Times<T> extends Operation<T> {
      * @param elist The list of Expressions to multiply
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
      */
-    public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
+    public /*constructor*/ Times(List<Expression<T>> elist) throws IllegalConstruction {
 
         super(elist);
         symbol = "*";
@@ -34,6 +34,6 @@ public final class Times<T> extends Operation<T> {
      * @return The integer that is the result of the multiplication
      */
     public Value<T> op(Value<T> l, Value<T> r) {
-        return (l * r);
+        return l * r;
     }
 }

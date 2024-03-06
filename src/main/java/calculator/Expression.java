@@ -9,14 +9,14 @@ import visitor.Visitor;
  * @see Operation
  * @see MyNumber
  */
-public interface Expression {
+public interface Expression<T> {
 
    /**
     * accept is a method needed to implement the visitor design pattern
     *
     * @param v The visitor object being passed as a parameter
     */
-   void accept(Visitor v);
+   void accept(Visitor<T> v);
 
    /**
     * Counts the depth of nested expressions in an arithmetic expression

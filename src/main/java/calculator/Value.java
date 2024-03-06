@@ -1,5 +1,6 @@
 package calculator;
 
+import lombok.Getter;
 import visitor.Visitor;
 
 /**
@@ -9,26 +10,22 @@ import visitor.Visitor;
  * @see Expression
  * @see Operation
  */
-public abstract class Value<T> implements Expression, Operand<T> {
-
-    private final T value;
+@Getter
+public abstract class Value<T> implements Expression<T>, Operand<T> {
 
     /**
-     * getter method to obtain the value contained in the object
-     *
-     * @return The integer number contained in the object
+     * -- GETTER --
+     *  getter method to obtain the value contained in the object
      */
-    public T getValue() {
-        return value;
-    }
+    private final T val;
 
     /**
      * Constructor method
      *
      * @param v The integer value to be contained in the object
      */
-    public /*constructor*/ Value(T v) {
-        value = v;
+    protected  /*constructor*/ Value(T v) {
+        val = v;
     }
 
     /**
@@ -37,7 +34,7 @@ public abstract class Value<T> implements Expression, Operand<T> {
      *
      * @param v The visitor object
      */
-    public void accept(Visitor v) {
+    public void accept(Visitor<T> v) {
         v.visit(this);
     }
 

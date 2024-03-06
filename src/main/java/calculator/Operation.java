@@ -1,10 +1,12 @@
 package calculator;
 
+import lombok.Getter;
 import visitor.Printer;
 import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -13,20 +15,20 @@ import java.util.List;
  * @see Expression
  * @see MyNumber
  */
-public abstract class Operation<T> implements Expression {
+public abstract class Operation<T> implements Expression<T> {
     /**
      * The list of expressions passed as an argument to the arithmetic operation
+     * -- GETTER --
+     * getter method to return the number of arguments of an arithmetic operation.
      */
-    public List<Expression> args;
+    @Getter
+    public List<Expression<T>> args;
 
     /**
      * The character used to represent the arithmetic operation (e.g. "+", "*")
      */
+    @Getter
     protected String symbol;
-
-    public String getSymbol() {
-        return symbol;
-    }
 
     /**
      * The neutral element of the operation (e.g. 1 for *, 0 for +)
@@ -40,22 +42,13 @@ public abstract class Operation<T> implements Expression {
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected /*constructor*/ Operation(List<Expression> elist)
+    protected /*constructor*/ Operation(List<Expression<T>> elist)
             throws IllegalConstruction {
         if (elist == null) {
             throw new IllegalConstruction();
         } else {
             args = new ArrayList<>(elist);
         }
-    }
-
-    /**
-     * getter method to return the number of arguments of an arithmetic operation.
-     *
-     * @return The number of arguments of the arithmetic operation.
-     */
-    public List<Expression> getArgs() {
-        return args;
     }
 
     /**
@@ -73,7 +66,7 @@ public abstract class Operation<T> implements Expression {
      *
      * @param params The list of parameters to be added
      */
-    public void addMoreParams(List<Expression> params) {
+    public void addMoreParams(List<Expression<T>> params) {
         args.addAll(params);
     }
 
@@ -84,7 +77,7 @@ public abstract class Operation<T> implements Expression {
      *
      * @param v The visitor object
      */
-    public void accept(Visitor v) {
+    public void accept(Visitor<T> v) {
         v.visit(this);
     }
 
@@ -96,9 +89,10 @@ public abstract class Operation<T> implements Expression {
      */
     public final int countDepth() {
         // use of Java 8 functional programming capabilities
-        return 1 + args.stream()
+        OptionalInt temp = args.stream()
                 .mapToInt(Expression::countDepth)
-                .max()
+                .max();
+        return temp.isEmpty() ? 0 : 1 + temp
                 .getAsInt();
     }
 
@@ -110,17 +104,19 @@ public abstract class Operation<T> implements Expression {
      */
     public final int countOps() {
         // use of Java 8 functional programming capabilities
-        return 1 + args.stream()
+        OptionalInt temp = args.stream()
                 .mapToInt(Expression::countOps)
-                .reduce(Integer::sum)
+                .reduce(Integer::sum);
+        return temp.isEmpty() ? 0 : 1 + temp
                 .getAsInt();
     }
 
     public final int countNbs() {
         // use of Java 8 functional programming capabilities
-        return args.stream()
+        OptionalInt temp =  args.stream()
                 .mapToInt(Expression::countNbs)
-                .reduce(Integer::sum)
+                .reduce(Integer::sum);
+        return  temp.isEmpty() ? 0 : temp
                 .getAsInt();
     }
 
@@ -143,7 +139,7 @@ public abstract class Operation<T> implements Expression {
      * @return The String that is the result of the conversion.
      */
     public final String toString(Notation n) {
-        Printer p = new Printer(n);
+        Printer<T> p = new Printer<>(n);
         this.accept(p);
         return p.getResult();
     }
@@ -163,7 +159,7 @@ public abstract class Operation<T> implements Expression {
         if (getClass() != o.getClass())
             return false; // getClass() instead of instanceof() because an addition is not the same as a multiplication
 
-        Operation other = (Operation) o;
+        Operation<T> other = (Operation<T>) o;
         return this.args.equals(other.getArgs());
     }
 
@@ -176,7 +172,8 @@ public abstract class Operation<T> implements Expression {
      */
     @Override
     public int hashCode() {
-        int result = 5, prime = 31;
+        int result = 5;
+        int prime = 31;
         result = prime * result + neutral;
         result = prime * result + symbol.hashCode();
         result = prime * result + args.hashCode();

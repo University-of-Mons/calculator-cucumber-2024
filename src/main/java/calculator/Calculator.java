@@ -1,5 +1,6 @@
 package calculator;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import visitor.Evaluator;
 import visitor.Printer;
@@ -11,14 +12,8 @@ import visitor.Printer;
  * @author tommens
  */
 @Slf4j
+@NoArgsConstructor
 public class Calculator<T> {
-
-    /**
-     * Default constructor of the class.
-     * Does nothing since the class does not have any variables that need to be initialised.
-     */
-    public Calculator() {
-    }
 
     /*
      For the moment the calculator only contains a print method and an eval method
@@ -35,14 +30,14 @@ public class Calculator<T> {
      * @param e the arithmetic Expression to be printed
      * @see #printExpressionDetails(Expression)
      */
-    public void print(Expression e, Notation n) {
-        Printer v = new Printer(n);
+    public void print(Expression<T> e, Notation n) {
+        Printer<T> v = new Printer<>(n);
         e.accept(v);
 
         log.info("The result of evaluating expression {}%nis; {}.",v.getResult(),eval(e));
     }
 
-    public void print(Expression e) {
+    public void print(Expression<T> e) {
         Notation n = Notation.INFIX;
         print(e, n);
     }
@@ -54,7 +49,7 @@ public class Calculator<T> {
      * @param e the arithmetic Expression to be printed
      * @see #print(Expression)
      */
-    public void printExpressionDetails(Expression e) {
+    public void printExpressionDetails(Expression<T> e) {
         print(e);
         log.info("It contains {} levels of nested expressions, {} operations and {} numbers.",e.countDepth(),e.countOps(),e.countNbs());
     }
@@ -62,18 +57,18 @@ public class Calculator<T> {
     /**
      * Evaluates an arithmetic expression and returns its result
      *
-     * @param e the arithmetic Expression to be evaluated
+     * @param expr the arithmetic Expression to be evaluated
      * @return The result of the evaluation
      */
-    public Value<T> eval(Expression e) {
+    public Value<T> eval(Expression<T> expr) {
         try {
             // create a new visitor to evaluate expressions
             Evaluator<T> v = new Evaluator<>();
             // and ask the expression to accept this visitor to start the evaluation process
-            e.accept(v);
+            expr.accept(v);
             // and return the result of the evaluation at the end of the process
             return v.getResult();
-        } catch (ArithmeticException e_) {
+        } catch (ArithmeticException e) {
             return new MyNaN<>();
         }
 

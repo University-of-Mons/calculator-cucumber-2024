@@ -20,7 +20,7 @@ public final class Plus<T> extends Operation<T> {
      * @param elist The list of Expressions to add
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
      */
-    public /*constructor*/ Plus(List<Expression> elist) throws IllegalConstruction {
+    public /*constructor*/ Plus(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "+";
         neutral = 0;
@@ -34,6 +34,6 @@ public final class Plus<T> extends Operation<T> {
      * @return The integer that is the result of the addition
      */
     public Value<T> op(Value<T> l,Value<T> r) {
-        return (l + r);
+        return l + r;
     }
 }

@@ -21,7 +21,7 @@ public final class Divides<T> extends Operation<T> {
      * @param elist The list of Expressions to divide
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
      */
-    public Divides(List<Expression> elist) throws IllegalConstruction {
+    public Divides(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "/";
         neutral = 1;
@@ -36,5 +36,5 @@ public final class Divides<T> extends Operation<T> {
      */
 
   public Value<T> op(Value<T> l, Value<T> r) throws ArithmeticException
-    { return (l / r); }
+    { return l / r; }
 }

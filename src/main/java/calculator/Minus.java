@@ -19,7 +19,7 @@ public final class Minus<T> extends Operation<T>
    * @param elist The list of Expressions to subtract
    * @throws IllegalConstruction    If an empty list of expressions if passed as parameter
    */
-  public /*constructor*/ Minus(List<Expression> elist) throws IllegalConstruction {
+  public /*constructor*/ Minus(List<Expression<T>> elist) throws IllegalConstruction {
   	super(elist);
   	symbol = "-";
   	neutral = 0;
@@ -32,6 +32,6 @@ public final class Minus<T> extends Operation<T>
      * @return The integer that is the result of the subtraction
      */
   public Value<T> op(Value<T> l, Value<T> r) {
-  	return (l-r);
+  	return l-r;
   }
 }

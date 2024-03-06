@@ -12,7 +12,7 @@ public class Printer<T> extends Visitor<T> {
     /**
      * The result of the evaluation will be stored in this private variable
      */
-    private StringBuilder result;
+    private final StringBuilder result;
 
     /**
      * Default constructor of the class. Does not initialise anything.
@@ -37,7 +37,7 @@ public class Printer<T> extends Visitor<T> {
      * @param n The number being visited
      */
     public void visit(Value<T> n) {
-        result.append(n.getValue());
+        result.append(n.getVal());
     }
 
     /**
@@ -53,7 +53,7 @@ public class Printer<T> extends Visitor<T> {
 
         //first loop to recursively evaluate each subexpression
         for (int i = 0; i < o.args.size(); i++) {
-            Expression e = o.args.get(i);
+            Expression<T> e = o.args.get(i);
             e.accept(this);
             if ( i < o.args.size() - 1) {
                 if (n.equals(Notation.INFIX) ) {
