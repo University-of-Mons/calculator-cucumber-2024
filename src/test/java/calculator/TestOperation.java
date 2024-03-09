@@ -4,6 +4,9 @@ package calculator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import visitor.CountDepth;
+import visitor.CountNbs;
+import visitor.CountOps;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,19 +32,25 @@ class TestOperation {
         assertEquals(o, o2);
     }
 
-    @Test
-    void testCountDepth() {
-        assertEquals(2, o.countDepth());
-    }
+	@Test
+	void testCountDepth() {
+		CountDepth<Integer> cd = new CountDepth<>();
+		o.accept(cd);
+		assertEquals(2, cd.getDepth());
+	}
 
-    @Test
-    void testCountOps() {
-        assertEquals(3, o.countOps());
-    }
+	@Test
+	void testCountOps() {
+		CountOps<Integer> co = new CountOps<>();
+		o.accept(co);
+		assertEquals(3, co.getOps());
+	}
 
-    @Test
-    void testCountNbs() {
-        assertEquals(Integer.valueOf(6), o.countNbs());
-    }
+	@Test
+	void testCountNbs() {
+		CountNbs<Integer> cn = new CountNbs<>();
+		o.accept(cn);
+		assertEquals(Integer.valueOf(6), cn.getNbs());
+	}
 
 }

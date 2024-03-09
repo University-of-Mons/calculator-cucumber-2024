@@ -6,7 +6,6 @@ import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -79,45 +78,6 @@ public abstract class Operation<T> implements Expression<T> {
      */
     public void accept(Visitor<T> v) {
         v.visit(this);
-    }
-
-    /**
-     * Count the depth of an arithmetic expression recursively,
-     * using Java 8 functional programming capabilities (streams, maps, etc...)
-     *
-     * @return The depth of the arithmetic expression being traversed
-     */
-    public final int countDepth() {
-        // use of Java 8 functional programming capabilities
-        OptionalInt temp = args.stream()
-                .mapToInt(Expression::countDepth)
-                .max();
-        return temp.isEmpty() ? 0 : 1 + temp
-                .getAsInt();
-    }
-
-    /**
-     * Count the number of operations contained in an arithmetic expression recursively,
-     * using Java 8 functional programming capabilities (streams, maps, etc...)
-     *
-     * @return The number of operations contained in an arithmetic expression being traversed
-     */
-    public final int countOps() {
-        // use of Java 8 functional programming capabilities
-        OptionalInt temp = args.stream()
-                .mapToInt(Expression::countOps)
-                .reduce(Integer::sum);
-        return temp.isEmpty() ? 0 : 1 + temp
-                .getAsInt();
-    }
-
-    public final int countNbs() {
-        // use of Java 8 functional programming capabilities
-        OptionalInt temp =  args.stream()
-                .mapToInt(Expression::countNbs)
-                .reduce(Integer::sum);
-        return  temp.isEmpty() ? 0 : temp
-                .getAsInt();
     }
 
     /**

@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import visitor.Evaluator;
 import visitor.Printer;
+import visitor.*;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -34,7 +35,7 @@ public class Calculator<T> {
         Printer<T> v = new Printer<>(n);
         e.accept(v);
 
-        log.info("The result of evaluating expression {}%nis; {}.",v.getResult(),eval(e));
+        log.info("The result of evaluating expression {} is {}.",v.getResult(),eval(e));
     }
 
     public void print(Expression<T> e) {
@@ -51,7 +52,13 @@ public class Calculator<T> {
      */
     public void printExpressionDetails(Expression<T> e) {
         print(e);
-        log.info("It contains {} levels of nested expressions, {} operations and {} numbers.",e.countDepth(),e.countOps(),e.countNbs());
+        CountDepth<T> cd = new CountDepth<>();
+        e.accept(cd);
+        CountOps<T> co = new CountOps<>();
+        e.accept(co);
+        CountNbs<T> cn = new CountNbs<>();
+        e.accept(cn);
+        log.info("It contains {} levels of nested expressions, {} operations and {} numbers.",cd.getDepth(),co.getOps(),cn.getNbs());
     }
 
     /**
