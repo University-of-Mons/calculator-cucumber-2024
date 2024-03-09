@@ -15,7 +15,7 @@ public abstract class Value<T> implements Expression<T>, Operand<T> {
 
     /**
      * -- GETTER --
-     *  getter method to obtain the value contained in the object
+     * getter method to obtain the value contained in the object
      */
     private final T val;
 
@@ -36,34 +36,6 @@ public abstract class Value<T> implements Expression<T>, Operand<T> {
      */
     public void accept(Visitor<T> v) {
         v.visit(this);
-    }
-
-
-    /**
-     * The depth of a number expression is always 0
-     *
-     * @return The depth of a number expression
-     */
-    public int countDepth() {
-        return 0;
-    }
-
-    /**
-     * The number of operations contained in a number expression is always 0
-     *
-     * @return The number of operations contained in a number expression
-     */
-    public int countOps() {
-        return 0;
-    }
-
-    /**
-     * The number of numbers contained in a number expression is always 1
-     *
-     * @return The number of numbers contained in  a number expression
-     */
-    public int countNbs() {
-        return 1;
     }
 
     @Override

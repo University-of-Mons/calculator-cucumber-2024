@@ -33,7 +33,7 @@ public final class Plus<T> extends Operation<T> {
      * @param r The second integer that should be added to the first
      * @return The integer that is the result of the addition
      */
-    public Value<T> op(Value<T> l,Value<T> r) {
+    public Value<T> op(Value<T> l, Value<T> r) {
         return l + r;
     }
 }

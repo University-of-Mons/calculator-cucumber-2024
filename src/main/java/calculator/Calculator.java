@@ -2,8 +2,6 @@ package calculator;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import visitor.Evaluator;
-import visitor.Printer;
 import visitor.*;
 
 /**
@@ -35,7 +33,7 @@ public class Calculator<T> {
         Printer<T> v = new Printer<>(n);
         e.accept(v);
 
-        log.info("The result of evaluating expression {} is {}.",v.getResult(),eval(e));
+        log.info("The result of evaluating expression {} is {}.", v.getResult(), eval(e));
     }
 
     public void print(Expression<T> e) {
@@ -58,7 +56,7 @@ public class Calculator<T> {
         e.accept(co);
         CountNbs<T> cn = new CountNbs<>();
         e.accept(cn);
-        log.info("It contains {} levels of nested expressions, {} operations and {} numbers.",cd.getDepth(),co.getOps(),cn.getNbs());
+        log.info("It contains {} levels of nested expressions, {} operations and {} numbers.", cd.getDepth(), co.getOps(), cn.getNbs());
     }
 
     /**

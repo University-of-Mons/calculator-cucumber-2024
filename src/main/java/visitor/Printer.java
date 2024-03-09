@@ -1,6 +1,9 @@
 package visitor;
 
-import calculator.*;
+import calculator.Expression;
+import calculator.Notation;
+import calculator.Operation;
+import calculator.Value;
 
 /**
  * Evaluation is a concrete visitor that serves to
@@ -55,11 +58,11 @@ public class Printer<T> extends Visitor<T> {
         for (int i = 0; i < o.args.size(); i++) {
             Expression<T> e = o.args.get(i);
             e.accept(this);
-            if ( i < o.args.size() - 1) {
-                if (n.equals(Notation.INFIX) ) {
-                    result.append( " %s ".formatted(o.getSymbol()));
+            if (i < o.args.size() - 1) {
+                if (n.equals(Notation.INFIX)) {
+                    result.append(" %s ".formatted(o.getSymbol()));
                 } else {
-                   result.append(", ");
+                    result.append(", ");
                 }
 
             }

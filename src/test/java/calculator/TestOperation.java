@@ -32,25 +32,25 @@ class TestOperation {
         assertEquals(o, o2);
     }
 
-	@Test
-	void testCountDepth() {
-		CountDepth<Integer> cd = new CountDepth<>();
-		o.accept(cd);
-		assertEquals(2, cd.getDepth());
-	}
+    @Test
+    void testCountDepth() {
+        CountDepth<Integer> cd = new CountDepth<>();
+        o.accept(cd);
+        assertEquals(2, cd.getDepth());
+    }
 
-	@Test
-	void testCountOps() {
-		CountOps<Integer> co = new CountOps<>();
-		o.accept(co);
-		assertEquals(3, co.getOps());
-	}
+    @Test
+    void testCountOps() {
+        CountOps<Integer> co = new CountOps<>();
+        o.accept(co);
+        assertEquals(3, co.getOps());
+    }
 
-	@Test
-	void testCountNbs() {
-		CountNbs<Integer> cn = new CountNbs<>();
-		o.accept(cn);
-		assertEquals(Integer.valueOf(6), cn.getNbs());
-	}
+    @Test
+    void testCountNbs() {
+        CountNbs<Integer> cn = new CountNbs<>();
+        o.accept(cn);
+        assertEquals(Integer.valueOf(6), cn.getNbs());
+    }
 
 }

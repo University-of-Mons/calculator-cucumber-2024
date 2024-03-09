@@ -35,6 +35,7 @@ public final class Divides<T> extends Operation<T> {
      * @return The integer that is the result of the division
      */
 
-  public Value<T> op(Value<T> l, Value<T> r) throws ArithmeticException
-    { return l / r; }
+    public Value<T> op(Value<T> l, Value<T> r) throws ArithmeticException {
+        return l / r;
+    }
 }

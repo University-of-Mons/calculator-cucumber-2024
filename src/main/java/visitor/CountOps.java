@@ -6,7 +6,7 @@ import calculator.Value;
 import lombok.Getter;
 
 @Getter
-public class CountOps<T> extends Visitor<T>{
+public class CountOps<T> extends Visitor<T> {
 
     private int ops;
 
@@ -17,7 +17,7 @@ public class CountOps<T> extends Visitor<T>{
 
     @Override
     public void visit(Operation<T> o) {
-        for(Expression<T> a:o.getArgs()) {
+        for (Expression<T> a : o.getArgs()) {
             a.accept(this);
         }
         ops += 1;

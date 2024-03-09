@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 @Getter
-public class CountDepth<T> extends Visitor<T>{
+public class CountDepth<T> extends Visitor<T> {
 
     private int depth;
 
@@ -21,10 +21,10 @@ public class CountDepth<T> extends Visitor<T>{
     @Override
     public void visit(Operation<T> o) {
         ArrayList<Integer> args = new ArrayList<>();
-        for(Expression<T> a:o.getArgs()) {
+        for (Expression<T> a : o.getArgs()) {
             a.accept(this);
             args.add(depth);
         }
-        depth = 1+ Collections.max(args);
+        depth = 1 + Collections.max(args);
     }
 }

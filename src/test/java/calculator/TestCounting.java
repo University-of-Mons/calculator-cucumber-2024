@@ -35,7 +35,7 @@ class TestCounting {
         CountDepth<Integer> cd = new CountDepth<>();
         e.accept(cd);
         //test whether a number has zero depth (i.e. no nested expressions)
-        assertEquals( 0, cd.getDepth());
+        assertEquals(0, cd.getDepth());
         CountOps<Integer> co = new CountOps<>();
         e.accept(co);
         //test whether a number contains zero operations
@@ -67,7 +67,7 @@ class TestCounting {
         //test whether a binary operation has depth 1
         CountDepth<Integer> cd = new CountDepth<>();
         e.accept(cd);
-        assertEquals(1, cd.getDepth(),"counting depth of an Operation");
+        assertEquals(1, cd.getDepth(), "counting depth of an Operation");
         //test whether a binary operation contains 1 operation
         CountOps<Integer> co = new CountOps<>();
         e.accept(co);
