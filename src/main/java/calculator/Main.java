@@ -30,6 +30,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
+
   	Expression e;
   	Calculator c = new Calculator();
 
@@ -61,6 +62,13 @@ public class Main {
 		e = new Divides(params4);
 		c.print(e,Notation.POSTFIX);
 		c.eval(e);
+
+
+
+		TheParser p= new TheParser("(3+4+5)*(5-3)");
+		Integer r= p.evaluate();
+		System.out.println(r);
+
 	}
 	catch(IllegalConstruction exception) {
 		Logger logger = Logger.getLogger(Main.class.getName());
