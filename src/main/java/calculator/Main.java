@@ -66,7 +66,11 @@ public class Main {
 
 
 		TheParser p= new TheParser("(3+4+5)*(5-3)");
-		Integer r= p.evaluate();
+		MyNumber r= p.evaluate();
+		System.out.println(r);
+
+		p= new TheParser("*(+(3,4,5),-(5,3))");
+		r= p.evaluate();
 		System.out.println(r);
 
 	}

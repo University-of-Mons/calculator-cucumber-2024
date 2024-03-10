@@ -6,12 +6,19 @@ grammar ParserCalculator;
 prog: (expre);
 // Lexer rules
 // expression
-expre : expre  ('*'| '/') expre
-      | expre  ('+' | '-') expre
+expre : infix|prefix;
+// infix expression
+infix : infix ('*'| '/') infix
+      | infix  ('+' | '-') infix
       | NUMBER
-      | '(' expre ')'
+      | '(' infix ')'
       ;
-      //
+// prefix expression
+prefix : ('*'| '/') '(' prefix (',' prefix)+ ')'
+        | ('+' | '-') '(' prefix (',' prefix)+ ')'
+        | NUMBER
+        ;
+
 
 NUMBER : [0-9]+ ;
 

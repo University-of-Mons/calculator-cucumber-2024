@@ -8,6 +8,7 @@ class TheParser{
 
     private ParserCalculatorParser ourParser;
     private final ParserVisitor visitor= new ParserVisitor();
+    private final Calculator c = new Calculator();
 
     /**
      * This is the constructor of the class
@@ -25,8 +26,9 @@ class TheParser{
      * This method evaluate the expression
      * @return the result of the expression
      */
-    public int evaluate(){
+    public MyNumber evaluate(){
         ParseTree tree = ourParser.expre();
-        return visitor.visit(tree).getValue();
+        Expression e= visitor.visit(tree);
+        return c.eval(e);
     }
 }
