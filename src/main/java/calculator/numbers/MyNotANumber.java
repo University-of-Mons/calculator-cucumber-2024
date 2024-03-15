@@ -1,4 +1,6 @@
-package calculator;
+package calculator.numbers;
+
+import calculator.numbers.MyNumber;
 
 /**
  * MyNotANumber is a class that extends MyNumber.

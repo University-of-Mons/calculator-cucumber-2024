@@ -1,15 +1,19 @@
 package calculator;
 
+import calculator.numbers.Expression;
+import calculator.numbers.MyNumber;
+import gen.*;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import visitor.ParserVisitor;
 
 class Parser {
 
-    private ParserCalculatorParser ourParser;
-    private final ParserVisitor visitor= new ParserVisitor();
-    private final Calculator c = new Calculator();
+    private final ParserCalculatorParser ourParser;
+    public final Calculator c = new Calculator();
+    private final ParseTree tree;
 
     /**
      * This is the constructor of the class
@@ -19,17 +23,17 @@ class Parser {
         CharStream input = CharStreams.fromString(expression);
         ParserCalculatorLexer lexer = new ParserCalculatorLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        this.ourParser = new ParserCalculatorParser(tokens);
+        ourParser = new ParserCalculatorParser(tokens);
+        tree = ourParser.prog();
     }
-
 
     /**
      * This method evaluate the expression
      * @return the result of the expression
      */
     public MyNumber evaluate(){
-        ParseTree tree = ourParser.expre();
-        Expression e= visitor.visit(tree);
+        ParserVisitor visitor = new ParserVisitor(c);
+        Expression e = visitor.visit(tree);
         return c.eval(e);
     }
 }

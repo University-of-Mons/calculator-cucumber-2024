@@ -1,5 +1,7 @@
-package calculator;
+package calculator.numbers;
 
+import calculator.numbers.MyNumber;
+import calculator.operators.Operation;
 import visitor.Visitor;
 
 /**

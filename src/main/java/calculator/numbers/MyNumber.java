@@ -1,5 +1,6 @@
-package calculator;
+package calculator.numbers;
 
+import calculator.operators.Operation;
 import visitor.Visitor;
 
 /**

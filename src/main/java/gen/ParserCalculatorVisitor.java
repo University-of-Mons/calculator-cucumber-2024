@@ -1,4 +1,4 @@
-// Generated from /home/marinebodson/Documents/Ecole/MASTER1/Software-Evol/calculator-cucumber-2024/src/main/antlr4/calculator/ParserCalculator.g4 by ANTLR 4.13.1
+package gen;// Generated from /home/marinebodson/Documents/Ecole/MASTER1/Software-Evol/calculator-cucumber-2024/src/main/antlr4/calculator/ParserCalculator.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -22,11 +22,29 @@ public interface ParserCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(ParserCalculatorParser.ExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserCalculatorParser#infix}.
+	 * Visit a parse tree produced by the {@code Number}
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInfix(ParserCalculatorParser.InfixContext ctx);
+	T visitNumber(ParserCalculatorParser.NumberContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AddSub}
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAddSub(ParserCalculatorParser.AddSubContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code MulDiv}
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMulDiv(ParserCalculatorParser.MulDivContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code infix_exp}
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInfixExp(ParserCalculatorParser.Infix_expContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserCalculatorParser#prefix}.
 	 * @param ctx the parse tree

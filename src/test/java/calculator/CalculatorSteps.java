@@ -2,6 +2,10 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.numbers.Expression;
+import calculator.numbers.MyNotANumber;
+import calculator.numbers.MyNumber;
+import calculator.operators.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

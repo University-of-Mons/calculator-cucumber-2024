@@ -1,4 +1,4 @@
-// Generated from /home/marinebodson/Documents/Ecole/MASTER1/Software-Evol/calculator-cucumber-2024/src/main/antlr4/calculator/ParserCalculator.g4 by ANTLR 4.13.1
+package gen;// Generated from /home/marinebodson/Documents/Ecole/MASTER1/Software-Evol/calculator-cucumber-2024/src/main/antlr4/calculator/ParserCalculator.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -40,13 +40,49 @@ public class ParserCalculatorBaseListener implements ParserCalculatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInfix(ParserCalculatorParser.InfixContext ctx) { }
+	@Override public void enterNumber(ParserCalculatorParser.NumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInfix(ParserCalculatorParser.InfixContext ctx) { }
+	@Override public void exitNumber(ParserCalculatorParser.NumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAddSub(ParserCalculatorParser.AddSubContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAddSub(ParserCalculatorParser.AddSubContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMulDiv(ParserCalculatorParser.MulDivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMulDiv(ParserCalculatorParser.MulDivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInfix_exp(ParserCalculatorParser.Infix_expContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInfix_exp(ParserCalculatorParser.Infix_expContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,9 +1,9 @@
 package visitor;
 
-import calculator.Expression;
+import calculator.numbers.Expression;
 import calculator.Counting;
-import calculator.MyNumber;
-import calculator.Operation;
+import calculator.numbers.MyNumber;
+import calculator.operators.Operation;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-// Generated from /home/marinebodson/Documents/Ecole/MASTER1/Software-Evol/calculator-cucumber-2024/src/main/antlr4/calculator/ParserCalculator.g4 by ANTLR 4.13.1
+package gen;// Generated from /home/marinebodson/Documents/Ecole/MASTER1/Software-Evol/calculator-cucumber-2024/src/main/antlr4/calculator/ParserCalculator.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -31,7 +31,28 @@ public class ParserCalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInfix(ParserCalculatorParser.InfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNumber(ParserCalculatorParser.NumberContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitAddSub(ParserCalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitMulDiv(ParserCalculatorParser.MulDivContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitInfixExp(ParserCalculatorParser.Infix_expContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
