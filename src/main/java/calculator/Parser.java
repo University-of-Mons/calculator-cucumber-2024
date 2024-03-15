@@ -1,10 +1,11 @@
 package calculator;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-class TheParser{
+class Parser {
 
     private ParserCalculatorParser ourParser;
     private final ParserVisitor visitor= new ParserVisitor();
@@ -14,8 +15,8 @@ class TheParser{
      * This is the constructor of the class
      * @param expression a string who represent the expression
      */
-    public TheParser(String expression){
-        ANTLRInputStream input = new ANTLRInputStream(expression);
+    public Parser(String expression){
+        CharStream input = CharStreams.fromString(expression);
         ParserCalculatorLexer lexer = new ParserCalculatorLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         this.ourParser = new ParserCalculatorParser(tokens);
