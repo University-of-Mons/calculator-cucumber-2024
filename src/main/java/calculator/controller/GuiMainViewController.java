@@ -21,6 +21,20 @@ public class GuiMainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn0.setId("btn0");
+        btn1.setId("btn1");
+        btn2.setId("btn2");
+        btn3.setId("btn3");
+        btn4.setId("btn4");
+        btn5.setId("btn5");
+        btn6.setId("btn6");
+        btn7.setId("btn7");
+        btn8.setId("btn8");
+        btn9.setId("btn9");
+        btnPlus.setId("btnPlus");
+        btnMinus.setId("btnMinus");
+        btnMultiply.setId("btnMultiply");
+        btnDivide.setId("btnDivide");
         btn0.setOnAction(e -> appendToDisplay("0"));
         btn1.setOnAction(e -> appendToDisplay("1"));
         btn2.setOnAction(e -> appendToDisplay("2"));
