@@ -126,6 +126,6 @@ public class CalculatorSteps {
 
 	@Then("the operation evaluates to MyNotANumber")
 	public void thenTheOperationEvaluatesToMyNotANumber() {
-    	assertTrue(c.eval(op) instanceof MyNotANumber);
+        assertInstanceOf(MyNotANumber.class, c.eval(op));
 	}
 }

@@ -34,7 +34,7 @@ public class GuiMain extends Application {
             root.requestFocus();
             return new Scene(root);
         } catch (Exception e) {
-            logger.error("Erreur lors du chargement de l'interface utilisateur", e);
+            logger.error("Error when trying to load user interface", e);
         }
         return null;
     }

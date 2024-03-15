@@ -4,7 +4,6 @@ import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -96,7 +95,7 @@ public abstract class Operation implements Expression
   }
 
 	/**
-	 * Two operation objects are equal if their list of arguments is equal and they correspond to the same operation.
+	 * Two operation objects are equal if their list of arguments is equal, and they correspond to the same operation.
 	 *
 	 * @param o	The object to compare with
 	 * @return	The result of the equality comparison
