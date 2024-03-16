@@ -9,12 +9,11 @@ import visitor.Visitor;
  * @see Operation
  * @see MyNumber
  */
-public interface Expression {
-
-   /**
-    * accept is a method needed to implement the visitor design pattern
-    *
-    * @param v The visitor object being passed as a parameter
-    */
-   void accept(Visitor v);
+public interface Expression<T> {
+    /**
+     * accept is a method needed to implement the visitor design pattern
+     *
+     * @param v The visitor object being passed as a parameter
+     */
+    void accept(Visitor<T> v);
 }

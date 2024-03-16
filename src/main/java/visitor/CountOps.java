@@ -1,34 +1,25 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.MyNumber;
 import calculator.Operation;
+import calculator.Value;
+import lombok.Getter;
 
-import java.util.ArrayList;
-
-public class CountOps extends Visitor{
+@Getter
+public class CountOps<T> extends Visitor<T> {
 
     private int ops;
 
-    public int getOps() {
-        return ops;
+    @Override
+    public void visit(Value<T> n) {
+        // If not opp does nothing
     }
 
     @Override
-    public void visit(MyNumber n) {
-        ops = 0;
-    }
-
-    @Override
-    public void visit(Operation o) {
-        ArrayList<Integer> args = new ArrayList<>();
-        for(Expression a:o.getArgs()) {
+    public void visit(Operation<T> o) {
+        for (Expression<T> a : o.getArgs()) {
             a.accept(this);
-            args.add(ops);
         }
-        ops =  1 + args.stream()
-                .mapToInt(Integer::intValue)
-                .reduce(Integer::sum)
-                .getAsInt();
+        ops += 1;
     }
 }

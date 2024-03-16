@@ -12,11 +12,15 @@
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
 
-        <slf4j.version>2.0.6</slf4j.version>
-        <logback.version>1.4.5</logback.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <manifold.version>2024.1.4</manifold.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <lombok.version>1.18.30</lombok.version>
+        <slf4j.version>2.0.12</slf4j.version>
+        <logback.version>1.5.0</logback.version>
         <java.version>21</java.version>
-        <junit-jupiter.version>5.10.1</junit-jupiter.version>
-        <junit-platform-suite.version>1.10.1</junit-platform-suite.version>
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
         <cucumber.version>7.15.0</cucumber.version>
         <jacoco.version>0.8.11</jacoco.version>
         <javadoc.version>3.6.3</javadoc.version>
@@ -32,7 +36,40 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>systems.manifold</groupId>
+            <artifactId>manifold-ext-rt</artifactId>
+            <version>${manifold.version}</version>
+        </dependency>
+    <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <!-- QOL -->
+        <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
+        </dependency>
+        <!-- Test Dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -69,6 +106,24 @@
                     <encoding>UTF-8</encoding>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+
+                    <compilerArgs>
+                        <!-- Configure manifold plugin-->
+                        <arg>-Xplugin:Manifold</arg>
+                    </compilerArgs>
+                    <!-- Add the processor path for the plugin -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>systems.manifold</groupId>
+                            <artifactId>manifold-ext</artifactId>
+                            <version>${manifold.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
