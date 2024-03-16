@@ -40,49 +40,13 @@ public class ParserCalculatorBaseListener implements ParserCalculatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumber(ParserCalculatorParser.NumberContext ctx) { }
+	@Override public void enterInfix(ParserCalculatorParser.InfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNumber(ParserCalculatorParser.NumberContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAddSub(ParserCalculatorParser.AddSubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAddSub(ParserCalculatorParser.AddSubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMulDiv(ParserCalculatorParser.MulDivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMulDiv(ParserCalculatorParser.MulDivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInfix_exp(ParserCalculatorParser.Infix_expContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInfix_exp(ParserCalculatorParser.Infix_expContext ctx) { }
+	@Override public void exitInfix(ParserCalculatorParser.InfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -95,6 +59,18 @@ public class ParserCalculatorBaseListener implements ParserCalculatorListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPrefix(ParserCalculatorParser.PrefixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPostfix(ParserCalculatorParser.PostfixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPostfix(ParserCalculatorParser.PostfixContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

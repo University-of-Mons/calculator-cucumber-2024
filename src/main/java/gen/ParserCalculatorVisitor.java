@@ -22,33 +22,21 @@ public interface ParserCalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(ParserCalculatorParser.ExpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Number}
+	 * Visit a parse tree produced by {@link ParserCalculatorParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumber(ParserCalculatorParser.NumberContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code AddSub}
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAddSub(ParserCalculatorParser.AddSubContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code MulDiv}
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMulDiv(ParserCalculatorParser.MulDivContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code infix_exp}
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInfixExp(ParserCalculatorParser.Infix_expContext ctx);
+	T visitInfix(ParserCalculatorParser.InfixContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserCalculatorParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPrefix(ParserCalculatorParser.PrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCalculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostfix(ParserCalculatorParser.PostfixContext ctx);
 }

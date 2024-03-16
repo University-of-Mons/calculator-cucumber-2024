@@ -3,7 +3,7 @@ package visitor;
 import calculator.numbers.Expression;
 import calculator.Counting;
 import calculator.numbers.MyNumber;
-import calculator.operators.Operation;
+import calculator.Operation;
 
 import java.util.ArrayList;
 

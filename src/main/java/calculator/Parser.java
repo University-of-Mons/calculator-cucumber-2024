@@ -12,14 +12,15 @@ import visitor.ParserVisitor;
 class Parser {
 
     private final ParserCalculatorParser ourParser;
-    public final Calculator c = new Calculator();
+    public final Calculator c;
     private final ParseTree tree;
 
     /**
      * This is the constructor of the class
      * @param expression a string who represent the expression
      */
-    public Parser(String expression){
+    public Parser(String expression, Calculator c){
+        this.c = c;
         CharStream input = CharStreams.fromString(expression);
         ParserCalculatorLexer lexer = new ParserCalculatorLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);

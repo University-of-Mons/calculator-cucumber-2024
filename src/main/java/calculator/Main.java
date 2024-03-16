@@ -71,14 +71,20 @@ public class Main {
 		c.eval(e);
 
 
-
-		Parser p= new Parser("(3+4+5)*(5-3)");
+		System.out.println("(3+4+5)*(5-3) = 24");
+		Parser p= new Parser("(3+4+5)*(5-3)",c);
 		MyNumber r= p.evaluate();
-		System.out.println(r);
+		System.out.println(r.getValue());
 
-		p= new Parser("*(+(3,4,5),-(5,3))");
+		System.out.println("*(+(3,4,5),-(5,3)) = 24");
+		p= new Parser("*(+(3,4,5),-(5,3))",c);
 		r= p.evaluate();
-		System.out.println(r);
+		System.out.println(r.getValue());
+
+		System.out.println("(4,5)+, 2)* = 18");
+		Parser parser = new Parser("((4,5)+, 2)*",c);
+		System.out.println(parser.evaluate());
+
 
 	}
 	catch(IllegalConstruction exception) {

@@ -1,7 +1,6 @@
-package calculator.operators;
+package calculator;
 
 import calculator.numbers.Expression;
-import calculator.IllegalConstruction;
 import calculator.numbers.MyNumber;
 import visitor.Visitor;
 

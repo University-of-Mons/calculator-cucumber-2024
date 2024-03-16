@@ -14,24 +14,24 @@
     <node x="598.0" y="682.0">calculator.Main</node>
     <node x="312.0" y="583.0">calculator.operators.Times</node>
     <node x="0.0" y="583.0">calculator.operators.Plus</node>
-    <node x="151.5" y="170.0">calculator.operators.Operation</node>
+    <node x="151.5" y="170.0">calculator.Operation</node>
     <node x="0.0" y="682.0">calculator.Notation</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="calculator.operators.Minus" target="calculator.operators.Operation">
+    <edge source="calculator.operators.Minus" target="calculator.Operation">
       <point x="0.0" y="-27.0" />
       <point x="536.0" y="558.0" />
       <point x="414.875" y="558.0" />
       <point x="112.875" y="181.5" />
     </edge>
-    <edge source="calculator.operators.Divides" target="calculator.operators.Operation">
+    <edge source="calculator.operators.Divides" target="calculator.Operation">
       <point x="0.0" y="-27.0" />
       <point x="224.0" y="558.0" />
       <point x="264.375" y="558.0" />
       <point x="-37.625" y="181.5" />
     </edge>
-    <edge source="calculator.operators.Operation" target="calculator.numbers.Expression">
+    <edge source="calculator.Operation" target="calculator.numbers.Expression">
       <point x="0.0" y="-181.5" />
       <point x="302.0" y="145.0" />
       <point x="391.25" y="145.0" />
@@ -41,13 +41,13 @@
       <point x="0.0" y="-60.5" />
       <point x="0.0" y="38.0" />
     </edge>
-    <edge source="calculator.operators.Times" target="calculator.operators.Operation">
+    <edge source="calculator.operators.Times" target="calculator.Operation">
       <point x="0.0" y="-27.0" />
       <point x="380.0" y="558.0" />
       <point x="339.625" y="558.0" />
       <point x="37.625" y="181.5" />
     </edge>
-    <edge source="calculator.operators.Plus" target="calculator.operators.Operation">
+    <edge source="calculator.operators.Plus" target="calculator.Operation">
       <point x="0.0" y="-27.0" />
       <point x="68.0" y="558.0" />
       <point x="189.125" y="558.0" />

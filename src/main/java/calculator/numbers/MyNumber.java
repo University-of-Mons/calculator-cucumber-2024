@@ -1,6 +1,6 @@
 package calculator.numbers;
 
-import calculator.operators.Operation;
+import calculator.Operation;
 import visitor.Visitor;
 
 /**

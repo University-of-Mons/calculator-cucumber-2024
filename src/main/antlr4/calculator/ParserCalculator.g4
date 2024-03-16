@@ -13,22 +13,26 @@ exp : infix
 
 // infix expression
 
-infix : infix op=('*'| '/') infix   # AddSub
-      | infix op=('+' | '-') infix  # MulDiv
-      | NUMBER                      # Number
-      | '(' infix ')'               # infix_exp
+infix : infix ('*' | '/') infix
+      | infix  ('+' | '-') infix
+      | NUMBER
+      | '(' infix ')'
       ;
 
 // prefix expression
 
-prefix : op=('*'| '/') '(' prefix (',' prefix)+ ')'
-       | op=('+' | '-') '(' prefix (',' prefix)+ ')'
-       | NUMBER
-       ;
+prefix : ('*' | '/') '(' prefix (',' prefix)+ ')'
+        | ('+' | '-') '(' prefix (',' prefix)+ ')'
+        | NUMBER
+        | '(' prefix ')'
+        ;
+
+// postfix expression
+postfix : '(' postfix (',' postfix)+ ')' ('*' | '/')
+        | '(' postfix (',' postfix)+ ')' ('+' | '-')
+        | NUMBER
+        | '(' postfix ')'
+        ;
 
 NUMBER : [0-9]+ ;
 WS : [ \t\n\r]+ -> skip ;
-MUL : '*' ; // assigns token name to '*' used above in grammar
-DIV : '/' ;
-ADD : '+' ;
-SUB : '-' ;
