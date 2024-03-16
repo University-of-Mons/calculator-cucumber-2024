@@ -27,24 +27,23 @@ public class MyNaN<T> extends Value<T> {
         return 0;
     }
 
-    // TODO : Throw from fucntions ?
     @Override
     public Value<T> plus(Value<T> other) {
-        return null;
+        return new MyNaN<>();
     }
 
     @Override
     public Value<T> minus(Value<T> other) {
-        return null;
+        return new MyNaN<>();
     }
 
     @Override
     public Value<T> times(Value<T> other) {
-        return null;
+        return new MyNaN<>();
     }
 
     @Override
     public Value<T> div(Value<T> other) {
-        return null;
+        return new MyNaN<>();
     }
 }

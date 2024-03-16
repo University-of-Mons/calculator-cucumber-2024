@@ -53,7 +53,8 @@ class TestEvaluator {
     void testDivisionByZero() {
         List<Expression<Integer>> params = Arrays.asList(new MyNumber(value1), new MyNumber(0));
         try {
-            assertEquals(new MyNaN<>(), calc.eval(new Divides<>(params)));
+            Plus<Integer> plus = new Plus<>( Arrays.asList(new Divides<>(params), new MyNumber(4)));
+            assertEquals(new MyNaN<>(), calc.eval(plus));
         } catch (IllegalConstruction | ArithmeticException e) {
             fail();
         }
