@@ -1,5 +1,10 @@
 package calculator;
 
+import calculator.operand.MyNumber;
+import calculator.operation.Divides;
+import calculator.operation.Minus;
+import calculator.operation.Plus;
+import calculator.operation.Times;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

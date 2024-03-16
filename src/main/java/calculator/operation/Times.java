@@ -1,4 +1,8 @@
-package calculator;
+package calculator.operation;
+
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Value;
 
 import java.util.List;
 

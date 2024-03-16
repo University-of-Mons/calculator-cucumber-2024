@@ -1,7 +1,7 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.Operation;
+import calculator.operation.Operation;
 import calculator.Value;
 import lombok.Getter;
 

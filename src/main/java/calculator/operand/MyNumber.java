@@ -1,4 +1,10 @@
-package calculator;
+package calculator.operand;
+
+import calculator.Expression;
+import calculator.Value;
+import calculator.operation.Operation;
+
+import java.util.Objects;
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
@@ -8,17 +14,7 @@ package calculator;
  * @see Operation
  */
 public class MyNumber extends Value<Integer> {
-    private final int value;
 
-    /**
-     * getter method to obtain the value contained in the object
-     *
-     * @return The integer number contained in the object
-     */
-    @Override
-    public Integer getVal() {
-        return value;
-    }
 
     /**
      * Constructor method
@@ -27,12 +23,11 @@ public class MyNumber extends Value<Integer> {
      */
     public /*constructor*/ MyNumber(int v) {
         super(v);
-        value = v;
     }
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return Integer.toString(val);
     }
 
     /**
@@ -55,7 +50,7 @@ public class MyNumber extends Value<Integer> {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.value == ((MyNumber) o).value;
+        return Objects.equals(this.val, ((MyNumber) o).val);
         // Used == since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -69,7 +64,7 @@ public class MyNumber extends Value<Integer> {
      */
     @Override
     public int hashCode() {
-        return value;
+        return val;
     }
 
     @Override

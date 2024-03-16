@@ -1,5 +1,7 @@
-package calculator;
+package calculator.operation;
 
+import calculator.*;
+import calculator.operand.MyNumber;
 import lombok.Getter;
 import visitor.Printer;
 import visitor.Visitor;
