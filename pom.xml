@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>calculator</groupId>
     <artifactId>calculator-cucumber</artifactId>
@@ -13,12 +13,13 @@
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
 
         <commons-lang3.version>3.14.0</commons-lang3.version>
-        <manifold.version>2024.1.4</manifold.version>
+        <manifold.version>2024.1.9</manifold.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <lombok.version>1.18.30</lombok.version>
         <slf4j.version>2.0.12</slf4j.version>
-        <logback.version>1.5.0</logback.version>
+        <logback.version>1.5.3</logback.version>
         <java.version>21</java.version>
+        <javafx.version>21</javafx.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
         <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
         <cucumber.version>7.15.0</cucumber.version>
@@ -35,13 +36,20 @@
 
     </properties>
 
+
     <dependencies>
+        <!-- Java FX-->
         <dependency>
-            <groupId>systems.manifold</groupId>
-            <artifactId>manifold-ext-rt</artifactId>
-            <version>${manifold.version}</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
         </dependency>
-    <!-- Logging -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -54,10 +62,10 @@
         </dependency>
         <!-- QOL -->
         <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${lombok.version}</version>
-        <scope>compile</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -68,6 +76,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>systems.manifold</groupId>
+            <artifactId>manifold-ext-rt</artifactId>
+            <version>${manifold.version}</version>
         </dependency>
         <!-- Test Dependencies -->
         <dependency>
@@ -94,16 +107,7 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>21.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>21.0.2</version>
-        </dependency>
+
     </dependencies>
 
     <build>
@@ -113,7 +117,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>gui</mainClass>
+                    <mainClass>gui.GuiApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -212,7 +216,45 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.5.1</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <filters>
+                            <filter>
+                                <artifact>*:*</artifact>
+                                <excludes>
+                                    <exclude>module-info.class</exclude>
+                                    <exclude>META-INF/*.SF</exclude>
+                                    <exclude>META-INF/*.DSA</exclude>
+                                    <exclude>META-INF/*.RSA</exclude>
+                                </excludes>
+                            </filter>
+                        </filters>
+                        <artifactSet>
+                            <excludes>
+                            </excludes>
+                        </artifactSet>
+                        <transformers>
+                            <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                            <!-- add Main-Class to manifest file -->
+                            <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>gui.Starter</mainClass>
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 
