@@ -81,9 +81,9 @@ public class Main {
 		r= p.evaluate();
 		System.out.println(r.getValue());
 
-		System.out.println("(4,5)+, 2)* = 18");
-		Parser parser = new Parser("((4,5)+, 2)*",c);
-		System.out.println(parser.evaluate());
+		//System.out.println("(4,5)+, 2)* = 18");
+		Parser parser = new Parser("((4,5,6)+,(7,(5,2,7)/)+,9)*",c);
+		System.out.println(parser.evaluate().getValue());
 
 
 	}

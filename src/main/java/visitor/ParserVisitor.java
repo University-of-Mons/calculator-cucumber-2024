@@ -38,6 +38,7 @@ public class ParserVisitor extends ParserCalculatorBaseVisitor<Expression> {
 
             Operation op;
             try {
+
                 switch (ctx.getChild(1).getText()) {
                     case "+":
                         op = new Plus(params);
@@ -125,7 +126,7 @@ public class ParserVisitor extends ParserCalculatorBaseVisitor<Expression> {
             }
             Operation op;
             try {
-                switch (ctx.getChild(2).getText()) {
+                switch (ctx.getChild(ctx.getChildCount()-1).getText()) {
                     case "+":
                         op = new Plus(params);
                         break;

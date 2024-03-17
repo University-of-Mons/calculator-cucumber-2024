@@ -9,6 +9,7 @@ prog : exp ;
 
 exp : infix
     | prefix
+    | postfix
     ;
 
 // infix expression
@@ -21,7 +22,7 @@ infix : infix ('*' | '/') infix
 
 // prefix expression
 
-prefix : ('*' | '/') '(' prefix (',' prefix)+ ')'
+prefix : ('*' | '/') '(' prefix  (',' prefix)+ ')'
         | ('+' | '-') '(' prefix (',' prefix)+ ')'
         | NUMBER
         | '(' prefix ')'

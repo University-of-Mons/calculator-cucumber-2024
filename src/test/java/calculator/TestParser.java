@@ -60,9 +60,23 @@ class TestParser{
         Parser prefix = new Parser("*(+(4,5,6),+(7,/(5,2,7)),9)",calculator);
         assertEquals(945, prefix.evaluate().getValue());
 
-        //TheParser posfix = new TheParser("((4,5,,6)+,(7,(5,2,7)/)+,9)*");
-        //assertEquals(945, posfix.evaluate());
-
+        Parser posfix = new Parser("((4,5,6)+,(7,(5,2,7)/)+,9)*",calculator);
+        assertEquals(945, posfix.evaluate().getValue());
     }
+
+    @Test
+    void testNotSpaceSensible(){
+        Calculator calculator = new Calculator();
+        Parser cal1 = new Parser("(4+5)*2",calculator);
+        assertEquals(18, cal1.evaluate().getValue());
+
+        Parser cal2 = new Parser(" ( 4 + 5 ) * 2 ",calculator);
+        assertEquals(cal1.evaluate().getValue(), cal2.evaluate().getValue());
+
+        Parser cal3 = new Parser("  (   4   +   5   )   *   2   ",calculator);
+        assertEquals(cal1.evaluate().getValue(), cal3.evaluate().getValue());
+    }
+
+
 
 }
