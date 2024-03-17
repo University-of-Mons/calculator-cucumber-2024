@@ -76,13 +76,13 @@ public class Main {
 		MyNumber r= p.evaluate();
 		System.out.println(r.getValue());
 
-		System.out.println("*(+(3,4,5),-(5,3)) = 24");
-		p= new Parser("*(+(3,4,5),-(5,3))",c);
+		System.out.println("*(+(3 4 5) -(5 3)) = 24");
+		p= new Parser("*(+(3 4 5) -(5 3))",c);
 		r= p.evaluate();
 		System.out.println(r.getValue());
 
-		//System.out.println("(4,5)+, 2)* = 18");
-		Parser parser = new Parser("((4,5,6)+,(7,(5,2,7)/)+,9)*",c);
+		System.out.println("(4,5)+, 2)* = 18");
+		Parser parser = new Parser("((4 5)+  2)*",c);
 		System.out.println(parser.evaluate().getValue());
 
 

@@ -22,15 +22,15 @@ infix : infix ('*' | '/') infix
 
 // prefix expression
 
-prefix : ('*' | '/') '(' prefix  (',' prefix)+ ')'
-        | ('+' | '-') '(' prefix (',' prefix)+ ')'
+prefix : ('*' | '/') '(' prefix  ((',')? prefix)+ ')'
+        | ('+' | '-') '(' prefix ((',')? prefix)+ ')'
         | NUMBER
         | '(' prefix ')'
         ;
 
 // postfix expression
-postfix : '(' postfix (',' postfix)+ ')' ('*' | '/')
-        | '(' postfix (',' postfix)+ ')' ('+' | '-')
+postfix : '(' postfix ((',')? postfix)+ ')' ('*' | '/')
+        | '(' postfix ((',')? postfix)+ ')' ('+' | '-')
         | NUMBER
         | '(' postfix ')'
         ;

@@ -64,6 +64,9 @@ class TestParser{
         assertEquals(945, posfix.evaluate().getValue());
     }
 
+    /**
+     * This test if the parser is not space sensible
+     */
     @Test
     void testNotSpaceSensible(){
         Calculator calculator = new Calculator();
@@ -78,5 +81,28 @@ class TestParser{
     }
 
 
+    /**
+     * This test We can write the prefix and postfix expression with spaces instead of commas
+     */
+    @Test
+    void testPrefixAndPostfixWithSpace(){
+        Calculator calculator = new Calculator();
+        Parser prefix = new Parser("+(10 3)",calculator);
+        assertEquals(13, prefix.evaluate().getValue());
 
+        Parser posfix = new Parser("(10   3)+",calculator);
+        assertEquals(13, posfix.evaluate().getValue());
+    }
+
+
+    /**
+     * This test if the  parser's output can be used like parser's input
+     */
+    @Test
+    void testTheOutputInInput(){
+        Calculator calculator = new Calculator();
+        Parser parser = new Parser("(4+5)*2",calculator);
+        Parser parser2 = new Parser(parser.evaluate().toString(),calculator);
+        assertEquals(18,parser2.evaluate().getValue());
+    }
 }

@@ -76,7 +76,6 @@ public class ParserVisitor extends ParserCalculatorBaseVisitor<Expression> {
         if (ctx.prefix().size() == 1) {
             return visitPrefix(ctx.prefix(0));
         } else {
-
             Expression number1 = visitPrefix(ctx.prefix(0));
             Expression number2 = visitPrefix(ctx.prefix(1));
             List<Expression> params = new ArrayList<>();
