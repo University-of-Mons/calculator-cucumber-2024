@@ -105,4 +105,11 @@ class TestParser{
         Parser parser2 = new Parser(parser.evaluate().toString(),calculator);
         assertEquals(18,parser2.evaluate().getValue());
     }
+
+    @Test
+    void testSimplifyExpression(){
+        Calculator calculator = new Calculator();
+        Parser parser = new Parser("((4+5+6)(7+5/2/7)*9)",calculator);
+        assertEquals(945, parser.evaluate().getValue());
+    }
 }

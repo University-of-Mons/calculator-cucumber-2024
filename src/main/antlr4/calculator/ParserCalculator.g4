@@ -14,7 +14,8 @@ exp : infix
 
 // infix expression
 
-infix : infix ('*' | '/') infix
+infix : infix ('*')? infix
+      | infix ('/') infix
       | infix  ('+' | '-') infix
       | NUMBER
       | '(' infix ')'

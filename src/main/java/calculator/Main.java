@@ -85,6 +85,11 @@ public class Main {
 		Parser parser = new Parser("((4 5)+  2)*",c);
 		System.out.println(parser.evaluate().getValue());
 
+		System.out.println("((4+5)(10-1))= 81");
+		Parser parser2 = new Parser("((4+5)(10-4/2/2))",c);
+		System.out.println(parser2.evaluate().getValue());
+
+
 
 	}
 	catch(IllegalConstruction exception) {

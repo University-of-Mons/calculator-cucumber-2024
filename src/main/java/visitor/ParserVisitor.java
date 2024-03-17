@@ -8,6 +8,8 @@ import calculator.operators.*;
 import gen.ParserCalculatorBaseVisitor;
 import gen.ParserCalculatorParser;
 
+import javax.lang.model.type.NullType;
+import java.awt.geom.NoninvertibleTransformException;
 import java.util.*;
 
 public class ParserVisitor extends ParserCalculatorBaseVisitor<Expression> {
@@ -38,22 +40,26 @@ public class ParserVisitor extends ParserCalculatorBaseVisitor<Expression> {
 
             Operation op;
             try {
-
-                switch (ctx.getChild(1).getText()) {
-                    case "+":
-                        op = new Plus(params);
-                        break;
-                    case "-":
-                        op = new Minus(params);
-                        break;
-                    case "*":
-                        op = new Times(params);
-                        break;
-                    case "/":
-                        op = new Divides(params);
-                        break;
-                    default:
-                        return new MyNotANumber();
+                if (ctx.getChildCount() == 2){
+                    op =  new Times(params);
+                }
+                else {
+                    switch (ctx.getChild(1).getText()) {
+                        case "+":
+                            op = new Plus(params);
+                            break;
+                        case "-":
+                            op = new Minus(params);
+                            break;
+                        case "*", "":
+                            op = new Times(params);
+                            break;
+                        case "/":
+                            op = new Divides(params);
+                            break;
+                        default:
+                            return new MyNotANumber();
+                    }
                 }
                 return c.eval(op);
             } catch (IllegalConstruction e) {
