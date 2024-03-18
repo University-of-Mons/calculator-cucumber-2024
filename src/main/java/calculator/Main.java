@@ -30,8 +30,12 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        Parser<Integer> a = new Parser<>();
+        Expression<Integer> b = a.parse("5*4 + 3 * 3", Parser::stringToInteger);
+
         Expression<Integer> e;
         Calculator<Integer> c = new Calculator<>();
+        c.print(b);
 
         try {
 

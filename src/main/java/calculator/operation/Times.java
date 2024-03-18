@@ -27,6 +27,7 @@ public final class Times<T> extends Operation<T> {
 
         super(elist);
         symbol = "*";
+        priority = 1;
         neutral = 1;
     }
 

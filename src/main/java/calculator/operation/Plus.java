@@ -27,6 +27,7 @@ public final class Plus<T> extends Operation<T> {
     public /*constructor*/ Plus(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "+";
+        priority = 0;
         neutral = 0;
     }
 

@@ -31,6 +31,9 @@ public abstract class Operation<T> implements Expression<T> {
     @Getter
     protected String symbol;
 
+    @Getter
+    protected int priority;
+
     /**
      * The neutral element of the operation (e.g. 1 for *, 0 for +)
      */
