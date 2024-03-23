@@ -41,6 +41,6 @@ public final class Divides<T> extends Operation<T> {
      */
 
     public Value<T> op(Value<T> l, Value<T> r) throws ArithmeticException {
-        return l / r;
+        return l.div(r);
     }
 }

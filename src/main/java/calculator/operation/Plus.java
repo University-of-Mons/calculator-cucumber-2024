@@ -39,6 +39,6 @@ public final class Plus<T> extends Operation<T> {
      * @return The integer that is the result of the addition
      */
     public Value<T> op(Value<T> l, Value<T> r) {
-        return l + r;
+        return l.plus(r);
     }
 }

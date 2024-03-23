@@ -39,6 +39,6 @@ public final class Times<T> extends Operation<T> {
      * @return The integer that is the result of the multiplication
      */
     public Value<T> op(Value<T> l, Value<T> r) {
-        return l * r;
+        return l.times(r);
     }
 }
