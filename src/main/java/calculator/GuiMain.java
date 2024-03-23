@@ -16,27 +16,22 @@ public class GuiMain extends Application {
 
     @Override
     public void start(Stage stage) {
-        Scene scene = createScene();
-
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png")));
-        stage.getIcons().add(icon);
-        stage.setTitle("Calculator Cucumber");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public Scene createScene(){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/GuiMainView.fxml"));
             Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png")));
+            stage.getIcons().add(icon);
+            stage.setTitle("Calculator Cucumber");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
             root.requestFocus();
-            return new Scene(root);
         } catch (Exception e) {
-            logger.error("Error when trying to load user interface", e);
+            logger.error("Erreur lors du chargement de l'interface utilisateur", e);
         }
-        return null;
     }
 
     public static void main(String[] args) {
