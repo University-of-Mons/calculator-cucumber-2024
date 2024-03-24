@@ -5,7 +5,13 @@ import calculator.operation.Divides;
 import calculator.operation.Minus;
 import calculator.operation.Plus;
 import calculator.operation.Times;
+import calculator.parser.CalculatorLexer;
+import calculator.parser.CalculatorParser;
 import lombok.extern.slf4j.Slf4j;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +26,7 @@ import java.util.List;
  * @author tommens
  */
 @Slf4j
+@SuppressWarnings("all")
 public class Main {
 
     /**
@@ -29,44 +36,47 @@ public class Main {
      * @param args Command-line parameters are not used in this version
      */
     public static void main(String[] args) {
-
-        Parser<Integer> a = new Parser<>();
-        Expression<Integer> b = a.parse("5*4 + 3 * 3", Parser::stringToInteger);
-
-        Expression<Integer> e;
-        Calculator<Integer> c = new Calculator<>();
-        c.print(b);
-
         try {
 
+            String expr = "4 + 4";
+            CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString(expr));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            CalculatorParser parser = new CalculatorParser(tokens);
+            ParseTree tree = parser.expression();
+            ParseTreeWalker walker = new ParseTreeWalker();
+//            walker.walk(listener, tree);
+
+
+
+            Parser<Integer> a = new Parser<>();
+            Expression<Integer> b = a.parse(" 5 * 4 + 3 * 3", Parser::stringToInteger);
+
+            Expression<Integer> e;
+            Calculator<Integer> c = new Calculator<>();
+            c.print(b);
             e = new MyNumber(8);
             c.print(e);
-            c.eval(e);
 
             List<Expression<Integer>> params = new ArrayList<>();
             Collections.addAll(params, new MyNumber(3), new MyNumber(4), new MyNumber(5));
             e = new Plus<>(params);
             c.printExpressionDetails(e);
-            c.eval(e);
 
             List<Expression<Integer>> params2 = new ArrayList<>();
             Collections.addAll(params2, new MyNumber(5), new MyNumber(3));
             e = new Minus<>(params2);
             c.print(e);
-            c.eval(e);
 
             List<Expression<Integer>> params3 = new ArrayList<>();
             Collections.addAll(params3, new Plus<>(params), new Minus<>(params2));
             e = new Times<>(params3);
             c.printExpressionDetails(e);
-            c.eval(e);
 
             List<Expression<Integer>> params4 = new ArrayList<>();
             Collections.addAll(params4, new Plus<>(params), new Minus<>(params2), new MyNumber(5));
             e = new Divides<>(params4);
             c.print(e, Notation.POSTFIX);
-            c.eval(e);
-        } catch (IllegalConstruction exception) {
+        } catch (IllegalConstruction | IllegalExpression exception) {
             log.error("cannot create operations without parameters");
         }
     }

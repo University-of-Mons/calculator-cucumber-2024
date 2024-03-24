@@ -28,11 +28,11 @@ public class Parser<T> {
         }
     }
 
-    public Expression<T> parse(String s, From<T> parser) {
+    public Expression<T> parse(String s, From<T> parser) throws IllegalExpression {
         return parseRec(s.strip().trim().toLowerCase(), parser, 0, 0).e;
     }
 
-    private ParserResult parseRec(String s, From<T> parser, int i, int priority) {
+    private ParserResult parseRec(String s, From<T> parser, int i, int priority) throws IllegalExpression {
         Expression<T> left = null;
         while (i < s.length()) {
             char c = s.charAt(i);
@@ -56,6 +56,9 @@ public class Parser<T> {
                 i = res.i;
                 try {
                     Constructor<Operation<T>> constructor = (Constructor<Operation<T>>) operator.getClass().getConstructor(List.class);
+                    if (left == null || right == null){
+                        throw new IllegalExpression();
+                    }
                     left = constructor.newInstance(Arrays.asList(left, right));
                 } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
                          InvocationTargetException e) {
@@ -79,7 +82,7 @@ public class Parser<T> {
         return new ParserResult(parser.fromString(num.toString()), i);
     }
 
-    private ParserResult parseOp(String s, int i) {
+    private ParserResult parseOp(String s, int i) throws IllegalExpression {
         String op;
 
         char c = s.charAt(i);
@@ -97,7 +100,7 @@ public class Parser<T> {
         Operation<T> operator = operatorMap.get(op);
         if (operator == null) {
             log.error("\"{}\" not yet supported", op);
-            return new ParserResult(null, i);
+            throw new IllegalExpression();
         }
         return new ParserResult(operator, i);
     }
