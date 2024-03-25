@@ -1,7 +1,9 @@
-Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
-![CodeQL](https://github.com/tommens/calculator-cucumber/actions/workflows/codeql.yml/badge.svg)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6856a0f94d25446ca346cbc15a701d43)](https://www.codacy.com/gh/tommens/calculator-cucumber/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tommens/calculator-cucumber&amp;utm_campaign=Badge_Grade)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tommens_calculator-cucumber&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tommens_calculator-cucumber)
+Code quality: ![Maven Build](https://github.com/Nephty/calculator-cucumber-2024/actions/workflows/maven.yml/badge.svg)
+![CodeQL](https://github.com/LicorneRose765/ClockSystem/actions/workflows/codeql.yml/badge.svg)
+
+![ScoreCard](https://github.com/Nephty/calculator-cucumber-2024//actions/workflows/scorecard.yml/badge.svg )
+
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Nephty/calculator-cucumber-2024/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Nephty/calculator-cucumber-2024)
 
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
