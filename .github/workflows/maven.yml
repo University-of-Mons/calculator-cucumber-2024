@@ -15,7 +15,6 @@ jobs:
   build:
     name: build & test
     runs-on: ubuntu-latest
-
     permissions:
       checks: write
 
@@ -35,8 +34,8 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Publish Test Report
-        if: success() || failure()
-        uses: scacap/action-surefire-report@v1
+        if: ${{ always() }}
+        uses: scacap/action-surefire-report@a2911bd1a4412ec18dde2d93b1758b3e56d2a880 # v1.8.0
 
       - name: jacoco-badge-generator
         uses: cicirello/jacoco-badge-generator@v2.11.0
