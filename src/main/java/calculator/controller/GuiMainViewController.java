@@ -35,6 +35,8 @@ public class GuiMainViewController implements Initializable {
         btnMinus.setId("btnMinus");
         btnMultiply.setId("btnMultiply");
         btnDivide.setId("btnDivide");
+        btnClear.setId("btnClear");
+        btnEquals.setId("btnEquals");
         btn0.setOnAction(e -> appendToDisplay("0"));
         btn1.setOnAction(e -> appendToDisplay("1"));
         btn2.setOnAction(e -> appendToDisplay("2"));
