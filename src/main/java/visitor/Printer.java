@@ -1,9 +1,10 @@
 package visitor;
 
-import calculator.Expression;
 import calculator.MyNumber;
 import calculator.Notation;
 import calculator.Operation;
+
+import java.util.stream.IntStream;
 
 public class Printer extends Visitor {
     private Notation notation = Notation.INFIX;
