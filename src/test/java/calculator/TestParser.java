@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 class TestParser{
 
-    // Infix tests
+    //Basic infix tests
 
     @Test
     void testNumber(){
@@ -29,7 +29,24 @@ class TestParser{
         assertEquals(18,parser.evaluate().getValue());
     }
 
-    // Postfix test
+    @Test
+    void testPrecedence(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("4+2*5",calculator);
+        assertEquals(14, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testPrecedence2(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(4+5+6)*(7 + 4/2)*9",calculator);
+        assertEquals(1215, parser.evaluate().getValue());
+    }
+
+
+    //Basic postfix tests
 
     @Test
     void testSum2(){
@@ -47,6 +64,25 @@ class TestParser{
         assertEquals(18,parser.evaluate().getValue());
     }
 
+    //Basic prefix tests
+
+    @Test
+    void testSum3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("+(5, 3)",calculator);
+        assertEquals(8,parser.evaluate().getValue());
+    }
+
+    @Test
+    void testNestedMul3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("*(+(4,5), 2)",calculator);
+        assertEquals(18,parser.evaluate().getValue());
+    }
+
+    // Complex tests
 
     /**
      * This test is used to test the basic functionality of the parser
@@ -80,7 +116,6 @@ class TestParser{
         assertEquals(cal1.evaluate().getValue(), cal3.evaluate().getValue());
     }
 
-
     /**
      * This test We can write the prefix and postfix expression with spaces instead of commas
      */
@@ -93,7 +128,6 @@ class TestParser{
         Parser posfix = new Parser("(10   3)+",calculator);
         assertEquals(13, posfix.evaluate().getValue());
     }
-
 
     /**
      * This test if the  parser's output can be used like parser's input
