@@ -26,6 +26,7 @@
                     </rowConstraints>
                     <children>
                         <Button fx:id="clear" mnemonicParsing="false" prefHeight="93.0" prefWidth="88.0"
+                                onMouseClicked="#characterButtonClicked"
                                 style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;"
                                 text="C" textAlignment="CENTER">
                             <font>
@@ -104,7 +105,8 @@
                                 <Font name="System Bold" size="15.0"/>
                             </font>
                         </Button>
-                        <Button layoutX="90.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked"
+                        <Button layoutX="90.0" layoutY="58.0" mnemonicParsing="false"
+                                onMouseClicked="#characterButtonClicked"
                                 prefHeight="93.0" prefWidth="88.0"
                                 style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;"
                                 text="x²" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2"

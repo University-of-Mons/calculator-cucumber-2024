@@ -25,7 +25,8 @@ public class MainSceneController {
     public void characterButtonClicked(MouseEvent event) {
         Button source = (Button) event.getSource();
 
-        if (source.getText().equals("=")) equalsButtonClicked(event);
+        if (source.equals(equals)) equalsButtonClicked(event);
+        else if (source.equals(clear)) clearButtonClicked(event);
         else regularButtonClicked(event);
     }
 
