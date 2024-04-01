@@ -3,13 +3,19 @@ package back.calculator;
 import back.visitor.*;
 import back.visitor.*;
 
+import back.calculator.HistoryManager;
+
+import java.util.Observer;
+import java.util.Observable;
+
 /**
  * This class represents the core logic of a Calculator.
  * It can be used to print and evaluate artihmetic expressions.
  *
  * @author tommens
  */
-public class Calculator {
+public class Calculator extends Observable {
+    private Observer historyManager = new HistoryManager();
 
     /**
      * Default constructor of the class.
@@ -65,6 +71,8 @@ public class Calculator {
         Evaluator v = new Evaluator();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
+        // notify the historyManager observer in order to register a new entry
+        historyManager.update(this, new HistoryEntry(e, v.getResult()));
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }

@@ -10,7 +10,6 @@ import java.net.URL;
 
 /**
  * Handles the loading of FXML files to create the Scenes.
- *
  */
 public class SceneLoader {
 

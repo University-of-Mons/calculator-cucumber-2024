@@ -20,15 +20,20 @@ public class Main extends Application {
 
     public static String userInput = "";
 
+    private static Calculator calculator = new Calculator();
+
     @Override
-    public void start(Stage stage_){
+    public void start(Stage stage_) {
         stage = stage_;
 
         Scenes.MainScene = SceneLoader.load("MainScene.fxml");
         stage.setResizable(false);
-        stage.setTitle("Amazing calculator");
+        stage.setTitle("Please use gradle instead of maven");
         stage.setScene(Scenes.MainScene);
         stage.show();
     }
 
+    public static MyNumber eval(Expression expression) {
+        return calculator.eval(expression);
+    }
 }
