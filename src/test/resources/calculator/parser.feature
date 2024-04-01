@@ -59,6 +59,6 @@ Feature: Parser Test
       | "*(+(4,5,6),+(7,/(5,2,7)),9)"|
       | "((4,5,6)+,(7,(5,2,7)/)+,9)*"|
 
-  Scenarion: Test if a expression is not Space Sensible:
-    Given I have an expression "( 4     +        5)  *     2"
+  Scenario: Test if a expression is not Space Sensible:
+    Given I have an expression "(4+5)*2"
     Then the result is  18

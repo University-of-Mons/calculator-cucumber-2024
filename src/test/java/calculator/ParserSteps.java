@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-
 public class ParserSteps {
 
 	private Calculator c;
@@ -29,5 +28,4 @@ public class ParserSteps {
 	public void thenTheResultIs(int result) {
 		assertEquals(result, inputParser.evaluate().getValue());
 	}
-
 }
