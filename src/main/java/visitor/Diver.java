@@ -2,19 +2,12 @@ package visitor;
 
 import calculator.Expression;
 import calculator.MyNumber;
-import calculator.Notation;
 import calculator.Operation;
 
 import java.util.ArrayList;
 
 public class Diver extends Visitor {
     private int depth = 0;
-
-    /**
-     * Diver visitor constructor.
-     */
-    public Diver() {
-    }
 
     /**
      * Use the visitor design pattern to visit a number.

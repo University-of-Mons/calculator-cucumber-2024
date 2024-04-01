@@ -139,11 +139,7 @@ public class Printer extends Visitor {
      * @param symbol the symbol to append
      */
     private void appendInfixExpression(StringBuilder bobTheBuilder, String value, String symbol) {
-        bobTheBuilder.append("( ");
-        bobTheBuilder.append(value);
-        bobTheBuilder.append(" ");
-        bobTheBuilder.append(symbol);
-        bobTheBuilder.append(" ");
+        bobTheBuilder.append("( ").append(value).append(' ').append(symbol).append(' ');
     }
 
     /**
@@ -153,10 +149,7 @@ public class Printer extends Visitor {
      * @param symbol the symbol to append
      */
     private void appendPrefixExpression(StringBuilder bobTheBuilder, String value, String symbol){
-        bobTheBuilder.append(symbol);
-        bobTheBuilder.append(" (");
-        bobTheBuilder.append(value);
-        bobTheBuilder.append(", ");
+        bobTheBuilder.append(symbol).append(" (").append(value).append(", ");
     }
 
     /**
@@ -165,9 +158,7 @@ public class Printer extends Visitor {
      * @param value the value to append
      */
     private void appendPostfixExpression(StringBuilder bobTheBuilder, String value){
-        bobTheBuilder.append("(");
-        bobTheBuilder.append(value);
-        bobTheBuilder.append(", ");
+        bobTheBuilder.append('(').append(value).append(", ");
     }
 
     /**
@@ -189,7 +180,7 @@ public class Printer extends Visitor {
      */
     private void appendPrefixLastOperand(StringBuilder bobTheBuilder, String value, int size){
         bobTheBuilder.append(value);
-        IntStream.range(0, size-1).forEach(i -> bobTheBuilder.append(")"));
+        IntStream.range(0, size-1).forEach(i -> bobTheBuilder.append(')'));
     }
 
     /**
@@ -200,15 +191,9 @@ public class Printer extends Visitor {
      * @param symbol the symbol to add at the end of the operation as it should be in postfix
      */
     private void appendPostfixLastOperand(StringBuilder bobTheBuilder, String value, int size, String symbol){
-        bobTheBuilder.append(value);
-        bobTheBuilder.append(")");
-        IntStream.range(0, size-2).forEach(i -> {
-            bobTheBuilder.append(" ");
-            bobTheBuilder.append(symbol);
-            bobTheBuilder.append(")");
-        });
-        bobTheBuilder.append(" ");
-        bobTheBuilder.append(symbol);
+        bobTheBuilder.append(value).append(')');
+        IntStream.range(0, size-2).forEach(i -> bobTheBuilder.append(' ').append(symbol).append(')'));
+        bobTheBuilder.append(' ').append(symbol);
     }
     /**
      * Notation getter
