@@ -18,6 +18,12 @@ public class Calculator {
      public Expression read(String s)
     */
 
+    private final ExpressionParser parser;
+
+    public Calculator() {
+        parser = new ExpressionParser();
+    }
+
     /**
      * Prints an arithmetic expression provided as input parameter.
      *
@@ -58,6 +64,10 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    public Expression read(String s) {
+        return parser.parse(s);
     }
 
     /*

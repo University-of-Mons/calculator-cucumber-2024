@@ -58,26 +58,25 @@ public class Main {
         }
 
         System.out.println("================= Parser ====================");
-        ExpressionParser parser = new ExpressionParser();
-        Expression parsedExpression = parser.parse("3 + 4");
+        Expression parsedExpression = c.read("3 + 4");
         c.print(parsedExpression); // = 7
 
-        Expression parsedExpression2 = parser.parse("3 + 4 * 5");
+        Expression parsedExpression2 = c.read("3 + 4 * 5");
         c.print(parsedExpression2); // = 23
 
-        Expression parsedExpression3 = parser.parse("(3 + 4) * 5");
+        Expression parsedExpression3 = c.read("(3 + 4) * 5");
         c.print(parsedExpression3); // = 35
 
-        Expression parsedExpression4 = parser.parse("+ (3 4)");
+        Expression parsedExpression4 = c.read("+ (3 4)");
         c.print(parsedExpression4); // = 7
 
-        Expression parsedExpression5 = parser.parse("+ (3, 4)");
+        Expression parsedExpression5 = c.read("+ (3, 4)");
         c.print(parsedExpression5); // = 7
 
-        Expression parsedExpression6 = parser.parse("+ (3, 4, 5)");
+        Expression parsedExpression6 = c.read("+ (3, 4, 5)");
         c.print(parsedExpression6); // = 12
 
-        Expression parsedExpression7 = parser.parse("(3 4 5) +");
+        Expression parsedExpression7 = c.read("(3 4 5) +");
         c.print(parsedExpression7); // = 12
     }
 
