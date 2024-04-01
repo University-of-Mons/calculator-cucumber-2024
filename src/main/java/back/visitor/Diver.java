@@ -10,12 +10,6 @@ public class Diver extends Visitor {
     private int depth = 0;
 
     /**
-     * Diver visitor constructor.
-     */
-    public Diver() {
-    }
-
-    /**
      * Use the visitor design pattern to visit a number.
      *
      * @param n The number being visited

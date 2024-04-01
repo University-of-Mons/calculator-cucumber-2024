@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestMathematician {
+class TestMathematician {
 
     private Calculator calc;
     private int value1, value2, value3, value4;
@@ -35,36 +35,19 @@ public class TestMathematician {
         try {
             switch (symbol) {
                 case "+" -> {
-                    try {
-                        params = Arrays.asList(new Plus(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Plus(params), new MyNumber(value3));
                     assertEquals(3, calc.numbersCount(new Plus(params)));
                 }
                 case "-" -> {
-                    try {
-                        params = Arrays.asList(new Minus(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Minus(params), new MyNumber(value3));
                     assertEquals(3, calc.numbersCount(new Minus(params)));
                 }
                 case "*" -> {
-                    try {
-                        params = Arrays.asList(new Times(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
-                    Expression e = new Times(params);
+                    params = Arrays.asList(new Times(params), new MyNumber(value3));
                     assertEquals(3, calc.numbersCount(new Times(params)));
                 }
                 case "/" -> {
-                    try {
-                        params = Arrays.asList(new Divides(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Divides(params), new MyNumber(value3));
                     assertEquals(3, calc.numbersCount(new Divides(params)));
                 }
                 default -> fail();

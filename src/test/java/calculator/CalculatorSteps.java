@@ -41,10 +41,10 @@ public class CalculatorSteps {
                 case "-" -> op = new Minus(params);
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
-                default -> fail();
+                default -> fail("Unknown operation!");
             }
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Illegal construction!");
         }
     }
 
