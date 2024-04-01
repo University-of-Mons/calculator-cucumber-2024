@@ -9,19 +9,41 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" stylesheets="@../css/GuiMainStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.GuiMainViewController">
    <top>
       <VBox alignment="CENTER">
-         <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" prefHeight="40.0" prefWidth="480.0" VBox.vgrow="NEVER" style="-fx-text-fill: #7f7f7f;">
-            <font>
-               <Font name="Avenir Black" size="24.0" />
-            </font>
-         </TextField>
-         <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" prefHeight="160.0" prefWidth="480.0" text="0" VBox.vgrow="NEVER">
-            <font>
-               <Font name="Avenir Black" size="72.0" />
-            </font>
-         </TextField>
+         <HBox>
+            <Button fx:id="btnRetrieve" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" VBox.vgrow="NEVER" onAction="#onRetrieve" prefWidth="120.0" text="Retrieve" textAlignment="CENTER">
+               <font>
+                  <Font name="Avenir Black" size="24.0" />
+               </font>
+            </Button>
+            <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" prefHeight="40.0" prefWidth="480.0" VBox.vgrow="NEVER" style="-fx-text-fill: #7f7f7f;">
+               <font>
+                  <Font name="Avenir Black" size="24.0" />
+               </font>
+            </TextField>
+         </HBox>
+         <HBox>
+            <VBox>
+               <Button fx:id="btnUpSize" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="80.0" mnemonicParsing="false" onAction="#onUpSize" prefWidth="120.0" text="Zoom +" textAlignment="CENTER">
+                  <font>
+                     <Font name="Avenir Black" size="24.0" />
+                  </font>
+               </Button>
+               <Button fx:id="btnDownSize" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="80.0" mnemonicParsing="false" onAction="#onDownSize" prefWidth="120.0" text="Zoom -" textAlignment="CENTER">
+                  <font>
+                     <Font name="Avenir Black" size="24.0" />
+                  </font>
+               </Button>
+            </VBox>
+            <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" prefHeight="160.0" prefWidth="480.0" VBox.vgrow="NEVER" >
+               <font>
+                  <Font name="Avenir Black" size="72.0" />
+               </font>
+            </TextField>
+         </HBox>
       </VBox>
    </top>
 

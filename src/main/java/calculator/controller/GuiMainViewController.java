@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,11 +14,11 @@ public class GuiMainViewController implements Initializable {
     public TextField display;
     @FXML
     private TextField expression;
-    public Button btnClear, btnNegate, btnFraction, btnDivide, btnMultiply, btnMinus, btnPlus, btnEquals;
+    public Button btnClear, btnNegate, btnFraction, btnDivide, btnMultiply, btnMinus, btnPlus, btnEquals,
+            btnRetrieve, btnUpSize, btnDownSize;
     public Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
 
     private boolean resetDisplay = true;
-    private boolean resetExpression = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,47 +38,18 @@ public class GuiMainViewController implements Initializable {
         btnDivide.setId("btnDivide");
         btnClear.setId("btnClear");
         btnEquals.setId("btnEquals");
-        btn0.setOnAction(e -> appendToDisplay("0"));
-        btn1.setOnAction(e -> appendToDisplay("1"));
-        btn2.setOnAction(e -> appendToDisplay("2"));
-        btn3.setOnAction(e -> appendToDisplay("3"));
-        btn4.setOnAction(e -> appendToDisplay("4"));
-        btn5.setOnAction(e -> appendToDisplay("5"));
-        btn6.setOnAction(e -> appendToDisplay("6"));
-        btn7.setOnAction(e -> appendToDisplay("7"));
-        btn8.setOnAction(e -> appendToDisplay("8"));
-        btn9.setOnAction(e -> appendToDisplay("9"));
-        btnPlus.setOnAction(e -> handleOperator("+"));
-        btnMinus.setOnAction(e -> handleOperator("-"));
-        btnMultiply.setOnAction(e -> handleOperator("*"));
-        btnDivide.setOnAction(e -> handleOperator("/"));
+        btnRetrieve.setId("btnRetrieve");
+        btnUpSize.setId("btnUpSize");
+        btnDownSize.setId("btnDownSize");
     }
 
-    private void appendToDisplay(String text) {//TODO : Gérer le cas "0"
+    private void appendToDisplay(String text) {
         if (resetDisplay){
+            expression.appendText(display.getText());
             display.clear();
-        }
-        if (resetExpression){
-            expression.clear();
-            resetExpression = false;
         }
         display.appendText(text);
         resetDisplay = false;
-    }
-
-    private void handleOperator(String operator) {
-        if (resetExpression) {
-            expression.setText("0 " + operator + " ");
-            resetExpression = false;
-        }else{
-            if (resetDisplay) {
-                expression.setText(expression.getText().substring(0, expression.getText().length() - 2) + operator + " ");
-            }else {
-                expression.appendText(display.getText() + " " + operator + " ");
-            }
-        }
-        display.setText(operator);
-        resetDisplay = true;
     }
 
     public void onNegate() {
@@ -99,34 +71,60 @@ public class GuiMainViewController implements Initializable {
     }
 
     public void onClear() {
-        display.setText("0");
-        expression.clear();
+        display.clear();
     }
 
     public void onEquals() {
-        expression.appendText(display.getText() + " = ");
-        display.setText("Answer");// TODO : Remplacer "Answer" par le résultat de l'expression
-        resetDisplay = true;
-        resetExpression = true;
+        if (!resetDisplay && !display.getText().equals("0")) {
+            expression.setText(display.getText()+" = ");
+            display.setText("Answer");// TODO : Remplacer "Answer" par le résultat de l'expression
+            resetDisplay = true;
+        }
     }
 
     public void onDivide() {
-        // TODO : Gérer l'événement de clic sur le bouton "/"
+        appendToDisplay("/");
     }
 
     public void onMultiply() {
-        // TODO : Gérer l'événement de clic sur le bouton "*"
+        appendToDisplay("*");
     }
 
     public void onMinus() {
-        // TODO : Gérer l'événement de clic sur le bouton "-"
+        appendToDisplay("-");
     }
 
     public void onPlus() {
-        // TODO : Gérer l'événement de clic sur le bouton "+"
+        appendToDisplay("+");
     }
 
-    public void onNumber() {
-        // TODO : Gérer l'événement de clic sur un bouton numérique
+    @FXML
+    public void onNumber(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        appendToDisplay(button.getText());
+    }
+
+    public void onRetrieve() {
+        String expressionString = expression.getText();
+        int index = expressionString.lastIndexOf("=");
+        if (index != -1 && index < expressionString.length() - 2) {
+            String retrieved = expressionString.substring(index + 2);
+            if (!retrieved.equals(display.getText())) {
+                display.setText(retrieved);
+                resetDisplay = false;
+            }
+        }
+    }
+
+    public void onUpSize() {
+        double size = display.getFont().getSize();
+        if (size < 72) {
+            display.setStyle("-fx-font-size: " + (size + 2) + "px;");
+        }
+    }
+
+    public void onDownSize() {
+        double size = display.getFont().getSize();
+        display.setStyle("-fx-font-size: " + (size - 2) + "px;");
     }
 }
