@@ -43,7 +43,6 @@ class TestMathematician {
                 }
                 case "*" -> {
                     params = Arrays.asList(new Times(params), new MyNumber(value3));
-                    Expression e = new Times(params);
                     assertEquals(3, calc.numbersCount(new Times(params)));
                 }
                 case "/" -> {

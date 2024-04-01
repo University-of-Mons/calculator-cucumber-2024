@@ -48,6 +48,7 @@ public final class Minus extends Operation {
      * @param r The second integer that should be subtracted from the first
      * @return The integer that is the result of the subtraction
      */
+    @Override
     public MyNumber op(MyNumber l, MyNumber r) {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();

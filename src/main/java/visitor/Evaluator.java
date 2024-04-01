@@ -31,6 +31,7 @@ public class Evaluator extends Visitor {
      *
      * @param n The number being visited
      */
+    @Override
     public void visit(MyNumber n) {
         computedValue = n;
     }
@@ -40,6 +41,7 @@ public class Evaluator extends Visitor {
      *
      * @param o The operation being visited
      */
+    @Override
     public void visit(Operation o) {
         ArrayList<MyNumber> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression

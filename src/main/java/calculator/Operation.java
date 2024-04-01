@@ -100,6 +100,7 @@ public abstract class Operation implements Expression {
      *
      * @param visitor The visitor object
      */
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
