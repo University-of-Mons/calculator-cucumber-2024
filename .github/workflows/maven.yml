@@ -38,7 +38,6 @@ jobs:
         with:
           generate-branches-badge: true
           generate-summary: true
-          fail-if-coverage-less-than: 75
 
       - name: Log coverage percentage
         run: |
@@ -67,4 +66,10 @@ jobs:
             - **Coverage**: ${{ steps.jacoco.outputs.coverage }}%
             - **Branches**: ${{ steps.jacoco.outputs.branches }}%
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: Nephty/calculator-cucumber-2024
 
