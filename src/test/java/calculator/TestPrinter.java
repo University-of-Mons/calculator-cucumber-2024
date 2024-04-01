@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestPrinter {
+class TestPrinter {
 
     private Calculator calc;
     private int value1, value2, value3;
@@ -44,7 +44,7 @@ public class TestPrinter {
 
     @ParameterizedTest
     @ValueSource(strings = {"*", "+", "/", "-"})
-    void TestEvaluateInfix(String symbol){
+    void testEvaluateInfix(String symbol){
         List <Expression> params = Arrays.asList(new MyNumber(value1), new MyNumber(value2), new MyNumber(value3));
         try{
             //construct another type of operation depending on the input value

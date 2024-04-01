@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestDiver {
+class TestDiver {
 
     private Calculator calc;
     private int value1, value2, value3, value4;
@@ -56,35 +56,19 @@ public class TestDiver {
         try {
             switch (symbol) {
                 case "+" -> {
-                    try {
-                        params = Arrays.asList(new Plus(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Plus(params), new MyNumber(value3));
                     assertEquals(2, calc.depth(new Plus(params)));
                 }
                 case "-" -> {
-                    try {
-                        params = Arrays.asList(new Minus(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Minus(params), new MyNumber(value3));
                     assertEquals(2, calc.depth(new Minus(params)));
                 }
                 case "*" -> {
-                    try {
-                        params = Arrays.asList(new Times(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Times(params), new MyNumber(value3));
                     assertEquals(2, calc.depth(new Times(params)));
                 }
                 case "/" -> {
-                    try {
-                        params = Arrays.asList(new Divides(params), new MyNumber(value3));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Divides(params), new MyNumber(value3));
                     assertEquals(2, calc.depth(new Divides(params)));
                 }
                 default -> fail();
@@ -107,39 +91,23 @@ public class TestDiver {
         try {
             switch (symbol) {
                 case "+" -> {
-                    try {
-                        params = Arrays.asList(new Plus(params), new MyNumber(value3));
-                        params = Arrays.asList(new Plus(params), new MyNumber(value4));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Plus(params), new MyNumber(value3));
+                    params = Arrays.asList(new Plus(params), new MyNumber(value4));
                     assertEquals(3, calc.depth(new Plus(params)));
                 }
                 case "-" -> {
-                    try {
-                        params = Arrays.asList(new Minus(params), new MyNumber(value3));
-                        params = Arrays.asList(new Minus(params), new MyNumber(value4));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Minus(params), new MyNumber(value3));
+                    params = Arrays.asList(new Minus(params), new MyNumber(value4));
                     assertEquals(3, calc.depth(new Minus(params)));
                 }
                 case "*" -> {
-                    try {
-                        params = Arrays.asList(new Times(params), new MyNumber(value3));
-                        params = Arrays.asList(new Times(params), new MyNumber(value4));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Times(params), new MyNumber(value3));
+                    params = Arrays.asList(new Times(params), new MyNumber(value4));
                     assertEquals(3, calc.depth(new Times(params)));
                 }
                 case "/" -> {
-                    try {
-                        params = Arrays.asList(new Divides(params), new MyNumber(value3));
-                        params = Arrays.asList(new Divides(params), new MyNumber(value4));
-                    } catch (IllegalConstruction e) {
-                        fail();
-                    }
+                    params = Arrays.asList(new Divides(params), new MyNumber(value3));
+                    params = Arrays.asList(new Divides(params), new MyNumber(value4));
                     assertEquals(3, calc.depth(new Divides(params)));
                 }
                 default -> fail();

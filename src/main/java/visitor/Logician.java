@@ -8,12 +8,6 @@ public class Logician extends Visitor {
     private int operationsCount = 0;
 
     /**
-     * Logician visitor constructor.
-     */
-    public Logician() {
-    }
-
-    /**
      * Use the visitor design pattern to visit a number.
      *
      * @param n The number being visited

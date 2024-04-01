@@ -8,12 +8,6 @@ public class Mathematician extends Visitor {
     private int numbersCount = 0;
 
     /**
-     * Mathematician visitor constructor.
-     */
-    public Mathematician() {
-    }
-
-    /**
      * Use the visitor design pattern to visit a number.
      *
      * @param n The number being visited
