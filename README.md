@@ -1,6 +1,7 @@
 Code quality: ![Maven Build](https://github.com/MarineB210/calculator-cucumber-2024/actions/workflows/maven.yml/badge.svg)
 ![CodeQL](https://github.com/MarineB210/calculator-cucumber-2024/actions/workflows/codeql.yml/badge.svg)
 ![ScoreCard](https://github.com/MarineB210/calculator-cucumber-2024/actions/workflows/scorecard.yml/badge.svg)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/MarineB210/calculator-cucumber-2024/badge)](https://securityscorecards.dev/viewer/?uri=github.com/MarineB210/calculator-cucumber-2024)
 
 Test coverage: ![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
