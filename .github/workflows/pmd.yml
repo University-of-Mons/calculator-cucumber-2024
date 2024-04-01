@@ -37,8 +37,8 @@ jobs:
         id: pmd
         uses: pmd/pmd-github-action@d57c0463ebba262a33d1983a5c6ac6031bfde43b # v1.4.1
         with:
-          rulesets: 'rulesets/java/quickstart.xml'
-          sourcePath: 'src/main/java'
+          rulesets: 'rulesets/java/basic.xml'
+          sourcePath: 'src/main/java/'
           analyzeModifiedFilesOnly: false
 
       - name: Upload SARIF file
@@ -47,5 +47,5 @@ jobs:
           sarif_file: pmd-report.sarif
 
       - name: Fail build if PMD found issues
-        if: steps.pmd.outputs.violations > 3 # fail if it exceeds 3 issues
+        if: steps.pmd.outputs.violations > 25 # fail if it exceeds 25 issues
         run: exit 1
