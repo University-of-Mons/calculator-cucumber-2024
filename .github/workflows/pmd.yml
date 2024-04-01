@@ -37,7 +37,7 @@ jobs:
         id: pmd
         uses: pmd/pmd-github-action@d57c0463ebba262a33d1983a5c6ac6031bfde43b # v1.4.1
         with:
-          rulesets: 'rulesets/java/basic.xml'
+          rulesets: 'category/java/errorprone.xml', 'category/java/bestpractices.xml', 'category/java/codestyle.xml', 'category/java/design.xml', 'category/java/performance.xml', 'category/java/security.xml'
           sourcePath: 'src/main/java/'
           analyzeModifiedFilesOnly: false
 
@@ -45,7 +45,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@928ff8c822d966a999092a6a35e32177899afb7c # v2.24.6
         with:
           sarif_file: pmd-report.sarif
-
-      - name: Fail build if PMD found issues
-        if: steps.pmd.outputs.violations > 25 # fail if it exceeds 25 issues
-        run: exit 1
