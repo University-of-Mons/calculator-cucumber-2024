@@ -56,6 +56,29 @@ public class Main {
         } catch (IllegalConstruction exception) {
             System.out.println("cannot create operations without parameters");
         }
+
+        System.out.println("================= Parser ====================");
+        ExpressionParser parser = new ExpressionParser();
+        Expression parsedExpression = parser.parse("3 + 4");
+        c.print(parsedExpression); // = 7
+
+        Expression parsedExpression2 = parser.parse("3 + 4 * 5");
+        c.print(parsedExpression2); // = 23
+
+        Expression parsedExpression3 = parser.parse("(3 + 4) * 5");
+        c.print(parsedExpression3); // = 35
+
+        Expression parsedExpression4 = parser.parse("+ (3 4)");
+        c.print(parsedExpression4); // = 7
+
+        Expression parsedExpression5 = parser.parse("+ (3, 4)");
+        c.print(parsedExpression5); // = 7
+
+        Expression parsedExpression6 = parser.parse("+ (3, 4, 5)");
+        c.print(parsedExpression6); // = 12
+
+        Expression parsedExpression7 = parser.parse("(3 4 5) +");
+        c.print(parsedExpression7); // = 12
     }
 
 }

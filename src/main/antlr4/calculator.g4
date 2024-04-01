@@ -12,25 +12,26 @@ expression: infix
     | prefix;
 
 // With ANTLR, precedence is determined by the order of the rules
-infix: infix '*' infix
-    | infix '/' infix
-    | infix '+' infix
-    | infix '-' infix
-    | '(' infix ')'
-    | NUMBER;
+infix: infix op=('*'| '/') infix  # MulDivInfix
+    | infix op=('+' | '-') infix  # AddSubInfix
+    | '(' infix ')'               # ParensInfix
+    | NUMBER                      # NumberInfix
+    ;
 
 
 // The second part of the rule is there to enforce that we cannot create an expression
 // With both comma and space as separators.
-prefix: ('*' | '/') '(' prefix ( (',' prefix)+  | (prefix)+ ) ')'
-    | ('+' | '-') '(' prefix ( (',' prefix)+  | (prefix)+) ')'
-    | '(' prefix ')'
-    | NUMBER;
+prefix: op=('*' | '/') '(' prefix ( (',' prefix)+  | (prefix)+ ) ')' # MulDivPrefix
+    | op=('+' | '-') '(' prefix ( (',' prefix)+  | (prefix)+) ')'    # AddSubPrefix
+    | '(' prefix ')'                                                 # ParensPrefix
+    | NUMBER                                                         # NumberPrefix
+    ;
 
-postfix : '(' postfix ( (',' postfix)+  | (postfix)+ ) ')' ('*' | '/')
-    | '(' postfix ( (',' postfix)+  | (postfix)+) ')' ('+' | '-')
-    | '(' postfix ')'
-    | NUMBER;
+postfix : '(' postfix ( (',' postfix)+  | (postfix)+ ) ')' op=('*' | '/') # MulDivPostfix
+    | '(' postfix ( (',' postfix)+  | (postfix)+) ')' op=('+' | '-')      # AddSubPostfix
+    | '(' postfix ')'                                                     # ParensPostfix
+    | NUMBER                                                              # NumberPostfix
+    ;
 
 // Defined to reference as constants in the Java code
 ADD: '+';
