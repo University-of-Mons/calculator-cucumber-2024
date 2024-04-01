@@ -33,10 +33,11 @@ jobs:
         uses: scacap/action-surefire-report@a2911bd1a4412ec18dde2d93b1758b3e56d2a880 # v1.8.0
 
       - name: jacoco-badge-generator
-        uses: cicirello/jacoco-badge-generator@v2.11.0
+        uses: cicirello/jacoco-badge-generator@v2
         with:
-          generate-branch-coverage: true
+          generate-branches-badge: true
           generate-summary: true
+          fail-if-coverage-less-than: 75
 
       - name: Log coverage percentage
         run: |
@@ -63,7 +64,6 @@ jobs:
           message: |
             ## Code Coverage Report :bar_chart:
             - **Coverage**: ${{ steps.jacoco.outputs.coverage }}%
-            - **Branch Coverage**: ${{ steps.jacoco.outputs.branches }}%
+            - **Branches**: ${{ steps.jacoco.outputs.branches }}%
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
