@@ -37,7 +37,7 @@ jobs:
         id: pmd
         uses: pmd/pmd-github-action@d57c0463ebba262a33d1983a5c6ac6031bfde43b # v1.4.1
         with:
-          rulesets: 'category/java/errorprone.xml', 'category/java/bestpractices.xml', 'category/java/codestyle.xml', 'category/java/design.xml', 'category/java/performance.xml', 'category/java/security.xml'
+          rulesets: 'category/java/errorprone.xml,category/java/bestpractices.xml, category/java/codestyle.xml, category/java/design.xml, category/java/performance.xml, category/java/security.xml'
           sourcePath: 'src/main/java/'
           analyzeModifiedFilesOnly: false
 
