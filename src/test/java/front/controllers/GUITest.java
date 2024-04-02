@@ -4,9 +4,12 @@ import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -24,6 +27,7 @@ import javafx.stage.Stage;
 import java.util.concurrent.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.testfx.api.FxToolkit.registerPrimaryStage;
 
 
 @ExtendWith(ApplicationExtension.class)
@@ -58,6 +62,12 @@ public class GUITest extends ApplicationTest {
         release(new MouseButton[]{});
     }
 
+    @BeforeEach
+    public void clear() {
+        clickOn("#clear");
+        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("");
+    }
+
     @Test
     public void checkNumberButtons(FxRobot robot) {
         clickOn("#one");
@@ -69,7 +79,26 @@ public class GUITest extends ApplicationTest {
         clickOn("#seven");
         clickOn("#eight");
         clickOn("#nine");
+        clickOn("#dot");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("1234567890");
+        clickOn("#zero");
+        clickOn("#zero");
+        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("123456789.000");
+    }
+
+    @Test
+    public void checkOperandButtons(FxRobot robot) {
+        clickOn("#percent");
+        clickOn("#add");
+        clickOn("#minus");
+        clickOn("#multiply");
+        clickOn("#divide");
+        clickOn("#openParen");
+        clickOn("#closeParen");
+        clickOn("#exp");
+        clickOn("#pi");
+        clickOn("#sqrt");
+        clickOn("#squared");
+        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("%+-*/()^π√x²");
     }
 }
