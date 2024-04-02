@@ -1,6 +1,6 @@
-package calculator;
+package back.calculator;
 
-import visitor.Visitor;
+import back.visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,6 +177,7 @@ public abstract class Operation implements Expression {
 
     /**
      * Symbol getter.
+     *
      * @return the symbol of the operation
      */
     public String getSymbol() {

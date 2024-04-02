@@ -1,4 +1,4 @@
-package calculator;
+package back.calculator;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public final class Divides extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if (r.getValue() ==0 || l instanceof NotANumber || r instanceof NotANumber)
+        if (r.getValue() == 0 || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         return new MyNumber(l.getValue() / r.getValue());
     }

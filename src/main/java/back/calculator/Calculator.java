@@ -1,6 +1,12 @@
-package calculator;
+package back.calculator;
 
-import visitor.*;
+import back.visitor.*;
+import back.visitor.*;
+
+import back.calculator.HistoryManager;
+
+import java.util.Observer;
+import java.util.Observable;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -8,7 +14,16 @@ import visitor.*;
  *
  * @author tommens
  */
-public class Calculator {
+public class Calculator extends Observable {
+    private Observer historyManager = new HistoryManager();
+
+    /**
+     * Default constructor of the class.
+     * Does nothing since the class does not have any variables that need to be initialised.
+     */
+    public Calculator() {
+    }
+
     /*
      For the moment the calculator only contains a print method and an eval method
      It would be useful to complete this with a read method, so that we would be able
@@ -56,6 +71,8 @@ public class Calculator {
         Evaluator v = new Evaluator();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
+        // notify the historyManager observer in order to register a new entry
+        historyManager.update(this, new HistoryEntry(e, v.getResult()));
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }

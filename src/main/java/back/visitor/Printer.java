@@ -1,8 +1,9 @@
-package visitor;
+package back.visitor;
 
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
+import back.calculator.Expression;
+import back.calculator.MyNumber;
+import back.calculator.Notation;
+import back.calculator.Operation;
 
 import java.util.stream.IntStream;
 
@@ -27,6 +28,7 @@ public class Printer extends Visitor {
 
     /**
      * Notation setter.
+     *
      * @param notation The notation to use
      */
     public void setNotation(Notation notation) {
@@ -35,6 +37,7 @@ public class Printer extends Visitor {
 
     /**
      * Use the visitor design pattern to visit a number.
+     *
      * @param n The number being visited
      */
     @Override
@@ -197,6 +200,7 @@ public class Printer extends Visitor {
     }
     /**
      * Notation getter
+     *
      * @return The notation used
      */
     public Notation getNotation() {
@@ -205,6 +209,7 @@ public class Printer extends Visitor {
 
     /**
      * Computed value getter
+     *
      * @return The computed value
      */
     public String getComputedValue() {
