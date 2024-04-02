@@ -1,6 +1,9 @@
-package calculator;
+package visitor;
 
 
+import calculator.Calculator;
+import calculator.Expression;
+import calculator.Notation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

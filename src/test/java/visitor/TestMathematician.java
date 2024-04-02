@@ -1,5 +1,6 @@
-package calculator;
+package visitor;
 
+import calculator.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class TestLogician {
+class TestMathematician {
 
     private Calculator calc;
     private int value1, value2, value3, value4;
@@ -29,25 +30,26 @@ class TestLogician {
      */
     @ParameterizedTest
     @ValueSource(strings = {"*", "+", "/", "-"})
-    void testOperationsCount(String symbol) {
+    void testNumbersCount(String symbol) {
         List<Expression> params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
         try {
             switch (symbol) {
                 case "+" -> {
                     params = Arrays.asList(new Plus(params), new MyNumber(value3));
-                    assertEquals(2, calc.operationsCount(new Plus(params)));
+                    assertEquals(3, calc.numbersCount(new Plus(params)));
                 }
                 case "-" -> {
                     params = Arrays.asList(new Minus(params), new MyNumber(value3));
-                    assertEquals(2, calc.operationsCount(new Minus(params)));
+                    assertEquals(3, calc.numbersCount(new Minus(params)));
                 }
                 case "*" -> {
                     params = Arrays.asList(new Times(params), new MyNumber(value3));
-                    assertEquals(2, calc.operationsCount(new Times(params)));
+                    Expression e = new Times(params);
+                    assertEquals(3, calc.numbersCount(new Times(params)));
                 }
                 case "/" -> {
                     params = Arrays.asList(new Divides(params), new MyNumber(value3));
-                    assertEquals(2, calc.operationsCount(new Divides(params)));
+                    assertEquals(3, calc.numbersCount(new Divides(params)));
                 }
                 default -> fail();
             }

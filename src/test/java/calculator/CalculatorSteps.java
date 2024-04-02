@@ -25,10 +25,14 @@ public class CalculatorSteps {
         op = null;
     }
 
+// ############################### Givens ###############################
+
     @Given("I initialise a calculator")
     public void givenIInitialiseACalculator() {
         c = new Calculator();
     }
+
+    // ############################### Simple operations ###############################
 
     @Given("an integer operation {string}")
     public void givenAnIntegerOperation(String s) {
@@ -47,19 +51,6 @@ public class CalculatorSteps {
         }
     }
 
-    // The following example shows how to use a DataTable provided as input.
-    // The example looks slightly complex, since DataTables can take as input
-    //  tables in two dimensions, i.e. rows and lines. This is why the input
-    //  is a list of lists.
-    @Given("the following list of integer numbers")
-    public void givenTheFollowingListOfNumbers(List<List<String>> numbers) {
-        params = new ArrayList<>();
-        // Since we only use one line of input, we use get(0) to take the first line of the list,
-        // which is a list of strings, that we will manually convert to integers:
-        numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
-        op = null;
-    }
-
     // The string in the Given annotation shows how to use regular expressions...
     // In this example, the notation d+ is used to represent numbers, i.e. nonempty sequences of digits
     @Given("^the sum of two numbers (\\d+) and (\\d+)$")
@@ -76,53 +67,21 @@ public class CalculatorSteps {
         }
     }
 
-    @Then("^its (.*) notation is (.*)$")
-    public void thenItsNotationIs(String notation, String s) {
-        if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
-            c = new Calculator();
-            assertEquals(s, c.format(op, Notation.valueOf(notation)));
-        } else fail(notation + " is not a correct notation! ");
-    }
+    // ############################### Nested operations ###############################
 
-    @Then("^its (.*) parsing is (.*)$")
-    public void additionParsing(String notation, String s){
-        if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
-            c = new Calculator();
-            assertEquals(s, c.format(c.read(s), Notation.valueOf(notation)));
-        } else fail(notation + " is not a correct notation! ");
-    }
-
-    @When("^I provide a (.*) number (\\d+)$")
-    public void whenIProvideANumber(String s, int val) {
-        //add extra parameter to the operation
+    // The following example shows how to use a DataTable provided as input.
+    // The example looks slightly complex, since DataTables can take as input
+    //  tables in two dimensions, i.e. rows and lines. This is why the input
+    //  is a list of lists.
+    @Given("the following list of integer numbers")
+    public void givenTheFollowingListOfNumbers(List<List<String>> numbers) {
         params = new ArrayList<>();
-        params.add(new MyNumber(val));
-        op.addMoreParams(params);
+        // Since we only use one line of input, we use get(0) to take the first line of the list,
+        // which is a list of strings, that we will manually convert to integers:
+        numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+        op = null;
     }
 
-    @Then("^the (.*) is (\\d+)$")
-    public void thenTheOperationIs(String s, int val) {
-        try {
-            switch (s) {
-                case "sum" -> op = new Plus(params);
-                case "product" -> op = new Times(params);
-                case "quotient" -> op = new Divides(params);
-                case "difference" -> op = new Minus(params);
-                default -> fail();
-            }
-            assertEquals(new MyNumber(val), c.eval(op));
-        } catch (IllegalConstruction e) {
-            fail();
-        }
-    }
-
-    @Then("the operation evaluates to {int}")
-    public void thenTheOperationEvaluatesTo(int val) {
-        assertEquals(new MyNumber(val), c.eval(op));
-    }
-
-
-  
     // The list of numbers is intended to be used as a list of parameters for the operation
     // The goal is to test if a nested operation is correctly represented in a given notation
     @Given("the sum of the following list of numbers")
@@ -169,6 +128,31 @@ public class CalculatorSteps {
         }
     }
 
+// ############################### Then ###############################
+
+    // ########################### Evaluation of the operation ###############################
+
+    @Then("^the (.*) is (\\d+)$")
+    public void thenTheOperationIs(String s, int val) {
+        try {
+            switch (s) {
+                case "sum" -> op = new Plus(params);
+                case "product" -> op = new Times(params);
+                case "quotient" -> op = new Divides(params);
+                case "difference" -> op = new Minus(params);
+                default -> fail();
+            }
+            assertEquals(new MyNumber(val), c.eval(op));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Then("the operation evaluates to {int}")
+    public void thenTheOperationEvaluatesTo(int val) {
+        assertEquals(new MyNumber(val), c.eval(op));
+    }
+
     @Then("the operation evaluates to {string}")
     public void thenTheOperationEvaluatesTo(String val) {
         assertEquals(val, c.eval(op).toString());
@@ -190,5 +174,36 @@ public class CalculatorSteps {
         } catch (IllegalConstruction e) {
             fail();
         }
+    }
+
+    // ########################### Printing of the operation ###############################
+
+    @Then("^its (.*) notation is (.*)$")
+    public void thenItsNotationIs(String notation, String s) {
+        if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
+            c = new Calculator();
+            assertEquals(s, c.format(op, Notation.valueOf(notation)));
+        } else fail(notation + " is not a correct notation! ");
+    }
+
+    // ########################### Parsing of the operation ###############################
+
+    @Then("^its (.*) parsing is (.*)$")
+    public void additionParsing(String notation, String s){
+        if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
+            c = new Calculator();
+            assertEquals(s, c.format(c.read(s), Notation.valueOf(notation)));
+        } else fail(notation + " is not a correct notation! ");
+    }
+
+
+// ############################### When ###############################
+
+    @When("^I provide a (.*) number (\\d+)$")
+    public void whenIProvideANumber(String s, int val) {
+        //add extra parameter to the operation
+        params = new ArrayList<>();
+        params.add(new MyNumber(val));
+        op.addMoreParams(params);
     }
 }
