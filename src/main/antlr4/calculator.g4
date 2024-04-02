@@ -2,7 +2,7 @@ grammar calculator;
 
 // Add "package parser;" to the generated files.
 @header {
-package parser;
+package back.parser;
 }
 
 prog: expression;

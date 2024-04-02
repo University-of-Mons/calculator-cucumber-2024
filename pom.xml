@@ -182,8 +182,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>calculator/Main.class</exclude>
-                        <exclude>parser/*</exclude>
+                        <exclude>back/calculator/Main.class</exclude>
+                        <exclude>back/parser/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

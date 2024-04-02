@@ -1,6 +1,6 @@
 // Generated from calculator.g4 by ANTLR 4.7.1
 
-package parser;
+package back.parser;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
