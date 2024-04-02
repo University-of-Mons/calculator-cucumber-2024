@@ -1,6 +1,6 @@
 package front.controllers;
 
-import back.calculator.Main;
+import back.calculator.App;
 import back.calculator.Plus;
 import back.calculator.MyNumber;
 
@@ -33,7 +33,7 @@ public class MainSceneController {
     private void equalsButtonClicked(MouseEvent event) {
         try {
             // TODO : parse input and pass it to the Main.eval method
-            MyNumber result = Main.eval(new Plus(Arrays.asList(new MyNumber(1), new MyNumber(2))));
+            MyNumber result = App.eval(new Plus(Arrays.asList(new MyNumber(1), new MyNumber(2))));
         } catch (IllegalConstruction e) {
             outputField.setText("Invalid operation.");
             e.printStackTrace();
@@ -42,13 +42,13 @@ public class MainSceneController {
 
     private void clearButtonClicked(MouseEvent event) {
         outputField.setText("");
-        Main.userInput = "";
+        App.userInput = "";
     }
 
     private void regularButtonClicked(MouseEvent event) {
         Button button = (Button) event.getSource();
         String buttonText = button.getText();
-        Main.userInput += buttonText;
-        outputField.setText(Main.userInput);
+        App.userInput += buttonText;
+        outputField.setText(App.userInput);
     }
 }

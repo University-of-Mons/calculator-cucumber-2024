@@ -1,6 +1,6 @@
 package front.scenes;
 
-import back.calculator.Main;
+import back.calculator.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +22,7 @@ public class SceneLoader {
      */
     public static Scene load(String sceneName) {
         if (!sceneName.endsWith(".fxml")) sceneName += ".fxml";
-        URL url = Main.class.getResource("/xml/scenes/" + sceneName);
+        URL url = App.class.getResource("/xml/scenes/" + sceneName);
         FXMLLoader FXMLLoader = new FXMLLoader(url);
         try {
             Parent sceneParent = FXMLLoader.load();
