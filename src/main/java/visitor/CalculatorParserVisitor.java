@@ -11,6 +11,13 @@ import java.util.List;
 
 import static parser.calculatorLexer.*;
 
+/**
+ * Visitor class that extends the calculatorBaseVisitor class to visit the nodes of the parse tree.
+ *
+ * <p>
+ *     It is used to visit each type of node in the parse tree and create the corresponding Expression object.
+ * </p>
+ */
 public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
     private Expression getExpression(List<Expression> params, Token op, Notation notation) {

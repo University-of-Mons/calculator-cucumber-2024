@@ -8,14 +8,37 @@ import parser.calculatorLexer;
 import parser.calculatorParser;
 import visitor.CalculatorParserVisitor;
 
+/**
+ * Main class for the parser of the calculator. It uses the ANTLR4 library to parse the input. <br>
+ * The parser is generated from the grammar defined in the calculator.g4 file.
+ *
+ * <p>
+ *     The grammar handles prefix, infix and postfix notations. {@see parser.calculator.g4}
+ * </p>
+ *
+ * <p>
+ *     Example of expressions:
+ *     <pre>{@code
+ *         infix op infix
+ *         op '(' prefix ',' prefix ')'
+ *         '(' postfix ',' postfix ')' op
+ *     }</pre>
+ * </p>
+ */
 public class ExpressionParser {
 
 
     /**
      * Parse a String and return the corresponding expression.
      *
+     * <p>
+     *     If there is a syntax error in the input, an IllegalConstruction exception is thrown
+     *     and the error message is logged.
+     * </p>
+     *
      * @param expression String to parse
      * @return The corresponding expression object representing the input
+     * @throws IllegalConstruction If there is a syntax error in the input
      */
     public Expression parse(String expression) throws IllegalConstruction {
         CharStream input = CharStreams.fromString(expression);
