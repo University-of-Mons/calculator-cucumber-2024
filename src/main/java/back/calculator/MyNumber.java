@@ -1,6 +1,6 @@
-package calculator;
+package back.calculator;
 
-import visitor.Visitor;
+import back.visitor.Visitor;
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
@@ -36,6 +36,7 @@ public class MyNumber implements Expression {
      *
      * @param v The visitor object
      */
+    @Override
     public void accept(Visitor v) {
         v.visit(this);
     }

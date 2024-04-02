@@ -1,4 +1,4 @@
-package calculator;
+package back.calculator;
 
 import java.util.List;
 
@@ -47,6 +47,7 @@ public final class Times extends Operation {
      * @param r The second integer that should be multiplied with the first
      * @return The integer that is the result of the multiplication
      */
+    @Override
     public MyNumber op(MyNumber l, MyNumber r) {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();

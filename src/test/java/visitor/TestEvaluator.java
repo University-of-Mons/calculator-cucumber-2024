@@ -2,8 +2,7 @@ package visitor;
 
 //Import Junit5 libraries for unit testing:
 
-import calculator.*;
-import org.junit.jupiter.api.Assertions;
+import back.calculator.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,7 +28,7 @@ class TestEvaluator {
 
     @Test
     void testEvaluatorMyNumber() {
-        Assertions.assertEquals(new MyNumber(value1), calc.eval(new MyNumber(value1)));
+        assertEquals(new MyNumber(value1), calc.eval(new MyNumber(value1)));
     }
 
     @ParameterizedTest

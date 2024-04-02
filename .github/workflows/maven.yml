@@ -13,6 +13,14 @@ jobs:
     name: build & test
     runs-on: ubuntu-latest
 
+    services:
+      xvfb:
+        image: selenium/standalone-chrome:latest
+        options: -e VNC_SERVER=true -e VNC_PORT=5900
+
+    env:
+      DISPLAY: ":99.0"
+
     steps:
       - id: checkout
         name: checkout repository
@@ -25,6 +33,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Start Xvfb
+        run: Xvfb $DISPLAY -ac -screen 0 1600x1200x24 > /dev/null 2>&1 &
+
       - name: Build with Maven (+ running tests)
         run: mvn -B package --file pom.xml
 
@@ -33,9 +44,10 @@ jobs:
         uses: scacap/action-surefire-report@a2911bd1a4412ec18dde2d93b1758b3e56d2a880 # v1.8.0
 
       - name: jacoco-badge-generator
-        uses: cicirello/jacoco-badge-generator@v2.11.0
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v2
         with:
-          generate-branch-coverage: true
+          generate-branches-badge: true
           generate-summary: true
 
       - name: Log coverage percentage
@@ -63,7 +75,12 @@ jobs:
           message: |
             ## Code Coverage Report :bar_chart:
             - **Coverage**: ${{ steps.jacoco.outputs.coverage }}%
-            - **Branch Coverage**: ${{ steps.jacoco.outputs.branches }}%
+            - **Branches**: ${{ steps.jacoco.outputs.branches }}%
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: Nephty/calculator-cucumber-2024
 

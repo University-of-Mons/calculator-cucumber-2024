@@ -1,4 +1,4 @@
-package calculator;
+package back.calculator;
 
 import java.util.List;
 
@@ -48,8 +48,9 @@ public final class Divides extends Operation {
      * @param r The second integer that should divide the first
      * @return The integer that is the result of the division
      */
+    @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if (r.getValue() ==0 || l instanceof NotANumber || r instanceof NotANumber)
+        if (r.getValue() == 0 || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         return new MyNumber(l.getValue() / r.getValue());
     }
