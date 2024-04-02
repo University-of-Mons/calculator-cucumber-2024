@@ -95,5 +95,10 @@ class TestCalculatorParserVisitor {
         assertEquals(expression, calc.format(e, Notation.POSTFIX));
     }
 
+    @Test
+    void testWithSyntaxErrorShouldReturnNotANumber() {
+        Expression e = calc.read("3 + 4 * ");
+        assertEquals("NaN", calc.eval(e).toString());
+    }
 
 }

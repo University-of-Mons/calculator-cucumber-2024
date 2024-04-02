@@ -20,9 +20,10 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
                 case DIV -> new Divides(params, notation);
                 case ADD -> new Plus(params, notation);
                 case SUB -> new Minus(params, notation);
-                default -> throw new IllegalStateException("Unexpected value: " + op.getType());
+                default -> throw new IllegalConstruction();
             };
         } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
             return new NotANumber();
         }
     }

@@ -67,7 +67,11 @@ public class Calculator {
     }
 
     public Expression read(String s) {
-        return parser.parse(s);
+        try {
+            return parser.parse(s);
+        } catch (IllegalConstruction illegalConstruction) {
+            return new NotANumber();
+        }
     }
 
     /*

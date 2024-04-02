@@ -24,7 +24,6 @@ public class Main {
 
         Expression e;
         Calculator c = new Calculator();
-
         try {
             e = new MyNumber(8);
             c.print(e);
