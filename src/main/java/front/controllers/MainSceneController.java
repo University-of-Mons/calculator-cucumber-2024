@@ -1,8 +1,6 @@
 package front.controllers;
 
-import back.calculator.App;
-import back.calculator.Plus;
-import back.calculator.MyNumber;
+import back.calculator.*;
 
 import java.util.Arrays;
 
@@ -10,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import back.calculator.IllegalConstruction;
 import javafx.scene.input.MouseEvent;
 
 public class MainSceneController {
@@ -31,13 +28,9 @@ public class MainSceneController {
     }
 
     private void equalsButtonClicked(MouseEvent event) {
-        try {
-            // TODO : parse input and pass it to the Main.eval method
-            MyNumber result = App.eval(new Plus(Arrays.asList(new MyNumber(1), new MyNumber(2))));
-        } catch (IllegalConstruction e) {
-            outputField.setText("Invalid operation.");
-            e.printStackTrace();
-        }
+        Expression result = App.evalUserInput();
+        outputField.setText(result.toString());
+        App.userInput = "";
     }
 
     private void clearButtonClicked(MouseEvent event) {

@@ -40,4 +40,8 @@ public class App extends Application {
     public static MyNumber eval(Expression expression) {
         return calculator.eval(expression);
     }
+
+    public static Expression evalUserInput() {
+        return calculator.eval(calculator.read(App.userInput));
+    }
 }
