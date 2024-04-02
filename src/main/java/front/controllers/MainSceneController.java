@@ -34,8 +34,7 @@ public class MainSceneController {
     }
 
     private void clearButtonClicked(MouseEvent event) {
-        outputField.setText("");
-        App.userInput = "";
+        clearOutputField();
     }
 
     private void regularButtonClicked(MouseEvent event) {
@@ -43,5 +42,10 @@ public class MainSceneController {
         String buttonText = button.getText();
         App.userInput += buttonText;
         outputField.setText(App.userInput);
+    }
+
+    private void clearOutputField() {
+        outputField.setText("");
+        App.userInput = "";
     }
 }
