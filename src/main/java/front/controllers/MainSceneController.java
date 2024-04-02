@@ -42,6 +42,7 @@ public class MainSceneController {
 
     private void clearButtonClicked(MouseEvent event) {
         outputField.setText("");
+        Main.userInput = "";
     }
 
     private void regularButtonClicked(MouseEvent event) {
