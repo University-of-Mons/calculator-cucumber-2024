@@ -170,3 +170,11 @@ Feature: Integer Arithmetic Expressions
     Then its PREFIX parsing is / (8, / (6, 2))
     And its INFIX parsing is ( 8 / ( 6 / 2 ) )
     And its POSTFIX parsing is (8, (6, 2) /) /
+
+  Scenario: Parsing an expression with respect to the order of operations
+    Given the following expression "8 + 6 * 2"
+    Then its parsing is "( 8 + ( 6 * 2 ) )"
+
+  Scenario: Parsing an expression with syntax errors
+    Given the following expression "8 + 6 * 2 +"
+    Then its parsing is "NaN"

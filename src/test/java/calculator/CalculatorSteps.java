@@ -128,6 +128,15 @@ public class CalculatorSteps {
         }
     }
 
+    // ############################### Given an expression ###############################
+
+    @Given("the following expression {string}")
+    public void givenTheExpression(String s) {
+        c = new Calculator();
+        params = new ArrayList<>();
+        params.add(c.read(s));
+    }
+
 // ############################### Then ###############################
 
     // ########################### Evaluation of the operation ###############################
@@ -196,6 +205,11 @@ public class CalculatorSteps {
         } else fail(notation + " is not a correct notation! ");
     }
 
+    @Then("its parsing is {string}")
+    public void thenItsParsingIs(String s) {
+        assertEquals(s, params.get(0).toString());
+    }
+
 
 // ############################### When ###############################
 
@@ -206,4 +220,5 @@ public class CalculatorSteps {
         params.add(new MyNumber(val));
         op.addMoreParams(params);
     }
+
 }
