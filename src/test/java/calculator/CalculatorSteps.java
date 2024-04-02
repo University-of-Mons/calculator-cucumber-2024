@@ -84,6 +84,14 @@ public class CalculatorSteps {
         } else fail(notation + " is not a correct notation! ");
     }
 
+    @Then("^its (.*) parsing is (.*)$")
+    public void additionParsing(String notation, String s){
+        if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
+            c = new Calculator();
+            assertEquals(s, c.format(c.read(s), Notation.valueOf(notation)));
+        } else fail(notation + " is not a correct notation! ");
+    }
+
     @When("^I provide a (.*) number (\\d+)$")
     public void whenIProvideANumber(String s, int val) {
         //add extra parameter to the operation
@@ -112,6 +120,8 @@ public class CalculatorSteps {
     public void thenTheOperationEvaluatesTo(int val) {
         assertEquals(new MyNumber(val), c.eval(op));
     }
+
+
   
     // The list of numbers is intended to be used as a list of parameters for the operation
     // The goal is to test if a nested operation is correctly represented in a given notation
@@ -121,6 +131,39 @@ public class CalculatorSteps {
         numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
         try {
             op = new Plus(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Given("the difference of the following list of numbers")
+    public void theDifferenceOfTheFollowingListOfNumbers(List<List<String>> numbers) {
+        params = new ArrayList<>();
+        numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+        try {
+            op = new Minus(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Given("the product of the following list of numbers")
+    public void theProductOfTheFollowingListOfNumbers(List<List<String>> numbers) {
+        params = new ArrayList<>();
+        numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+        try {
+            op = new Times(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Given("the quotient of the following list of numbers")
+    public void theQuotientOfTheFollowingListOfNumbers(List<List<String>> numbers) {
+        params = new ArrayList<>();
+        numbers.get(0).forEach(n -> params.add(new MyNumber(Integer.parseInt(n))));
+        try {
+            op = new Divides(params);
         } catch (IllegalConstruction e) {
             fail();
         }

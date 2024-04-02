@@ -79,6 +79,35 @@ Feature: Integer Arithmetic Expressions
     And the difference is 4
     And the quotient is 2
 
+  Scenario: Parsing the nested sum of three integers numbers
+    Given the sum of the following list of numbers
+      | 8 | 6 | 2 |
+    Then its PREFIX parsing is + (8, + (6, 2))
+    And its INFIX parsing is ( 8 + ( 6 + 2 ) )
+    And its POSTFIX parsing is (8, (6, 2) +) +
+
+  Scenario: Parsing the nested difference of three integers numbers
+    Given the difference of the following list of numbers
+      | 8 | 6 | 2 |
+    Then its PREFIX parsing is - (8, - (6, 2))
+    And its INFIX parsing is ( 8 - ( 6 - 2 ) )
+    And its POSTFIX parsing is (8, (6, 2) -) -
+
+  Scenario: Parsing the nested product of three integers numbers
+    Given the product of the following list of numbers
+      | 8 | 6 | 2 |
+    Then its PREFIX parsing is * (8, * (6, 2))
+    And its INFIX parsing is ( 8 * ( 6 * 2 ) )
+    And its POSTFIX parsing is (8, (6, 2) *) *
+
+  Scenario: Parsing the nested quotient of three integers numbers
+    Given the quotient of the following list of numbers
+      | 8 | 6 | 2 |
+    Then its PREFIX parsing is / (8, / (6, 2))
+    And its INFIX parsing is ( 8 / ( 6 / 2 ) )
+    And its POSTFIX parsing is (8, (6, 2) /) /
+
+
   # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
   # The scenario will be executed with each of the provided inputs.
