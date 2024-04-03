@@ -101,4 +101,13 @@ public class GUITest extends ApplicationTest {
         clickOn("#squared");
         Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("%+-*/()^π√x²");
     }
+
+    @Test
+    public void checkEqualsButton(FxRobot robot) {
+        clickOn("#one");
+        clickOn("#add");
+        clickOn("#four");
+        clickOn("#equals");
+        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("5");
+    }
 }
