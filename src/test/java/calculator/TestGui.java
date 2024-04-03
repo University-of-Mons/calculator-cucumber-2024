@@ -9,10 +9,10 @@ import org.testfx.framework.junit5.Start;
 
 @ExtendWith(ApplicationExtension.class)
 public class TestGui {
-    private final GuiMain guiMain = new GuiMain();
+    private final AppStarter guiStarter = new AppStarter();
     @Start
     private void start(Stage stage) {
-        guiMain.start(stage);
+        guiStarter.start(stage);
     }
 
     @Test

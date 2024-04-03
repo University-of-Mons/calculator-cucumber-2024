@@ -10,10 +10,9 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GuiMain extends Application {
+public class AppStarter extends Application {
 
-    private static final Logger logger = LoggerFactory.getLogger(GuiMain.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     @Override
     public void start(Stage stage) {
         try {
