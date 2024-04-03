@@ -28,6 +28,7 @@ public class MainSceneController {
     }
 
     private void equalsButtonClicked(MouseEvent event) {
+        App.userInput = outputField.getText();
         Expression result = App.evalUserInput();
         outputField.setText(result.toString());
         App.userInput = "";
