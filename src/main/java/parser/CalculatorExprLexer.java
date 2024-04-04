@@ -1,22 +1,19 @@
-// Generated from /home/administrateur/Documents/cours/Mas1/Q2/Software evolution/calculator-cucumber-2024/src/main/antlr4/calculator/ParserCalculator.g4 by ANTLR 4.13.1
+package parser;// Generated from D:/Ecole/Soft-evol/calculator-cucumber-2024/src/main/antlr4/calculator/CalculatorExpr.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
-public class ParserCalculatorLexer extends Lexer {
+public class CalculatorExprLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, NUMBER=8, WS=9;
+		T__0=1, T__1=2, T__2=3, MUL=4, DIV=5, ADD=6, SUB=7, NUMBER=8, WS=9;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -27,20 +24,20 @@ public class ParserCalculatorLexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "NUMBER", "WS"
+			"T__0", "T__1", "T__2", "MUL", "DIV", "ADD", "SUB", "NUMBER", "WS"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'*'", "'/'", "'+'", "'-'", "'('", "')'", "','"
+			null, "'('", "')'", "','", "'*'", "'/'", "'+'", "'-'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, "NUMBER", "WS"
+			null, null, null, null, "MUL", "DIV", "ADD", "SUB", "NUMBER", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -78,13 +75,13 @@ public class ParserCalculatorLexer extends Lexer {
 	}
 
 
-	public ParserCalculatorLexer(CharStream input) {
+	public CalculatorExprLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "ParserCalculator.g4"; }
+	public String getGrammarFileName() { return "CalculatorExpr.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -120,12 +117,12 @@ public class ParserCalculatorLexer extends Lexer {
 		"\u0000\u0000\u0000\u0007\u0019\u0001\u0000\u0000\u0000\t\u001b\u0001\u0000"+
 		"\u0000\u0000\u000b\u001d\u0001\u0000\u0000\u0000\r\u001f\u0001\u0000\u0000"+
 		"\u0000\u000f\"\u0001\u0000\u0000\u0000\u0011\'\u0001\u0000\u0000\u0000"+
-		"\u0013\u0014\u0005*\u0000\u0000\u0014\u0002\u0001\u0000\u0000\u0000\u0015"+
-		"\u0016\u0005/\u0000\u0000\u0016\u0004\u0001\u0000\u0000\u0000\u0017\u0018"+
-		"\u0005+\u0000\u0000\u0018\u0006\u0001\u0000\u0000\u0000\u0019\u001a\u0005"+
-		"-\u0000\u0000\u001a\b\u0001\u0000\u0000\u0000\u001b\u001c\u0005(\u0000"+
-		"\u0000\u001c\n\u0001\u0000\u0000\u0000\u001d\u001e\u0005)\u0000\u0000"+
-		"\u001e\f\u0001\u0000\u0000\u0000\u001f \u0005,\u0000\u0000 \u000e\u0001"+
+		"\u0013\u0014\u0005(\u0000\u0000\u0014\u0002\u0001\u0000\u0000\u0000\u0015"+
+		"\u0016\u0005)\u0000\u0000\u0016\u0004\u0001\u0000\u0000\u0000\u0017\u0018"+
+		"\u0005,\u0000\u0000\u0018\u0006\u0001\u0000\u0000\u0000\u0019\u001a\u0005"+
+		"*\u0000\u0000\u001a\b\u0001\u0000\u0000\u0000\u001b\u001c\u0005/\u0000"+
+		"\u0000\u001c\n\u0001\u0000\u0000\u0000\u001d\u001e\u0005+\u0000\u0000"+
+		"\u001e\f\u0001\u0000\u0000\u0000\u001f \u0005-\u0000\u0000 \u000e\u0001"+
 		"\u0000\u0000\u0000!#\u0007\u0000\u0000\u0000\"!\u0001\u0000\u0000\u0000"+
 		"#$\u0001\u0000\u0000\u0000$\"\u0001\u0000\u0000\u0000$%\u0001\u0000\u0000"+
 		"\u0000%\u0010\u0001\u0000\u0000\u0000&(\u0007\u0001\u0000\u0000\'&\u0001"+

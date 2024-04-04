@@ -2,7 +2,7 @@ package calculator;
 
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
-import gen.*;
+import parser.*;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -11,7 +11,6 @@ import visitor.ParserVisitor;
 
 class Parser {
 
-    private final ParserCalculatorParser ourParser;
     public final Calculator c;
     private final ParseTree tree;
 
@@ -22,10 +21,10 @@ class Parser {
     public Parser(String expression, Calculator c){
         this.c = c;
         CharStream input = CharStreams.fromString(expression);
-        ParserCalculatorLexer lexer = new ParserCalculatorLexer(input);
+        CalculatorExprLexer lexer = new CalculatorExprLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        ourParser = new ParserCalculatorParser(tokens);
-        tree = ourParser.prog();
+        CalculatorExprParser parser = new CalculatorExprParser(tokens);
+        tree = parser.prog();
     }
 
     /**
