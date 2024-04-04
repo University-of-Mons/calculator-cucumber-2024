@@ -32,7 +32,7 @@ public class App extends Application {
 
         Scenes.MainScene = SceneLoader.load("MainScene.fxml");
         stage.setResizable(false);
-        stage.setTitle("Please use gradle instead of maven");
+        stage.setTitle("Amazing Calculator");
         stage.setScene(Scenes.MainScene);
         stage.show();
     }
