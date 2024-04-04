@@ -1,20 +1,20 @@
 package front.controllers;
 
-import back.calculator.*;
-
-import java.net.URL;
-import java.util.Arrays;
-import java.util.ResourceBundle;
-
+import back.calculator.App;
+import back.calculator.Expression;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
-public class MainSceneController implements Initializable{
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
+public class MainSceneController implements Initializable {
     @FXML
     Button clear, eight, nine, divide, closeParen, openParen, seven, x, multiply, six, five, four, minus, three, two, one, equals, add, percent, dot, zero;
 
@@ -24,10 +24,15 @@ public class MainSceneController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set the focus always on the textField
-        Platform.runLater( () -> outputField.requestFocus() );
+        Platform.runLater(() -> outputField.requestFocus());
         outputField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 outputField.requestFocus();
+            }
+        });
+        outputField.setOnKeyPressed(event -> {
+            if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
+                equalsButtonClicked(null);
             }
         });
     }
@@ -63,7 +68,7 @@ public class MainSceneController implements Initializable{
         outputField.insertText(cursorPosition, buttonText);
         App.userInput = outputField.getText();
         // Move the cursor to the right of the new character
-        outputField.positionCaret(cursorPosition +1);
+        outputField.positionCaret(cursorPosition + 1);
     }
 
     private void clearOutputField() {
