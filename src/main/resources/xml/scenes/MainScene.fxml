@@ -26,10 +26,10 @@
                   <RowConstraints />
                     </rowConstraints>
                     <children>
-                  <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0" prefWidth="160.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" stylesheets="@style.css" text="Mode" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="2">
+                  <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0" prefWidth="160.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Mode" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="2">
                     <items>
-                      <MenuItem mnemonicParsing="false" style="-fx-background-color: grey;" text="Basic" />
-                      <MenuItem mnemonicParsing="false" text="Avanced" />
+                      <MenuItem mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="Basic" />
+                      <MenuItem mnemonicParsing="false" style="-fx-text-fill: white;" text="Avanced" />
                     </items>
                      <font>
                         <Font size="20.0" />
