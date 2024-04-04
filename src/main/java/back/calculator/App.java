@@ -32,12 +32,16 @@ public class App extends Application {
 
         Scenes.MainScene = SceneLoader.load("MainScene.fxml");
         stage.setResizable(false);
-        stage.setTitle("Please use gradle instead of maven");
+        stage.setTitle("Amazing Calculator");
         stage.setScene(Scenes.MainScene);
         stage.show();
     }
 
     public static MyNumber eval(Expression expression) {
         return calculator.eval(expression);
+    }
+
+    public static Expression evalUserInput() {
+        return calculator.eval(calculator.read(App.userInput));
     }
 }

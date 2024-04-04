@@ -1,24 +1,41 @@
 package front.controllers;
 
 import back.calculator.App;
-import back.calculator.Plus;
-import back.calculator.MyNumber;
-
-import java.util.Arrays;
-
+import back.calculator.Expression;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
-import back.calculator.IllegalConstruction;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
-public class MainSceneController {
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
+public class MainSceneController implements Initializable {
     @FXML
-    Button clear, eight, nine, divide, sqrt, pi, exp, closeParen, openParen, seven, x, multiply, six, five, four, minus, three, two, one, equals, add, percent, dot, zero;
+    Button clear, eight, nine, divide, closeParen, openParen, seven, x, multiply, six, five, four, minus, three, two, one, equals, add, percent, dot, zero;
 
     @FXML
     TextField outputField;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Set the focus always on the textField
+        Platform.runLater(() -> outputField.requestFocus());
+        outputField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                outputField.requestFocus();
+            }
+        });
+        outputField.setOnKeyPressed(event -> {
+            if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
+                equalsButtonClicked(null);
+            }
+        });
+    }
 
     @FXML
     // This method is called when the user clicks on a character button (Not C and =)
@@ -31,24 +48,31 @@ public class MainSceneController {
     }
 
     private void equalsButtonClicked(MouseEvent event) {
-        try {
-            // TODO : parse input and pass it to the Main.eval method
-            MyNumber result = App.eval(new Plus(Arrays.asList(new MyNumber(1), new MyNumber(2))));
-        } catch (IllegalConstruction e) {
-            outputField.setText("Invalid operation.");
-            e.printStackTrace();
-        }
+        App.userInput = outputField.getText();
+        Expression result = App.evalUserInput();
+        outputField.setText(result.toString());
+        // Set the cursor at the end of the text
+        outputField.positionCaret(outputField.getText().length());
+        App.userInput = "";
     }
 
     private void clearButtonClicked(MouseEvent event) {
-        outputField.setText("");
-        App.userInput = "";
+        clearOutputField();
     }
 
     private void regularButtonClicked(MouseEvent event) {
         Button button = (Button) event.getSource();
         String buttonText = button.getText();
-        App.userInput += buttonText;
-        outputField.setText(App.userInput);
+
+        int cursorPosition = outputField.getCaretPosition();
+        outputField.insertText(cursorPosition, buttonText);
+        App.userInput = outputField.getText();
+        // Move the cursor to the right of the new character
+        outputField.positionCaret(cursorPosition + 1);
+    }
+
+    private void clearOutputField() {
+        outputField.setText("");
+        App.userInput = "";
     }
 }
