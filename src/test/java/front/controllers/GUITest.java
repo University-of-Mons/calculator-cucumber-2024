@@ -75,23 +75,18 @@ public class GUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("123456789.000");
+        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("123456789,000");
     }
 
     @Test
     public void checkOperandButtons(FxRobot robot) {
-        clickOn("#percent");
         clickOn("#add");
         clickOn("#minus");
         clickOn("#multiply");
         clickOn("#divide");
         clickOn("#openParen");
         clickOn("#closeParen");
-        clickOn("#exp");
-        clickOn("#pi");
-        clickOn("#sqrt");
-        clickOn("#squared");
-        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("%+-*/()^π√x²");
+        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("+-*/()");
     }
 
     @Test

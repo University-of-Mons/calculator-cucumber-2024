@@ -16,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 
 public class MainSceneController implements Initializable{
     @FXML
-    Button clear, eight, nine, divide, sqrt, pi, exp, closeParen, openParen, seven, x, multiply, six, five, four, minus, three, two, one, equals, add, percent, dot, zero;
+    Button clear, eight, nine, divide, closeParen, openParen, seven, x, multiply, six, five, four, minus, three, two, one, equals, add, percent, dot, zero;
 
     @FXML
     TextField outputField;
