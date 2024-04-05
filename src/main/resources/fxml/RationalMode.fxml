@@ -5,37 +5,29 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.GuiMainViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.RationalModeController">
    <top>
       <VBox alignment="CENTER">
-         <MenuBar VBox.vgrow="NEVER">
+         <MenuBar>
            <menus>
              <Menu mnemonicParsing="false" text="Mode">
                <items>
-                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false" onAction="#onStandardMode" selected="true" text="Standard" />
+                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false" onAction="#onStandardMode" text="Standard" />
                   <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false" onAction="#onRationalMode" text="Rational" />
-                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" onAction="#onComplexMode" text="Complex" />
                </items>
              </Menu>
-             <Menu mnemonicParsing="false" text="View">
+             <Menu mnemonicParsing="false" text="Window">
                <items>
-                     <Menu mnemonicParsing="false" text="Zoom">
-                       <items>
-                         <MenuItem mnemonicParsing="false" text="Zoom In" />
-                           <MenuItem mnemonicParsing="false" text="Zoom out" />
-                           <SeparatorMenuItem mnemonicParsing="false" />
-                           <MenuItem mnemonicParsing="false" text="Default size" />
-                       </items>
-                     </Menu>
+                 <MenuItem mnemonicParsing="false" text="Delete" />
                </items>
              </Menu>
              <Menu mnemonicParsing="false" text="Help">
@@ -45,25 +37,25 @@
              </Menu>
            </menus>
          </MenuBar>
-         <VBox fx:id="displayContainer" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="NEVER">
-            <children>
-               <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" minWidth="480.0" prefHeight="40.0" style="-fx-text-fill: #7f7f7f;" VBox.vgrow="NEVER">
-                  <font>
-                     <Font name="Avenir Black" size="24.0" />
-                  </font>
-               </TextField>
-               <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" minWidth="480.0" prefHeight="160.0" VBox.vgrow="NEVER">
-                  <font>
-                     <Font name="Avenir Black" size="72.0" />
-                  </font>
-               </TextField>
-            </children>
-         </VBox>
+         <HBox>
+            <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" prefHeight="40.0" prefWidth="480.0" style="-fx-text-fill: #7f7f7f;" VBox.vgrow="NEVER">
+               <font>
+                  <Font name="Avenir Black" size="24.0" />
+               </font>
+            </TextField>
+         </HBox>
+         <HBox>
+            <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" prefHeight="160.0" prefWidth="480.0" VBox.vgrow="NEVER">
+               <font>
+                  <Font name="Avenir Black" size="72.0" />
+               </font>
+            </TextField>
+         </HBox>
       </VBox>
    </top>
 
    <center>
-      <GridPane fx:id="buttonGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.5" prefWidth="480.0" BorderPane.alignment="CENTER">
+      <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -112,7 +104,7 @@
                <Font name="Avenir Black" size="36.0" />
             </font>
          </Button>
-         <Button fx:id="btnDivide" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDivide" prefHeight="81.0" prefWidth="120.0" text="÷" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         <Button fx:id="btnFraction" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onFraction" prefHeight="81.0" prefWidth="120.0" text="/" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
             <font>
                <Font name="Avenir Black" size="36.0" />
             </font>
