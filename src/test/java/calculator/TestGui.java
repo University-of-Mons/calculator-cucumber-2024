@@ -13,7 +13,7 @@ public class TestGui {
     @Start
     private void start(Stage stage) {
         guiStarter.start(stage);
-    }
+    }z
 
     @Test
     void testClick(FxRobot fxRobot){

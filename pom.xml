@@ -190,7 +190,7 @@
                 </executions>
                 <configuration>
                     <visitor>true</visitor>
-                    <outputDirectory>${project.basedir}/src/main/java/parser</outputDirectory>
+                    <outputDirectory>src/main/java/parser</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

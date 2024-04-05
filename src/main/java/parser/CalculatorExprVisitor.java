@@ -1,4 +1,4 @@
-package parser;// Generated from D:/Ecole/Soft-evol/calculator-cucumber-2024/src/main/antlr4/calculator/CalculatorExpr.g4 by ANTLR 4.13.1
+package parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

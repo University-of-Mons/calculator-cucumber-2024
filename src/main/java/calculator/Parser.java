@@ -2,7 +2,8 @@ package calculator;
 
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
-import parser.*;
+import parser.CalculatorExprLexer;
+import parser.CalculatorExprParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
