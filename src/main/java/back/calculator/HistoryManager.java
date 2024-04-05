@@ -13,12 +13,6 @@ public class HistoryManager implements Observer {
     public void update(Observable o, Object arg) {
         if (arg instanceof HistoryEntry) {
             historyEntries.add((HistoryEntry) arg);
-            for (HistoryEntry e : historyEntries) {
-                // TODO: remove this print statement
-                System.out.println(e);
-            }
-            // TODO: remove this print statement
-            System.out.println();
         } else {
             // TODO : throw new error
         }
