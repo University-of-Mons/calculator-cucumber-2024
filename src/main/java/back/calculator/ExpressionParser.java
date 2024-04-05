@@ -4,8 +4,8 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import back.parser.calculatorLexer;
-import back.parser.calculatorParser;
+import back.parser.CalculatorLexer;
+import back.parser.CalculatorParser;
 import back.visitor.CalculatorParserVisitor;
 
 /**
@@ -40,9 +40,9 @@ public class ExpressionParser {
      */
     public Expression parse(String expression) throws IllegalConstruction {
         CharStream input = CharStreams.fromString(expression);
-        calculatorLexer lexer = new calculatorLexer(input);
+        CalculatorLexer lexer = new CalculatorLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        calculatorParser parser = new calculatorParser(tokens);
+        CalculatorParser parser = new CalculatorParser(tokens);
 
         parser.removeErrorListeners(); // Remove the default error listeners
         MySyntaxErrorListener errorListener = new MySyntaxErrorListener();
