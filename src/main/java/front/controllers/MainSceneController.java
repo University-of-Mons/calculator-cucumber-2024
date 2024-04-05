@@ -16,7 +16,43 @@ import java.util.ResourceBundle;
 
 public class MainSceneController implements Initializable {
     @FXML
-    Button clear, eight, nine, divide, closeParen, openParen, seven, x, multiply, six, five, four, minus, three, two, one, equals, add, percent, dot, zero;
+    Button clear;
+    @FXML
+    Button eight;
+    @FXML
+    Button nine;
+    @FXML
+    Button divide;
+    @FXML
+    Button closeParen;
+    @FXML
+    Button openParen;
+    @FXML
+    Button seven;
+    @FXML
+    Button multiply;
+    @FXML
+    Button six;
+    @FXML
+    Button five;
+    @FXML
+    Button four;
+    @FXML
+    Button minus;
+    @FXML
+    Button three;
+    @FXML
+    Button two;
+    @FXML
+    Button one;
+    @FXML
+    Button equals;
+    @FXML
+    Button add;
+    @FXML
+    Button dot;
+    @FXML
+    Button zero;
 
     @FXML
     TextField outputField;
@@ -26,13 +62,13 @@ public class MainSceneController implements Initializable {
         // Set the focus always on the textField
         Platform.runLater(() -> outputField.requestFocus());
         outputField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+            if (Boolean.FALSE.equals(newValue)) {
                 outputField.requestFocus();
             }
         });
         outputField.setOnKeyPressed(event -> {
             if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
-                equalsButtonClicked(null);
+                equalsButtonClicked();
             }
         });
     }
@@ -42,12 +78,12 @@ public class MainSceneController implements Initializable {
     public void characterButtonClicked(MouseEvent event) {
         Button source = (Button) event.getSource();
 
-        if (source.equals(equals)) equalsButtonClicked(event);
-        else if (source.equals(clear)) clearButtonClicked(event);
+        if (source.equals(equals)) equalsButtonClicked();
+        else if (source.equals(clear)) clearButtonClicked();
         else regularButtonClicked(event);
     }
 
-    private void equalsButtonClicked(MouseEvent event) {
+    private void equalsButtonClicked() {
         App.userInput = outputField.getText();
         Expression result = App.evalUserInput();
         outputField.setText(result.toString());
@@ -56,7 +92,7 @@ public class MainSceneController implements Initializable {
         App.userInput = "";
     }
 
-    private void clearButtonClicked(MouseEvent event) {
+    private void clearButtonClicked() {
         clearOutputField();
     }
 

@@ -23,7 +23,7 @@ import java.util.concurrent.TimeoutException;
 
 
 @ExtendWith(ApplicationExtension.class)
-public class GUITest extends ApplicationTest {
+class GUITest extends ApplicationTest {
     private static Stage stage;
 
     /**
@@ -35,10 +35,10 @@ public class GUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        Scenes.MainScene = SceneLoader.load("MainScene.fxml");
+        Scenes.mainScene = SceneLoader.load("MainScene.fxml");
         stage.setResizable(false);
         stage.setTitle("Please use gradle instead of maven");
-        stage.setScene(Scenes.MainScene);
+        stage.setScene(Scenes.mainScene);
         stage.show();
     }
 
@@ -48,20 +48,20 @@ public class GUITest extends ApplicationTest {
     }
 
     @After
-    public void afterTest() throws TimeoutException {
+    void afterTest() throws TimeoutException {
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
     }
 
     @BeforeEach
-    public void clear() {
+    void clear() {
         clickOn("#clear");
         Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("");
     }
 
     @Test
-    public void checkNumberButtons(FxRobot robot) {
+    void checkNumberButtons(FxRobot robot) {
         clickOn("#one");
         clickOn("#two");
         clickOn("#three");
@@ -79,7 +79,7 @@ public class GUITest extends ApplicationTest {
     }
 
     @Test
-    public void checkOperandButtons(FxRobot robot) {
+    void checkOperandButtons(FxRobot robot) {
         clickOn("#add");
         clickOn("#minus");
         clickOn("#multiply");
@@ -90,7 +90,7 @@ public class GUITest extends ApplicationTest {
     }
 
     @Test
-    public void checkEqualsButton(FxRobot robot) {
+    void checkEqualsButton(FxRobot robot) {
         clickOn("#one");
         clickOn("#add");
         clickOn("#four");

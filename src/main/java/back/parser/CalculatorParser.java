@@ -5,13 +5,11 @@ package back.parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class calculatorParser extends Parser {
+public class CalculatorParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -76,7 +74,7 @@ public class calculatorParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public calculatorParser(TokenStream input) {
+	public CalculatorParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -90,7 +88,7 @@ public class calculatorParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_prog; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitProg(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitProg(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -132,7 +130,7 @@ public class calculatorParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_expression; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitExpression(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -200,7 +198,7 @@ public class calculatorParser extends Parser {
 		public MulDivInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitMulDivInfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitMulDivInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -211,7 +209,7 @@ public class calculatorParser extends Parser {
 		public ParensInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitParensInfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitParensInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -226,16 +224,16 @@ public class calculatorParser extends Parser {
 		public AddSubInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitAddSubInfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitAddSubInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NumberInfixContext extends InfixContext {
-		public TerminalNode NUMBER() { return getToken(calculatorParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(CalculatorParser.NUMBER, 0); }
 		public NumberInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitNumberInfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitNumberInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -381,7 +379,7 @@ public class calculatorParser extends Parser {
 		public AddSubPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitAddSubPrefix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitAddSubPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -392,7 +390,7 @@ public class calculatorParser extends Parser {
 		public ParensPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitParensPrefix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitParensPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -407,16 +405,16 @@ public class calculatorParser extends Parser {
 		public MulDivPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitMulDivPrefix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitMulDivPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NumberPrefixContext extends PrefixContext {
-		public TerminalNode NUMBER() { return getToken(calculatorParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(CalculatorParser.NUMBER, 0); }
 		public NumberPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitNumberPrefix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitNumberPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -632,7 +630,7 @@ public class calculatorParser extends Parser {
 		public MulDivPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitMulDivPostfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitMulDivPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -643,7 +641,7 @@ public class calculatorParser extends Parser {
 		public ParensPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitParensPostfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitParensPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -658,16 +656,16 @@ public class calculatorParser extends Parser {
 		public AddSubPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitAddSubPostfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitAddSubPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NumberPostfixContext extends PostfixContext {
-		public TerminalNode NUMBER() { return getToken(calculatorParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(CalculatorParser.NUMBER, 0); }
 		public NumberPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitNumberPostfix(this);
+			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitNumberPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}

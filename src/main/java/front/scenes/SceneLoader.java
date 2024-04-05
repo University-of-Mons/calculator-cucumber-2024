@@ -23,9 +23,9 @@ public class SceneLoader {
     public static Scene load(String sceneName) {
         if (!sceneName.endsWith(".fxml")) sceneName += ".fxml";
         URL url = App.class.getResource("/xml/scenes/" + sceneName);
-        FXMLLoader FXMLLoader = new FXMLLoader(url);
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
         try {
-            Parent sceneParent = FXMLLoader.load();
+            Parent sceneParent = fxmlLoader.load();
             return new Scene(sceneParent, 400, 500);
         } catch (IOException e) {
             System.out.println("FATAL ERROR while trying to load scene " + url);

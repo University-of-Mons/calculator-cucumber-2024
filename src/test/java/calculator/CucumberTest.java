@@ -12,5 +12,5 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("calculator")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "calculator")
 public class CucumberTest {
-
+    // TODO : Is this normal that there is nothing here ?
 }

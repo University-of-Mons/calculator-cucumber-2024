@@ -6,5 +6,5 @@ import javafx.scene.Scene;
  * Holds every required Scene for the Application.
  **/
 public class Scenes {
-    public static Scene MainScene;
+    public static Scene mainScene;
 }

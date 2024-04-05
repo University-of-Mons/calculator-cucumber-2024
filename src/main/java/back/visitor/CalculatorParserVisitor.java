@@ -2,14 +2,14 @@ package back.visitor;
 
 import back.calculator.*;
 import org.antlr.v4.runtime.Token;
-import back.parser.calculatorBaseVisitor;
-import back.parser.calculatorParser;
+import back.parser.CalculatorBaseVisitor;
+import back.parser.CalculatorParser;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static back.parser.calculatorLexer.*;
+import static back.parser.CalculatorLexer.*;
 
 /**
  * Visitor class that extends the calculatorBaseVisitor class to visit the nodes of the parse tree.
@@ -18,7 +18,7 @@ import static back.parser.calculatorLexer.*;
  *     It is used to visit each type of node in the parse tree and create the corresponding Expression object.
  * </p>
  */
-public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
+public class CalculatorParserVisitor extends CalculatorBaseVisitor<Expression> {
 
     private Expression getExpression(List<Expression> params, Token op, Notation notation) {
         try {
@@ -35,29 +35,29 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         }
     }
 
-    private List<Expression> getInfixParams(calculatorParser.InfixContext ctx) {
+    private List<Expression> getInfixParams(CalculatorParser.InfixContext ctx) {
         List<Expression> params = new ArrayList<>();
         Collections.addAll(params, visit(ctx.getChild(0)), visit(ctx.getChild(2)));
         return params;
     }
 
-    private List<Expression> getPrefixParams(List<calculatorParser.PrefixContext> prefixContextList) {
+    private List<Expression> getPrefixParams(List<CalculatorParser.PrefixContext> prefixContextList) {
         List<Expression> params = new ArrayList<>();
-        for (calculatorParser.PrefixContext prefix : prefixContextList)
+        for (CalculatorParser.PrefixContext prefix : prefixContextList)
             params.add(visit(prefix));
         return params;
     }
 
-    private List<Expression> getPostfixParams(List<calculatorParser.PostfixContext> postfixContextList) {
+    private List<Expression> getPostfixParams(List<CalculatorParser.PostfixContext> postfixContextList) {
         List<Expression> params = new ArrayList<>();
-        for (calculatorParser.PostfixContext postfix : postfixContextList)
+        for (CalculatorParser.PostfixContext postfix : postfixContextList)
             params.add(visit(postfix));
         return params;
     }
 
 
     @Override
-    public Expression visitMulDivInfix(calculatorParser.MulDivInfixContext ctx) {
+    public Expression visitMulDivInfix(CalculatorParser.MulDivInfixContext ctx) {
         // Infix ( '*' | '/' ) Infix
         return getExpression(
                 getInfixParams(ctx),
@@ -66,7 +66,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitAddSubInfix(calculatorParser.AddSubInfixContext ctx) {
+    public Expression visitAddSubInfix(CalculatorParser.AddSubInfixContext ctx) {
         // Infix ( '+' | '-' ) Infix
         return getExpression(
                 getInfixParams(ctx),
@@ -75,19 +75,19 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitParensInfix(calculatorParser.ParensInfixContext ctx) {
+    public Expression visitParensInfix(CalculatorParser.ParensInfixContext ctx) {
         // '(' Infix ')'
         return visit(ctx.infix());
     }
 
     @Override
-    public Expression visitNumberInfix(calculatorParser.NumberInfixContext ctx) {
+    public Expression visitNumberInfix(CalculatorParser.NumberInfixContext ctx) {
         // NUMBER
         return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
     }
 
     @Override
-    public Expression visitMulDivPrefix(calculatorParser.MulDivPrefixContext ctx) {
+    public Expression visitMulDivPrefix(CalculatorParser.MulDivPrefixContext ctx) {
         // ( '*' | '/' ) Prefix Prefix
         return getExpression(
                 getPrefixParams(ctx.prefix()),
@@ -96,7 +96,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitAddSubPrefix(calculatorParser.AddSubPrefixContext ctx) {
+    public Expression visitAddSubPrefix(CalculatorParser.AddSubPrefixContext ctx) {
         // ( '+' | '-' ) Prefix Prefix
         return getExpression(
                 getPrefixParams(ctx.prefix()),
@@ -105,19 +105,19 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitParensPrefix(calculatorParser.ParensPrefixContext ctx) {
+    public Expression visitParensPrefix(CalculatorParser.ParensPrefixContext ctx) {
         // '(' Prefix ')'
         return visit(ctx.prefix());
     }
 
     @Override
-    public Expression visitNumberPrefix(calculatorParser.NumberPrefixContext ctx) {
+    public Expression visitNumberPrefix(CalculatorParser.NumberPrefixContext ctx) {
         // NUMBER
         return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
     }
 
     @Override
-    public Expression visitMulDivPostfix(calculatorParser.MulDivPostfixContext ctx) {
+    public Expression visitMulDivPostfix(CalculatorParser.MulDivPostfixContext ctx) {
         // Postfix Postfix ( '*' | '/' )
         return getExpression(
                 getPostfixParams(ctx.postfix()),
@@ -126,7 +126,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitAddSubPostfix(calculatorParser.AddSubPostfixContext ctx) {
+    public Expression visitAddSubPostfix(CalculatorParser.AddSubPostfixContext ctx) {
         // Postfix Postfix ( '+' | '-' )
         return getExpression(
                 getPostfixParams(ctx.postfix()),
@@ -135,13 +135,13 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitParensPostfix(calculatorParser.ParensPostfixContext ctx) {
+    public Expression visitParensPostfix(CalculatorParser.ParensPostfixContext ctx) {
         // Postfix '(' Postfix ')'
         return visit(ctx.postfix());
     }
 
     @Override
-    public Expression visitNumberPostfix(calculatorParser.NumberPostfixContext ctx) {
+    public Expression visitNumberPostfix(CalculatorParser.NumberPostfixContext ctx) {
         // NUMBER
         return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
     }

@@ -1,6 +1,5 @@
 package back.visitor;
 
-import back.calculator.Expression;
 import back.calculator.MyNumber;
 import back.calculator.Notation;
 import back.calculator.Operation;

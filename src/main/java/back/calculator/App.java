@@ -16,8 +16,6 @@ import front.scenes.Scenes;
  */
 public class App extends Application {
 
-    private static Stage stage;
-
     public static String userInput = "";
 
     private static Calculator calculator = new Calculator();
@@ -27,13 +25,13 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage_) {
-        stage = stage_;
+    public void start(Stage stageP) {
+        Stage stage = stageP;
 
-        Scenes.MainScene = SceneLoader.load("MainScene.fxml");
+        Scenes.mainScene = SceneLoader.load("MainScene.fxml");
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
-        stage.setScene(Scenes.MainScene);
+        stage.setScene(Scenes.mainScene);
         stage.show();
     }
 
