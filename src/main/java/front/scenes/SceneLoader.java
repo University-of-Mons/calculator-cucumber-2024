@@ -11,7 +11,12 @@ import java.net.URL;
 /**
  * Handles the loading of FXML files to create the Scenes.
  */
-public class SceneLoader {
+public final class SceneLoader {
+
+    private SceneLoader() {
+        // Private constructor to hide the implicit public one
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Takes the given scene name to find the corresponding FXML file.
@@ -23,9 +28,9 @@ public class SceneLoader {
     public static Scene load(String sceneName) {
         if (!sceneName.endsWith(".fxml")) sceneName += ".fxml";
         URL url = App.class.getResource("/xml/scenes/" + sceneName);
-        FXMLLoader FXMLLoader = new FXMLLoader(url);
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
         try {
-            Parent sceneParent = FXMLLoader.load();
+            Parent sceneParent = fxmlLoader.load();
             return new Scene(sceneParent, 400, 500);
         } catch (IOException e) {
             System.out.println("FATAL ERROR while trying to load scene " + url);

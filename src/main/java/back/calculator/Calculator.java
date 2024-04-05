@@ -1,10 +1,9 @@
 package back.calculator;
 
+import back.calculator.types.MyNumber;
+import back.calculator.types.NotANumber;
 import back.visitor.*;
 
-
-import java.util.Observer;
-import java.util.Observable;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -12,9 +11,7 @@ import java.util.Observable;
  *
  * @author tommens
  */
-public class Calculator extends Observable {
-    private final Observer historyManager = new HistoryManager();
-
+public class Calculator {
     private final ExpressionParser parser;
 
     public Calculator() {
@@ -59,8 +56,6 @@ public class Calculator extends Observable {
         Evaluator v = new Evaluator();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
-        // notify the historyManager observer in order to register a new entry
-        historyManager.update(this, new HistoryEntry(e, v.getResult()));
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }

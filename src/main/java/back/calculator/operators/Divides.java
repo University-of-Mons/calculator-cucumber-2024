@@ -1,4 +1,8 @@
-package back.calculator;
+package back.calculator.operators;
+
+import back.calculator.*;
+import back.calculator.types.MyNumber;
+import back.calculator.types.NotANumber;
 
 import java.util.List;
 
@@ -19,7 +23,7 @@ public final class Divides extends Operation {
      *
      * @param elist The list of Expressions to divide
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Divides(List<Expression>,Notation)
+     * @see #Divides(List< Expression >, Notation )
      */
     public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
         this(elist, null);

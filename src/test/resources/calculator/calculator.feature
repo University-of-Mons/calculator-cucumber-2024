@@ -175,6 +175,10 @@ Feature: Integer Arithmetic Expressions
     Given the following expression "8 + 6 * 2"
     Then its parsing is "( 8 + ( 6 * 2 ) )"
 
+  Scenario: Parsing an expression with parentheses
+    Given the following expression "( 8 + 6 ) * 2"
+    Then its parsing is "( ( 8 + 6 ) * 2 )"
+
   Scenario: Parsing an expression with syntax errors
     Given the following expression "8 + 6 * 2 +"
     Then its parsing is "NaN"

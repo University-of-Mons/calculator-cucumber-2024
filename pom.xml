@@ -112,7 +112,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>back.calculator.App</mainClass>
+                            <mainClass>back.calculator.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -183,6 +183,7 @@
                 <configuration>
                     <excludes>
                         <exclude>back/calculator/Main.class</exclude>
+                        <exclude>back/calculator/App.class</exclude>
                         <exclude>back/parser/*</exclude>
                     </excludes>
                 </configuration>
