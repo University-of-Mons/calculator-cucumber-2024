@@ -2,6 +2,12 @@ package calculator;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.numbers.Expression;
+import calculator.numbers.MyNotANumber;
+import calculator.numbers.MyNumber;
+import calculator.operators.Divides;
+import calculator.operators.Times;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;

@@ -1,5 +1,8 @@
 package calculator;
 
+import calculator.numbers.Expression;
+import calculator.numbers.MyNumber;
+import calculator.operators.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -45,7 +48,7 @@ public class NotationSteps {
         testNotation("(" + value1 + ", " + value2 + ") " + operation, op, Notation.POSTFIX);
     }
 
-    void testNotation(String s,Operation o,Notation n) {
+    void testNotation(String s, Operation o, Notation n) {
         ExpressionVisitor ev = new ExpressionVisitor();
         ev.setNotation(n);
         o.accept(ev);

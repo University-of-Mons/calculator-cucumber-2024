@@ -2,6 +2,13 @@ package calculator;
 
 //Import Junit5 libraries for unit testing:
 import static org.junit.jupiter.api.Assertions.*;
+
+import calculator.numbers.Expression;
+import calculator.numbers.MyNumber;
+import calculator.operators.Divides;
+import calculator.operators.Minus;
+import calculator.operators.Plus;
+import calculator.operators.Times;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

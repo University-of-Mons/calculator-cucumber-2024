@@ -1,10 +1,11 @@
 package calculator;
 
+import calculator.numbers.Expression;
+import calculator.numbers.MyNumber;
 import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
@@ -36,7 +37,7 @@ public abstract class Operation implements Expression
    * Note that it is allowed to have an EMPTY list of arguments.
    *
    * @param expressionList	The list of expressions passed as argument to the arithmetic operation
-   * @throws IllegalConstruction	Exception thrown if a null list of expressions is passed as argument
+   * @throws IllegalConstruction    Exception thrown if a null list of expressions is passed as argument
    */
   protected /*constructor*/ Operation(List<Expression> expressionList)
 		  throws IllegalConstruction

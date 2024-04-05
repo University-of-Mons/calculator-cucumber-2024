@@ -1,4 +1,10 @@
-package calculator;
+package calculator.operators;
+
+import calculator.Operation;
+import calculator.numbers.Expression;
+import calculator.IllegalConstruction;
+import calculator.numbers.MyNotANumber;
+import calculator.numbers.MyNumber;
 
 import java.util.List;
 

@@ -1,5 +1,12 @@
 package calculator;
 
+import calculator.numbers.Expression;
+import calculator.numbers.MyNumber;
+import calculator.operators.Divides;
+import calculator.operators.Minus;
+import calculator.operators.Plus;
+import calculator.operators.Times;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +36,7 @@ public class Main {
 	 * @param args	Command-line parameters are not used in this version
 	 */
 	public static void main(String[] args) {
+
 
   	Expression e;
   	Calculator c = new Calculator();
@@ -61,6 +69,28 @@ public class Main {
 		e = new Divides(params4);
 		c.print(e,Notation.POSTFIX);
 		c.eval(e);
+
+
+		System.out.println("(3+4+5)*(5-3) = 24");
+		Parser p= new Parser("(3+4+5)*(5-3)",c);
+		MyNumber r= p.evaluate();
+		System.out.println(r.getValue());
+
+		System.out.println("*(+(3 4 5) -(5 3)) = 24");
+		p= new Parser("*(+(3 4 5) -(5 3))",c);
+		r= p.evaluate();
+		System.out.println(r.getValue());
+
+		System.out.println("(4,5)+, 2)* = 18");
+		Parser parser = new Parser("((4 5)+  2)*",c);
+		System.out.println(parser.evaluate().getValue());
+
+		System.out.println("((4+5)(10-1))= 81");
+		Parser parser2 = new Parser("((4+5)(10-4/2/2))",c);
+		System.out.println(parser2.evaluate().getValue());
+
+
+
 	}
 	catch(IllegalConstruction exception) {
 		Logger logger = Logger.getLogger(Main.class.getName());

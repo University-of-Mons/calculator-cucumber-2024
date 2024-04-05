@@ -2,13 +2,14 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import calculator.numbers.Expression;
+import calculator.numbers.MyNumber;
+import calculator.operators.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import visitor.ExpressionVisitor;
 
-import java.lang.runtime.SwitchBootstraps;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +18,7 @@ class TestNotation {
 
     /* This is an auxiliary method to avoid code duplication.
      */
-	void testNotation(String s,Operation o,Notation n) {
+	void testNotation(String s, Operation o, Notation n) {
 		ExpressionVisitor ev = new ExpressionVisitor();
 		ev.setNotation(n);
 		o.accept(ev);
