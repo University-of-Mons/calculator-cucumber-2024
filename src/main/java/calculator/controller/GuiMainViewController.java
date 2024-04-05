@@ -91,6 +91,13 @@ public class GuiMainViewController implements Initializable {
     }
 
     @FXML
+    public void onDelete() {
+        if (!display.getText().isEmpty()) {
+            display.setText(display.getText(0, display.getText().length() - 1));
+        }
+    }
+
+    @FXML
     private void onStandardMode(ActionEvent actionEvent) {
         // we already are in standard mode
     }

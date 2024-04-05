@@ -1,6 +1,7 @@
 package calculator;
 
 import javafx.stage.Stage;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -13,13 +14,13 @@ public class TestGui {
     @Start
     private void start(Stage stage) {
         guiStarter.start(stage);
-    }z
+    }
 
     @Test
     void testClick(FxRobot fxRobot){
         fxRobot.clickOn("#btn1");
         //TODO Vérifier que cliquer sur le bouton 1 affiche bien 1
-        //Assertions.assertEquals(X, 1);
+        //Assertions.assertEquals(, 1);
     }
 
     @Test

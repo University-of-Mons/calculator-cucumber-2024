@@ -157,7 +157,12 @@
                <Font name="Avenir Black" size="36.0" />
             </font>
          </Button>
-         <Button fx:id="btn0" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNumber" prefHeight="81.0" prefWidth="240.0" text="0" textAlignment="CENTER" GridPane.rowIndex="4">
+         <Button fx:id="btnDelete" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDelete" prefHeight="81.0" prefWidth="120.0" text="Del" textAlignment="CENTER" GridPane.rowIndex="4">
+            <font>
+               <Font name="Avenir Black" size="36.0" />
+            </font>
+         </Button>
+         <Button fx:id="btn0" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNumber" prefHeight="81.0" prefWidth="120.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <font>
                <Font name="Avenir Black" size="36.0" />
             </font>
