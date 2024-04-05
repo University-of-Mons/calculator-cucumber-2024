@@ -1,6 +1,12 @@
 package calculator;
 
 import back.calculator.*;
+import back.calculator.operators.Divides;
+import back.calculator.operators.Minus;
+import back.calculator.operators.Plus;
+import back.calculator.operators.Times;
+import back.calculator.types.MyNumber;
+import back.calculator.types.NotANumber;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

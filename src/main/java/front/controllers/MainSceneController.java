@@ -115,15 +115,15 @@ public class MainSceneController implements Initializable {
     }
 
     private void equalsButtonClicked() {
-        App.userInput = outputField.getText();
+        App.setUserInput(outputField.getText());
         Expression result = App.evalUserInput();
 
-        switchHistory(App.userInput, result.toString());
+        switchHistory(App.getUserInput(), result.toString());
 
         outputField.setText(result.toString());
         // Set the cursor at the end of the text
         outputField.positionCaret(outputField.getText().length());
-        App.userInput = "";
+        App.setUserInput("");
     }
 
     private void switchHistory(String newExpression, String newResult){
@@ -150,13 +150,13 @@ public class MainSceneController implements Initializable {
 
         int cursorPosition = outputField.getCaretPosition();
         outputField.insertText(cursorPosition, buttonText);
-        App.userInput = outputField.getText();
+        App.setUserInput(outputField.getText());
         // Move the cursor to the right of the new character
         outputField.positionCaret(cursorPosition + 1);
     }
 
     private void clearOutputField() {
         outputField.setText("");
-        App.userInput = "";
+        App.setUserInput("");
     }
 }

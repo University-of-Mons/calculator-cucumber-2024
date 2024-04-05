@@ -2,12 +2,10 @@ package front.controllers;
 
 import front.scenes.SceneLoader;
 import front.scenes.Scenes;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.testfx.api.FxToolkit;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
-import javafx.stage.Stage;
 
 import java.util.concurrent.TimeoutException;
 
@@ -27,7 +24,7 @@ class GUITest extends ApplicationTest {
     private static Stage stage;
 
     /**
-     * Will be called with {@code @Before} semantics, i. e. before each test method.
+     * Will be called with {@code @Before} semantics, i.e. before each test method.
      *
      * @param stage_ - Will be injected by the test runner.
      */
@@ -35,19 +32,14 @@ class GUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        Scenes.mainScene = SceneLoader.load("MainScene.fxml");
+        Scenes.setMainScene(SceneLoader.load("MainScene.fxml"));
         stage.setResizable(false);
         stage.setTitle("Please use gradle instead of maven");
-        stage.setScene(Scenes.mainScene);
+        stage.setScene(Scenes.getMainScene());
         stage.show();
     }
 
-    @Before
-    public void beforeTest() {
-
-    }
-
-    @After
+    @AfterEach
     void afterTest() throws TimeoutException {
         FxToolkit.hideStage();
         release(new KeyCode[]{});

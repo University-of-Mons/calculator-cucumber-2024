@@ -16,30 +16,33 @@ import front.scenes.Scenes;
  */
 public class App extends Application {
 
-    public static String userInput = "";
+    private static String userInput = "";
 
-    private static Calculator calculator = new Calculator();
+    private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage stageP) {
-        Stage stage = stageP;
-
-        Scenes.mainScene = SceneLoader.load("MainScene.fxml");
+    public void start(Stage stage) {
+        Scenes.setMainScene(SceneLoader.load("MainScene.fxml"));
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
-        stage.setScene(Scenes.mainScene);
+        stage.setScene(Scenes.getMainScene());
         stage.show();
-    }
-
-    public static MyNumber eval(Expression expression) {
-        return calculator.eval(expression);
     }
 
     public static Expression evalUserInput() {
         return calculator.eval(calculator.read(App.userInput));
+    }
+
+    @SuppressWarnings("unused")
+    public static String getUserInput() {
+        return userInput;
+    }
+
+    public static void setUserInput(String userInput) {
+        App.userInput = userInput;
     }
 }
