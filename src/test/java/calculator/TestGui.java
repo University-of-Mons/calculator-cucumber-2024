@@ -1,5 +1,6 @@
 package calculator;
 
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,8 @@ public class TestGui {
     @Test
     void testClick(FxRobot fxRobot){
         fxRobot.clickOn("#btn1");
-        //TODO Vérifier que cliquer sur le bouton 1 affiche bien 1
-        //Assertions.assertEquals(, 1);
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("1", display.getText());
     }
 
     @Test
@@ -29,8 +30,8 @@ public class TestGui {
         fxRobot.clickOn("#btnPlus");
         fxRobot.clickOn("#btn3");
         fxRobot.clickOn("#btnEquals");
-        //TODO Vérifier que l'affichage est ok
-        //Assertions.assertEquals(X, 5);
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("5", display.getText());
     }
 
     @Test
@@ -39,8 +40,8 @@ public class TestGui {
         fxRobot.clickOn("#btnMinus");
         fxRobot.clickOn("#btn4");
         fxRobot.clickOn("#btnEquals");
-        //TODO Vérifier que l'affichage est ok
-        //Assertions.assertEquals(X, 1);
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("1", display.getText());
     }
 
     @Test
@@ -49,8 +50,8 @@ public class TestGui {
         fxRobot.clickOn("#btnMultiply");
         fxRobot.clickOn("#btn7");
         fxRobot.clickOn("#btnEquals");
-        //TODO Vérifier que l'affichage est ok
-        //Assertions.assertEquals(X, 42);
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("42", display.getText());
     }
 
     @Test
@@ -59,8 +60,31 @@ public class TestGui {
         fxRobot.clickOn("#btnDivide");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnEquals");
-        //TODO Vérifier que l'affichage est ok
-        //Assertions.assertEquals(X, 4);
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("4", display.getText());
+    }
+
+    @Test
+    void testMultipleOperations(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnMultiply");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("7", display.getText());
+    }
+
+    @Test
+    void testNegative(FxRobot fxRobot){
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("-3", display.getText());
     }
 
     @Test
@@ -69,15 +93,73 @@ public class TestGui {
         fxRobot.clickOn("#btnDivide");
         fxRobot.clickOn("#btn0");
         fxRobot.clickOn("#btnEquals");
-        //TODO Vérifier que l'affichage est ok
-        //Assertions.assertEquals(X, Nan);
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("NaN", display.getText());
+    }
+
+    @Test
+    void testPostfix(FxRobot fxRobot){
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btn7");
+        fxRobot.clickOn("btnComma");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("2", display.getText());
+    }
+
+    @Test
+    void testMultiplePostfix(FxRobot fxRobot){
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("btnComma");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btnMultiply");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("9", display.getText());
+    }
+
+    @Test
+    void testprefix(FxRobot fxRobot){
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btn7");
+        fxRobot.clickOn("#btnComma");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("2", display.getText());
+    }
+
+    @Test
+    void testMultiplePrefix(FxRobot fxRobot){
+        fxRobot.clickOn("#btnMultiply");
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btnComma");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("9", display.getText());
     }
 
     @Test
     void testClear(FxRobot fxRobot){
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btnClear");
-        //TODO Vérifier que l'affichage est ok
-        //Assertions.assertEquals(X, Vide);
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("", display.getText());
     }
 }

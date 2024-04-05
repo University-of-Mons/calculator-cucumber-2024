@@ -66,16 +66,20 @@ public class GuiMainViewController implements Initializable {
         if (!resetDisplay && !display.getText().equals("0")) {
             expression.setText(display.getText()+" = ");
 
-            System.out.println("Expression : " + display.getText());
+            // System.out.println("Expression : " + display.getText());
             Calculator calculator = new Calculator();
-            Parser parser = new Parser(display.getText(), calculator);
-            display.setText(parser.evaluate().toString());
+            try{
+                Parser parser = new Parser(display.getText(), calculator);
+                display.setText(parser.evaluate().toString());}
+            catch (Exception e){
+                display.setText("Error");
+            }
             resetDisplay = true;
         }
     }
 
     public void onDivide() {
-        appendToDisplay("÷");
+        appendToDisplay("/");
     }
 
     public void onMultiply() {
@@ -157,11 +161,11 @@ public class GuiMainViewController implements Initializable {
     }
 
     public void onComma(ActionEvent actionEvent) {
-        // TODO : à revoir
+        // TODO : à revoir (revu par Samuel)
         if (resetDisplay) {
             display.setText("0,");
             resetDisplay = false;
-        } else if (!display.getText().contains(",")) {
+        } else{
             display.appendText(",");
         }
     }
