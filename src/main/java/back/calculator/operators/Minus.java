@@ -56,6 +56,11 @@ public final class Minus extends Operation {
     public MyNumber op(MyNumber l, MyNumber r) {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
-        return new MyNumber(l.getValue() - r.getValue());
+        if (l.isImaginary() || r.isImaginary()) {
+            int real = l.getReal() - r.getReal();
+            int imaginary = l.getImaginary() - r.getImaginary();
+            return new MyNumber(real, imaginary);
+        }
+        return new MyNumber(l.getReal() - r.getReal());
     }
 }

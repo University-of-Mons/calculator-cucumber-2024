@@ -54,8 +54,19 @@ public final class Divides extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if (r.getValue() == 0 || l instanceof NotANumber || r instanceof NotANumber)
+        if (r.getReal() == 0 || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
-        return new MyNumber(l.getValue() / r.getValue());
+        if (l.isImaginary() || r.isImaginary()) {
+            // (a + bi) / (c + di) = (ac + bd) + (bc - ad)i / (c^2 + d^2)
+            int a = l.getReal();
+            int b = l.getImaginary();
+            int c = r.getReal();
+            int d = r.getImaginary();
+            int denom = c^2 + d^2;
+            int real = (a * c + b * d) / denom;
+            int imaginary = (b * c - a * d) / denom;
+            return new MyNumber(real, imaginary);
+        }
+        return new MyNumber(l.getReal() / r.getReal());
     }
 }

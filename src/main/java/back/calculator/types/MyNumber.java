@@ -12,24 +12,57 @@ import back.visitor.Visitor;
  * @see Operation
  */
 public class MyNumber implements Expression {
-    private final int value;
+    private final int real;
+
+    private final int imaginary;
 
     /**
      * getter method to obtain the value contained in the object
      *
      * @return The integer number contained in the object
      */
-    public int getValue() {
-        return value;
+    public int getReal() {
+        return real;
     }
+
+    /**
+     * Getter method to obtain the imaginary part of the object
+     *
+     * @return The imaginary part of the object
+     */
+    public int getImaginary() {
+        return imaginary;
+    }
+
 
     /**
      * Constructor method
      *
      * @param v The integer value to be contained in the object
      */
-    public /*constructor*/ MyNumber(int v) {
-        value = v;
+    public MyNumber(int v) {
+        real = v;
+        imaginary = 0;
+    }
+
+    /**
+     * Constructor method for complex numbers
+     *
+     * @param real The real part of the complex number
+     * @param imaginary The imaginary part of the complex number
+     */
+    public MyNumber(int real, int imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    /**
+     * Method to check if the number is imaginary
+     *
+     * @return True if the number is imaginary, false otherwise.
+     */
+    public boolean isImaginary() {
+        return imaginary != 0;
     }
 
     /**
@@ -50,7 +83,10 @@ public class MyNumber implements Expression {
      */
     @Override
     public String toString() {
-        return Integer.toString(value);
+        if (isImaginary()) {
+            return real + "+" + imaginary + "i";
+        }
+        return Integer.toString(real);
     }
 
     /**
@@ -73,7 +109,8 @@ public class MyNumber implements Expression {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.value == ((MyNumber) o).value;
+
+        return real == ((MyNumber) o).real && imaginary == ((MyNumber) o).imaginary;
         // Used == since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -87,7 +124,10 @@ public class MyNumber implements Expression {
      */
     @Override
     public int hashCode() {
-        return value;
+        if (isImaginary()) {
+            return Integer.hashCode(real) + Integer.hashCode(imaginary);
+        }
+        return Integer.hashCode(real);
     }
 
 }
