@@ -11,6 +11,8 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +22,20 @@ import java.util.ResourceBundle;
 
 public class GuiMainViewController implements Initializable {
 
-    // TODO : Vérifier, utilisez public pour les méthodes de contrôleur qui sont appelées par le fichier FXML,
-    //  et utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
+    // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
     //  à l'intérieur de la classe de contrôleur.
+    // TODO : Traduire en anglais si jamais il y a du français
 
     private static final Logger logger = LoggerFactory.getLogger(GuiMainViewController.class);
 
     @FXML
-    private CheckMenuItem standardMode, rationalMode;
+    private CheckMenuItem standardMode, rationalMode, complexMode;
+    @FXML
+    private VBox displayContainer;
     @FXML
     private TextField display, expression;
+    @FXML
+    private GridPane buttonGrid;
     @FXML
     private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnDivide, btnMultiply, btnMinus, btnPlus;
     @FXML
@@ -38,9 +44,7 @@ public class GuiMainViewController implements Initializable {
     private boolean resetDisplay = true;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        standardMode.setSelected(true);
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
 
     public void appendToDisplay(String text) {
         if (resetDisplay) {
@@ -49,6 +53,11 @@ public class GuiMainViewController implements Initializable {
         }
         display.appendText(text);
         resetDisplay = false;
+    }
+
+    private void resetDisplay() {
+        expression.setText("");
+        display.setText("");
     }
 
     public void onEquals() {
@@ -88,29 +97,49 @@ public class GuiMainViewController implements Initializable {
 
     @FXML
     private void onRationalMode(ActionEvent actionEvent) {
-        try {
-            // Chargement de la nouvelle scène pour le mode complexe
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rationalModeView.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-
-            // Obtention de la scène actuelle et mise à jour avec la nouvelle scène
-            Stage stage = (Stage) ((MenuItem) actionEvent.getSource()).getParentPopup().getOwnerWindow();
-            stage.setScene(scene);
-            stage.show();
-
-            root.requestFocus();
-        } catch (IOException e) {
-            logger.error("Error loading rational mode", e);
-        }
+        updateButtonsForMode("Rational");
     }
+
+    @FXML
+    private void onComplexMode(ActionEvent actionEvent) {
+        updateButtonsForMode("Complex");
+    }
+
+   private void updateButtonsForMode(String mode) {
+        // TODO : Renommer les fxml et pas toucher au rationnal, c'est un ancien test
+        // TODO : Gérer dans le menu, le mode selectionné
+        String fxmlFile = String.format("/fxml/%sMode.fxml", mode);
+        URL resource = getClass().getResource(fxmlFile);
+
+        if (resource == null) {
+            logger.error("Le fichier FXML pour le mode " + mode + " n'a pas été trouvé : " + fxmlFile);
+            // Vous pouvez gérer l'erreur comme bon vous semble ici
+            // TODO : afficher une pop up erreur utilisateur
+        } else {
+            try {
+                buttonGrid.getChildren().clear(); // Nettoyez d'abord le contenu actuel
+                FXMLLoader loader = new FXMLLoader(resource);
+                GridPane complexGrid = loader.load();
+                // Récupérer le contrôleur pour le mode complexe et lui passer les champs
+                ComplexModeController complexModeController = loader.getController();
+                complexModeController.setDisplayTextField(display);
+                complexModeController.setExpressionTextField(expression);
+
+                buttonGrid.getChildren().setAll(complexGrid.getChildren()); // Ajoutez les nouveaux boutons
+            } catch (IOException e) {
+                logger.error("Erreur lors du chargement des boutons pour le mode " + mode, e);
+            }
+        }
+}
+
+
 
     public void onOpenParenthesis(ActionEvent actionEvent) {
         appendToDisplay("(");
     }
 
     public void onCloseParenthesis(ActionEvent actionEvent) {
-        // TODO : interdire la fermeture de parenthèse si aucune ouverture
+        // TODO : interdire la fermeture de parenthèse si aucune ouverture ou pas
         appendToDisplay(")");
     }
 

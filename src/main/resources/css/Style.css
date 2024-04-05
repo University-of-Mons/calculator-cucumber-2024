@@ -2,7 +2,7 @@
     -fx-color: white;
 }
 
-#btnOpenParenthesis, #btnCloseParenthesis, #btnComma {
+#btnOpenParenthesis, #btnCloseParenthesis, #btnComma, #btnExtension {
     -fx-color: #bdc3c7; /* Gris clair */
 }
 
