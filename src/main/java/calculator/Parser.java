@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import visitor.ParserVisitor;
 
-class Parser {
+public class Parser {
 
     public final Calculator c;
     private final ParseTree tree;

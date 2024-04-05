@@ -1,5 +1,7 @@
 package calculator.controller;
 
+import calculator.Calculator;
+import calculator.Parser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,7 +65,11 @@ public class GuiMainViewController implements Initializable {
     public void onEquals() {
         if (!resetDisplay && !display.getText().equals("0")) {
             expression.setText(display.getText()+" = ");
-            display.setText("Answer");// TODO : Remplacer "Answer" par le résultat de l'expression
+
+            System.out.println("Expression : " + display.getText());
+            Calculator calculator = new Calculator();
+            Parser parser = new Parser(display.getText(), calculator);
+            display.setText(parser.evaluate().toString());
             resetDisplay = true;
         }
     }
