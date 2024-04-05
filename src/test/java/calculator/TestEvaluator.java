@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
+import calculator.numbers.MyNotANumber;
 import calculator.operators.Divides;
 import calculator.operators.Minus;
 import calculator.operators.Plus;
