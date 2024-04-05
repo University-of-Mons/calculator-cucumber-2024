@@ -14,7 +14,7 @@ import java.util.List;
  * </p>
  */
 public class MySyntaxErrorListener extends BaseErrorListener {
-    private boolean hasSyntaxError = false;
+    private boolean hasError;
 
     private String message;
 
@@ -23,7 +23,7 @@ public class MySyntaxErrorListener extends BaseErrorListener {
      * @return True if a syntax error has been detected, false otherwise
      */
     public boolean hasSyntaxError() {
-        return hasSyntaxError;
+        return hasError;
     }
 
     /**
@@ -57,7 +57,7 @@ public class MySyntaxErrorListener extends BaseErrorListener {
                             String msg,
                             RecognitionException e) {
 
-        hasSyntaxError = true;
+        hasError = true;
 
         // Change the error message
         List<String> stack = ((Parser) recognizer).getRuleInvocationStack();

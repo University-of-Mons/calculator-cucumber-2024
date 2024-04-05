@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 /**
  * Holds every required Scene for the Application.
  **/
-public class Scenes {
+public final class Scenes {
     private static Scene mainScene;
 
     private Scenes() {

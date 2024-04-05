@@ -23,6 +23,8 @@ import java.util.concurrent.TimeoutException;
 class GUITest extends ApplicationTest {
     private static Stage stage;
 
+    private static final String outputField = "#outputField";
+
     /**
      * Will be called with {@code @Before} semantics, i.e. before each test method.
      *
@@ -49,7 +51,7 @@ class GUITest extends ApplicationTest {
     @BeforeEach
     void clear() {
         clickOn("#clear");
-        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("");
     }
 
     @Test
@@ -67,7 +69,7 @@ class GUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("123456789,000");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("123456789,000");
     }
 
     @Test
@@ -78,7 +80,7 @@ class GUITest extends ApplicationTest {
         clickOn("#divide");
         clickOn("#openParen");
         clickOn("#closeParen");
-        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("+-*/()");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("+-*/()");
     }
 
     @Test
@@ -87,6 +89,6 @@ class GUITest extends ApplicationTest {
         clickOn("#add");
         clickOn("#four");
         clickOn("#equals");
-        Assertions.assertThat((TextField) lookup("#outputField").query()).hasText("5");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("5");
     }
 }

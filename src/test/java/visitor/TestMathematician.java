@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class TestMathematician {
 
     private Calculator calc;
-    private int value1, value2, value3, value4;
+    private int value1, value2, value3;
 
     @BeforeEach
     void setUp() {
@@ -27,7 +27,6 @@ class TestMathematician {
         value1 = 8;
         value2 = 6;
         value3 = 5;
-        value4 = 7;
     }
 
     /**

@@ -5,7 +5,7 @@ import back.calculator.types.MyNumber;
 import back.calculator.Operation;
 
 public class Logician extends Visitor {
-    private int operationsCount = 0;
+    private int operationsCount;
 
     /**
      * Use the visitor design pattern to visit a number.

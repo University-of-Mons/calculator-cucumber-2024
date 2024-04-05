@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestMyNumber {
 
-    private final int value = 8;
+    private static final int value = 8;
     private MyNumber number;
 
     @BeforeEach

@@ -57,34 +57,24 @@ public class MainSceneController implements Initializable {
 
     @FXML
     Label lastExpression;
-
     @FXML
     Label lastExpression1;
-
     @FXML
     Label lastExpression2;
-
     @FXML
     Label lastExpression3;
-
     @FXML
     Label lastExpression4;
-
     @FXML
     Label lastResult;
-
     @FXML
     Label lastResult1;
-
     @FXML
     Label lastResult2;
-
     @FXML
     Label lastResult3;
-
     @FXML
     Label lastResult4;
-
     @FXML
     TextField outputField;
 

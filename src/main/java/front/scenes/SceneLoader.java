@@ -11,7 +11,12 @@ import java.net.URL;
 /**
  * Handles the loading of FXML files to create the Scenes.
  */
-public class SceneLoader {
+public final class SceneLoader {
+
+    private SceneLoader() {
+        // Private constructor to hide the implicit public one
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Takes the given scene name to find the corresponding FXML file.

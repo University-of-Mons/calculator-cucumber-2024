@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestMinus {
 
-    private final int value1 = 8;
-    private final int value2 = 6;
+    private static final int value1 = 8;
+    private static final int value2 = 6;
     private Minus op;
     private List<Expression> params;
 
