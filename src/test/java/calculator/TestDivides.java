@@ -18,8 +18,7 @@ class TestDivides {
 
 	private final int value1 = 8;
 	private final int value2 = 6;
-	private final int zero = 0;
-	private Divides op;
+    private Divides op;
 	private List<Expression> params;
 
 	@BeforeEach
@@ -85,11 +84,12 @@ class TestDivides {
 	@Test
 	void testDivideByZero() {
 		// It should not be possible to divide by zero
-		params = Arrays.asList(new MyNumber(value1), new MyNumber(zero));
+        int zero = 0;
+        params = Arrays.asList(new MyNumber(value1), new MyNumber(zero));
         try {
             op = new Divides(params);
 			Calculator c = new Calculator();
-            assertTrue(c.eval(op) instanceof MyNotANumber);
+            assertInstanceOf(MyNotANumber.class, c.eval(op));
         } catch (IllegalConstruction e) {
             fail();
         }
