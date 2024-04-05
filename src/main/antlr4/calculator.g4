@@ -15,7 +15,7 @@ expression: infix
 infix: infix op=('*'| '/') infix  # MulDivInfix
     | infix op=('+' | '-') infix  # AddSubInfix
     | '(' infix ')'               # ParensInfix
-    | NUMBER                      # NumberInfix
+    | SUB? NUMBER                      # NumberInfix
     ;
 
 
@@ -24,13 +24,13 @@ infix: infix op=('*'| '/') infix  # MulDivInfix
 prefix: op=('*' | '/') '(' prefix ( (',' prefix)+  | (prefix)+ ) ')' # MulDivPrefix
     | op=('+' | '-') '(' prefix ( (',' prefix)+  | (prefix)+) ')'    # AddSubPrefix
     | '(' prefix ')'                                                 # ParensPrefix
-    | NUMBER                                                         # NumberPrefix
+    | SUB? NUMBER                                                         # NumberPrefix
     ;
 
 postfix : '(' postfix ( (',' postfix)+  | (postfix)+ ) ')' op=('*' | '/') # MulDivPostfix
     | '(' postfix ( (',' postfix)+  | (postfix)+) ')' op=('+' | '-')      # AddSubPostfix
     | '(' postfix ')'                                                     # ParensPostfix
-    | NUMBER                                                              # NumberPostfix
+    | SUB? NUMBER                                                              # NumberPostfix
     ;
 
 // Defined to reference as constants in the Java code
