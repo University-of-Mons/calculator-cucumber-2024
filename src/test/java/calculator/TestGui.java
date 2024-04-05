@@ -101,7 +101,7 @@ public class TestGui {
     void testPostfix(FxRobot fxRobot){
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn7");
-        fxRobot.clickOn("btnComma");
+        fxRobot.clickOn("#btnComma");
         fxRobot.clickOn("#btn5");
         fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnMinus");
@@ -115,7 +115,7 @@ public class TestGui {
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn1");
-        fxRobot.clickOn("btnComma");
+        fxRobot.clickOn("#btnComma");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnPlus");
