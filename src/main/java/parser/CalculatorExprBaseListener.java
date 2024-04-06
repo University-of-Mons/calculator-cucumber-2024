@@ -64,13 +64,13 @@ public class CalculatorExprBaseListener implements CalculatorExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMulInfix(CalculatorExprParser.MulInfixContext ctx) { }
+	@Override public void enterMulDivInfix(CalculatorExprParser.MulDivInfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMulInfix(CalculatorExprParser.MulInfixContext ctx) { }
+	@Override public void exitMulDivInfix(CalculatorExprParser.MulDivInfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -83,18 +83,6 @@ public class CalculatorExprBaseListener implements CalculatorExprListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAddSubInfix(CalculatorExprParser.AddSubInfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDivInfix(CalculatorExprParser.DivInfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDivInfix(CalculatorExprParser.DivInfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -45,6 +45,54 @@ class TestParser{
         assertEquals(1215, parser.evaluate().getValue());
     }
 
+    @Test
+    void testNegNumber(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-5",calculator);
+        assertEquals(-5, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testBasicNegOp(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-5-2",calculator);
+        assertEquals(-7, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testMulNegPos(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-5 * 2",calculator);
+        assertEquals(-10, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testMulNeg(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-5 * -2",calculator);
+        assertEquals(10, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testNegOp(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-5 + 7",calculator);
+        assertEquals(2, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testComplexNegOp(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(-5 + 7) * 3",calculator);
+        assertEquals(6, parser.evaluate().getValue());
+    }
+
 
     //Basic postfix tests
 
@@ -64,6 +112,54 @@ class TestParser{
         assertEquals(18,parser.evaluate().getValue());
     }
 
+    @Test
+    void testNegNumber2(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-5",calculator);
+        assertEquals(-5, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testBasicNegOp2(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(-5, 2)-",calculator);
+        assertEquals(-7, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testMulNegPos2(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(-5, 2)*",calculator);
+        assertEquals(-10, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testMulNeg2(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(-5, -2)*",calculator);
+        assertEquals(10, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testNegOp2(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(-5, 7)+",calculator);
+        assertEquals(2, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testComplexNegOp2(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("((-5, 7)+ , 3)*",calculator);
+        assertEquals(6, parser.evaluate().getValue());
+    }
+
     //Basic prefix tests
 
     @Test
@@ -80,6 +176,54 @@ class TestParser{
 
         Parser parser = new Parser("*(+(4,5), 2)",calculator);
         assertEquals(18,parser.evaluate().getValue());
+    }
+
+    @Test
+    void testNegNumber3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-5",calculator);
+        assertEquals(-5, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testBasicNegOp3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("-(-5, 2)",calculator);
+        assertEquals(-7, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testMulNegPos3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("*(-5, 2)",calculator);
+        assertEquals(-10, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testMulNeg3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("*(-5, -2)",calculator);
+        assertEquals(10, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testNegOp3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("+(-5, 7)",calculator);
+        assertEquals(2, parser.evaluate().getValue());
+    }
+
+    @Test
+    void testComplexNegOp3(){
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("*(+(-5, 7), 3",calculator);
+        assertEquals(6, parser.evaluate().getValue());
     }
 
     // Complex tests
@@ -143,7 +287,7 @@ class TestParser{
     @Test
     void testSimplifyExpression(){
         Calculator calculator = new Calculator();
-        Parser parser = new Parser("((4+5+6)(7+5/2/7)*9)",calculator);
+        Parser parser = new Parser("((4+5+6)*(7+5/2/7)*9)",calculator);
         assertEquals(945, parser.evaluate().getValue());
     }
 }

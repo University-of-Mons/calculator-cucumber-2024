@@ -14,25 +14,24 @@ exp : infix
 
 // infix expression
 
-infix : infix ('*')? infix   # MulInfix
-      | infix ('/') infix    # DivInfix
-      | infix op=('+' | '-') infix    #AddSubInfix
-      | NUMBER                  # intInfix
-      | '(' infix ')'           # parensInfix
+infix : infix op=('*' | '/') infix    # MulDivInfix
+      | infix op=('+' | '-') infix    # AddSubInfix
+      | SUB? NUMBER                   # intInfix
+      | '(' infix ')'                 # parensInfix
       ;
 
 // prefix expression
 
 prefix : op=('*' | '/') '(' prefix  ((',')? prefix)+ ')'   # MulDivPrefix
         | op=('+' | '-') '(' prefix ((',')? prefix)+ ')'   # AddSubPrefix
-        | NUMBER                                        # intPrefix
+        | SUB? NUMBER                                        # intPrefix
         | '(' prefix ')'                                # parensPrefix
         ;
 
 // postfix expression
 postfix : '(' postfix ((',')? postfix)+ ')' op=('*' | '/')     # MulDivPostfix
         | '(' postfix ((',')? postfix)+ ')' op=('+' | '-')     # AddSubPostfix
-        | NUMBER                                            # intPostfix
+        | SUB? NUMBER                                            # intPostfix
         | '(' postfix ')'                                   # parensPostfix
         ;
 

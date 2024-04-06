@@ -26,11 +26,14 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitIntInfix(CalculatorExprParser.IntInfixContext ctx){
+        if(ctx.SUB() != null){
+            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
+        }
         return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
     }
 
     @Override
-    public Expression visitMulInfix(CalculatorExprParser.MulInfixContext ctx) {
+    public Expression visitMulDivInfix(CalculatorExprParser.MulDivInfixContext ctx) {
             Expression number1 = visit(ctx.infix(0));
             Expression number2 = visit(ctx.infix(1));
             List<Expression> params = new ArrayList<>();
@@ -40,29 +43,13 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
                 if(ctx.infix().size() == 1){
                     return visit(ctx.infix(0));
                 }
+                if(ctx.op.getType() == CalculatorExprParser.DIV)
+                    return c.eval(new Divides(params));
                 return c.eval(new Times(params));
             }
             catch (IllegalConstruction e){
                 return new MyNotANumber();
             }
-    }
-
-    @Override
-    public Expression visitDivInfix(CalculatorExprParser.DivInfixContext ctx){
-        Expression number1 = visit(ctx.infix(0));
-        Expression number2 = visit(ctx.infix(1));
-        List<Expression> params = new ArrayList<>();
-
-        Collections.addAll(params, number1, number2);
-        try {
-            if(ctx.infix().size() == 1){
-                return visit(ctx.infix(0));
-            }
-            return c.eval(new Divides(params));
-        }
-        catch (IllegalConstruction e){
-            return new MyNotANumber();
-        }
     }
 
     @Override
@@ -94,8 +81,12 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitIntPrefix(CalculatorExprParser.IntPrefixContext ctx){
+        if(ctx.SUB() != null){
+            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
+        }
         return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
     }
+
 
     @Override
     public Expression visitMulDivPrefix(CalculatorExprParser.MulDivPrefixContext ctx){
@@ -152,6 +143,9 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitIntPostfix(CalculatorExprParser.IntPostfixContext ctx) {
+        if(ctx.SUB() != null){
+            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
+        }
         return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
     }
 
