@@ -5,11 +5,14 @@ package back.parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class CalculatorParser extends Parser {
+public class calculatorParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -74,7 +77,7 @@ public class CalculatorParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public CalculatorParser(TokenStream input) {
+	public calculatorParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -88,7 +91,7 @@ public class CalculatorParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_prog; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitProg(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitProg(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -130,7 +133,7 @@ public class CalculatorParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_expression; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitExpression(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -198,7 +201,7 @@ public class CalculatorParser extends Parser {
 		public MulDivInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitMulDivInfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitMulDivInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -209,7 +212,7 @@ public class CalculatorParser extends Parser {
 		public ParensInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitParensInfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitParensInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -224,16 +227,17 @@ public class CalculatorParser extends Parser {
 		public AddSubInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitAddSubInfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitAddSubInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NumberInfixContext extends InfixContext {
-		public TerminalNode NUMBER() { return getToken(CalculatorParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(calculatorParser.NUMBER, 0); }
+		public TerminalNode SUB() { return getToken(calculatorParser.SUB, 0); }
 		public NumberInfixContext(InfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitNumberInfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitNumberInfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -254,7 +258,7 @@ public class CalculatorParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(23);
+			setState(26);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__0:
@@ -271,12 +275,23 @@ public class CalculatorParser extends Parser {
 				match(T__1);
 				}
 				break;
+			case SUB:
 			case NUMBER:
 				{
 				_localctx = new NumberInfixContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(22);
+				setState(23);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SUB) {
+					{
+					setState(22);
+					match(SUB);
+					}
+				}
+
+				setState(25);
 				match(NUMBER);
 				}
 				break;
@@ -284,24 +299,24 @@ public class CalculatorParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(33);
+			setState(36);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(31);
+					setState(34);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 					case 1:
 						{
 						_localctx = new MulDivInfixContext(new InfixContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_infix);
-						setState(25);
+						setState(28);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(26);
+						setState(29);
 						((MulDivInfixContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==MUL || _la==DIV) ) {
@@ -312,7 +327,7 @@ public class CalculatorParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(27);
+						setState(30);
 						infix(5);
 						}
 						break;
@@ -320,9 +335,9 @@ public class CalculatorParser extends Parser {
 						{
 						_localctx = new AddSubInfixContext(new InfixContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_infix);
-						setState(28);
+						setState(31);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(29);
+						setState(32);
 						((AddSubInfixContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==ADD || _la==SUB) ) {
@@ -333,16 +348,16 @@ public class CalculatorParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(30);
+						setState(33);
 						infix(4);
 						}
 						break;
 					}
 					} 
 				}
-				setState(35);
+				setState(38);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
 			}
 		}
@@ -379,7 +394,7 @@ public class CalculatorParser extends Parser {
 		public AddSubPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitAddSubPrefix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitAddSubPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -390,7 +405,7 @@ public class CalculatorParser extends Parser {
 		public ParensPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitParensPrefix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitParensPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -405,16 +420,17 @@ public class CalculatorParser extends Parser {
 		public MulDivPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitMulDivPrefix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitMulDivPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NumberPrefixContext extends PrefixContext {
-		public TerminalNode NUMBER() { return getToken(CalculatorParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(calculatorParser.NUMBER, 0); }
+		public TerminalNode SUB() { return getToken(calculatorParser.SUB, 0); }
 		public NumberPrefixContext(PrefixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitNumberPrefix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitNumberPrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -424,15 +440,14 @@ public class CalculatorParser extends Parser {
 		enterRule(_localctx, 6, RULE_prefix);
 		int _la;
 		try {
-			setState(77);
+			setState(83);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case MUL:
-			case DIV:
+			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+			case 1:
 				_localctx = new MulDivPrefixContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(36);
+				setState(39);
 				((MulDivPrefixContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==MUL || _la==DIV) ) {
@@ -443,28 +458,28 @@ public class CalculatorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(37);
+				setState(40);
 				match(T__0);
-				setState(38);
+				setState(41);
 				prefix();
-				setState(50);
+				setState(53);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case COMMA:
 					{
-					setState(41); 
+					setState(44); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
-						setState(39);
+						setState(42);
 						match(COMMA);
-						setState(40);
+						setState(43);
 						prefix();
 						}
 						}
-						setState(43); 
+						setState(46); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					} while ( _la==COMMA );
@@ -477,17 +492,17 @@ public class CalculatorParser extends Parser {
 				case DIV:
 				case NUMBER:
 					{
-					setState(46); 
+					setState(49); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
-						setState(45);
+						setState(48);
 						prefix();
 						}
 						}
-						setState(48); 
+						setState(51); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << ADD) | (1L << SUB) | (1L << MUL) | (1L << DIV) | (1L << NUMBER))) != 0) );
@@ -496,16 +511,15 @@ public class CalculatorParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(52);
+				setState(55);
 				match(T__1);
 				}
 				break;
-			case ADD:
-			case SUB:
+			case 2:
 				_localctx = new AddSubPrefixContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(54);
+				setState(57);
 				((AddSubPrefixContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==ADD || _la==SUB) ) {
@@ -516,28 +530,28 @@ public class CalculatorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(55);
+				setState(58);
 				match(T__0);
-				setState(56);
+				setState(59);
 				prefix();
-				setState(68);
+				setState(71);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case COMMA:
 					{
-					setState(59); 
+					setState(62); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
-						setState(57);
+						setState(60);
 						match(COMMA);
-						setState(58);
+						setState(61);
 						prefix();
 						}
 						}
-						setState(61); 
+						setState(64); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					} while ( _la==COMMA );
@@ -550,17 +564,17 @@ public class CalculatorParser extends Parser {
 				case DIV:
 				case NUMBER:
 					{
-					setState(64); 
+					setState(67); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
-						setState(63);
+						setState(66);
 						prefix();
 						}
 						}
-						setState(66); 
+						setState(69); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << ADD) | (1L << SUB) | (1L << MUL) | (1L << DIV) | (1L << NUMBER))) != 0) );
@@ -569,32 +583,40 @@ public class CalculatorParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(70);
+				setState(73);
 				match(T__1);
 				}
 				break;
-			case T__0:
+			case 3:
 				_localctx = new ParensPrefixContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(72);
+				setState(75);
 				match(T__0);
-				setState(73);
+				setState(76);
 				prefix();
-				setState(74);
+				setState(77);
 				match(T__1);
 				}
 				break;
-			case NUMBER:
+			case 4:
 				_localctx = new NumberPrefixContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(76);
+				setState(80);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SUB) {
+					{
+					setState(79);
+					match(SUB);
+					}
+				}
+
+				setState(82);
 				match(NUMBER);
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -630,7 +652,7 @@ public class CalculatorParser extends Parser {
 		public MulDivPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitMulDivPostfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitMulDivPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -641,7 +663,7 @@ public class CalculatorParser extends Parser {
 		public ParensPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitParensPostfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitParensPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -656,16 +678,17 @@ public class CalculatorParser extends Parser {
 		public AddSubPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitAddSubPostfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitAddSubPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NumberPostfixContext extends PostfixContext {
-		public TerminalNode NUMBER() { return getToken(CalculatorParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(calculatorParser.NUMBER, 0); }
+		public TerminalNode SUB() { return getToken(calculatorParser.SUB, 0); }
 		public NumberPostfixContext(PostfixContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor) return ((CalculatorVisitor<? extends T>)visitor).visitNumberPostfix(this);
+			if ( visitor instanceof calculatorVisitor ) return ((calculatorVisitor<? extends T>)visitor).visitNumberPostfix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -675,65 +698,66 @@ public class CalculatorParser extends Parser {
 		enterRule(_localctx, 8, RULE_postfix);
 		int _la;
 		try {
-			setState(120);
+			setState(129);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
 			case 1:
 				_localctx = new MulDivPostfixContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(79);
+				setState(85);
 				match(T__0);
-				setState(80);
+				setState(86);
 				postfix();
-				setState(92);
+				setState(98);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case COMMA:
 					{
-					setState(83); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					do {
-						{
-						{
-						setState(81);
-						match(COMMA);
-						setState(82);
-						postfix();
-						}
-						}
-						setState(85); 
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					} while ( _la==COMMA );
-					}
-					break;
-				case T__0:
-				case NUMBER:
-					{
-					setState(88); 
+					setState(89); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
 						setState(87);
+						match(COMMA);
+						setState(88);
 						postfix();
 						}
 						}
-						setState(90); 
+						setState(91); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
-					} while ( _la==T__0 || _la==NUMBER );
+					} while ( _la==COMMA );
+					}
+					break;
+				case T__0:
+				case SUB:
+				case NUMBER:
+					{
+					setState(94); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					do {
+						{
+						{
+						setState(93);
+						postfix();
+						}
+						}
+						setState(96); 
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << SUB) | (1L << NUMBER))) != 0) );
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(94);
+				setState(100);
 				match(T__1);
-				setState(95);
+				setState(101);
 				((MulDivPostfixContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==MUL || _la==DIV) ) {
@@ -750,58 +774,59 @@ public class CalculatorParser extends Parser {
 				_localctx = new AddSubPostfixContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(97);
+				setState(103);
 				match(T__0);
-				setState(98);
+				setState(104);
 				postfix();
-				setState(110);
+				setState(116);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case COMMA:
 					{
-					setState(101); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					do {
-						{
-						{
-						setState(99);
-						match(COMMA);
-						setState(100);
-						postfix();
-						}
-						}
-						setState(103); 
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					} while ( _la==COMMA );
-					}
-					break;
-				case T__0:
-				case NUMBER:
-					{
-					setState(106); 
+					setState(107); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
 						setState(105);
+						match(COMMA);
+						setState(106);
 						postfix();
 						}
 						}
-						setState(108); 
+						setState(109); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
-					} while ( _la==T__0 || _la==NUMBER );
+					} while ( _la==COMMA );
+					}
+					break;
+				case T__0:
+				case SUB:
+				case NUMBER:
+					{
+					setState(112); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					do {
+						{
+						{
+						setState(111);
+						postfix();
+						}
+						}
+						setState(114); 
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << SUB) | (1L << NUMBER))) != 0) );
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(112);
+				setState(118);
 				match(T__1);
-				setState(113);
+				setState(119);
 				((AddSubPostfixContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==ADD || _la==SUB) ) {
@@ -818,11 +843,11 @@ public class CalculatorParser extends Parser {
 				_localctx = new ParensPostfixContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(115);
+				setState(121);
 				match(T__0);
-				setState(116);
+				setState(122);
 				postfix();
-				setState(117);
+				setState(123);
 				match(T__1);
 				}
 				break;
@@ -830,7 +855,17 @@ public class CalculatorParser extends Parser {
 				_localctx = new NumberPostfixContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(119);
+				setState(126);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==SUB) {
+					{
+					setState(125);
+					match(SUB);
+					}
+				}
+
+				setState(128);
 				match(NUMBER);
 				}
 				break;
@@ -865,38 +900,42 @@ public class CalculatorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13}\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\3\3\3\3\3\5\3\22\n\3\3\4\3\4\3\4"+
-		"\3\4\3\4\3\4\5\4\32\n\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4\"\n\4\f\4\16\4%\13"+
-		"\4\3\5\3\5\3\5\3\5\3\5\6\5,\n\5\r\5\16\5-\3\5\6\5\61\n\5\r\5\16\5\62\5"+
-		"\5\65\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\6\5>\n\5\r\5\16\5?\3\5\6\5C\n\5"+
-		"\r\5\16\5D\5\5G\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5P\n\5\3\6\3\6\3\6\3"+
-		"\6\6\6V\n\6\r\6\16\6W\3\6\6\6[\n\6\r\6\16\6\\\5\6_\n\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\6\6h\n\6\r\6\16\6i\3\6\6\6m\n\6\r\6\16\6n\5\6q\n\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6{\n\6\3\6\2\3\6\7\2\4\6\b\n\2\4\3\2\7\b"+
-		"\3\2\5\6\2\u008e\2\f\3\2\2\2\4\21\3\2\2\2\6\31\3\2\2\2\bO\3\2\2\2\nz\3"+
-		"\2\2\2\f\r\5\4\3\2\r\3\3\2\2\2\16\22\5\6\4\2\17\22\5\n\6\2\20\22\5\b\5"+
-		"\2\21\16\3\2\2\2\21\17\3\2\2\2\21\20\3\2\2\2\22\5\3\2\2\2\23\24\b\4\1"+
-		"\2\24\25\7\3\2\2\25\26\5\6\4\2\26\27\7\4\2\2\27\32\3\2\2\2\30\32\7\n\2"+
-		"\2\31\23\3\2\2\2\31\30\3\2\2\2\32#\3\2\2\2\33\34\f\6\2\2\34\35\t\2\2\2"+
-		"\35\"\5\6\4\7\36\37\f\5\2\2\37 \t\3\2\2 \"\5\6\4\6!\33\3\2\2\2!\36\3\2"+
-		"\2\2\"%\3\2\2\2#!\3\2\2\2#$\3\2\2\2$\7\3\2\2\2%#\3\2\2\2&\'\t\2\2\2\'"+
-		"(\7\3\2\2(\64\5\b\5\2)*\7\t\2\2*,\5\b\5\2+)\3\2\2\2,-\3\2\2\2-+\3\2\2"+
-		"\2-.\3\2\2\2.\65\3\2\2\2/\61\5\b\5\2\60/\3\2\2\2\61\62\3\2\2\2\62\60\3"+
-		"\2\2\2\62\63\3\2\2\2\63\65\3\2\2\2\64+\3\2\2\2\64\60\3\2\2\2\65\66\3\2"+
-		"\2\2\66\67\7\4\2\2\67P\3\2\2\289\t\3\2\29:\7\3\2\2:F\5\b\5\2;<\7\t\2\2"+
-		"<>\5\b\5\2=;\3\2\2\2>?\3\2\2\2?=\3\2\2\2?@\3\2\2\2@G\3\2\2\2AC\5\b\5\2"+
-		"BA\3\2\2\2CD\3\2\2\2DB\3\2\2\2DE\3\2\2\2EG\3\2\2\2F=\3\2\2\2FB\3\2\2\2"+
-		"GH\3\2\2\2HI\7\4\2\2IP\3\2\2\2JK\7\3\2\2KL\5\b\5\2LM\7\4\2\2MP\3\2\2\2"+
-		"NP\7\n\2\2O&\3\2\2\2O8\3\2\2\2OJ\3\2\2\2ON\3\2\2\2P\t\3\2\2\2QR\7\3\2"+
-		"\2R^\5\n\6\2ST\7\t\2\2TV\5\n\6\2US\3\2\2\2VW\3\2\2\2WU\3\2\2\2WX\3\2\2"+
-		"\2X_\3\2\2\2Y[\5\n\6\2ZY\3\2\2\2[\\\3\2\2\2\\Z\3\2\2\2\\]\3\2\2\2]_\3"+
-		"\2\2\2^U\3\2\2\2^Z\3\2\2\2_`\3\2\2\2`a\7\4\2\2ab\t\2\2\2b{\3\2\2\2cd\7"+
-		"\3\2\2dp\5\n\6\2ef\7\t\2\2fh\5\n\6\2ge\3\2\2\2hi\3\2\2\2ig\3\2\2\2ij\3"+
-		"\2\2\2jq\3\2\2\2km\5\n\6\2lk\3\2\2\2mn\3\2\2\2nl\3\2\2\2no\3\2\2\2oq\3"+
-		"\2\2\2pg\3\2\2\2pl\3\2\2\2qr\3\2\2\2rs\7\4\2\2st\t\3\2\2t{\3\2\2\2uv\7"+
-		"\3\2\2vw\5\n\6\2wx\7\4\2\2x{\3\2\2\2y{\7\n\2\2zQ\3\2\2\2zc\3\2\2\2zu\3"+
-		"\2\2\2zy\3\2\2\2{\13\3\2\2\2\24\21\31!#-\62\64?DFOW\\^inpz";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13\u0086\4\2\t\2"+
+		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\3\3\3\3\3\5\3\22\n\3\3\4\3"+
+		"\4\3\4\3\4\3\4\3\4\5\4\32\n\4\3\4\5\4\35\n\4\3\4\3\4\3\4\3\4\3\4\3\4\7"+
+		"\4%\n\4\f\4\16\4(\13\4\3\5\3\5\3\5\3\5\3\5\6\5/\n\5\r\5\16\5\60\3\5\6"+
+		"\5\64\n\5\r\5\16\5\65\5\58\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\6\5A\n\5\r"+
+		"\5\16\5B\3\5\6\5F\n\5\r\5\16\5G\5\5J\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5"+
+		"\5S\n\5\3\5\5\5V\n\5\3\6\3\6\3\6\3\6\6\6\\\n\6\r\6\16\6]\3\6\6\6a\n\6"+
+		"\r\6\16\6b\5\6e\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\6\6n\n\6\r\6\16\6o\3\6"+
+		"\6\6s\n\6\r\6\16\6t\5\6w\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0081"+
+		"\n\6\3\6\5\6\u0084\n\6\3\6\2\3\6\7\2\4\6\b\n\2\4\3\2\7\b\3\2\5\6\2\u009a"+
+		"\2\f\3\2\2\2\4\21\3\2\2\2\6\34\3\2\2\2\bU\3\2\2\2\n\u0083\3\2\2\2\f\r"+
+		"\5\4\3\2\r\3\3\2\2\2\16\22\5\6\4\2\17\22\5\n\6\2\20\22\5\b\5\2\21\16\3"+
+		"\2\2\2\21\17\3\2\2\2\21\20\3\2\2\2\22\5\3\2\2\2\23\24\b\4\1\2\24\25\7"+
+		"\3\2\2\25\26\5\6\4\2\26\27\7\4\2\2\27\35\3\2\2\2\30\32\7\6\2\2\31\30\3"+
+		"\2\2\2\31\32\3\2\2\2\32\33\3\2\2\2\33\35\7\n\2\2\34\23\3\2\2\2\34\31\3"+
+		"\2\2\2\35&\3\2\2\2\36\37\f\6\2\2\37 \t\2\2\2 %\5\6\4\7!\"\f\5\2\2\"#\t"+
+		"\3\2\2#%\5\6\4\6$\36\3\2\2\2$!\3\2\2\2%(\3\2\2\2&$\3\2\2\2&\'\3\2\2\2"+
+		"\'\7\3\2\2\2(&\3\2\2\2)*\t\2\2\2*+\7\3\2\2+\67\5\b\5\2,-\7\t\2\2-/\5\b"+
+		"\5\2.,\3\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3\2\2\2\618\3\2\2\2\62\64"+
+		"\5\b\5\2\63\62\3\2\2\2\64\65\3\2\2\2\65\63\3\2\2\2\65\66\3\2\2\2\668\3"+
+		"\2\2\2\67.\3\2\2\2\67\63\3\2\2\289\3\2\2\29:\7\4\2\2:V\3\2\2\2;<\t\3\2"+
+		"\2<=\7\3\2\2=I\5\b\5\2>?\7\t\2\2?A\5\b\5\2@>\3\2\2\2AB\3\2\2\2B@\3\2\2"+
+		"\2BC\3\2\2\2CJ\3\2\2\2DF\5\b\5\2ED\3\2\2\2FG\3\2\2\2GE\3\2\2\2GH\3\2\2"+
+		"\2HJ\3\2\2\2I@\3\2\2\2IE\3\2\2\2JK\3\2\2\2KL\7\4\2\2LV\3\2\2\2MN\7\3\2"+
+		"\2NO\5\b\5\2OP\7\4\2\2PV\3\2\2\2QS\7\6\2\2RQ\3\2\2\2RS\3\2\2\2ST\3\2\2"+
+		"\2TV\7\n\2\2U)\3\2\2\2U;\3\2\2\2UM\3\2\2\2UR\3\2\2\2V\t\3\2\2\2WX\7\3"+
+		"\2\2Xd\5\n\6\2YZ\7\t\2\2Z\\\5\n\6\2[Y\3\2\2\2\\]\3\2\2\2][\3\2\2\2]^\3"+
+		"\2\2\2^e\3\2\2\2_a\5\n\6\2`_\3\2\2\2ab\3\2\2\2b`\3\2\2\2bc\3\2\2\2ce\3"+
+		"\2\2\2d[\3\2\2\2d`\3\2\2\2ef\3\2\2\2fg\7\4\2\2gh\t\2\2\2h\u0084\3\2\2"+
+		"\2ij\7\3\2\2jv\5\n\6\2kl\7\t\2\2ln\5\n\6\2mk\3\2\2\2no\3\2\2\2om\3\2\2"+
+		"\2op\3\2\2\2pw\3\2\2\2qs\5\n\6\2rq\3\2\2\2st\3\2\2\2tr\3\2\2\2tu\3\2\2"+
+		"\2uw\3\2\2\2vm\3\2\2\2vr\3\2\2\2wx\3\2\2\2xy\7\4\2\2yz\t\3\2\2z\u0084"+
+		"\3\2\2\2{|\7\3\2\2|}\5\n\6\2}~\7\4\2\2~\u0084\3\2\2\2\177\u0081\7\6\2"+
+		"\2\u0080\177\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u0082\3\2\2\2\u0082\u0084"+
+		"\7\n\2\2\u0083W\3\2\2\2\u0083i\3\2\2\2\u0083{\3\2\2\2\u0083\u0080\3\2"+
+		"\2\2\u0084\13\3\2\2\2\27\21\31\34$&\60\65\67BGIRU]bdotv\u0080\u0083";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

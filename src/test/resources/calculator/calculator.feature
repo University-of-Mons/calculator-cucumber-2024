@@ -182,3 +182,15 @@ Feature: Integer Arithmetic Expressions
   Scenario: Parsing an expression with syntax errors
     Given the following expression "8 + 6 * 2 +"
     Then its parsing is "NaN"
+
+  Scenario: Parsing an Infix expression with negative numbers
+    Given the following expression "8 + -6 * 2"
+    Then its parsing is "( 8 + ( -6 * 2 ) )"
+
+  Scenario: Parsing an Prefix expression with negative numbers
+    Given the following expression "+ (8, -2, 4)"
+    Then its parsing is "+ (8, -2, 4)"
+
+  Scenario: Parsing an Postfix expression with negative numbers
+    Given the following expression "(8, -2, 4) +"
+    Then its parsing is "(8, -2, 4) +"
