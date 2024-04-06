@@ -43,7 +43,7 @@ public class GuiMainViewController implements Initializable {
     @FXML
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnEquals;
 
-    private boolean resetDisplay = true;
+    private boolean resetDisplay = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
@@ -102,6 +102,10 @@ public class GuiMainViewController implements Initializable {
 
     @FXML
     public void onDelete() {
+        if (resetDisplay) {
+            expression.appendText(display.getText());
+            display.clear();
+        }
         if (!display.getText().isEmpty()) {
             display.setText(display.getText(0, display.getText().length() - 1));
         }
@@ -171,6 +175,9 @@ public class GuiMainViewController implements Initializable {
     }
 
     public void onClear(ActionEvent actionEvent) {
+        if (resetDisplay) {
+            expression.appendText(display.getText());
+        }
         display.clear();
     }
 
@@ -207,7 +214,7 @@ public class GuiMainViewController implements Initializable {
             return;
         }
         display.setText("1/" + display.getText());
-    }
+    }*/
 
     public void onRetrieve() {
         String expressionString = expression.getText();
@@ -215,9 +222,9 @@ public class GuiMainViewController implements Initializable {
         if (index != -1 && index < expressionString.length() - 2) {
             String retrieved = expressionString.substring(index + 2);
             if (!retrieved.equals(display.getText())) {
-                display.setText(retrieved);
+                display.setText(display.getText() + retrieved);
                 resetDisplay = false;
             }
         }
-    } */
+    }
 }

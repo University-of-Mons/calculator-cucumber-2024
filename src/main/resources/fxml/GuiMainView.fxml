@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.HBox?>
 <BorderPane minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.GuiMainViewController">
    <top>
       <VBox alignment="CENTER">
@@ -30,10 +31,10 @@
                <items>
                      <Menu mnemonicParsing="false" text="Zoom">
                        <items>
-                         <MenuItem mnemonicParsing="false" text="Zoom In" />
-                           <MenuItem mnemonicParsing="false" text="Zoom out" />
+                         <MenuItem mnemonicParsing="false" onAction="#displayZoomIn" text="Zoom In" />
+                           <MenuItem mnemonicParsing="false" onAction="#displayZoomOut" text="Zoom out" />
                            <SeparatorMenuItem mnemonicParsing="false" />
-                           <MenuItem mnemonicParsing="false" text="Default size" />
+                           <MenuItem mnemonicParsing="false" onAction="#displayDefaultZoom" text="Default size" />
                        </items>
                      </Menu>
                </items>
@@ -47,11 +48,18 @@
          </MenuBar>
          <VBox fx:id="displayContainer" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="NEVER">
             <children>
-               <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" minWidth="480.0" prefHeight="40.0" style="-fx-text-fill: #7f7f7f;" VBox.vgrow="NEVER">
-                  <font>
-                     <Font name="Avenir Black" size="24.0" />
-                  </font>
-               </TextField>
+               <HBox>
+                  <Button fx:id="btnRetrieve" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" VBox.vgrow="NEVER" onAction="#onRetrieve" prefWidth="120.0" text="Retrieve" textAlignment="CENTER">
+                     <font>
+                        <Font name="Avenir Black" size="24.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" minWidth="360.0" prefHeight="40.0" style="-fx-text-fill: #7f7f7f;" VBox.vgrow="NEVER">
+                     <font>
+                        <Font name="Avenir Black" size="24.0" />
+                     </font>
+                  </TextField>
+               </HBox>
                <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" minWidth="480.0" prefHeight="160.0" VBox.vgrow="NEVER">
                   <font>
                      <Font name="Avenir Black" size="72.0" />
