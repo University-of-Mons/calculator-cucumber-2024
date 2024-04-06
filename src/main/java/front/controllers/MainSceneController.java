@@ -80,13 +80,19 @@ public class MainSceneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Set the focus always on the textField
+        // This method is called at the creation of the scene
+
+        // At startup, the focus is set on the textField
         Platform.runLater(() -> outputField.requestFocus());
+
+        // Add a listener that maintains the focus on the textField
         outputField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (Boolean.FALSE.equals(newValue)) {
                 outputField.requestFocus();
             }
         });
+
+        // Set the equals button event
         outputField.setOnKeyPressed(event -> {
             if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
                 equalsButtonClicked();
@@ -95,8 +101,9 @@ public class MainSceneController implements Initializable {
     }
 
     @FXML
-    // This method is called when the user clicks on a character button (Not C and =)
     public void characterButtonClicked(MouseEvent event) {
+        // This method is called when the user clicks on a character button (Not C and =)
+
         Button source = (Button) event.getSource();
 
         if (source.equals(equals)) equalsButtonClicked();
@@ -105,18 +112,23 @@ public class MainSceneController implements Initializable {
     }
 
     private void equalsButtonClicked() {
+        // Read the input and evaluate it
         App.setUserInput(outputField.getText());
         Expression result = App.evalUserInput();
 
+        // Log the new result on the GUI
         switchHistory(App.getUserInput(), result.toString());
 
+        // Set the answer in the textField
         outputField.setText(result.toString());
+
         // Set the cursor at the end of the text
         outputField.positionCaret(outputField.getText().length());
-        App.setUserInput("");
     }
 
     private void switchHistory(String newExpression, String newResult){
+        // This method logs the new result and shift last results
+
         Label[] expressionHistory = new Label[5];
         expressionHistory[0] = lastExpression; expressionHistory[1] = lastExpression1; expressionHistory[2] = lastExpression2; expressionHistory[3] = lastExpression3; expressionHistory[4] = lastExpression4;
         Label[] resultHistory = new Label[5];
@@ -135,12 +147,15 @@ public class MainSceneController implements Initializable {
     }
 
     private void regularButtonClicked(MouseEvent event) {
+        // This method handles character button pressed
+
         Button button = (Button) event.getSource();
         String buttonText = button.getText();
 
         int cursorPosition = outputField.getCaretPosition();
         outputField.insertText(cursorPosition, buttonText);
         App.setUserInput(outputField.getText());
+
         // Move the cursor to the right of the new character
         outputField.positionCaret(cursorPosition + 1);
     }
