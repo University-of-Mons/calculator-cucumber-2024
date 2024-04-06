@@ -13,6 +13,14 @@ jobs:
     name: building, testing and quality analysis
     runs-on: ubuntu-latest
 
+    services:
+      xvfb:
+        image: selenium/standalone-chrome:latest
+        options: -e VNC_SERVER=true -e VNC_PORT=5900
+
+    env:
+      DISPLAY: ":99.0"
+
     steps:
     - name: checkout repository
       uses: actions/checkout@v4
@@ -23,6 +31,9 @@ jobs:
         distribution: 'temurin'
         java-version: 21
         cache: 'maven'
+
+    - name: Set up Xvfb
+      run: Xvfb $DISPLAY -ac -screen 0 1600x1200x24 > /dev/null 2>&1 &
         
     - name: Build with Maven (including running all tests)
       run: mvn -B package --file pom.xml
