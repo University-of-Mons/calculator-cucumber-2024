@@ -1,5 +1,6 @@
 package calculator;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
@@ -189,4 +190,49 @@ public class TestGui {
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("", display.getText());
     }
+
+    @Test
+    void testZoomOut(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#zoomMenu");
+        fxRobot.clickOn("#zoomOut");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals(70, display.getFont().getSize());
+    }
+
+    @Test
+    void testZoomIn(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#zoomMenu");
+        fxRobot.clickOn("#zoomOut");
+        fxRobot.clickOn("#zoomMenu");
+        fxRobot.clickOn("#zoomOut");
+        fxRobot.clickOn("#zoomMenu");
+        fxRobot.clickOn("#zoomOut");
+        fxRobot.clickOn("#zoomMenu");
+        fxRobot.clickOn("#zoomIn");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals(68, display.getFont().getSize());
+    }
+
+    @Test
+    void testZoomDefault(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#zoomMenu");
+        fxRobot.clickOn("#zoomOut");
+        fxRobot.clickOn("#zoomMenu");
+        fxRobot.clickOn("#zoomDefault");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals(72, display.getFont().getSize());
+    }
+
+    /*@Test
+    void testComplexModeChange(FxRobot fxRobot){
+        Button btnDelete = fxRobot.lookup("#btnDelete").queryAs(Button.class);
+        Assertions.assertNotNull(btnDelete, "btnDelete should be present");
+        fxRobot.clickOn("#modeMenu");
+        fxRobot.clickOn("#complexMode");
+        Button btnExtension = fxRobot.lookup("#btnExtension").queryAs(Button.class);
+        Assertions.assertNotNull(btnExtension, "btnExtension should be present");
+    }*/
 }

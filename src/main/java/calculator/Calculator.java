@@ -32,43 +32,6 @@ public class Calculator {
     */
 
     /**
-     * Prints an arithmetic expression provided as input parameter.
-     * @param e the arithmetic Expression to be printed
-     * @param notation the notation to be used
-     * @see #printExpressionDetails(Expression, Notation)
-     */
-
-    public void print(Expression e, Notation notation) {
-        ExpressionVisitor ev = new ExpressionVisitor();
-        ev.setNotation(notation);
-        e.accept(ev);
-        System.out.println("The result of evaluating expression " + ev.getExpression());
-        System.out.println("is: " + eval(e) + ".");
-        System.out.println();
-    }
-
-    /**
-     * Prints verbose details of an arithmetic expression provided as input parameter.
-     * @param e the arithmetic Expression to be printed
-     * @param n the notation to be used
-     * @see #print(Expression, Notation)
-     */
-    public void printExpressionDetails(Expression e, Notation n) {
-        print(e,n);
-        CountingVisitor cv = new CountingVisitor();
-        cv.setMode(Counting.DEPTH);
-        e.accept(cv);
-        System.out.print("It contains " + cv.getValue() + " levels of nested expressions, ");
-        cv.setMode(Counting.COUNT_OPS);
-        e.accept(cv);
-        System.out.print(cv.getValue() + " operations");
-        cv.setMode(Counting.COUNT_NBS);
-        e.accept(cv);
-        System.out.println(" and " + cv.getValue() + " numbers.");
-        System.out.println();
-    }
-
-    /**
      * Evaluates an arithmetic expression and returns its result
      * @param e the arithmetic Expression to be evaluated
      * @return The result of the evaluation

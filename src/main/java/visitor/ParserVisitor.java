@@ -34,22 +34,22 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitMulDivInfix(CalculatorExprParser.MulDivInfixContext ctx) {
-            Expression number1 = visit(ctx.infix(0));
-            Expression number2 = visit(ctx.infix(1));
-            List<Expression> params = new ArrayList<>();
+        Expression number1 = visit(ctx.infix(0));
+        Expression number2 = visit(ctx.infix(1));
+        List<Expression> params = new ArrayList<>();
 
-            Collections.addAll(params, number1, number2);
-            try {
-                if(ctx.infix().size() == 1){
-                    return visit(ctx.infix(0));
-                }
-                if(ctx.op.getType() == CalculatorExprParser.DIV)
-                    return c.eval(new Divides(params));
-                return c.eval(new Times(params));
+        Collections.addAll(params, number1, number2);
+        try {
+            if(ctx.infix().size() == 1){
+                return visit(ctx.infix(0));
             }
-            catch (IllegalConstruction e){
-                return new MyNotANumber();
-            }
+            if(ctx.op.getType() == CalculatorExprParser.DIV)
+                return c.eval(new Divides(params));
+            return c.eval(new Times(params));
+        }
+        catch (IllegalConstruction e){
+            return new MyNotANumber();
+        }
     }
 
     @Override

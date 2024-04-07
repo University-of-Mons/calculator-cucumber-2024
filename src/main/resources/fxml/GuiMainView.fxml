@@ -20,25 +20,21 @@
       <VBox alignment="CENTER">
          <MenuBar VBox.vgrow="NEVER">
            <menus>
-             <Menu mnemonicParsing="false" text="Mode">
+             <Menu fx:id="modeMenu" mnemonicParsing="false" text="Mode">
                <items>
-                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false" onAction="#onStandardMode" selected="true" text="Standard" />
-                  <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false" onAction="#onRationalMode" text="Rational" />
-                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" onAction="#onComplexMode" text="Complex" />
+                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false"  selected="true" text="Standard" /><!-- onAction="#onStandardMode" -->
+                  <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false"  text="Rational" /><!-- onAction="#onRationalMode" -->
+                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" text="Complex" /><!-- onAction="#onComplexMode" -->
                </items>
              </Menu>
-             <Menu mnemonicParsing="false" text="View">
-               <items>
-                     <Menu mnemonicParsing="false" text="Zoom">
-                       <items>
-                         <MenuItem mnemonicParsing="false" onAction="#displayZoomIn" text="Zoom In" />
-                           <MenuItem mnemonicParsing="false" onAction="#displayZoomOut" text="Zoom out" />
-                           <SeparatorMenuItem mnemonicParsing="false" />
-                           <MenuItem mnemonicParsing="false" onAction="#displayDefaultZoom" text="Default size" />
-                       </items>
-                     </Menu>
-               </items>
-             </Menu>
+              <Menu fx:id="zoomMenu" mnemonicParsing="false" text="Zoom">
+                 <items>
+                    <MenuItem fx:id="zoomIn" mnemonicParsing="false" onAction="#displayZoomIn" text="Zoom In" />
+                    <MenuItem fx:id="zoomOut" mnemonicParsing="false" onAction="#displayZoomOut" text="Zoom out" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem fx:id="zoomDefault" mnemonicParsing="false" onAction="#displayDefaultZoom" text="Default size" />
+                 </items>
+              </Menu>
              <Menu mnemonicParsing="false" text="Help">
                <items>
                  <MenuItem mnemonicParsing="false" text="About" />

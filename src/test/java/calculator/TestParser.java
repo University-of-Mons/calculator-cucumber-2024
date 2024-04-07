@@ -144,6 +144,14 @@ class TestParser{
         assertEquals(10, parser.evaluate().getValue());
     }
 
+    /*@Test
+    void testVisitParensPostfix() {
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(1 2 +)",calculator);
+        assertEquals(3, parser.evaluate().getValue());
+    }*/
+
     @Test
     void testNegOp2(){
         Calculator calculator = new Calculator();
@@ -176,6 +184,14 @@ class TestParser{
 
         Parser parser = new Parser("*(+(4,5), 2)",calculator);
         assertEquals(18,parser.evaluate().getValue());
+    }
+
+    @Test
+    void testVisitParensPrefix() {
+        Calculator calculator = new Calculator();
+
+        Parser parser = new Parser("(+ 1 2)",calculator);
+        assertEquals(3, parser.evaluate().getValue());
     }
 
     @Test
@@ -269,8 +285,8 @@ class TestParser{
         Parser prefix = new Parser("+(10 3)",calculator);
         assertEquals(13, prefix.evaluate().getValue());
 
-        Parser posfix = new Parser("(10   3)+",calculator);
-        assertEquals(13, posfix.evaluate().getValue());
+        Parser postfix = new Parser("(10   3)+",calculator);
+        assertEquals(13, postfix.evaluate().getValue());
     }
 
     /**

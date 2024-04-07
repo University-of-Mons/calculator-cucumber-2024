@@ -41,7 +41,7 @@ public class RationalModeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rationalMode.setSelected(true);
     }
-    public void appendToDisplay(String text) {
+    /*public void appendToDisplay(String text) {
         if (resetDisplay) {
             expression.appendText(display.getText());
             display.clear();
@@ -140,5 +140,5 @@ public class RationalModeController implements Initializable {
 
     public void displayDefaultZoom() {
         display.setStyle("-fx-font-size: 72px;");
-    }
+    }*/
 }

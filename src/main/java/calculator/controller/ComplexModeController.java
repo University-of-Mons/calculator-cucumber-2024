@@ -36,7 +36,7 @@ public class ComplexModeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
-    public void appendToDisplay(String text) {
+    /*public void appendToDisplay(String text) {
         if (resetDisplay) {
             expression.appendText(display.getText());
             display.clear();
@@ -148,5 +148,5 @@ public class ComplexModeController implements Initializable {
     }
 
     public void onExtension(ActionEvent actionEvent) {
-    }
+    }*/
 }

@@ -57,11 +57,6 @@ public class GuiMainViewController implements Initializable {
         resetDisplay = false;
     }
 
-    private void resetDisplay() {
-        expression.setText("");
-        display.setText("");
-    }
-
     public void onEquals() {
         if (!resetDisplay && !display.getText().equals("0")) {
             expression.setText(display.getText()+" = ");
@@ -111,7 +106,7 @@ public class GuiMainViewController implements Initializable {
         }
     }
 
-    @FXML
+    /*@FXML
     private void onStandardMode(ActionEvent actionEvent) {
         // we already are in standard mode
     }
@@ -126,7 +121,7 @@ public class GuiMainViewController implements Initializable {
         updateButtonsForMode("Complex");
     }
 
-   private void updateButtonsForMode(String mode) {
+    private void updateButtonsForMode(String mode) {
         // TODO : Renommer les fxml et pas toucher au rationnal, c'est un ancien test
         // TODO : Gérer dans le menu, le mode selectionné
         String fxmlFile = String.format("/fxml/%sMode.fxml", mode);
@@ -151,16 +146,13 @@ public class GuiMainViewController implements Initializable {
                 logger.error("Erreur lors du chargement des boutons pour le mode " + mode, e);
             }
         }
-}
-
-
+    }*/
 
     public void onOpenParenthesis(ActionEvent actionEvent) {
         appendToDisplay("(");
     }
 
     public void onCloseParenthesis(ActionEvent actionEvent) {
-        // TODO : interdire la fermeture de parenthèse si aucune ouverture ou pas
         appendToDisplay(")");
     }
 
@@ -196,25 +188,6 @@ public class GuiMainViewController implements Initializable {
     public void displayDefaultZoom() {
         display.setStyle("-fx-font-size: 72px;");
     }
-
-
-    /* public void onNegate() {
-        if (display.getText().equals("0") || resetDisplay) {
-            return;
-        }
-        if (display.getText().charAt(0) == '-') {
-            display.setText(display.getText().substring(1));
-        } else {
-            display.setText("-" + display.getText());
-        }
-    }
-
-    public void onFraction() {
-        if (display.getText().equals("0")||resetDisplay) {
-            return;
-        }
-        display.setText("1/" + display.getText());
-    }*/
 
     public void onRetrieve() {
         String expressionString = expression.getText();
