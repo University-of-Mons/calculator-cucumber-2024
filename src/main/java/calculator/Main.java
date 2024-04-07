@@ -7,6 +7,7 @@ import calculator.operation.Plus;
 import calculator.operation.Times;
 import calculator.parser.CalculatorLexer;
 import calculator.parser.CalculatorParser;
+import calculator.parser.VisitorParser;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -37,23 +38,16 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
-
-            String expr = "4 + 4";
-            CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString(expr));
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            CalculatorParser parser = new CalculatorParser(tokens);
-            ParseTree tree = parser.expression();
-            ParseTreeWalker walker = new ParseTreeWalker();
-//            walker.walk(listener, tree);
-
-
-
             Parser<Integer> a = new Parser<>();
-            Expression<Integer> b = a.parse(" 5 * 4 + 3 * 3", Parser::stringToInteger);
+            Expression<Integer> b = a.parse("5*4 + 3 * 3", Parser::stringToInteger);
+            System.out.println(b);
+
+            //Expression<Integer> expression = a.parse("5*4 + 3 * 3 - 458 * 740 /0 * 90 +4 -870 / 8", Parser::stringToInteger);
+            //System.out.println(expression);
 
             Expression<Integer> e;
             Calculator<Integer> c = new Calculator<>();
-            c.print(b);
+            // c.print(b);
             e = new MyNumber(8);
             c.print(e);
 

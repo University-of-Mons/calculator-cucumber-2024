@@ -44,15 +44,17 @@ equation
 
 // infix expression
 expression
-    : multiplyingExpression ((PLUS | MINUS) multiplyingExpression)*
+    : multiplyingExpression
+    | expression ((PLUS | MINUS) multiplyingExpression)
     ;
 
 multiplyingExpression
-    : powExpression ((TIMES | DIV) powExpression)*
+    : powExpression
+    | multiplyingExpression ((TIMES | DIV) powExpression)
     ;
 
 powExpression
-    : signedAtom (POW signedAtom)*
+    : signedAtom (POW powExpression)?
     ;
 
 // postfix expression
