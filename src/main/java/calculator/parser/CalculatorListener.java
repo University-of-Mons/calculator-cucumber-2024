@@ -48,6 +48,66 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitPowExpression(CalculatorParser.PowExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#postfix_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostfix_expression(CalculatorParser.Postfix_expressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#postfix_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostfix_expression(CalculatorParser.Postfix_expressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#postfix_multiplyingExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostfix_multiplyingExpression(CalculatorParser.Postfix_multiplyingExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#postfix_multiplyingExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostfix_multiplyingExpression(CalculatorParser.Postfix_multiplyingExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#postfix_powExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostfix_powExpression(CalculatorParser.Postfix_powExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#postfix_powExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostfix_powExpression(CalculatorParser.Postfix_powExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#prefix_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrefix_expression(CalculatorParser.Prefix_expressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#prefix_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrefix_expression(CalculatorParser.Prefix_expressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#prefix_multiplyingExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrefix_multiplyingExpression(CalculatorParser.Prefix_multiplyingExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#prefix_multiplyingExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrefix_multiplyingExpression(CalculatorParser.Prefix_multiplyingExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#prefix_powExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrefix_powExpression(CalculatorParser.Prefix_powExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#prefix_powExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrefix_powExpression(CalculatorParser.Prefix_powExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CalculatorParser#signedAtom}.
 	 * @param ctx the parse tree
 	 */
