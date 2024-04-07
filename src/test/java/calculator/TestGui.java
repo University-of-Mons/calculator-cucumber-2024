@@ -144,15 +144,42 @@ public class TestGui {
     void testMultiplePrefix(FxRobot fxRobot){
         fxRobot.clickOn("#btnMultiply");
         fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn(("#btnComma"));
         fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btnComma");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnCloseParenthesis");
-        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnEquals");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("9", display.getText());
+    }
+
+    @Test
+    void testDelete(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btnDelete");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("12", display.getText());
+    }
+
+    @Test
+    void testRetrieve(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btn4");
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btnRetrieve");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("1", display.getText());
     }
 
     @Test
