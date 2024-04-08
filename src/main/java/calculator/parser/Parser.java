@@ -1,9 +1,9 @@
-package calculator;
+package calculator.parser;
 
+import calculator.Expression;
+import calculator.IllegalExpression;
+import calculator.Value;
 import calculator.operand.MyNumber;
-import calculator.parser.CalculatorLexer;
-import calculator.parser.CalculatorParser;
-import calculator.parser.VisitorParser;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.CharStreams;
@@ -14,13 +14,23 @@ import org.antlr.v4.runtime.tree.ParseTree;
 @Slf4j
 public class Parser<T> {
 
-    public Expression<T> parse(String s, From<T> baseParser) throws IllegalExpression{
+    public Expression<T> parse(String s, From<T> baseParser) throws IllegalExpression {
         CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString(s));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CalculatorParser parser = new CalculatorParser(tokens);
         ParseTree tree = parser.equation();
         VisitorParser<T> visitorParser = new VisitorParser<>(baseParser);
-        return visitorParser.visit(tree);
+        try {
+            Expression<T> expr = visitorParser.visit(tree);
+            if (expr == null) {
+                log.error("Illegal expression : {}", s);
+                throw new IllegalExpression();
+            }
+            return expr;
+        } catch (NullPointerException e) {
+            log.error("Illegal expression : {}", s);
+            throw new IllegalExpression();
+        }
     }
 
     @FunctionalInterface

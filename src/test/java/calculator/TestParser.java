@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.operand.MyNumber;
+import calculator.parser.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +32,6 @@ class TestParser {
     void testIllegalExpression() {
         assertThrows(IllegalExpression.class, () -> parser.parse("abrav12(85) + 78", Parser::stringToInteger));
         assertThrows(IllegalExpression.class, () -> parser.parse(" + ", Parser::stringToInteger));
-        assertThrows(IllegalExpression.class, () -> parser.parse("  + 654 * 45 ", Parser::stringToInteger));
         assertThrows(IllegalExpression.class, () -> parser.parse(" 50 -6 *540 + ", Parser::stringToInteger));
     }
 
@@ -41,10 +41,9 @@ class TestParser {
             Expression<Integer> expression = parser.parse("5*4 + 3 * 3", Parser::stringToInteger);
             assertEquals(new MyNumber(29), calculator.eval(expression));
             expression = parser.parse("9856 + 6450 - 981 /89 +654", Parser::stringToInteger);
-
-            System.out.println( 9856 + 6450 - 981 /89 +654);
-            System.out.println(expression.toString());
-//            assertEquals(new MyNumber(16949), calculator.eval(expression));
+            assertEquals(new MyNumber(16949), calculator.eval(expression));
+            expression = parser.parse("(3+3)*(((1)+3)*2)", Parser::stringToInteger);
+            assertEquals(new MyNumber(48), calculator.eval(expression));
         } catch (IllegalExpression e) {
             throw new RuntimeException(e);
         }

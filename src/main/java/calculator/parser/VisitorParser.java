@@ -2,8 +2,6 @@ package calculator.parser;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
-import calculator.MyNaN;
-import calculator.Parser;
 import calculator.operation.Divides;
 import calculator.operation.Minus;
 import calculator.operation.Plus;
@@ -14,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>>{
+public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
 
-    private Parser.From<T> baseParser;
+    private final Parser.From<T> baseParser;
 
     public VisitorParser(Parser.From<T> baseParser) {
         super();
@@ -32,7 +30,7 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>>{
     public Expression<T> visitExpression(CalculatorParser.ExpressionContext ctx) {
         log.trace("Visit expression : {}", ctx.getText());
 
-        if(ctx.children.size() == 1){
+        if (ctx.children.size() == 1) {
             // multiplyingExpression
             return visit(ctx.multiplyingExpression());
         } else if (ctx.children.size() == 3) {
@@ -44,22 +42,25 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>>{
             String op = ctx.children.get(1).getText();
             try {
                 if (op.equals("+")) {
+                    log.trace("Create plus : {}", insideExpression);
                     return new Plus<>(insideExpression);
                 } else if (op.equals("-")) {
                     return new Minus<>(insideExpression);
                 }
             } catch (IllegalConstruction e) {
-                throw new RuntimeException(e);
+                log.warn("Could not create Operation");
+                return null;
             }
         }
-        throw new RuntimeException();
+        log.error("Illegal expression");
+        return null;
     }
 
     @Override
     public Expression<T> visitMultiplyingExpression(CalculatorParser.MultiplyingExpressionContext ctx) {
         log.trace("Visit multiplying expression : {}", ctx.getText());
 
-        if(ctx.children.size() == 1){
+        if (ctx.children.size() == 1) {
             // powExpression
             return visit(ctx.powExpression());
         } else if (ctx.children.size() == 3) {
@@ -76,33 +77,45 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>>{
                     return new Divides<>(insideExpression);
                 }
             } catch (IllegalConstruction e) {
-                throw new RuntimeException(e);
+                log.warn("Could not create Operation");
+                return null;
             }
         }
-        throw new RuntimeException();
+        log.error("Illegal multiplyingExpression");
+        return null;
     }
 
     @Override
     public Expression<T> visitPowExpression(CalculatorParser.PowExpressionContext ctx) {
         log.trace("Visit pow expression : {}", ctx.getText());
 
-        if (ctx.children.size() == 1){
+        if (ctx.children.size() == 1) {
             // signedAtom
             return visit(ctx.signedAtom());
-        } else if (ctx.children.size() == 3){
+        } else if (ctx.children.size() == 3) {
             // signedAtom POW powExpression
             // todo : add pow operation
-            return visit(ctx.signedAtom());
+            log.error("Exponent not yet implemented");
+            return null;
         }
-        throw new RuntimeException();
+        log.error("Illegal powExpression");
+        return null;
     }
 
-    @Override public Expression<T> visitSignedAtom(CalculatorParser.SignedAtomContext ctx) {
+    @Override
+    public Expression<T> visitSignedAtom(CalculatorParser.SignedAtomContext ctx) {
         String text = ctx.getText();
+        log.trace("Visit signed atom expression : {}", text);
 
         if (ctx.func_() == null) {
+            if (ctx.atom() != null && ctx.atom().LPAREN() != null) {
+                return visit(ctx.atom().expression());
+            }
+            log.trace("base {}", baseParser.fromString(text));
             return baseParser.fromString(text);
         }
-        return visitChildren(ctx);
+        // todo : add functions
+        log.error("function not yet implemented");
+        return null;
     }
 }

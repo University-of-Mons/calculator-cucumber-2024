@@ -5,14 +5,8 @@ import calculator.operation.Divides;
 import calculator.operation.Minus;
 import calculator.operation.Plus;
 import calculator.operation.Times;
-import calculator.parser.CalculatorLexer;
-import calculator.parser.CalculatorParser;
-import calculator.parser.VisitorParser;
+import calculator.parser.Parser;
 import lombok.extern.slf4j.Slf4j;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,15 +33,12 @@ public class Main {
     public static void main(String[] args) {
         try {
             Parser<Integer> a = new Parser<>();
-            Expression<Integer> b = a.parse("5*4 + 3 * 3", Parser::stringToInteger);
+            Expression<Integer> b = a.parse("((5))", Parser::stringToInteger);
             System.out.println(b);
-
-            //Expression<Integer> expression = a.parse("5*4 + 3 * 3 - 458 * 740 /0 * 90 +4 -870 / 8", Parser::stringToInteger);
-            //System.out.println(expression);
 
             Expression<Integer> e;
             Calculator<Integer> c = new Calculator<>();
-            // c.print(b);
+            c.print(b);
             e = new MyNumber(8);
             c.print(e);
 
@@ -71,7 +62,7 @@ public class Main {
             e = new Divides<>(params4);
             c.print(e, Notation.POSTFIX);
         } catch (IllegalConstruction | IllegalExpression exception) {
-            log.error("cannot create operations without parameters");
+            log.error("cannot create operations without parameters {}", exception);
         }
     }
 
