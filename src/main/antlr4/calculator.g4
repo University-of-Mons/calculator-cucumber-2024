@@ -15,7 +15,7 @@ expression: infix
 infix: infix op=('*'| '/') infix  # MulDivInfix
     | infix op=('+' | '-') infix  # AddSubInfix
     | '(' infix ')'               # ParensInfix
-    | SUB? NUMBER                      # NumberInfix
+    | atom                      # AtomInfix
     ;
 
 
@@ -24,13 +24,13 @@ infix: infix op=('*'| '/') infix  # MulDivInfix
 prefix: op=('*' | '/') '(' prefix ( (',' prefix)+  | (prefix)+ ) ')' # MulDivPrefix
     | op=('+' | '-') '(' prefix ( (',' prefix)+  | (prefix)+) ')'    # AddSubPrefix
     | '(' prefix ')'                                                 # ParensPrefix
-    | SUB? NUMBER                                                         # NumberPrefix
+    | atom                                                         # AtomPrefix
     ;
 
 postfix : '(' postfix ( (',' postfix)+  | (postfix)+ ) ')' op=('*' | '/') # MulDivPostfix
     | '(' postfix ( (',' postfix)+  | (postfix)+) ')' op=('+' | '-')      # AddSubPostfix
     | '(' postfix ')'                                                     # ParensPostfix
-    | SUB? NUMBER                                                              # NumberPostfix
+    | atom                                                              # AtomPostfix
     ;
 
 // Defined to reference as constants in the Java code
@@ -40,6 +40,11 @@ MUL: '*';
 DIV: '/';
 COMMA: ',';
 
-NUMBER: [0-9]+;
-WS: [ \t\r\n]+ -> skip; // skip tabs, newlines
+// Can have real or imaginary numbers
+atom: SUB? NUMBER? I  # ImaginaryAtom
+    | SUB? NUMBER # RealAtom
+    ;
 
+I: 'i';
+NUMBER:[0-9]+;
+WS: [ \t\r\n]+ -> skip; // skip tabs, newlines

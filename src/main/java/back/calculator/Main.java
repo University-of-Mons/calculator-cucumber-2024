@@ -5,6 +5,13 @@ package back.calculator;
  */
 public class Main {
     public static void main(String[] args) {
-        App.main(args);
+        //App.main(args);
+
+        Calculator c = new Calculator();
+
+        Expression e = c.read("2i");
+        System.out.println(e);
+        Expression f = c.read("i");
+        System.out.println(f);
     }
 }

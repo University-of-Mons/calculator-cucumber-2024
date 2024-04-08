@@ -83,10 +83,23 @@ public class MyNumber implements Expression {
      */
     @Override
     public String toString() {
-        if (isImaginary()) {
-            return real + "+" + imaginary + "i";
+        if (real == 0) {
+            if (imaginary == 0) {
+                return "0";
+            } else if (imaginary == 1) {
+                return "i";
+            } else {
+                return imaginary + "i";
+            }
+        } else {
+            if (imaginary == 0) {
+                return Integer.toString(real);
+            } else if (imaginary > 0) {
+                return real + "+" + imaginary + "i";
+            } else {
+                return real + "-" + (-imaginary) + "i";
+            }
         }
-        return Integer.toString(real);
     }
 
     /**
