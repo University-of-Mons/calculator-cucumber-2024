@@ -35,9 +35,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 grammar Calculator;
 
-equation
-    : expression relop expression  EOF
-    | expression EOF
+init
+    : expression EOF
     | postfix_expression EOF
     | prefix_expression EOF
     ;
@@ -135,12 +134,6 @@ funcname
     | SQRT
     ;
 
-relop
-    : EQ
-    | GT
-    | LT
-    ;
-
 COS
     : 'cos'
     ;
@@ -199,18 +192,6 @@ TIMES
 
 DIV
     : '/'
-    ;
-
-GT
-    : '>'
-    ;
-
-LT
-    : '<'
-    ;
-
-EQ
-    : '='
     ;
 
 COMMA

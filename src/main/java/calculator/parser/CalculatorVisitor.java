@@ -8,14 +8,14 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
- @SuppressWarnings("all")
+@SuppressWarnings("all")
 public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#equation}.
+	 * Visit a parse tree produced by {@link CalculatorParser#init}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEquation(CalculatorParser.EquationContext ctx);
+	T visitInit(CalculatorParser.InitContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
@@ -112,10 +112,4 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFuncname(CalculatorParser.FuncnameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#relop}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRelop(CalculatorParser.RelopContext ctx);
 }
