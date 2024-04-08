@@ -44,6 +44,8 @@ class TestParser {
             assertEquals(new MyNumber(16949), calculator.eval(expression));
             expression = parser.parse("(3+3)*(((1)+3)*2)", Parser::stringToInteger);
             assertEquals(new MyNumber(48), calculator.eval(expression));
+            expression = parser.parse("3 * 5 * 4 *6 /4 /6 *6 *8 /6", Parser::stringToInteger);
+            assertEquals(new MyNumber(120), calculator.eval(expression));
         } catch (IllegalExpression e) {
             throw new RuntimeException(e);
         }
