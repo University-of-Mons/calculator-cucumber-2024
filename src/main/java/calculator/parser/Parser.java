@@ -18,7 +18,11 @@ public class Parser<T> {
         CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString(s));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CalculatorParser parser = new CalculatorParser(tokens);
-        ParseTree tree = parser.equation();
+        ParseTree tree = parser.init();
+        if (parser.getNumberOfSyntaxErrors() > 0){
+            log.error("Illegal expression : {}", s);
+            throw new IllegalExpression();
+        }
         VisitorParser<T> visitorParser = new VisitorParser<>(baseParser);
         try {
             Expression<T> expr = visitorParser.visit(tree);
