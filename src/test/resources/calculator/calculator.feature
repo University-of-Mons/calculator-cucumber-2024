@@ -2,7 +2,6 @@ Feature: Integer Arithmetic Expressions
   This feature provides a range of scenarios corresponding to the
   intended external behaviour of arithmetic expressions on integers.
 
-  # This is just a comment.
   # You can start with a Background: that will be run before executing each scenario.
 
   Background:

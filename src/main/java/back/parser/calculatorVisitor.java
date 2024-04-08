@@ -39,6 +39,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParensInfix(calculatorParser.ParensInfixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ImaginaryInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImaginaryInfix(calculatorParser.ImaginaryInfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code AtomInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
@@ -74,6 +81,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParensPrefix(calculatorParser.ParensPrefixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ImaginaryPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImaginaryPrefix(calculatorParser.ImaginaryPrefixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code AtomPrefix}
 	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
@@ -102,12 +116,25 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParensPostfix(calculatorParser.ParensPostfixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ImaginaryPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImaginaryPostfix(calculatorParser.ImaginaryPostfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code AtomPostfix}
 	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAtomPostfix(calculatorParser.AtomPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link calculatorParser#imaginaryAndReal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImaginaryAndReal(calculatorParser.ImaginaryAndRealContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ImaginaryAtom}
 	 * labeled alternative in {@link calculatorParser#atom}.

@@ -57,8 +57,9 @@ public final class Divides extends Operation {
         if (r.getReal() == 0 || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
+            return new NotANumber();
             // (a + bi) / (c + di) = (ac + bd) + (bc - ad)i / (c^2 + d^2)
-            int a = l.getReal();
+            /*int a = l.getReal();
             int b = l.getImaginary();
             int c = r.getReal();
             int d = r.getImaginary();
@@ -66,6 +67,7 @@ public final class Divides extends Operation {
             int real = (a * c + b * d) / denom;
             int imaginary = (b * c - a * d) / denom;
             return new MyNumber(real, imaginary);
+             */
         }
         return new MyNumber(l.getReal() / r.getReal());
     }

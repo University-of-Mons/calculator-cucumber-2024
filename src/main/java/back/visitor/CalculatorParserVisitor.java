@@ -87,6 +87,11 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
+    public Expression visitImaginaryInfix(calculatorParser.ImaginaryInfixContext ctx) {
+        return visit(ctx.imaginaryAndReal());
+    }
+
+    @Override
     public Expression visitAtomInfix(calculatorParser.AtomInfixContext ctx) {
         return visit(ctx.atom());
     }
@@ -171,4 +176,20 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return visit(ctx.atom());
     }
 
+
+    @Override
+    public Expression visitImaginaryAndReal(calculatorParser.ImaginaryAndRealContext ctx) {
+        int real = Integer.parseInt(ctx.real.getText());
+        int imaginary = 1;
+        if (ctx.getChild(0) == ctx.SUB()) {
+            real *= -1;
+        }
+        if (ctx.im != null) {
+            imaginary = Integer.parseInt(ctx.im.getText());
+        }
+        if (ctx.op.getType() == SUB) {
+            imaginary *= -1;
+        }
+        return new MyNumber(real, imaginary);
+    }
 }

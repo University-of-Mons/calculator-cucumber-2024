@@ -74,6 +74,23 @@ public class CalculatorSteps {
         }
     }
 
+    @Given("a complex operation {string}")
+    public void givenAComplexOperation(String s) {
+        // Write code here that turns the phrase above into concrete actions
+        params = new ArrayList<>(); // create an empty set of parameters to be filled in
+        try {
+            switch (s) {
+                case "+" -> op = new back.calculator.operators.Plus(params);
+                case "-" -> op = new back.calculator.operators.Minus(params);
+                case "*" -> op = new back.calculator.operators.Times(params);
+                case "/" -> op = new back.calculator.operators.Divides(params);
+                default -> throw new IllegalArgumentException("Unknown operation!");
+            }
+        } catch (back.calculator.IllegalConstruction e) {
+            throw new IllegalArgumentException("Illegal construction!");
+        }
+    }
+
     // ############################### Nested operations ###############################
 
     // The following example shows how to use a DataTable provided as input.
@@ -225,6 +242,14 @@ public class CalculatorSteps {
         //add extra parameter to the operation
         params = new ArrayList<>();
         params.add(new MyNumber(val));
+        op.addMoreParams(params);
+    }
+
+    @When("^I provide a (.*) complex number (-?\\d+)([+-])(\\d+)i")
+    public void whenIProvideAComplexNumber(String s, int real, char sign2, int imaginary) {
+        // Write code here that turns the phrase above into concrete actions
+        params = new ArrayList<>(); // create an empty set of parameters to be filled in
+        params.add(new MyNumber(real, sign2 == '-' ? -imaginary : imaginary));
         op.addMoreParams(params);
     }
 

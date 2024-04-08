@@ -13,6 +13,7 @@ expression: infix
 
 // With ANTLR, precedence is determined by the order of the rules
 infix: infix op=('*'| '/') infix  # MulDivInfix
+    | imaginaryAndReal  # ImaginaryInfix
     | infix op=('+' | '-') infix  # AddSubInfix
     | '(' infix ')'               # ParensInfix
     | atom                      # AtomInfix
@@ -24,14 +25,18 @@ infix: infix op=('*'| '/') infix  # MulDivInfix
 prefix: op=('*' | '/') '(' prefix ( (',' prefix)+  | (prefix)+ ) ')' # MulDivPrefix
     | op=('+' | '-') '(' prefix ( (',' prefix)+  | (prefix)+) ')'    # AddSubPrefix
     | '(' prefix ')'                                                 # ParensPrefix
+    | imaginaryAndReal                                             # ImaginaryPrefix
     | atom                                                         # AtomPrefix
     ;
 
 postfix : '(' postfix ( (',' postfix)+  | (postfix)+ ) ')' op=('*' | '/') # MulDivPostfix
     | '(' postfix ( (',' postfix)+  | (postfix)+) ')' op=('+' | '-')      # AddSubPostfix
     | '(' postfix ')'                                                     # ParensPostfix
+    | imaginaryAndReal                                                   # ImaginaryPostfix
     | atom                                                              # AtomPostfix
     ;
+
+imaginaryAndReal: SUB? real=NUMBER op=('+' | '-') im=NUMBER? I;
 
 // Defined to reference as constants in the Java code
 ADD: '+';
@@ -41,8 +46,8 @@ DIV: '/';
 COMMA: ',';
 
 // Can have real or imaginary numbers
-atom: SUB? NUMBER? I  # ImaginaryAtom
-    | SUB? NUMBER # RealAtom
+atom: SUB? NUMBER? I # ImaginaryAtom
+    |  SUB? NUMBER   # RealAtom
     ;
 
 I: 'i';

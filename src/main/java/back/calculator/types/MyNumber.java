@@ -84,21 +84,34 @@ public class MyNumber implements Expression {
     @Override
     public String toString() {
         if (real == 0) {
-            if (imaginary == 0) {
-                return "0";
-            } else if (imaginary == 1) {
-                return "i";
-            } else {
-                return imaginary + "i";
-            }
+            return toStringPurelyImaginary();
         } else {
-            if (imaginary == 0) {
-                return Integer.toString(real);
-            } else if (imaginary > 0) {
-                return real + "+" + imaginary + "i";
-            } else {
-                return real + "-" + (-imaginary) + "i";
-            }
+            return toStringWithReal();
+        }
+    }
+
+    private String toStringPurelyImaginary() {
+        System.out.println(imaginary + "" + real);
+        if (imaginary == 0) {
+            return "0";
+        } else if (imaginary == 1) {
+            return "i";
+        } else {
+            return imaginary + "i";
+        }
+    }
+
+    private String toStringWithReal() {
+        if (imaginary == 0) {
+            return Integer.toString(real);
+        } else if (imaginary == 1) {
+            return real + "+i";
+        } else if (imaginary == -1) {
+            return real + "-i";
+        } else if (imaginary > 1) {
+            return real + "+" + imaginary + "i";
+        } else {
+            return real + "-" + (-imaginary) + "i";
         }
     }
 
