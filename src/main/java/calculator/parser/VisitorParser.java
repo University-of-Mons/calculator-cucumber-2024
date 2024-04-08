@@ -102,61 +102,21 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
     }
 
     @Override public Expression<T> visitPostfix_expression(CalculatorParser.Postfix_expressionContext ctx) {
-        log.trace("Visit postfix multiplying expression : {}", ctx.getText());
+        log.trace("Visit postfix expression : {}", ctx.getText());
 
         if (ctx.children.size() == 1) {
             // postfix_multiplyingExpression
-            return visit(ctx.postfix_multiplyingExpression(0));
-        } else if (ctx.children.size() == 3) {
+            return visit(ctx.signedAtom());
+        } else {
             // LPAREN (postfix_multiplyingExpression COMMA?)+ RPAREN (PLUS | MINUS)
             List<Expression<T>> insideExpression = new ArrayList<>();
-            for (var expr:ctx.postfix_multiplyingExpression()) {
+            for (var expr:ctx.postfix_expression()) {
                 insideExpression.add(visit(expr));
             }
 
             String op = ctx.children.getLast().getText();
             return createOperation(op,insideExpression);
         }
-        log.error("Illegal multiplyingExpression");
-        return null;
-    }
-
-    @Override public Expression<T> visitPostfix_multiplyingExpression(CalculatorParser.Postfix_multiplyingExpressionContext ctx) {
-        log.trace("Visit postfix multiplying expression : {}", ctx.getText());
-
-        if (ctx.children.size() == 1) {
-            // postfix_powExpression
-            return visit(ctx.postfix_powExpression(0));
-        } else if (ctx.children.size() == 3) {
-            // LPAREN (postfix_powExpression COMMA?)+ RPAREN (TIMES | DIV)
-            List<Expression<T>> insideExpression = new ArrayList<>();
-            for (var expr:ctx.postfix_powExpression()) {
-                insideExpression.add(visit(expr));
-            }
-
-            String op = ctx.children.getLast().getText();
-            return createOperation(op,insideExpression);
-
-        }
-        log.error("Illegal multiplyingExpression");
-        return null;
-    }
-
-
-    @Override public Expression<T> visitPostfix_powExpression(CalculatorParser.Postfix_powExpressionContext ctx) {
-        log.trace("Visit postfix pow expression : {}", ctx.getText());
-
-        if (ctx.children.size() == 1) {
-            // signedAtom
-            return visit(ctx.signedAtom(0));
-        } else if (ctx.children.size() == 3) {
-            // signedAtom POW powExpression
-            // todo : add pow operation
-            log.error("Exponent not yet implemented");
-            return null;
-        }
-        log.error("Illegal powExpression");
-        return null;
     }
 
     @Override public Expression<T> visitPrefix_expression(CalculatorParser.Prefix_expressionContext ctx) {
@@ -164,57 +124,17 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
 
         if (ctx.children.size() == 1) {
             // prefix_multiplyingExpression
-            return visit(ctx.prefix_multiplyingExpression(0));
-        } else if (ctx.children.size() == 3) {
+            return visit(ctx.signedAtom());
+        } else {
             // LPAREN (prefix_multiplyingExpression COMMA?)+ RPAREN (PLUS | MINUS)
             List<Expression<T>> insideExpression = new ArrayList<>();
-            for (var expr:ctx.prefix_multiplyingExpression()) {
+            for (var expr:ctx.prefix_expression()) {
                 insideExpression.add(visit(expr));
             }
 
             String op = ctx.children.getFirst().getText();
             return createOperation(op,insideExpression);
         }
-        log.error("Illegal multiplyingExpression");
-        return null;
-    }
-
-    @Override public Expression<T> visitPrefix_multiplyingExpression(CalculatorParser.Prefix_multiplyingExpressionContext ctx) {
-        log.trace("Visit prefix multiplying expression : {}", ctx.getText());
-
-        if (ctx.children.size() == 1) {
-            // prefix_powExpression
-            return visit(ctx.prefix_powExpression(0));
-        } else if (ctx.children.size() == 3) {
-            // LPAREN (prefix_powExpression COMMA?)+ RPAREN (TIMES | DIV)
-            List<Expression<T>> insideExpression = new ArrayList<>();
-            for (var expr:ctx.prefix_powExpression()) {
-                insideExpression.add(visit(expr));
-            }
-
-            String op = ctx.children.getFirst().getText();
-            return createOperation(op,insideExpression);
-
-        }
-        log.error("Illegal multiplyingExpression");
-        return null;
-    }
-
-
-    @Override public Expression<T> visitPrefix_powExpression(CalculatorParser.Prefix_powExpressionContext ctx) {
-        log.trace("Visit prefix pow expression : {}", ctx.getText());
-
-        if (ctx.children.size() == 1) {
-            // signedAtom
-            return visit(ctx.signedAtom(0));
-        } else if (ctx.children.size() == 3) {
-            // signedAtom POW powExpression
-            // todo : add pow operation
-            log.error("Exponent not yet implemented");
-            return null;
-        }
-        log.error("Illegal powExpression");
-        return null;
     }
 
     @Override

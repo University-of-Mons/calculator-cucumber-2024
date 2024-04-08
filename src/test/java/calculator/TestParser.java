@@ -51,4 +51,40 @@ class TestParser {
         }
     }
 
+    @Test
+    void testPostfix(){
+        try {
+            Expression<Integer> expression = parser.parse("((5 4)* , (3,3)*)+", Parser::stringToInteger);
+            assertEquals(new MyNumber(29), calculator.eval(expression));
+            expression = parser.parse("(((9856 6450)+ (981 89) / )- 654)+", Parser::stringToInteger);
+            assertEquals(new MyNumber(16949), calculator.eval(expression));
+            expression = parser.parse("((3 3)+ (((1),3)+2)*)*", Parser::stringToInteger);
+            assertEquals(new MyNumber(48), calculator.eval(expression));
+            expression = parser.parse("(3  5  4 6 )*", Parser::stringToInteger);
+            assertEquals(new MyNumber(360), calculator.eval(expression));
+        } catch (IllegalExpression e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @Test
+    void testPrefix(){
+        try {
+            Expression<Integer> expression = parser.parse("+(*(5 4) , *(3,3))", Parser::stringToInteger);
+            assertEquals(new MyNumber(29), calculator.eval(expression));
+            expression = parser.parse("+(-(+(9856 6450) /(981 89)) 654)", Parser::stringToInteger);
+            assertEquals(new MyNumber(16949), calculator.eval(expression));
+            expression = parser.parse("*(+(3 3) *(+((1),3)2))", Parser::stringToInteger);
+            assertEquals(new MyNumber(48), calculator.eval(expression));
+            expression = parser.parse("*(3  5  4 6 )", Parser::stringToInteger);
+            assertEquals(new MyNumber(360), calculator.eval(expression));
+        } catch (IllegalExpression e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
 }

@@ -58,41 +58,22 @@ powExpression
 
 // postfix expression
 postfix_expression
-    : LPAREN (postfix_multiplyingExpression COMMA?)+ RPAREN (PLUS | MINUS)
-    | postfix_multiplyingExpression
-    ;
-
-postfix_multiplyingExpression
-    : LPAREN (postfix_powExpression COMMA?)+ RPAREN (TIMES | DIV)
-    | postfix_powExpression
-    ;
-
-postfix_powExpression
-    : LPAREN (signedAtom COMMA? signedAtom) RPAREN (POW)
+    : LPAREN (postfix_expression COMMA?)+ RPAREN (PLUS | MINUS | TIMES | DIV)
     | signedAtom
     ;
 
+
 // prefix expression
 prefix_expression
-    : (PLUS | MINUS) LPAREN (prefix_multiplyingExpression COMMA?)+ RPAREN
-    | prefix_multiplyingExpression
-    ;
-
-prefix_multiplyingExpression
-    : (TIMES | DIV) LPAREN (prefix_powExpression COMMA?)+ RPAREN
-    | prefix_powExpression
-    ;
-
-prefix_powExpression
-    : (POW) LPAREN (signedAtom COMMA? signedAtom) RPAREN
+    : (PLUS | MINUS | TIMES | DIV) LPAREN (prefix_expression COMMA?)+ RPAREN
     | signedAtom
     ;
 
 
 // Atom
 signedAtom
-    : PLUS signedAtom
-    | MINUS signedAtom
+    : PLUS scientific
+    | MINUS scientific
     | func_
     | atom
     ;

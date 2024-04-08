@@ -41,35 +41,11 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPostfix_expression(CalculatorParser.Postfix_expressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#postfix_multiplyingExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPostfix_multiplyingExpression(CalculatorParser.Postfix_multiplyingExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#postfix_powExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPostfix_powExpression(CalculatorParser.Postfix_powExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CalculatorParser#prefix_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPrefix_expression(CalculatorParser.Prefix_expressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#prefix_multiplyingExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrefix_multiplyingExpression(CalculatorParser.Prefix_multiplyingExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#prefix_powExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrefix_powExpression(CalculatorParser.Prefix_powExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CalculatorParser#signedAtom}.
 	 * @param ctx the parse tree
