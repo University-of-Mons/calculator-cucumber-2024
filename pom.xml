@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>calculator</groupId>
     <artifactId>calculator-cucumber</artifactId>
@@ -13,15 +13,14 @@
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
 
         <commons-lang3.version>3.14.0</commons-lang3.version>
-        <manifold.version>2024.1.4</manifold.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <lombok.version>1.18.30</lombok.version>
-        <slf4j.version>2.0.12</slf4j.version>
-        <logback.version>1.5.0</logback.version>
+        <lombok.version>[1.18,)</lombok.version>
+        <slf4j.version>[2.0,)</slf4j.version>
+        <logback.version>1.5.3</logback.version>
         <java.version>21</java.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
         <junit-platform-suite.version>1.10.2</junit-platform-suite.version>
-        <cucumber.version>7.15.0</cucumber.version>
+        <cucumber.version>[7.16,)</cucumber.version>
         <jacoco.version>0.8.11</jacoco.version>
         <javadoc.version>3.6.3</javadoc.version>
         <sonar.organization>tommens</sonar.organization>
@@ -29,19 +28,20 @@
 
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.version>3.12.1</maven.compiler.version>
-        <maven.surefire.version>3.2.3</maven.surefire.version>
+        <maven.compiler.version>3.13.0</maven.compiler.version>
+        <maven.surefire.version>3.2.5</maven.surefire.version>
         <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
+        <exec-plugin.version>3.2.0</exec-plugin.version>
 
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>systems.manifold</groupId>
-            <artifactId>manifold-ext-rt</artifactId>
-            <version>${manifold.version}</version>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4</artifactId>
+            <version>4.13.1</version>
         </dependency>
-    <!-- Logging -->
+        <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -54,10 +54,10 @@
         </dependency>
         <!-- QOL -->
         <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${lombok.version}</version>
-        <scope>compile</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -107,17 +107,8 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
 
-                    <compilerArgs>
-                        <!-- Configure manifold plugin-->
-                        <arg>-Xplugin:Manifold</arg>
-                    </compilerArgs>
                     <!-- Add the processor path for the plugin -->
                     <annotationProcessorPaths>
-                        <path>
-                            <groupId>systems.manifold</groupId>
-                            <artifactId>manifold-ext</artifactId>
-                            <version>${manifold.version}</version>
-                        </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
@@ -141,7 +132,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${exec-plugin.version}</version>
                 <configuration>
                     <mainClass>calculator.Main</mainClass>
                 </configuration>
@@ -171,6 +162,7 @@
                 <configuration>
                     <excludes>
                         <exclude>calculator/Main.class</exclude>
+                        <exclude>Calculator*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -191,6 +183,44 @@
                         <phase>package</phase>
                         <goals>
                             <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.6.3</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>4.13.1</version>
+                <configuration>
+                    <arguments>
+                        <argument>-no-listener</argument>
+                        <argument>-visitor</argument>
+                    </arguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>antlr4</goal>
                         </goals>
                     </execution>
                 </executions>

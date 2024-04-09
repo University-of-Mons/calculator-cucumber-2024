@@ -1,4 +1,8 @@
-package calculator;
+package calculator.operation;
+
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Value;
 
 import java.util.List;
 
@@ -23,6 +27,7 @@ public final class Times<T> extends Operation<T> {
 
         super(elist);
         symbol = "*";
+        priority = 1;
         neutral = 1;
     }
 
@@ -34,6 +39,6 @@ public final class Times<T> extends Operation<T> {
      * @return The integer that is the result of the multiplication
      */
     public Value<T> op(Value<T> l, Value<T> r) {
-        return l * r;
+        return l.times(r);
     }
 }

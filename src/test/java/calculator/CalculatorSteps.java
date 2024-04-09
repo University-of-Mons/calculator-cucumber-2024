@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.operand.MyNumber;
+import calculator.operation.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

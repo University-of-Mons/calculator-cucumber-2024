@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.operand.Operand;
+import calculator.operation.Operation;
 import lombok.Getter;
 import visitor.Visitor;
 
@@ -17,7 +19,7 @@ public abstract class Value<T> implements Expression<T>, Operand<T> {
      * -- GETTER --
      * getter method to obtain the value contained in the object
      */
-    private final T val;
+    protected final T val;
 
     /**
      * Constructor method
