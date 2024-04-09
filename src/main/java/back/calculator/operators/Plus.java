@@ -57,10 +57,10 @@ public final class Plus extends Operation {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
-            int real = l.getReal() + r.getReal();
+            int real = l.getReal().add(r.getReal());
             int imaginary = l.getImaginary() + r.getImaginary();
             return new MyNumber(real, imaginary);
         }
-        return new MyNumber(l.getReal() + r.getReal());
+        return new MyNumber(l.getValue().add(r.getValue()));
     }
 }

@@ -56,15 +56,19 @@ public final class Times extends Operation {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
+            /*
+            TODO: adapt this with new modifications
             // (a + bi) * (c + di) = (ac - bd) + (ad + bc)i
-            int a = l.getReal();
+            AbstractValue a = l.getReal();
             int b = l.getImaginary();
-            int c = r.getReal();
+            AbstractValue c = r.getReal();
             int d = r.getImaginary();
             int real = a * c - b * d;
             int imaginary = a * d + b * c;
             return new MyNumber(real, imaginary);
+
+             */
         }
-        return new MyNumber(l.getReal() * r.getReal());
+        return new MyNumber(l.getReal().mul(r.getReal()));
     }
 }

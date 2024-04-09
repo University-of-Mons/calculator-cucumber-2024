@@ -12,7 +12,7 @@ import back.visitor.Visitor;
  * @see Operation
  */
 public class MyNumber implements Expression {
-    private final int real;
+    private final AbstractValue real;
 
     private final int imaginary;
 
@@ -21,7 +21,8 @@ public class MyNumber implements Expression {
      *
      * @return The integer number contained in the object
      */
-    public int getReal() {
+
+    public AbstractValue getReal() {
         return real;
     }
 
@@ -40,8 +41,12 @@ public class MyNumber implements Expression {
      *
      * @param v The integer value to be contained in the object
      */
-    public MyNumber(int v) {
+    public /*constructor*/ MyNumber(AbstractValue v) {
         real = v;
+    }
+
+    public MyNumber(int v) {
+        real = new IntValue(v);
         imaginary = 0;
     }
 
@@ -51,7 +56,7 @@ public class MyNumber implements Expression {
      * @param real The real part of the complex number
      * @param imaginary The imaginary part of the complex number
      */
-    public MyNumber(int real, int imaginary) {
+    public MyNumber(AbstractValue real, int imaginary) {
         this.real = real;
         this.imaginary = imaginary;
     }
@@ -84,6 +89,7 @@ public class MyNumber implements Expression {
     @Override
     public String toString() {
         if (real == 0) {
+            // TODO: adapt this with new modifications
             return toStringPurelyImaginary();
         } else {
             return toStringWithReal();
@@ -135,8 +141,7 @@ public class MyNumber implements Expression {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-
-        return real == ((MyNumber) o).real && imaginary == ((MyNumber) o).imaginary;
+        return this.real.equals(((MyNumber) o).real) && imaginary == ((MyNumber) o).imaginary;
         // Used == since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -151,9 +156,9 @@ public class MyNumber implements Expression {
     @Override
     public int hashCode() {
         if (isImaginary()) {
-            return Integer.hashCode(real) + Integer.hashCode(imaginary);
+            return real.hashCode() + Integer.hashCode(imaginary);
         }
-        return Integer.hashCode(real);
+        return real.hashCode();
     }
 
 }

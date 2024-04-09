@@ -54,7 +54,7 @@ public final class Divides extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if (r.getReal() == 0 || l instanceof NotANumber || r instanceof NotANumber)
+        if (r.getValue().isEqualsZero() || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
             return new NotANumber();
@@ -69,6 +69,6 @@ public final class Divides extends Operation {
             return new MyNumber(real, imaginary);
              */
         }
-        return new MyNumber(l.getReal() / r.getReal());
+        return new MyNumber(l.getValue().div(r.getValue()));
     }
 }

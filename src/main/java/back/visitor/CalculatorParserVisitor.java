@@ -5,6 +5,7 @@ import back.calculator.operators.Divides;
 import back.calculator.operators.Minus;
 import back.calculator.operators.Plus;
 import back.calculator.operators.Times;
+import back.calculator.types.IntValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 import org.antlr.v4.runtime.Token;
@@ -99,10 +100,10 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     @Override
     public Expression visitRealAtom(calculatorParser.RealAtomContext ctx) {
         if (ctx.SUB() != null)
-            // '-' Atom
-            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
-        // Atom
-        return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+            // '-' Infix
+            return new MyNumber(new IntValue(-Integer.parseInt(ctx.NUMBER().getText())));
+        // NUMBER
+        return new MyNumber(new IntValue(Integer.parseInt(ctx.NUMBER().getText())));
     }
 
     @Override
@@ -143,7 +144,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitAtomPrefix(calculatorParser.AtomPrefixContext ctx) {
+    public Expression visitAtomPrefix(calculatorParser.NumberPrefixContext ctx) {
         return visit(ctx.atom());
     }
 
