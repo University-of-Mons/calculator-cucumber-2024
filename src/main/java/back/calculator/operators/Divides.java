@@ -23,9 +23,9 @@ public final class Divides extends Operation {
      *
      * @param elist The list of Expressions to divide
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Divides(List< Expression >, Notation )
+     * @see #Divides
      */
-    public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
+    public Divides(List<Expression> elist) throws IllegalConstruction {
         this(elist, null);
     }
 
@@ -36,8 +36,9 @@ public final class Divides extends Operation {
      * @param elist The list of Expressions to divide
      * @param n     The Notation to be used to represent the operation
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Divides(List<Expression>)
-     * @see Operation#Operation(List<Expression>,Notation)
+     * @see #Divides
+     * @see Operation#Operation
+     *
      */
     public Divides(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
@@ -54,9 +55,10 @@ public final class Divides extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if (r.getValue().isEqualsZero() || l instanceof NotANumber || r instanceof NotANumber)
+        if ((r.getReal().isEqualsZero() && r.getImaginary().isEqualsZero()) || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
+            // TODO: Implement division of complex numbers
             return new NotANumber();
             // (a + bi) / (c + di) = (ac + bd) + (bc - ad)i / (c^2 + d^2)
             /*int a = l.getReal();
@@ -69,6 +71,6 @@ public final class Divides extends Operation {
             return new MyNumber(real, imaginary);
              */
         }
-        return new MyNumber(l.getValue().div(r.getValue()));
+        return new MyNumber(l.getReal().div(r.getReal()));
     }
 }

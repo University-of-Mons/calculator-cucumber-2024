@@ -1,6 +1,7 @@
 package back.calculator.operators;
 
 import back.calculator.*;
+import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 
@@ -57,10 +58,10 @@ public final class Plus extends Operation {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
-            int real = l.getReal().add(r.getReal());
-            int imaginary = l.getImaginary() + r.getImaginary();
+            AbstractValue real = l.getReal().add(r.getReal());
+            AbstractValue imaginary = l.getImaginary().add(r.getImaginary());
             return new MyNumber(real, imaginary);
         }
-        return new MyNumber(l.getValue().add(r.getValue()));
+        return new MyNumber(l.getReal().add(r.getReal()));
     }
 }

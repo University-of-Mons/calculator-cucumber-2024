@@ -1,6 +1,7 @@
 package back.calculator.operators;
 
 import back.calculator.*;
+import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 
@@ -22,7 +23,7 @@ public final class Times extends Operation {
      *
      * @param elist The list of Expressions to multiply
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Times(List< Expression >, Notation )
+     * @see #Times
      */
     public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
         this(elist, null);
@@ -35,8 +36,8 @@ public final class Times extends Operation {
      * @param elist The list of Expressions to multiply
      * @param n     The Notation to be used to represent the operation
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Times(List<Expression>)
-     * @see Operation#Operation(List<Expression>,Notation)
+     * @see #Times
+     * @see Operation#Operation
      */
     public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
@@ -56,18 +57,14 @@ public final class Times extends Operation {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
-            /*
-            TODO: adapt this with new modifications
             // (a + bi) * (c + di) = (ac - bd) + (ad + bc)i
             AbstractValue a = l.getReal();
-            int b = l.getImaginary();
+            AbstractValue b = l.getImaginary();
             AbstractValue c = r.getReal();
-            int d = r.getImaginary();
-            int real = a * c - b * d;
-            int imaginary = a * d + b * c;
+            AbstractValue d = r.getImaginary();
+            AbstractValue real = a.mul(c).sub(b.mul(d));
+            AbstractValue imaginary = a.mul(d).add(b.mul(c));
             return new MyNumber(real, imaginary);
-
-             */
         }
         return new MyNumber(l.getReal().mul(r.getReal()));
     }

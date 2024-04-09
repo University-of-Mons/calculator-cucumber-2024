@@ -14,6 +14,8 @@ public abstract class AbstractValue {
 
     public abstract boolean isEqualsZero();
 
+    public abstract boolean isPositive();
+
     public Type getType() {
         return type;
     }

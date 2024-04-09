@@ -63,4 +63,9 @@ public class IntValue extends AbstractValue {
     public boolean isEqualsZero(){
         return this.value == 0;
     }
+
+    @Override
+    public boolean isPositive(){
+        return this.value > 0;
+    }
 }

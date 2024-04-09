@@ -144,7 +144,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitAtomPrefix(calculatorParser.NumberPrefixContext ctx) {
+    public Expression visitAtomPrefix(calculatorParser.AtomPrefixContext ctx) {
         return visit(ctx.atom());
     }
 

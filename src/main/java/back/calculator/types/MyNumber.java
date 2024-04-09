@@ -14,7 +14,7 @@ import back.visitor.Visitor;
 public class MyNumber implements Expression {
     private final AbstractValue real;
 
-    private final int imaginary;
+    private final AbstractValue imaginary;
 
     /**
      * getter method to obtain the value contained in the object
@@ -31,23 +31,19 @@ public class MyNumber implements Expression {
      *
      * @return The imaginary part of the object
      */
-    public int getImaginary() {
+    public AbstractValue getImaginary() {
         return imaginary;
     }
 
-
-    /**
-     * Constructor method
-     *
-     * @param v The integer value to be contained in the object
-     */
-    public /*constructor*/ MyNumber(AbstractValue v) {
+    public MyNumber(AbstractValue v) {
         real = v;
+        // TODO: add a switch to check the type of v to create the same type.
+        imaginary = new IntValue(0);
     }
 
     public MyNumber(int v) {
         real = new IntValue(v);
-        imaginary = 0;
+        imaginary = new IntValue(0);
     }
 
     /**
@@ -56,9 +52,14 @@ public class MyNumber implements Expression {
      * @param real The real part of the complex number
      * @param imaginary The imaginary part of the complex number
      */
-    public MyNumber(AbstractValue real, int imaginary) {
+    public MyNumber(AbstractValue real, AbstractValue imaginary) {
         this.real = real;
         this.imaginary = imaginary;
+    }
+
+    public MyNumber(int real, int imaginary) {
+        this.real = new IntValue(real);
+        this.imaginary = new IntValue(imaginary);
     }
 
     /**
@@ -67,7 +68,7 @@ public class MyNumber implements Expression {
      * @return True if the number is imaginary, false otherwise.
      */
     public boolean isImaginary() {
-        return imaginary != 0;
+        return !imaginary.isEqualsZero();
     }
 
     /**
@@ -88,8 +89,7 @@ public class MyNumber implements Expression {
      */
     @Override
     public String toString() {
-        if (real == 0) {
-            // TODO: adapt this with new modifications
+        if (real.isEqualsZero()) {
             return toStringPurelyImaginary();
         } else {
             return toStringWithReal();
@@ -98,9 +98,9 @@ public class MyNumber implements Expression {
 
     private String toStringPurelyImaginary() {
         System.out.println(imaginary + "" + real);
-        if (imaginary == 0) {
+        if (imaginary.isEqualsZero()) {
             return "0";
-        } else if (imaginary == 1) {
+        } else if (imaginary.equals(new IntValue(1))) {
             return "i";
         } else {
             return imaginary + "i";
@@ -108,16 +108,16 @@ public class MyNumber implements Expression {
     }
 
     private String toStringWithReal() {
-        if (imaginary == 0) {
-            return Integer.toString(real);
-        } else if (imaginary == 1) {
+        if (imaginary.isEqualsZero()) {
+            return real.toString();
+        } else if (imaginary.equals(new IntValue(1))) {
             return real + "+i";
-        } else if (imaginary == -1) {
+        } else if (imaginary.equals(new IntValue(-1))) {
             return real + "-i";
-        } else if (imaginary > 1) {
+        } else if (imaginary.isPositive()) {
             return real + "+" + imaginary + "i";
         } else {
-            return real + "-" + (-imaginary) + "i";
+            return real + "" + imaginary + "i";
         }
     }
 
@@ -141,7 +141,7 @@ public class MyNumber implements Expression {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.real.equals(((MyNumber) o).real) && imaginary == ((MyNumber) o).imaginary;
+        return this.real.equals(((MyNumber) o).real) && this.imaginary.equals(((MyNumber) o).imaginary);
         // Used == since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -156,7 +156,7 @@ public class MyNumber implements Expression {
     @Override
     public int hashCode() {
         if (isImaginary()) {
-            return real.hashCode() + Integer.hashCode(imaginary);
+            return real.hashCode() + imaginary.hashCode();
         }
         return real.hashCode();
     }
