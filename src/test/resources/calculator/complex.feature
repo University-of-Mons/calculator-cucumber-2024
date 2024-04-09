@@ -24,6 +24,25 @@ Feature: Complex arithmetic expressions
     And I provide a second complex number 3-4i
     Then the operation evaluates to '23-14i'
 
+  Scenario: Dividing two purely imaginary numbers
+    Given a complex operation '/'
+    When I provide a first complex number 6i
+    And I provide a second complex number 2i
+    Then the operation evaluates to '3'
+
+  # Scenario: Dividing two complex numbers with integer results
+  #  Given a complex operation '/'
+  #  When I provide a first complex number 20+15i
+  #  And I provide a second complex number 2-1i
+  #  Then the operation evaluates to '11+2i'
+
+  Scenario: Dividing two complex numbers with floating point results (floored)
+    Given a complex operation '/'
+    When I provide a first complex number 5+4i
+    And I provide a second complex number 1+2i
+    Then the operation evaluates to '2-i'
+  # TODO: Change this when we add support for real numbers
+
 
   ##################################### Parsing tests #####################################
   Scenario: Parsing a complex number

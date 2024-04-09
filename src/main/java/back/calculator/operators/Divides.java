@@ -1,6 +1,7 @@
 package back.calculator.operators;
 
 import back.calculator.*;
+import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 
@@ -58,18 +59,15 @@ public final class Divides extends Operation {
         if ((r.getReal().isEqualsZero() && r.getImaginary().isEqualsZero()) || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
-            // TODO: Implement division of complex numbers
-            return new NotANumber();
             // (a + bi) / (c + di) = (ac + bd) + (bc - ad)i / (c^2 + d^2)
-            /*int a = l.getReal();
-            int b = l.getImaginary();
-            int c = r.getReal();
-            int d = r.getImaginary();
-            int denom = c^2 + d^2;
-            int real = (a * c + b * d) / denom;
-            int imaginary = (b * c - a * d) / denom;
+            AbstractValue a = l.getReal();
+            AbstractValue b = l.getImaginary();
+            AbstractValue c = r.getReal();
+            AbstractValue d = r.getImaginary();
+            AbstractValue denom = c.mul(c).add(d.mul(d)); // c^2 + d^2
+            AbstractValue real = (a.mul(c).add(b.mul(d))).div(denom);
+            AbstractValue imaginary = (b.mul(c).sub(a.mul(d)).div(denom));
             return new MyNumber(real, imaginary);
-             */
         }
         return new MyNumber(l.getReal().div(r.getReal()));
     }

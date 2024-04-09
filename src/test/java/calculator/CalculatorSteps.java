@@ -245,11 +245,19 @@ public class CalculatorSteps {
         op.addMoreParams(params);
     }
 
-    @When("^I provide a (.*) complex number (-?\\d+)([+-])(\\d+)i")
+    @When("^I provide a (.*) complex number (-?\\d+)([+-])(\\d+)i$")
     public void whenIProvideAComplexNumber(String s, int real, char sign2, int imaginary) {
         // Write code here that turns the phrase above into concrete actions
         params = new ArrayList<>(); // create an empty set of parameters to be filled in
         params.add(new MyNumber(real, sign2 == '-' ? -imaginary : imaginary));
+        op.addMoreParams(params);
+    }
+
+    @When("I provide a (.*) complex number (-?\\d+)i$")
+    public void whenIProvideAComplexNumber(String s, int imaginary) {
+        // Write code here that turns the phrase above into concrete actions
+        params = new ArrayList<>(); // create an empty set of parameters to be filled in
+        params.add(new MyNumber(0, imaginary));
         op.addMoreParams(params);
     }
 

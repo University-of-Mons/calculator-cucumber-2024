@@ -97,7 +97,6 @@ public class MyNumber implements Expression {
     }
 
     private String toStringPurelyImaginary() {
-        System.out.println(imaginary + "" + real);
         if (imaginary.isEqualsZero()) {
             return "0";
         } else if (imaginary.equals(new IntValue(1))) {
