@@ -60,6 +60,12 @@ public class IntValue extends AbstractValue {
     }
 
     @Override
+    public AbstractValue sqrt() {
+        // This should return a double but atm there is only int type available
+        return new IntValue((int) Math.sqrt(this.value));
+    }
+
+    @Override
     public boolean isEqualsZero(){
         return this.value == 0;
     }

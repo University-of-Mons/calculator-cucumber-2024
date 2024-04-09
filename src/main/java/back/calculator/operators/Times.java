@@ -46,11 +46,11 @@ public final class Times extends Operation {
     }
 
     /**
-     * The actual computation of the (binary) arithmetic multiplication of two integers
+     * The actual computation of the (binary) arithmetic multiplication of two numbers
      *
-     * @param l The first integer
-     * @param r The second integer that should be multiplied with the first
-     * @return The integer that is the result of the multiplication
+     * @param l The first number
+     * @param r The second number that should be multiplied with the first
+     * @return The number that is the result of the multiplication
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
@@ -67,5 +67,16 @@ public final class Times extends Operation {
             return new MyNumber(real, imaginary);
         }
         return new MyNumber(l.getReal().mul(r.getReal()));
+    }
+
+    /**
+     * The actual computation of the (unary) arithmetic multiplication of a number.
+     *
+     * @param l The argument of the unary operation
+     * @return The result of the unary operation. (The argument itself)
+     */
+    @Override
+    public MyNumber op(MyNumber l) {
+        return l;
     }
 }

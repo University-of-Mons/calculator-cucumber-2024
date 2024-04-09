@@ -48,11 +48,11 @@ public final class Divides extends Operation {
     }
 
     /**
-     * The actual computation of the (binary) arithmetic division of two integers
+     * The actual computation of the (binary) arithmetic division of two numbers
      *
-     * @param l The first integer
-     * @param r The second integer that should divide the first
-     * @return The integer that is the result of the division
+     * @param l The first number
+     * @param r The second number that should divide the first
+     * @return The number that is the result of the division
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
@@ -70,5 +70,17 @@ public final class Divides extends Operation {
             return new MyNumber(real, imaginary);
         }
         return new MyNumber(l.getReal().div(r.getReal()));
+    }
+
+
+    /**
+     * The actual computation of the (unary) arithmetic division of a number.
+     *
+     * @param l The argument of the unary operation
+     * @return The result of the unary operation. (The argument itself)
+     */
+    @Override
+    public MyNumber op(MyNumber l) {
+        return l;
     }
 }

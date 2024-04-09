@@ -18,6 +18,11 @@ Feature: Complex arithmetic expressions
     And I provide a second complex number 3-4i
     Then the operation evaluates to '2+6i'
 
+  Scenario: Subtracting a complex number
+    Given a complex operation '-'
+    When I provide a first complex number 5+2i
+    Then the operation evaluates to '-5-2i'
+
   Scenario: Multiplying two complex numbers
     Given a complex operation '*'
     When I provide a first complex number 5+2i
@@ -42,6 +47,16 @@ Feature: Complex arithmetic expressions
     And I provide a second complex number 1+2i
     Then the operation evaluates to '2-i'
   # TODO: Change this when we add support for real numbers
+
+  Scenario: Compute the modulus of a complex number
+    Given a complex operation '|'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to '5'
+
+  Scenario: Compute the modulus of a NaN number
+    Given a complex operation '|'
+    When I provide a NaN number
+    Then the operation evaluates to 'NaN'
 
 
   ##################################### Parsing tests #####################################
