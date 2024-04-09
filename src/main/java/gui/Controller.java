@@ -1,12 +1,18 @@
 package gui;
 
+import calculator.Calculator;
+import calculator.Expression;
+import calculator.IllegalExpression;
+import calculator.parser.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Controller {
 
     @FXML
@@ -81,9 +87,19 @@ public class Controller {
     }
 
     private void evaluate() {
-        // TODO: integrate with parser
+        Parser<Integer> p = new Parser<>();
+        Expression<Integer> e;
+        try {
+            e = p.parse(currentExpression.getText(), Parser::stringToInteger);
+        } catch (IllegalExpression i) {
+            log.warn("Supplied expression is not correct : {}",currentExpression.getText());
+            // todo: signal to user
+            return;
+        }
+        Calculator<Integer> c = new Calculator<>();
+        int s = c.eval(e).getVal();
         if (!currentExpression.getText().isEmpty()) {
-            history.setText(history.getText() + "\n" + currentExpression.getText());
+            history.setText(history.getText() + "\n" + s);
             currentExpression.setText("");
         }
     }
