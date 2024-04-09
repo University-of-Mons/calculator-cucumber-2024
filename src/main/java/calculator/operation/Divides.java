@@ -1,4 +1,8 @@
-package calculator;
+package calculator.operation;
+
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Value;
 
 import java.util.List;
 
@@ -24,6 +28,7 @@ public final class Divides<T> extends Operation<T> {
     public Divides(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "/";
+        priority = 1;
         neutral = 1;
     }
 
@@ -36,6 +41,6 @@ public final class Divides<T> extends Operation<T> {
      */
 
     public Value<T> op(Value<T> l, Value<T> r) throws ArithmeticException {
-        return l / r;
+        return l.div(r);
     }
 }
