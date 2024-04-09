@@ -56,6 +56,6 @@ public final class Minus extends Operation {
     public MyNumber op(MyNumber l, MyNumber r) {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
-        return new MyNumber(l.getValue() - r.getValue());
+        return new MyNumber(l.getValue().sub(r.getValue()));
     }
 }

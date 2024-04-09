@@ -12,14 +12,14 @@ import back.visitor.Visitor;
  * @see Operation
  */
 public class MyNumber implements Expression {
-    private final int value;
+    private final AbstractValue value;
 
     /**
      * getter method to obtain the value contained in the object
      *
      * @return The integer number contained in the object
      */
-    public int getValue() {
+    public AbstractValue getValue() {
         return value;
     }
 
@@ -28,8 +28,12 @@ public class MyNumber implements Expression {
      *
      * @param v The integer value to be contained in the object
      */
-    public /*constructor*/ MyNumber(int v) {
+    public /*constructor*/ MyNumber(AbstractValue v) {
         value = v;
+    }
+
+    public MyNumber(int v) {
+        value = new IntValue(v);
     }
 
     /**
@@ -50,7 +54,7 @@ public class MyNumber implements Expression {
      */
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return value.toString();
     }
 
     /**
@@ -73,7 +77,7 @@ public class MyNumber implements Expression {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.value == ((MyNumber) o).value;
+        return this.value.equals(((MyNumber) o).value);
         // Used == since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -87,7 +91,7 @@ public class MyNumber implements Expression {
      */
     @Override
     public int hashCode() {
-        return value;
+        return value.hashCode();
     }
 
 }

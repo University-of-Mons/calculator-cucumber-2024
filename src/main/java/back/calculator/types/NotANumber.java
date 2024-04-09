@@ -14,7 +14,7 @@ public class NotANumber extends MyNumber {
      * Constructor method
      */
     public NotANumber() {
-        super(-1);
+        super(new IntValue(-1));
     }
 
 
