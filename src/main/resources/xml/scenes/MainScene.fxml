@@ -58,6 +58,11 @@
                                 <Font name="System Bold" size="15.0" />
                             </font>
                         </Button>
+                        <Button fx:id="i" layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="i" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Button>
                         <Button fx:id="closeParen" layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text=")" textAlignment="CENTER" GridPane.columnIndex="2">
                             <font>
                                 <Font name="System Bold" size="15.0" />

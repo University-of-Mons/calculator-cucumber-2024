@@ -6,7 +6,9 @@ import back.calculator.operators.Minus;
 import back.calculator.operators.Plus;
 import back.calculator.operators.Times;
 import back.calculator.types.MyNumber;
+import back.visitor.Printer;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -27,6 +29,15 @@ class TestPrinter {
         value1 = 8;
         value2 = 6;
         value3 = 5;
+    }
+
+    @Test
+    void testPrinterParams() {
+        Printer printer = new Printer();
+        assertEquals(Notation.INFIX, printer.getNotation());
+
+        printer.setNotation(Notation.PREFIX);
+        assertEquals(Notation.PREFIX, printer.getNotation());
     }
 
     @ParameterizedTest

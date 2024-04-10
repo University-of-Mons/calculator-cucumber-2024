@@ -12,7 +12,11 @@ public abstract class AbstractValue {
 
     public abstract AbstractValue div(AbstractValue other);
 
+    public abstract AbstractValue sqrt();
+
     public abstract boolean isEqualsZero();
+
+    public abstract boolean isPositive();
 
     public Type getType() {
         return type;

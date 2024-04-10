@@ -2,7 +2,6 @@ Feature: Integer Arithmetic Expressions
   This feature provides a range of scenarios corresponding to the
   intended external behaviour of arithmetic expressions on integers.
 
-  # This is just a comment.
   # You can start with a Background: that will be run before executing each scenario.
 
   Background:
@@ -21,11 +20,26 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 5
     Then the operation evaluates to 9
 
+  Scenario: Adding an integer number
+    Given an integer operation '+'
+    When I provide a first number 7
+    Then the operation evaluates to 7
+
   Scenario: Subtracting two integer numbers
     Given an integer operation '-'
     When I provide a first number 7
     And I provide a second number 5
     Then the operation evaluates to 2
+
+  Scenario: Subtracting an integer number
+    Given an integer operation '-'
+    When I provide a first number 7
+    Then the operation evaluates to -7
+
+  Scenario: Subtracting a NaN
+    Given an integer operation '-'
+    When I provide a NaN number
+    Then the operation evaluates to "NaN"
 
   Scenario: Multiplying two integer numbers
     Given an integer operation '*'
@@ -33,11 +47,21 @@ Feature: Integer Arithmetic Expressions
     And I provide a second number 5
     Then the operation evaluates to 35
 
+  Scenario: Multiplying an integer number
+    Given an integer operation '*'
+    When I provide a first number 7
+    Then the operation evaluates to 7
+
   Scenario: Dividing two integer numbers
     Given an integer operation '/'
     When I provide a first number 7
     And I provide a second number 5
     Then the operation evaluates to 1
+
+  Scenario: Dividing an integer number
+    Given an integer operation '/'
+    When I provide a first number 7
+    Then the operation evaluates to 7
 
       # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
@@ -146,30 +170,30 @@ Feature: Integer Arithmetic Expressions
   Scenario: Parsing the nested sum of three integers numbers
     Given the sum of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is + (8, + (6, 2))
-    And its INFIX parsing is ( 8 + ( 6 + 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) +) +
+    Then its PREFIX parsing is + (+ (8, 6), 2)
+    And its INFIX parsing is ( ( 8 + 6 ) + 2 )
+    And its POSTFIX parsing is ((8, 6) +, 2) +
 
   Scenario: Parsing the nested difference of three integers numbers
     Given the difference of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is - (8, - (6, 2))
-    And its INFIX parsing is ( 8 - ( 6 - 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) -) -
+    Then its PREFIX parsing is - (- (8, 6), 2)
+    And its INFIX parsing is ( ( 8 - 6 ) - 2 )
+    And its POSTFIX parsing is ((8, 6) -, 2) -
 
   Scenario: Parsing the nested product of three integers numbers
     Given the product of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is * (8, * (6, 2))
-    And its INFIX parsing is ( 8 * ( 6 * 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) *) *
+    Then its PREFIX parsing is * (* (8, 6), 2)
+    And its INFIX parsing is ( ( 8 * 6 ) * 2 )
+    And its POSTFIX parsing is ((8, 6) *, 2) *
 
   Scenario: Parsing the nested quotient of three integers numbers
     Given the quotient of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is / (8, / (6, 2))
-    And its INFIX parsing is ( 8 / ( 6 / 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) /) /
+    Then its PREFIX parsing is / (/ (8, 6), 2)
+    And its INFIX parsing is ( ( 8 / 6 ) / 2 )
+    And its POSTFIX parsing is ((8, 6) /, 2) /
 
   Scenario: Parsing an expression with respect to the order of operations
     Given the following expression "8 + 6 * 2"
