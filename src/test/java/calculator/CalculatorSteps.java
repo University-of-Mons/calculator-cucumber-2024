@@ -282,4 +282,15 @@ public class CalculatorSteps {
         }
     }
 
+    @When("I provide the following expression {string}")
+    public void WhenIProvideAnExpression(String s) {
+        try {
+            params = new ArrayList<>();
+            params.add(c.read(s));
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
+    }
+
 }

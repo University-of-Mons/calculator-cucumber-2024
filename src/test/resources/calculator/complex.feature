@@ -6,34 +6,31 @@ Feature: Complex arithmetic expressions
   Background:
     Given I initialise a calculator
 
-  Scenario: Adding two complex numbers
-    Given a complex operation '+'
-    When I provide a first complex number 5+2i
-    And I provide a second complex number 3-4i
-    Then the operation evaluates to '8-2i'
+  Scenario Outline: Evaluating the operations with complex numbers
+    Given a complex operation <op>
+    When I provide a first complex number <c1>
+    And I provide a second complex number <c2>
+    Then the operation evaluates to <res>
 
-  Scenario: Subtracting two complex numbers
-    Given a complex operation '-'
-    When I provide a first complex number 5+2i
-    And I provide a second complex number 3-4i
-    Then the operation evaluates to '2+6i'
+    Examples:
+      | op  | c1   | c2   | res  |
+      | '+' | 5+2i | 3-4i | '8-2i'   |
+      | '-' | 5+2i | 3-4i | '2+6i'   |
+      | '*' | 5+2i | 3-4i | '23-14i' |
+      | '/' | 6i   | 2i   | '3'      |
 
-  Scenario: Subtracting a complex number
-    Given a complex operation '-'
-    When I provide a first complex number 5+2i
-    Then the operation evaluates to '-5-2i'
+   Scenario Outline: Evaluating the operations between real and complex numbers
+     Given a complex operation <op>
+     When I provide a first number <n1>
+     And I provide a second complex number <c2>
+     Then the operation evaluates to <res>
 
-  Scenario: Multiplying two complex numbers
-    Given a complex operation '*'
-    When I provide a first complex number 5+2i
-    And I provide a second complex number 3-4i
-    Then the operation evaluates to '23-14i'
-
-  Scenario: Dividing two purely imaginary numbers
-    Given a complex operation '/'
-    When I provide a first complex number 6i
-    And I provide a second complex number 2i
-    Then the operation evaluates to '3'
+     Examples:
+       | op  | n1   | c2   | res  |
+       | '+' | 2 | 3-4i | '5-4i'   |
+       | '-' | 2 | 3-4i | '-1+4i'   |
+       | '*' | 2 | 3-4i | '6-8i' |
+       | '/' | 6   | 2i   | '-3i'      |
 
   # Scenario: Dividing two complex numbers with integer results
   #  Given a complex operation '/'
@@ -73,6 +70,15 @@ Feature: Complex arithmetic expressions
     Then its PREFIX notation is modulus(3+4i)
     And its INFIX notation is modulus(3+4i)
     And its POSTFIX notation is modulus(3+4i)
+
+  Scenario: Printing modulus with operation
+    Given a complex operation '|'
+    When I provide the following expression "( 8 + 6 ) * 2"
+    Then its PREFIX notation is modulus(* (+ (8, 6), 2))
+    And its INFIX notation is modulus(( ( 8 + 6 ) * 2 ))
+    And its POSTFIX notation is modulus(((8, 6) +, 2) *)
+
+
 
   ##################################### Parsing tests #####################################
   Scenario: Parsing a complex number
