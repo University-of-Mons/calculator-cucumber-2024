@@ -25,7 +25,7 @@ public class ComplexModeController implements Initializable {
     @FXML
     private GridPane complexGrid;
     @FXML
-    public Button btnExtension;
+    public Button btnExtension1, btnExtension2, btnExtension3, btnExtension4, btnExtension5; ;
     @FXML
     private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnDivide, btnMultiply, btnMinus, btnPlus;
     @FXML
