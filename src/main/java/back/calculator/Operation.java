@@ -105,11 +105,20 @@ public abstract class Operation implements Expression {
     // the operation itself is specified in the subclasses
 
     /**
+     * Abstract method representing the actual unary arithmetic operation to compute
+     *
+     * @param l The argument of the unary operation
+     * @return The result of computing the unary operation
+     */
+    public abstract MyNumber op(MyNumber l);
+
+    /**
      * Add more parameters to the existing list of parameters
      *
      * @param params The list of parameters to be added
+     * @throws IllegalConstruction Exception thrown if the resulting list of parameters is not valid for the operation
      */
-    public void addMoreParams(List<Expression> params) {
+    public void addMoreParams(List<Expression> params) throws IllegalConstruction {
         args.addAll(params);
     }
 
