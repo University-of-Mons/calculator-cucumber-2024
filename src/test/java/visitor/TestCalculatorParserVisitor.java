@@ -100,5 +100,4 @@ class TestCalculatorParserVisitor {
         Expression e = calc.read("3 + 4 * ");
         assertEquals("NaN", calc.eval(e).toString());
     }
-
 }

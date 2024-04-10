@@ -6,106 +6,106 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
  * This interface defines a complete generic visitor for a parse tree produced
- * by {@link CalculatorParser}.
+ * by {@link calculatorParser}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
+public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#prog}.
+	 * Visit a parse tree produced by {@link calculatorParser#prog}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProg(CalculatorParser.ProgContext ctx);
+	T visitProg(calculatorParser.ProgContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#expression}.
+	 * Visit a parse tree produced by {@link calculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(CalculatorParser.ExpressionContext ctx);
+	T visitExpression(calculatorParser.ExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDivInfix}
-	 * labeled alternative in {@link CalculatorParser#infix}.
+	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMulDivInfix(CalculatorParser.MulDivInfixContext ctx);
+	T visitMulDivInfix(calculatorParser.MulDivInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ParensInfix}
-	 * labeled alternative in {@link CalculatorParser#infix}.
+	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParensInfix(CalculatorParser.ParensInfixContext ctx);
+	T visitParensInfix(calculatorParser.ParensInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AddSubInfix}
-	 * labeled alternative in {@link CalculatorParser#infix}.
+	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddSubInfix(CalculatorParser.AddSubInfixContext ctx);
+	T visitAddSubInfix(calculatorParser.AddSubInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code NumberInfix}
-	 * labeled alternative in {@link CalculatorParser#infix}.
+	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberInfix(CalculatorParser.NumberInfixContext ctx);
+	T visitNumberInfix(calculatorParser.NumberInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDivPrefix}
-	 * labeled alternative in {@link CalculatorParser#prefix}.
+	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMulDivPrefix(CalculatorParser.MulDivPrefixContext ctx);
+	T visitMulDivPrefix(calculatorParser.MulDivPrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AddSubPrefix}
-	 * labeled alternative in {@link CalculatorParser#prefix}.
+	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddSubPrefix(CalculatorParser.AddSubPrefixContext ctx);
+	T visitAddSubPrefix(calculatorParser.AddSubPrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ParensPrefix}
-	 * labeled alternative in {@link CalculatorParser#prefix}.
+	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParensPrefix(CalculatorParser.ParensPrefixContext ctx);
+	T visitParensPrefix(calculatorParser.ParensPrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code NumberPrefix}
-	 * labeled alternative in {@link CalculatorParser#prefix}.
+	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberPrefix(CalculatorParser.NumberPrefixContext ctx);
+	T visitNumberPrefix(calculatorParser.NumberPrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDivPostfix}
-	 * labeled alternative in {@link CalculatorParser#postfix}.
+	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMulDivPostfix(CalculatorParser.MulDivPostfixContext ctx);
+	T visitMulDivPostfix(calculatorParser.MulDivPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AddSubPostfix}
-	 * labeled alternative in {@link CalculatorParser#postfix}.
+	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddSubPostfix(CalculatorParser.AddSubPostfixContext ctx);
+	T visitAddSubPostfix(calculatorParser.AddSubPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ParensPostfix}
-	 * labeled alternative in {@link CalculatorParser#postfix}.
+	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParensPostfix(CalculatorParser.ParensPostfixContext ctx);
+	T visitParensPostfix(calculatorParser.ParensPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code NumberPostfix}
-	 * labeled alternative in {@link CalculatorParser#postfix}.
+	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberPostfix(CalculatorParser.NumberPostfixContext ctx);
+	T visitNumberPostfix(calculatorParser.NumberPostfixContext ctx);
 }

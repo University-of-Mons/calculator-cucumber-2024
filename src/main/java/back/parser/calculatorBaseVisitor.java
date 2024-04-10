@@ -5,110 +5,110 @@ package back.parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
- * This class provides an empty implementation of {@link CalculatorVisitor},
+ * This class provides an empty implementation of {@link calculatorVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class CalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements CalculatorVisitor<T> {
+public class calculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements calculatorVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitProg(CalculatorParser.ProgContext ctx) { return visitChildren(ctx); }
+	@Override public T visitProg(calculatorParser.ProgContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpression(CalculatorParser.ExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpression(calculatorParser.ExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMulDivInfix(CalculatorParser.MulDivInfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulDivInfix(calculatorParser.MulDivInfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParensInfix(CalculatorParser.ParensInfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParensInfix(calculatorParser.ParensInfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAddSubInfix(CalculatorParser.AddSubInfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAddSubInfix(calculatorParser.AddSubInfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNumberInfix(CalculatorParser.NumberInfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNumberInfix(calculatorParser.NumberInfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMulDivPrefix(CalculatorParser.MulDivPrefixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulDivPrefix(calculatorParser.MulDivPrefixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAddSubPrefix(CalculatorParser.AddSubPrefixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAddSubPrefix(calculatorParser.AddSubPrefixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParensPrefix(CalculatorParser.ParensPrefixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParensPrefix(calculatorParser.ParensPrefixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNumberPrefix(CalculatorParser.NumberPrefixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNumberPrefix(calculatorParser.NumberPrefixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMulDivPostfix(CalculatorParser.MulDivPostfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulDivPostfix(calculatorParser.MulDivPostfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAddSubPostfix(CalculatorParser.AddSubPostfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAddSubPostfix(calculatorParser.AddSubPostfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParensPostfix(CalculatorParser.ParensPostfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParensPostfix(calculatorParser.ParensPostfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNumberPostfix(CalculatorParser.NumberPostfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNumberPostfix(calculatorParser.NumberPostfixContext ctx) { return visitChildren(ctx); }
 }
