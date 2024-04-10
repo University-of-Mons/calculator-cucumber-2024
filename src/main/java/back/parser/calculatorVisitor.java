@@ -25,6 +25,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(calculatorParser.ExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ModulusInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModulusInfix(calculatorParser.ModulusInfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code MulDivInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
@@ -60,6 +67,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAddSubInfix(calculatorParser.AddSubInfixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ModulusPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModulusPrefix(calculatorParser.ModulusPrefixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code MulDivPrefix}
 	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
@@ -94,6 +108,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAtomPrefix(calculatorParser.AtomPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ModulusPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModulusPostfix(calculatorParser.ModulusPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDivPostfix}
 	 * labeled alternative in {@link calculatorParser#postfix}.

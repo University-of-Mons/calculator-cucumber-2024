@@ -22,7 +22,7 @@ public class Modulus extends Operation {
         if (elist.size() > 1)
             // Modulus is a unary operator
             throw new IllegalConstruction();
-        symbol = "|";
+        symbol = "modulus";
         neutral = 1;
     }
 

@@ -142,6 +142,10 @@ public abstract class Operation implements Expression {
      */
     @Override
     public final String toString() {
+        if (args.size() == 1) {
+            // Unary operation : symbol(val). Ex: modulus(1+2i)
+            return symbol + "(" + args.get(0) + ")";
+        }
         return toString(notation);
     }
 
@@ -160,7 +164,8 @@ public abstract class Operation implements Expression {
                 if (val.isPresent()) {
                     yield "( " + val.get() + " )";
                 } else {
-                    yield symbol; // Should never happen
+                    // There is no argument, return the symbol itself
+                    yield symbol;
                 }
             }
             case PREFIX -> {
@@ -168,6 +173,7 @@ public abstract class Operation implements Expression {
                 if (val.isPresent()) {
                     yield symbol + " (" + val.get() + ")";
                 } else {
+                    // There is no argument, return the symbol itself
                     yield symbol;
                 }
             }
@@ -176,6 +182,7 @@ public abstract class Operation implements Expression {
                 if (val.isPresent()) {
                     yield "(" + val.get() + ") " + symbol;
                 } else {
+                    // There is no argument, return the symbol itself
                     yield symbol;
                 }
             }

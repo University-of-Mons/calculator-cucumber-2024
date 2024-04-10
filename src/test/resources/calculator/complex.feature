@@ -58,6 +58,21 @@ Feature: Complex arithmetic expressions
     When I provide a NaN number
     Then the operation evaluates to 'NaN'
 
+  ################################### Printer with unary ##################################
+  Scenario: Printing a complex number
+    Given a complex operation '+'
+    When I provide a first complex number 5+2i
+    And I provide a second complex number 3-4i
+    Then its PREFIX notation is + (5+2i, 3-4i)
+    And its INFIX notation is ( 5+2i + 3-4i )
+    And its POSTFIX notation is (5+2i, 3-4i) +
+
+  Scenario: Printing modulus
+    Given a complex operation '|'
+    When I provide a first complex number 3+4i
+    Then its PREFIX notation is modulus(3+4i)
+    And its INFIX notation is modulus(3+4i)
+    And its POSTFIX notation is modulus(3+4i)
 
   ##################################### Parsing tests #####################################
   Scenario: Parsing a complex number
@@ -83,4 +98,24 @@ Feature: Complex arithmetic expressions
   Scenario: Parsing a complex number in postfix notation
     Given the following expression '(5 2-i) +'
     Then its parsing is '(5, 2-i) +'
+
+  Scenario: Parsing a modulus operation with bars
+    Given the following expression '| 3+4i |'
+    Then its parsing is 'modulus(3+4i)'
+
+  Scenario: Parsing a modulus operation with keyword
+    Given the following expression 'modulus(3+4i)'
+    Then its parsing is 'modulus(3+4i)'
+
+  Scenario: Parsing a modulus operation in Infix notation
+    Given the following expression '| (1+2+3) |'
+    Then its parsing is 'modulus(( ( 1 + 2 ) + 3 ))'
+
+  Scenario: Parsing a modulus operation in Prefix notation
+    Given the following expression '| + (1 2 3) |'
+    Then its parsing is 'modulus(+ (1, 2, 3))'
+
+  Scenario: Parsing a modulus operation in Postfix notation
+    Given the following expression '| ((1 2 3) +) |'
+    Then its parsing is 'modulus((1, 2, 3) +)'
 

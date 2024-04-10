@@ -1,6 +1,7 @@
 package back.calculator;
 
 import back.calculator.operators.Modulus;
+import back.calculator.operators.Plus;
 import back.calculator.types.MyNumber;
 
 import java.util.ArrayList;
@@ -17,8 +18,9 @@ public class Main {
         Calculator c = new Calculator();
 
         try {
-
-            e = new MyNumber(8);
+            ArrayList<Expression> p = new ArrayList<>();
+            Collections.addAll(p, new MyNumber(3), new MyNumber(4), new MyNumber(7));
+            e = new Plus(p);
             c.print(e);
             c.eval(e);
 

@@ -1,10 +1,7 @@
 package back.visitor;
 
 import back.calculator.*;
-import back.calculator.operators.Divides;
-import back.calculator.operators.Minus;
-import back.calculator.operators.Plus;
-import back.calculator.operators.Times;
+import back.calculator.operators.*;
 import back.calculator.types.IntValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
@@ -62,6 +59,18 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return params;
     }
 
+    @Override
+    public Expression visitModulusInfix(calculatorParser.ModulusInfixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
 
     @Override
     public Expression visitMulDivInfix(calculatorParser.MulDivInfixContext ctx) {
@@ -120,6 +129,19 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
+    public Expression visitModulusPrefix(calculatorParser.ModulusPrefixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
     public Expression visitMulDivPrefix(calculatorParser.MulDivPrefixContext ctx) {
         // ( '*' | '/' ) Prefix Prefix
         return getExpression(
@@ -146,6 +168,19 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     @Override
     public Expression visitAtomPrefix(calculatorParser.AtomPrefixContext ctx) {
         return visit(ctx.atom());
+    }
+
+    @Override
+    public Expression visitModulusPostfix(calculatorParser.ModulusPostfixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
     }
 
     @Override
