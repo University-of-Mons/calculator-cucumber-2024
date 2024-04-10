@@ -33,4 +33,21 @@ class TestOperation {
     void testEquals() {
         assertEquals(o, o2);
     }
+
+    @Test
+    void testToStringEmpty() throws Exception {
+        List<Expression> params = List.of();
+        o = new Divides(params, Notation.PREFIX);
+
+        assertEquals("/", o.toString());
+        o.setNotation(Notation.INFIX);
+        assertEquals("/", o.toString());
+        o.setNotation(Notation.POSTFIX);
+        assertEquals("/", o.toString());
+    }
+
+    @Test
+    void testGetNotation() {
+        assertEquals(Notation.INFIX, o.getNotation());
+    }
 }
