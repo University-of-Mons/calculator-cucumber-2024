@@ -1,10 +1,7 @@
 package calculator;
 
 import back.calculator.*;
-import back.calculator.operators.Divides;
-import back.calculator.operators.Minus;
-import back.calculator.operators.Plus;
-import back.calculator.operators.Times;
+import back.calculator.operators.*;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 import io.cucumber.java.Before;
@@ -71,6 +68,24 @@ public class CalculatorSteps {
             op = new Plus(params);
         } catch (IllegalConstruction e) {
             fail();
+        }
+    }
+
+    @Given("a complex operation {string}")
+    public void givenAComplexOperation(String s) {
+        // Write code here that turns the phrase above into concrete actions
+        params = new ArrayList<>(); // create an empty set of parameters to be filled in
+        try {
+            switch (s) {
+                case "+" -> op = new Plus(params);
+                case "-" -> op = new Minus(params);
+                case "*" -> op = new Times(params);
+                case "/" -> op = new Divides(params);
+                case "|" -> op = new Modulus(params);
+                default -> throw new IllegalArgumentException("Unknown operation!");
+            }
+        } catch (back.calculator.IllegalConstruction e) {
+            throw new IllegalArgumentException("Illegal construction!");
         }
     }
 
@@ -222,10 +237,60 @@ public class CalculatorSteps {
 
     @When("^I provide a (.*) number (\\d+)$")
     public void whenIProvideANumber(String s, int val) {
-        //add extra parameter to the operation
-        params = new ArrayList<>();
-        params.add(new MyNumber(val));
-        op.addMoreParams(params);
+        try {
+            //add extra parameter to the operation
+            params = new ArrayList<>();
+            params.add(new MyNumber(val));
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
+    }
+
+    @When("I provide a NaN number")
+    public void whenIProvideANaNNumber() {
+        try {
+            params = new ArrayList<>(); // create an empty set of parameters to be filled in
+            params.add(new NotANumber());
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
+    }
+
+    @When("^I provide a (.*) complex number (-?\\d+)([+-])(\\d+)i$")
+    public void whenIProvideAComplexNumber(String s, int real, char sign2, int imaginary) {
+        try {
+            // Write code here that turns the phrase above into concrete actions
+            params = new ArrayList<>(); // create an empty set of parameters to be filled in
+            params.add(new MyNumber(real, sign2 == '-' ? -imaginary : imaginary));
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
+    }
+
+    @When("I provide a (.*) complex number (-?\\d+)i$")
+    public void whenIProvideAComplexNumber(String s, int imaginary) {
+        try {
+            // Write code here that turns the phrase above into concrete actions
+            params = new ArrayList<>(); // create an empty set of parameters to be filled in
+            params.add(new MyNumber(0, imaginary));
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
+    }
+
+    @When("I provide the following expression {string}")
+    public void WhenIProvideAnExpression(String s) {
+        try {
+            params = new ArrayList<>();
+            params.add(c.read(s));
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
     }
 
 }
