@@ -146,30 +146,30 @@ Feature: Integer Arithmetic Expressions
   Scenario: Parsing the nested sum of three integers numbers
     Given the sum of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is + (8, + (6, 2))
-    And its INFIX parsing is ( 8 + ( 6 + 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) +) +
+    Then its PREFIX parsing is + (+ (8, 6), 2)
+    And its INFIX parsing is ( ( 8 + 6 ) + 2 )
+    And its POSTFIX parsing is ((8, 6) +, 2) +
 
   Scenario: Parsing the nested difference of three integers numbers
     Given the difference of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is - (8, - (6, 2))
-    And its INFIX parsing is ( 8 - ( 6 - 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) -) -
+    Then its PREFIX parsing is - (- (8, 6), 2)
+    And its INFIX parsing is ( ( 8 - 6 ) - 2 )
+    And its POSTFIX parsing is ((8, 6) -, 2) -
 
   Scenario: Parsing the nested product of three integers numbers
     Given the product of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is * (8, * (6, 2))
-    And its INFIX parsing is ( 8 * ( 6 * 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) *) *
+    Then its PREFIX parsing is * (* (8, 6), 2)
+    And its INFIX parsing is ( ( 8 * 6 ) * 2 )
+    And its POSTFIX parsing is ((8, 6) *, 2) *
 
   Scenario: Parsing the nested quotient of three integers numbers
     Given the quotient of the following list of numbers
       | 8 | 6 | 2 |
-    Then its PREFIX parsing is / (8, / (6, 2))
-    And its INFIX parsing is ( 8 / ( 6 / 2 ) )
-    And its POSTFIX parsing is (8, (6, 2) /) /
+    Then its PREFIX parsing is / (/ (8, 6), 2)
+    And its INFIX parsing is ( ( 8 / 6 ) / 2 )
+    And its POSTFIX parsing is ((8, 6) /, 2) /
 
   Scenario: Parsing an expression with respect to the order of operations
     Given the following expression "8 + 6 * 2"
