@@ -208,7 +208,7 @@ public class CalculatorSteps {
     public void additionParsing(String notation, String s){
         if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
             c = new Calculator();
-            assertEquals(s, c.format(c.read(s), Notation.valueOf(notation)));
+            assertEquals(s, c.format(c.read(op.toString()), Notation.valueOf(notation)));
         } else fail(notation + " is not a correct notation! ");
     }
 

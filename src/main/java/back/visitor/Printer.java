@@ -7,7 +7,7 @@ import back.calculator.Operation;
 import java.util.stream.IntStream;
 
 public class Printer extends Visitor {
-    private Notation notation = Notation.INFIX;
+    private Notation notation;
     private String computedValue = "";
 
     /**
@@ -23,6 +23,7 @@ public class Printer extends Visitor {
      * Default INFIX constructor.
      */
     public Printer() {
+        this.notation = Notation.INFIX;
     }
 
     /**
