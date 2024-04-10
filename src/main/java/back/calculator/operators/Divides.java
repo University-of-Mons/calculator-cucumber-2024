@@ -58,10 +58,11 @@ public final class Divides extends Operation {
     public MyNumber op(MyNumber l, MyNumber r) {
         if (r.getValue().isEqualsZero() || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
-        // TODO : Modify things here ?
+
         if (App.isRationalMode()){
-            return new MyNumber(l.getValue());
+            return new MyNumber(l.getValue(), r.getValue());
         }
+
         return new MyNumber(l.getValue().div(r.getValue()));
     }
 }

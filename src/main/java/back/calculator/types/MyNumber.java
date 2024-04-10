@@ -36,8 +36,8 @@ public class MyNumber implements Expression {
         value = new IntValue(v);
     }
 
-    public MyNumber(int num, int den){
-        value = new RationalValue(new IntValue(num), new IntValue(den));
+    public MyNumber(AbstractValue num, AbstractValue den){
+        value = new RationalValue(num, den);
     }
 
     /**

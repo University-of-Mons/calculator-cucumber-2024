@@ -48,27 +48,82 @@ public class RationalValue extends AbstractValue {
                         this.den = rationalDen.getNum() * rationalNum.getDen();
                 }
         }
+        this.reduce();
     }
 
-    // TODO : Implements all the methods
+    private static int pgcd(int num, int den) {
+        if (den == 0) {
+            return num;
+        } else {
+            return pgcd(den, num % den);
+        }
+    }
+
+    private void reduce(){
+        int pgcd = pgcd(this.num, this.den);
+        this.num = this.num / pgcd;
+        this.den = this.den / pgcd;
+    }
+
     @Override
     public AbstractValue add(AbstractValue other) {
-        return null;
+        switch (other.getType()) {
+            case INT:
+                IntValue integer = (IntValue) other;
+                int intNum2 = integer.getValue() * this.den;
+                this.num += intNum2;
+
+            case RATIONAL:
+                RationalValue rational = (RationalValue) other;
+                int ratNum2 = rational.getNum();
+                int ratDen2 = rational.getDen();
+
+                this.den = this.den * ratDen2;
+                this.num = this.num * ratDen2 + this.den * ratNum2;
+        }
+        this.reduce();
+        return this;
     }
 
     @Override
     public AbstractValue sub(AbstractValue other) {
-        return null;
+        switch (other.getType()) {
+            case INT:
+                IntValue integer = (IntValue) other;
+                int intNum2 = integer.getValue() * this.den;
+                this.num += intNum2;
+
+            case RATIONAL:
+                RationalValue rational = (RationalValue) other;
+                int ratNum2 = rational.getNum();
+                int ratDen2 = rational.getDen();
+
+                this.den = this.den * ratDen2;
+                this.num = this.num * ratDen2 - this.den * ratNum2;
+        }
+        this.reduce();
+        return this;
     }
 
     @Override
     public AbstractValue mul(AbstractValue other) {
-        return null;
+        switch (other.getType()) {
+            case INT:
+                IntValue integer = (IntValue) other;
+                this.num *= integer.getValue();
+            case RATIONAL:
+                RationalValue rational = (RationalValue) other;
+
+                this.num *= rational.getNum();
+                this.den *= rational.getDen();
+        }
+        this.reduce();
+        return this;
     }
 
     @Override
     public AbstractValue div(AbstractValue other) {
-        return null;
+        return new RationalValue(this, other);
     }
 
     public int getNum(){
@@ -81,21 +136,30 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public boolean isEqualsZero() {
-        return false;
+        return this.num == 0;
     }
 
     @Override
     public String toString() {
-        return "";
+        return this.num + "/" + this.den;
     }
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (!((o instanceof IntValue) || o instanceof RationalValue)) return false;
+        if (o instanceof IntValue) {
+            IntValue intValue = (IntValue) o;
+            return (this.num == intValue.getValue() & this.den == 1);
+        } else{
+            RationalValue rational = (RationalValue) o;
+            return (this.num == rational.getNum() && this.den == rational.getDen());
+        }
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        // TODO : better solution ?
+        return Float.hashCode(this.num / this.den);
     }
 }
