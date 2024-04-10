@@ -18,6 +18,8 @@ public class App extends Application {
 
     private static String userInput = "";
 
+    private static boolean isRationalMode = false; // TODO : Turn this on
+
     private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
@@ -44,5 +46,9 @@ public class App extends Application {
 
     public static void setUserInput(String userInput) {
         App.userInput = userInput;
+    }
+
+    public static boolean isRationalMode() {
+        return isRationalMode;
     }
 }

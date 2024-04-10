@@ -36,6 +36,10 @@ public class MyNumber implements Expression {
         value = new IntValue(v);
     }
 
+    public MyNumber(int num, int den){
+        value = new RationalValue(new IntValue(num), new IntValue(den));
+    }
+
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
      * Each number will pass itself to the visitor object to get processed by the visitor.
