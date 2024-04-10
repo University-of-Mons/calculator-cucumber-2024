@@ -1,46 +1,34 @@
-package calculator.controller;
+package calculator.controller.components;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuItem;
+import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RationalModeController implements Initializable {
-    // TODO : Vérifier, utilisez public pour les méthodes de contrôleur qui sont appelées par le fichier FXML,
-    //  et utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
-    //  à l'intérieur de la classe de contrôleur.
+public class ComplexModeController implements Initializable {
 
-    private static final Logger logger = LoggerFactory.getLogger(GuiMainViewController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ComplexModeController.class);
 
     @FXML
-    private CheckMenuItem standardMode, rationalMode;
+    private GridPane complexGrid;
     @FXML
-    private TextField display, expression;
+    public Button btnExtension1, btnExtension2, btnExtension3, btnExtension4, btnExtension5; ;
     @FXML
-    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnFraction, btnMultiply, btnMinus, btnPlus;
+    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnDivide, btnMultiply, btnMinus, btnPlus;
     @FXML
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnEquals;
 
     private boolean resetDisplay = true;
+    private TextField display, expression;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        rationalMode.setSelected(true);
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
     /*public void appendToDisplay(String text) {
         if (resetDisplay) {
             expression.appendText(display.getText());
@@ -58,7 +46,7 @@ public class RationalModeController implements Initializable {
         }
     }
 
-    public void onFraction() {
+    public void onDivide() {
         appendToDisplay("/");
     }
 
@@ -79,6 +67,8 @@ public class RationalModeController implements Initializable {
         Button button = (Button) event.getSource();
         appendToDisplay(button.getText());
     }
+    
+    
 
     @FXML
     private void onStandardMode(ActionEvent actionEvent) {
@@ -140,5 +130,16 @@ public class RationalModeController implements Initializable {
 
     public void displayDefaultZoom() {
         display.setStyle("-fx-font-size: 72px;");
+    }
+
+    public void setDisplayTextField(TextField display) {
+            this.display = display;
+    }
+
+    public void setExpressionTextField(TextField expression) {
+            this.expression = expression;
+    }
+
+    public void onExtension(ActionEvent actionEvent) {
     }*/
 }

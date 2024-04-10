@@ -17,7 +17,7 @@ public class AppStarter extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/GuiMainView.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/MainView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

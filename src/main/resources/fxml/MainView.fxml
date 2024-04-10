@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.layout.HBox?>
-<BorderPane minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.GuiMainViewController">
+<BorderPane minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.MainViewController">
    <top>
       <VBox alignment="CENTER">
          <MenuBar VBox.vgrow="NEVER">

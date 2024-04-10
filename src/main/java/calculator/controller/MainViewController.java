@@ -4,31 +4,25 @@ import calculator.Calculator;
 import calculator.Parser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GuiMainViewController implements Initializable {
+public class MainViewController implements Initializable {
 
     // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
     //  à l'intérieur de la classe de contrôleur.
     // TODO : Traduire en anglais si jamais il y a du français
 
-    private static final Logger logger = LoggerFactory.getLogger(GuiMainViewController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
 
     @FXML
     private CheckMenuItem standardMode, rationalMode, complexMode;
