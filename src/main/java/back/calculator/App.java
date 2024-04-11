@@ -18,7 +18,7 @@ public class App extends Application {
 
     private static String userInput = "";
 
-    private static boolean isRationalMode = false; // TODO : Turn this on
+    private static boolean isRationalMode = true; // TODO : Turn this on
 
     private static final Calculator calculator = new Calculator();
 

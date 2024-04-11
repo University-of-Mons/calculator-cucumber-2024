@@ -1,8 +1,8 @@
 package back.calculator.types;
 
-public class RationalValue extends AbstractValue {
+import back.calculator.App;
 
-    private final Type type = Type.RATIONAL;
+public class RationalValue extends AbstractValue {
 
     private int num;
 
@@ -18,6 +18,7 @@ public class RationalValue extends AbstractValue {
 
                         this.num = intNum.getValue();
                         this.den = intDen.getValue();
+                        break;
 
                     case RATIONAL:
                         // Invert the den and multiply the numerators
@@ -26,7 +27,9 @@ public class RationalValue extends AbstractValue {
 
                         this.num = intNum.getValue() * rationalDen.getDen();
                         this.den = rationalDen.getNum();
+                        break;
                 }
+            break;
 
             case RATIONAL:
                 RationalValue rationalNum = (RationalValue) num;
@@ -39,6 +42,7 @@ public class RationalValue extends AbstractValue {
 
                         this.num = rationalNum.getNum();
                         this.den = rationalNum.getDen() * intDen.getValue();
+                        break;
 
                     case RATIONAL:
                         // Same as above but two multiplications
@@ -46,8 +50,10 @@ public class RationalValue extends AbstractValue {
 
                         this.num = rationalNum.getNum() * rationalDen.getDen();
                         this.den = rationalDen.getNum() * rationalNum.getDen();
+                        break;
                 }
         }
+        this.setType(Type.RATIONAL);
         this.reduce();
     }
 
@@ -72,16 +78,21 @@ public class RationalValue extends AbstractValue {
                 IntValue integer = (IntValue) other;
                 int intNum2 = integer.getValue() * this.den;
                 this.num += intNum2;
-
+                break;
             case RATIONAL:
                 RationalValue rational = (RationalValue) other;
                 int ratNum2 = rational.getNum();
                 int ratDen2 = rational.getDen();
 
+                int oldDen = this.den;
                 this.den = this.den * ratDen2;
-                this.num = this.num * ratDen2 + this.den * ratNum2;
+                this.num = this.num * ratDen2 + oldDen * ratNum2;
+
         }
         this.reduce();
+        if (this.den == 1) {
+            return new IntValue(this.num);
+        }
         return this;
     }
 
@@ -92,16 +103,20 @@ public class RationalValue extends AbstractValue {
                 IntValue integer = (IntValue) other;
                 int intNum2 = integer.getValue() * this.den;
                 this.num += intNum2;
-
+                break;
             case RATIONAL:
                 RationalValue rational = (RationalValue) other;
                 int ratNum2 = rational.getNum();
                 int ratDen2 = rational.getDen();
 
+                int oldDen = this.den;
                 this.den = this.den * ratDen2;
-                this.num = this.num * ratDen2 - this.den * ratNum2;
+                this.num = this.num * ratDen2 - oldDen * ratNum2;
         }
         this.reduce();
+        if (this.den == 1) {
+            return new IntValue(this.num);
+        }
         return this;
     }
 
@@ -111,6 +126,7 @@ public class RationalValue extends AbstractValue {
             case INT:
                 IntValue integer = (IntValue) other;
                 this.num *= integer.getValue();
+                break;
             case RATIONAL:
                 RationalValue rational = (RationalValue) other;
 
@@ -118,6 +134,9 @@ public class RationalValue extends AbstractValue {
                 this.den *= rational.getDen();
         }
         this.reduce();
+        if (this.den == 1) {
+            return new IntValue(this.num);
+        }
         return this;
     }
 
@@ -128,7 +147,10 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public AbstractValue sqrt() {
-        // TODO : Implement this
+        // TODO : How to implement that ?
+        // Change the App.RationalMode if sqrt is real ?
+//        this.num = Math.sqrt(this.num);
+//        this.den = Math.sqrt(this.den)
         return null;
     }
 
@@ -147,8 +169,7 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public boolean isPositive() {
-        // TODO : Implement this
-        return false;
+        return (this.num >= 0 & this.den >= 0);
     }
 
     @Override

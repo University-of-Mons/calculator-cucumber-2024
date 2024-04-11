@@ -3,11 +3,11 @@ package back.calculator.types;
 import back.calculator.App;
 
 public class IntValue extends AbstractValue {
-    private final Type type = Type.INT;
 
     private int value;
 
     public IntValue(int value) {
+        this.setType(Type.INT);
         this.value = value;
     }
 
