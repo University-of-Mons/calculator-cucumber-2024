@@ -142,6 +142,7 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public AbstractValue div(AbstractValue other) {
+        // TODO : Vérifier si le résultat est entier ??
         return new RationalValue(this, other);
     }
 

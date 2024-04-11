@@ -58,7 +58,15 @@ public class IntValue extends AbstractValue {
     @Override
     public AbstractValue div(AbstractValue other) {
         // Check for the type but atm there is only one type
-
+        if (this.value == ((IntValue) other).getValue()) {
+            return new IntValue(1);
+        }
+        if (((IntValue) other).getValue() == 1) {
+            return new IntValue(this.value);
+        }
+        if (this.value % ((IntValue) other).getValue() == 0) {
+            return new IntValue(this.value / ((IntValue) other).getValue());
+        }
         if (App.isRationalMode()){
             return new RationalValue(this, other);
         }
