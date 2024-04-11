@@ -32,17 +32,18 @@ Feature: Complex arithmetic expressions
        | '*' | 2 | 3-4i | '6-8i' |
        | '/' | 6   | 2i   | '-3i'      |
 
-  # Scenario: Dividing two complex numbers with integer results
-  #  Given a complex operation '/'
-  #  When I provide a first complex number 20+15i
-  #  And I provide a second complex number 2-1i
-  #  Then the operation evaluates to '11+2i'
+#   Scenario: Dividing two complex numbers with integer results
+#    Given a complex operation '/'
+#    When I provide a first complex number 20+15i
+#    And I provide a second complex number 2-1i
+#    Then the operation evaluates to '11+2i'
+#   TODO : Manage rational numbers
 
-  Scenario: Dividing two complex numbers with floating point results (floored)
-    Given a complex operation '/'
-    When I provide a first complex number 5+4i
-    And I provide a second complex number 1+2i
-    Then the operation evaluates to '2-i'
+#  Scenario: Dividing two complex numbers with floating point results (floored)
+#    Given a complex operation '/'
+#    When I provide a first complex number 5+4i
+#    And I provide a second complex number 1+2i
+#    Then the operation evaluates to '2-i'
   # TODO: Change this when we add support for real numbers
 
   Scenario: Compute the modulus of a complex number
