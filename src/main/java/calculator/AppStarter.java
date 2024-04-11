@@ -1,6 +1,8 @@
 package calculator;
 
 import java.util.Objects;
+
+import calculator.controller.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -19,6 +21,8 @@ public class AppStarter extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/MainView.fxml"));
             Parent root = loader.load();
+            MainViewController mainViewController = loader.getController();
+            mainViewController.setStage(stage);
             Scene scene = new Scene(root);
 
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png")));

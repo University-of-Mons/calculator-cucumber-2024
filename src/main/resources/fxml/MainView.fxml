@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.layout.HBox?>
-<BorderPane minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.MainViewController">
+<BorderPane fx:id="root" minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.MainViewController">
    <top>
       <VBox alignment="CENTER">
          <MenuBar VBox.vgrow="NEVER">
@@ -24,7 +24,7 @@
                <items>
                  <CheckMenuItem fx:id="standardMode" mnemonicParsing="false"  selected="true" text="Standard" /><!-- onAction="#onStandardMode" -->
                   <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false"  text="Rational" /><!-- onAction="#onRationalMode" -->
-                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" text="Complex" /><!-- onAction="#onComplexMode" -->
+                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" text="Complex" onAction="#onComplexMode" /><!--  -->
                </items>
              </Menu>
               <Menu fx:id="zoomMenu" mnemonicParsing="false" text="Zoom">
@@ -75,11 +75,11 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints vgrow="SOMETIMES" minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints vgrow="SOMETIMES" minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints vgrow="SOMETIMES" minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints vgrow="SOMETIMES" minHeight="10.0" prefHeight="30.0" />
          </rowConstraints>
          <Button fx:id="btnOpenParenthesis" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onOpenParenthesis" prefHeight="81.0" prefWidth="120.0" text="(" textAlignment="CENTER">
             <font>

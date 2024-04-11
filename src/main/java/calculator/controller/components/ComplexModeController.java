@@ -1,13 +1,20 @@
 package calculator.controller.components;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,7 +36,7 @@ public class ComplexModeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
-    /*public void appendToDisplay(String text) {
+    public void appendToDisplay(String text) {
         if (resetDisplay) {
             expression.appendText(display.getText());
             display.clear();
@@ -64,6 +71,7 @@ public class ComplexModeController implements Initializable {
 
     @FXML
     public void onNumber(ActionEvent event) {
+        System.out.println("onNumber in ComplexModeController");
         Button button = (Button) event.getSource();
         appendToDisplay(button.getText());
     }
@@ -141,5 +149,5 @@ public class ComplexModeController implements Initializable {
     }
 
     public void onExtension(ActionEvent actionEvent) {
-    }*/
+    }
 }
