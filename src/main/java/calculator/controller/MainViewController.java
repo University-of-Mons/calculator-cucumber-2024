@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -26,7 +28,6 @@ public class MainViewController implements Initializable {
     // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
     //  à l'intérieur de la classe de contrôleur.
     // TODO : Traduire en anglais si jamais il y a du français
-    // TODO : Check https://stackoverflow.com/questions/31360919/how-to-dynamically-change-the-height-of-a-stage-in-javafx
 
     public static final String STANDARD_MODE = "Standard";
     public static final String RATIONAL_MODE = "Rational";
@@ -39,15 +40,19 @@ public class MainViewController implements Initializable {
     @FXML
     private CheckMenuItem standardMode, rationalMode, complexMode;
     @FXML
+    private Menu modeMenu, zoomMenu;
+    @FXML
+    private MenuItem zoomIn, zoomOut, zoomDefault;
+    @FXML
     private VBox displayContainer;
     @FXML
     private TextField display, expression;
     @FXML
-    private GridPane buttonGrid;
+    private Button btnDivide, btnMultiply, btnMinus, btnPlus, btnEquals;
     @FXML
-    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnDivide, btnMultiply, btnMinus, btnPlus;
+    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnRetrieve, btnDelete;
     @FXML
-    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnEquals;
+    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
 
     private Stage stage;
     private boolean resetDisplay = false;
@@ -81,8 +86,6 @@ public class MainViewController implements Initializable {
     public void onEquals() {
         if (!resetDisplay && !display.getText().equals("0")) {
             expression.setText(display.getText()+" = ");
-
-            // System.out.println("Expression : " + display.getText());
             Calculator calculator = new Calculator();
             try{
                 Parser parser = new Parser(display.getText(), calculator);
@@ -94,25 +97,24 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void onOpenParenthesis(ActionEvent actionEvent) {
+    public void onOpenParenthesis() {
         appendToDisplay("(");
     }
 
-    public void onCloseParenthesis(ActionEvent actionEvent) {
+    public void onCloseParenthesis() {
         appendToDisplay(")");
     }
 
-    public void onComma(ActionEvent actionEvent) {
-        // TODO : à revoir (revu par Samuel)
+    public void onComma() {
         if (resetDisplay) {
             display.setText("0,");
             resetDisplay = false;
-        } else{
+        } else {
             display.appendText(",");
         }
     }
 
-    public void onClear(ActionEvent actionEvent) {
+    public void onClear() {
         if (resetDisplay) {
             expression.appendText(display.getText());
         }
@@ -144,17 +146,17 @@ public class MainViewController implements Initializable {
 
     // Mode change event handlers
     @FXML
-    private void onStandardMode(ActionEvent actionEvent) {
+    private void onStandardMode() {
         updateButtonsForMode(STANDARD_MODE);
     }
 
     @FXML
-    private void onRationalMode(ActionEvent actionEvent) {
+    private void onRationalMode() {
         updateButtonsForMode(RATIONAL_MODE);
     }
 
     @FXML
-    private void onComplexMode(ActionEvent actionEvent) {
+    private void onComplexMode() {
         updateButtonsForMode(COMPLEX_MODE);
     }
 

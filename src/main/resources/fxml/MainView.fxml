@@ -22,9 +22,9 @@
            <menus>
              <Menu fx:id="modeMenu" mnemonicParsing="false" text="Mode">
                <items>
-                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false"  selected="true" text="Standard" /><!-- onAction="#onStandardMode" -->
+                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false"  selected="true" text="Standard" onAction="#onStandardMode"/>
                   <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false"  text="Rational" /><!-- onAction="#onRationalMode" -->
-                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" text="Complex" onAction="#onComplexMode" /><!--  -->
+                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" text="Complex" onAction="#onComplexMode" />
                </items>
              </Menu>
               <Menu fx:id="zoomMenu" mnemonicParsing="false" text="Zoom">
@@ -67,7 +67,7 @@
    </top>
 
    <center>
-      <GridPane fx:id="buttonGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.5" prefWidth="480.0" BorderPane.alignment="CENTER">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.5" prefWidth="480.0" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
