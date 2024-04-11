@@ -38,23 +38,24 @@ public class MainViewController implements Initializable {
     @FXML
     private BorderPane root;
     @FXML
-    private CheckMenuItem standardMode, rationalMode, complexMode;
+    private CheckMenuItem standardMode, rationalMode, complexMode; // unused
     @FXML
-    private Menu modeMenu, zoomMenu;
+    private Menu modeMenu, zoomMenu; // unused
     @FXML
-    private MenuItem zoomIn, zoomOut, zoomDefault;
+    private MenuItem zoomIn, zoomOut, zoomDefault; // unused
     @FXML
-    private VBox displayContainer;
+    private VBox displayContainer; // unused
     @FXML
     private TextField display, expression;
     @FXML
-    private Button btnDivide, btnMultiply, btnMinus, btnPlus, btnEquals;
+    private Button btnDivide, btnMultiply, btnMinus, btnPlus, btnEquals; // unused
     @FXML
-    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnRetrieve, btnDelete;
+    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnRetrieve, btnDelete; // unused
     @FXML
-    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
+    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9; // unused
 
     private Stage stage;
+    private String currentMode = STANDARD_MODE;
     private boolean resetDisplay = false;
 
     @Override
