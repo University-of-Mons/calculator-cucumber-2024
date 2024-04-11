@@ -1,6 +1,7 @@
 package calculator.operators;
 
 import calculator.*;
+import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
@@ -45,5 +46,10 @@ public final class Minus extends Operation
     if (l instanceof MyNotANumber || r instanceof MyNotANumber)
         return new MyNotANumber();
     return new MyNumber(l.getValue() - r.getValue());
+  }
+
+
+  public ComplexNumber op(ComplexNumber l, ComplexNumber r) {
+    return new ComplexNumber(l.getReal() - r.getReal(), l.getImaginary() - r.getImaginary());
   }
 }

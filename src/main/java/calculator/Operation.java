@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
 import visitor.Visitor;
@@ -129,4 +130,6 @@ public abstract class Operation implements Expression
 		result = prime * result + args.hashCode();
 		return result;
 	}
+
+	public abstract ComplexNumber op(ComplexNumber l, ComplexNumber r);
 }

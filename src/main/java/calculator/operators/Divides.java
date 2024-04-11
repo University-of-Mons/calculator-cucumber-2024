@@ -1,9 +1,7 @@
 package calculator.operators;
 
 import calculator.*;
-import calculator.numbers.Expression;
-import calculator.numbers.MyNotANumber;
-import calculator.numbers.MyNumber;
+import calculator.numbers.*;
 
 import java.util.List;
 
@@ -44,5 +42,16 @@ public final class Divides extends Operation {
       if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0)
           return new MyNotANumber();
       return new MyNumber(l.getValue() / r.getValue());
+  }
+
+  public ComplexNumber op(ComplexNumber l, ComplexNumber r) {
+      int denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
+      if (denominator == 0)
+          return new NotComplexNumber();
+      else {
+          int real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
+          int imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
+          return new ComplexNumber(real, imaginary);
+      }
   }
 }

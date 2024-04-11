@@ -1,10 +1,10 @@
 package calculator;
 
+import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
-import visitor.CountingVisitor;
+import visitor.ComplexNumberVisitor;
 import visitor.Evaluator;
-import visitor.ExpressionVisitor;
 
 /**
  * This class represents the core logic of a Calculator.
@@ -51,4 +51,10 @@ public class Calculator {
      or to simplify some expression
      public Expression simplify(Expression e)
     */
+
+    public ComplexNumber evalComplex(Expression o){
+        ComplexNumberVisitor v = new ComplexNumberVisitor();
+        o.accept(v);
+        return v.getResult();
+    }
 }

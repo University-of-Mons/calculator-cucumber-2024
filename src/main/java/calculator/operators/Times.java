@@ -1,6 +1,7 @@
 package calculator.operators;
 
 import calculator.Operation;
+import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.IllegalConstruction;
 import calculator.numbers.MyNotANumber;
@@ -46,5 +47,9 @@ public final class Times extends Operation
     if (l instanceof MyNotANumber || r instanceof MyNotANumber)
         return new MyNotANumber();
     return new MyNumber(l.getValue() * r.getValue());
+  }
+
+  public ComplexNumber op(ComplexNumber l, ComplexNumber r) {
+    return new ComplexNumber(l.getReal() * r.getReal() - l.getImaginary() * r.getImaginary(), l.getReal() * r.getImaginary() + l.getImaginary() * r.getReal());
   }
  }
