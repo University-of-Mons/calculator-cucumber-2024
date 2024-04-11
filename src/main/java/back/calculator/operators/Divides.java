@@ -57,7 +57,7 @@ public final class Divides extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if (r.getValue().isEqualsZero() || l instanceof NotANumber || r instanceof NotANumber)
+        if ((r.getReal().isEqualsZero() && r.getImaginary().isEqualsZero()) || l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
             // (a + bi) / (c + di) = (ac + bd) + (bc - ad)i / (c^2 + d^2)

@@ -126,6 +126,12 @@ public class RationalValue extends AbstractValue {
         return new RationalValue(this, other);
     }
 
+    @Override
+    public AbstractValue sqrt() {
+        // TODO : Implement this
+        return null;
+    }
+
     public int getNum(){
         return this.num;
     }
@@ -137,6 +143,12 @@ public class RationalValue extends AbstractValue {
     @Override
     public boolean isEqualsZero() {
         return this.num == 0;
+    }
+
+    @Override
+    public boolean isPositive() {
+        // TODO : Implement this
+        return false;
     }
 
     @Override
