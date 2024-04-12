@@ -163,6 +163,16 @@ public class MainViewController implements Initializable {
         display.setStyle("-fx-font-size: 72px;");
     }
 
+    public void onDelete() {
+        if (resetDisplay) {
+            expression.appendText(display.getText());
+            display.clear();
+        }
+        if (!display.getText().isEmpty()) {
+            display.setText(display.getText(0, display.getText().length() - 1));
+        }
+    }
+
     // Setters
     public void setStage(Stage stage) {
         this.stage = stage;

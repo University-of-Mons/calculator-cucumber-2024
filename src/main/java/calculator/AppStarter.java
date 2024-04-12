@@ -53,7 +53,6 @@ public class AppStarter extends Application {
                 if (isModifierDown) {
                     switch (event.getCode()) {
                         case EQUALS:
-                            mainViewController.displayZoomIn();
                         case ADD:
                             mainViewController.displayZoomIn();
                             break;
@@ -67,6 +66,11 @@ public class AppStarter extends Application {
                             break;
                     }
                 }
+                // Delete with Backspace
+                if (event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE) {
+                    mainViewController.onDelete();
+                }
+
                 /* String text = event.getText();
                 if (Character.isDigit(text.charAt(0))) {
                     mainViewController.appendToDisplay(text);
