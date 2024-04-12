@@ -45,16 +45,6 @@ jobs:
           name: jacoco-report
           path: target/site/jacoco/
 
-      - name: Comment coverage report on PR
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: thollander/actions-comment-pull-request@v2.5.0
-        with:
-          message: |
-            ## Code Coverage Report :bar_chart:
-            - **Coverage**: ${{ steps.jacoco.outputs.coverage }}%
-            - **Branches**: ${{ steps.jacoco.outputs.branches }}%
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
