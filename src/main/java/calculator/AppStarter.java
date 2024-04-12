@@ -30,7 +30,7 @@ public class AppStarter extends Application {
             mainViewController.setStage(stage);
             Scene scene = new Scene(root);
 
-            addKeyListeners(scene, mainViewController);
+            // addKeyListeners(scene, mainViewController);
 
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png")));
             stage.getIcons().add(icon);
@@ -44,7 +44,8 @@ public class AppStarter extends Application {
         }
     }
 
-    private void addKeyListeners(Scene scene, MainViewController mainViewController) {
+    /* private void addKeyListeners(Scene scene, MainViewController mainViewController) {
+        // to pass this method like python
         scene.setOnKeyPressed(event -> {
                 String text = event.getText();
                 if (Character.isDigit(text.charAt(0))) {
@@ -75,7 +76,7 @@ public class AppStarter extends Application {
                     }
                 }
             });
-    }
+    } */
 
     public static void main(String[] args) {
         launch(args);
