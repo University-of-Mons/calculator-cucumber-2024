@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class AppStarter extends Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/", "="));
+    private static final Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/", "=")); // unused
     @Override
     public void start(Stage stage) {
         try {
@@ -30,7 +30,7 @@ public class AppStarter extends Application {
             mainViewController.setStage(stage);
             Scene scene = new Scene(root);
 
-            // addKeyListeners(scene, mainViewController);
+            addKeyListeners(scene, mainViewController);
 
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png")));
             stage.getIcons().add(icon);
@@ -44,10 +44,30 @@ public class AppStarter extends Application {
         }
     }
 
-    /* private void addKeyListeners(Scene scene, MainViewController mainViewController) {
-        // to pass this method like python
+    private void addKeyListeners(Scene scene, MainViewController mainViewController) {
         scene.setOnKeyPressed(event -> {
-                String text = event.getText();
+                // Zoom in/out/default with Ctrl/Cmd + "+/-/O"
+                boolean isMac = System.getProperty("os.name").contains("Mac");
+                boolean isModifierDown = isMac ? event.isMetaDown() : event.isControlDown();
+
+                if (isModifierDown) {
+                    switch (event.getCode()) {
+                        case EQUALS:
+                            mainViewController.displayZoomIn();
+                        case ADD:
+                            mainViewController.displayZoomIn();
+                            break;
+                        case MINUS:
+                            mainViewController.displayZoomOut();
+                            break;
+                        case O:
+                            mainViewController.displayDefaultZoom();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                /* String text = event.getText();
                 if (Character.isDigit(text.charAt(0))) {
                     mainViewController.appendToDisplay(text);
                 } else if (operators.contains(text)) {
@@ -58,25 +78,9 @@ public class AppStarter extends Application {
                     } else {
                         mainViewController.appendToDisplay(text);
                     }
-                }
-                // Zoom in/out with Ctrl + "+/-"
-                if (event.isControlDown()) {
-                    switch (event.getCode()) {
-                        case ADD:
-                            mainViewController.displayZoomIn();
-                            break;
-                        case MINUS:
-                            mainViewController.displayZoomOut();
-                            break;
-                        case DEAD_GRAVE:
-                            mainViewController.displayDefaultZoom();
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                } */
             });
-    } */
+    }
 
     public static void main(String[] args) {
         launch(args);
