@@ -1,7 +1,7 @@
 package calculator;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -164,7 +164,7 @@ public class TestGui {
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btn3");
-        fxRobot.clickOn("#btnDelete");
+        fxRobot.push(KeyCode.BACK_SPACE);
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("12", display.getText());
     }
@@ -177,7 +177,7 @@ public class TestGui {
         fxRobot.clickOn("#btnEquals");
         fxRobot.clickOn("#btn4");
         fxRobot.clickOn("#btnMinus");
-        fxRobot.clickOn("#btnRetrieve");
+        fxRobot.clickOn("#expression");
         fxRobot.clickOn("#btnEquals");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("1", display.getText());

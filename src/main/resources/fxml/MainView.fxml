@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="root" minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.MainViewController">
+   <top>
+      <VBox alignment="CENTER" prefHeight="235.0" prefWidth="480.0">
+         <MenuBar prefHeight="27.5" prefWidth="480.0" VBox.vgrow="NEVER">
+           <menus>
+             <Menu fx:id="modeMenu" mnemonicParsing="false" text="Mode">
+               <items>
+                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false" onAction="#onStandardMode" selected="true" text="Standard" />
+                  <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false" text="Rational" /><!-- onAction="#onRationalMode" -->
+                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" onAction="#onComplexMode" text="Complex" />
+               </items>
+             </Menu>
+              <Menu fx:id="zoomMenu" mnemonicParsing="false" text="Zoom">
+                 <items>
+                    <MenuItem fx:id="zoomIn" mnemonicParsing="false" onAction="#displayZoomIn" text="Zoom In" />
+                    <MenuItem fx:id="zoomOut" mnemonicParsing="false" onAction="#displayZoomOut" text="Zoom out" />
+                    <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem fx:id="zoomDefault" mnemonicParsing="false" onAction="#displayDefaultZoom" text="Default size" />
+                 </items>
+              </Menu>
+             <Menu mnemonicParsing="false" text="Help">
+               <items>
+                 <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+             </Menu>
+           </menus>
+         </MenuBar>
+         <VBox fx:id="displayContainer" prefHeight="205.5" prefWidth="480.0" VBox.vgrow="NEVER">
+            <children>
+               <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" minWidth="360.0" onMouseClicked="#handleExpressionFieldClick" prefHeight="51.0" prefWidth="480.0" style="-fx-text-fill: #7f7f7f;" VBox.vgrow="NEVER">
+                  <font>
+                     <Font name="Avenir Black" size="24.0" />
+                  </font>
+               </TextField>
+               <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" minWidth="480.0" onMouseClicked="#handleDisplayFieldClick" prefHeight="154.5" prefWidth="480.0" VBox.vgrow="NEVER">
+                  <font>
+                     <Font name="Avenir Black" size="72.0" />
+                  </font>
+               </TextField>
+            </children>
+         </VBox>
+      </VBox>
+   </top>
+
+   <center>
+      <!-- Calculator buttons -->
+   </center>
+</BorderPane>
