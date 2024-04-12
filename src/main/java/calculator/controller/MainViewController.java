@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -58,7 +59,7 @@ public class MainViewController implements Initializable {
         updateMode(STANDARD_MODE);
     }
 
-    // Button click event handlers
+    // click event handlers
     public void onRetrieve() {
         String expressionString = expression.getText();
         int index = expressionString.lastIndexOf("=");
@@ -147,6 +148,15 @@ public class MainViewController implements Initializable {
     }
 
     // Display event handlers
+    public void handleExpressionFieldClick(MouseEvent mouseEvent) {
+        onRetrieve();
+        root.requestFocus();
+    }
+
+    public void handleDisplayFieldClick(MouseEvent mouseEvent) {
+        root.requestFocus();
+    }
+
     public void displayZoomIn() {
         double size = display.getFont().getSize();
         if (size < 72) {
