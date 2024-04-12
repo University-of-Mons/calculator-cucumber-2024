@@ -71,80 +71,6 @@ public class MainViewController implements Initializable {
         }
     }
 
-    // TODO : tmp delete
-    /*
-    @FXML
-    public void onNumber(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        appendToDisplay(button.getText());
-    }
-
-    public void onDivide() {
-        appendToDisplay("/");
-    }
-
-    public void onMultiply() {
-        appendToDisplay("*");
-    }
-
-    public void onMinus() {
-        appendToDisplay("-");
-    }
-
-    public void onPlus() {
-        appendToDisplay("+");
-    }
-
-    public void onEquals() {
-        if (!resetDisplay && !display.getText().equals("0")) {
-            expression.setText(display.getText()+" = ");
-            Calculator calculator = new Calculator();
-            try{
-                Parser parser = new Parser(display.getText(), calculator);
-                display.setText(parser.evaluate().toString());}
-            catch (Exception e){
-                display.setText("Error");
-            }
-            resetDisplay = true;
-        }
-    }
-
-    public void onOpenParenthesis() {
-        appendToDisplay("(");
-    }
-
-    public void onCloseParenthesis() {
-        appendToDisplay(")");
-    }
-
-    public void onComma() {
-        if (resetDisplay) {
-            display.setText("0,");
-            resetDisplay = false;
-        } else {
-            display.appendText(",");
-        }
-    }
-
-    public void onClear() {
-        if (resetDisplay) {
-            expression.appendText(display.getText());
-        }
-        display.clear();
-    }
-
-    @FXML
-    public void onDelete() {
-        if (resetDisplay) {
-            expression.appendText(display.getText());
-            display.clear();
-        }
-        if (!display.getText().isEmpty()) {
-            display.setText(display.getText(0, display.getText().length() - 1));
-        }
-    }
-     */
-
     // Mode change event handlers
     @FXML
     private void onStandardMode() {
@@ -221,16 +147,6 @@ public class MainViewController implements Initializable {
     }
 
     // Display event handlers
-    // TODO : tmp delete
-    /* public void appendToDisplay(String text) {
-        if (resetDisplay) {
-            expression.appendText(display.getText());
-            display.clear();
-        }
-        display.appendText(text);
-        resetDisplay = false;
-    } */
-
     public void displayZoomIn() {
         double size = display.getFont().getSize();
         if (size < 72) {
