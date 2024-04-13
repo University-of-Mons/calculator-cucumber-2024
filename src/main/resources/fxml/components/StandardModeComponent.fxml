@@ -1,73 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckMenuItem?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.HBox?>
-<BorderPane minHeight="640" minWidth="480" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.GuiMainViewController">
-   <top>
-      <VBox alignment="CENTER">
-         <MenuBar VBox.vgrow="NEVER">
-           <menus>
-             <Menu fx:id="modeMenu" mnemonicParsing="false" text="Mode">
-               <items>
-                 <CheckMenuItem fx:id="standardMode" mnemonicParsing="false"  selected="true" text="Standard" /><!-- onAction="#onStandardMode" -->
-                  <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false"  text="Rational" /><!-- onAction="#onRationalMode" -->
-                  <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" text="Complex" /><!-- onAction="#onComplexMode" -->
-               </items>
-             </Menu>
-              <Menu fx:id="zoomMenu" mnemonicParsing="false" text="Zoom">
-                 <items>
-                    <MenuItem fx:id="zoomIn" mnemonicParsing="false" onAction="#displayZoomIn" text="Zoom In" />
-                    <MenuItem fx:id="zoomOut" mnemonicParsing="false" onAction="#displayZoomOut" text="Zoom out" />
-                    <SeparatorMenuItem mnemonicParsing="false" />
-                    <MenuItem fx:id="zoomDefault" mnemonicParsing="false" onAction="#displayDefaultZoom" text="Default size" />
-                 </items>
-              </Menu>
-             <Menu mnemonicParsing="false" text="Help">
-               <items>
-                 <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-             </Menu>
-           </menus>
-         </MenuBar>
-         <VBox fx:id="displayContainer" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="NEVER">
-            <children>
-               <HBox>
-                  <Button fx:id="btnRetrieve" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" VBox.vgrow="NEVER" onAction="#onRetrieve" prefWidth="120.0" text="Retrieve" textAlignment="CENTER">
-                     <font>
-                        <Font name="Avenir Black" size="24.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="expression" alignment="CENTER_RIGHT" editable="false" minWidth="360.0" prefHeight="40.0" style="-fx-text-fill: #7f7f7f;" VBox.vgrow="NEVER">
-                     <font>
-                        <Font name="Avenir Black" size="24.0" />
-                     </font>
-                  </TextField>
-               </HBox>
-               <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" minWidth="480.0" prefHeight="160.0" VBox.vgrow="NEVER">
-                  <font>
-                     <Font name="Avenir Black" size="72.0" />
-                  </font>
-               </TextField>
-            </children>
-         </VBox>
-      </VBox>
-   </top>
-
-   <center>
-      <GridPane fx:id="buttonGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.5" prefWidth="480.0" BorderPane.alignment="CENTER">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="480.0" stylesheets="@../../css/Style.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.components.StandardModeController">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -116,7 +56,7 @@
                <Font name="Avenir Black" size="36.0" />
             </font>
          </Button>
-         <Button fx:id="btnDivide" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDivide" prefHeight="81.0" prefWidth="120.0" text="/" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         <Button fx:id="btnDivide" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDivide" prefHeight="81.0" prefWidth="120.0" text="÷" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
             <font>
                <Font name="Avenir Black" size="36.0" />
             </font>
@@ -161,12 +101,7 @@
                <Font name="Avenir Black" size="36.0" />
             </font>
          </Button>
-         <Button fx:id="btnDelete" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDelete" prefHeight="81.0" prefWidth="120.0" text="Del" textAlignment="CENTER" GridPane.rowIndex="4">
-            <font>
-               <Font name="Avenir Black" size="36.0" />
-            </font>
-         </Button>
-         <Button fx:id="btn0" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNumber" prefHeight="81.0" prefWidth="120.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <Button fx:id="btn0" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNumber" prefHeight="81.0" prefWidth="240.0" text="0" textAlignment="CENTER" GridPane.rowIndex="4">
             <font>
                <Font name="Avenir Black" size="36.0" />
             </font>
@@ -182,5 +117,3 @@
             </font>
          </Button>
       </GridPane>
-   </center>
-</BorderPane>
