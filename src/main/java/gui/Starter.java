@@ -1,7 +1,7 @@
 package gui;
 
-public class Gui {
+public class Starter {
     public static void main(final String[] args) {
-        HelloFX.main(args);
+        GuiApplication.main(args);
     }
 }
