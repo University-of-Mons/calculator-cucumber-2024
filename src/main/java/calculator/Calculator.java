@@ -1,5 +1,10 @@
 package calculator;
 
+import calculator.parser.CalculatorLexer;
+import calculator.parser.CalculatorParser;
+import calculator.parser.VisitorParser;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 import visitor.Evaluator;
 import visitor.Printer;
 
@@ -18,14 +23,18 @@ public class Calculator {
     public Calculator() {
     }
 
-    /*
-     For the moment the calculator only contains a print method and an eval method
-     It would be useful to complete this with a read method, so that we would be able
-     to implement a full REPL cycle (Read-Eval-Print loop) such as in Scheme, Python, R and other languages.
-     To do so would require to implement a method with the following signature, converting an input string
-     into an arithmetic expression:
-     public Expression read(String s)
-    */
+    /**
+     * The read method is implemented with ANTLR4 parser.
+     * We construct the AST with ANTLR4 and convert it into a valid expression
+     * that the calculator can use.
+     * @param s the string to parse
+     * @return a new Expression
+     */
+    public Expression read(String s) {
+        CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString(s));
+        CalculatorParser parser = new CalculatorParser(new CommonTokenStream(lexer));
+        return parser.init().accept(new VisitorParser());
+    }
 
     /**
      * Prints an arithmetic expression provided as input parameter.

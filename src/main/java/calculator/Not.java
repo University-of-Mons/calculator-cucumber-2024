@@ -25,6 +25,10 @@ public class Not implements Expression {
         this.arg = truthValue;
     }
 
+    public Not(Expression truthValue) {
+        this.arg = truthValue;
+    }
+
     @Override
     public void accept(Visitor v) {
         v.visit(this);
@@ -42,7 +46,7 @@ public class Not implements Expression {
 
     @Override
     public int countNbs() {
-        return 1 + arg.countNbs();
+        return arg.countNbs();
     }
 
     @Override
