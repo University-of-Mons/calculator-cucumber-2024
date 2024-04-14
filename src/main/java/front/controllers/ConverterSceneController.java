@@ -229,8 +229,8 @@ public class ConverterSceneController implements Initializable {
         conversionModeSelector.setText("Speed");
         firstSelectedUnit = values[0];
         secondSelectedUnit = values[0];
-        firstUnitSelector.setText(firstSelectedUnit.toString());
-        secondUnitSelector.setText(secondSelectedUnit.toString());
+        firstUnitSelector.setText(firstSelectedUnit.getSymbol());
+        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -245,8 +245,8 @@ public class ConverterSceneController implements Initializable {
         conversionModeSelector.setText("Weight");
         firstSelectedUnit = values[0];
         secondSelectedUnit = values[0];
-        firstUnitSelector.setText(firstSelectedUnit.toString());
-        secondUnitSelector.setText(secondSelectedUnit.toString());
+        firstUnitSelector.setText(firstSelectedUnit.getSymbol());
+        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -261,8 +261,8 @@ public class ConverterSceneController implements Initializable {
         conversionModeSelector.setText("Distance");
         firstSelectedUnit = values[0];
         secondSelectedUnit = values[0];
-        firstUnitSelector.setText(firstSelectedUnit.toString());
-        secondUnitSelector.setText(secondSelectedUnit.toString());
+        firstUnitSelector.setText(firstSelectedUnit.getSymbol());
+        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -277,8 +277,8 @@ public class ConverterSceneController implements Initializable {
         conversionModeSelector.setText("Time");
         firstSelectedUnit = values[0];
         secondSelectedUnit = values[0];
-        firstUnitSelector.setText(firstSelectedUnit.toString());
-        secondUnitSelector.setText(secondSelectedUnit.toString());
+        firstUnitSelector.setText(firstSelectedUnit.getSymbol());
+        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -290,7 +290,7 @@ public class ConverterSceneController implements Initializable {
         selector.getItems().clear();
 
         for (Units.Unit value : values) {
-            MenuItem item = new MenuItem(value.toString());
+            MenuItem item = new MenuItem(value.getSymbol());
             item.setOnAction(event -> {
                 if (selector.equals(firstUnitSelector)) {
                     firstSelectedUnit = value;
@@ -299,7 +299,6 @@ public class ConverterSceneController implements Initializable {
                 } else {
                     logger.error("Invalid selector passed to replaceSelectorItem.");
                 }
-                selector.setText(value.toString());
                 logger.info(value + " selected");
             });
             selector.getItems().add(item);
