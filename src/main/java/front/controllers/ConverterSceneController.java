@@ -6,9 +6,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
@@ -19,6 +17,17 @@ import java.util.ResourceBundle;
 // TODO : i'm waiting for issue #25 to be resolved to implement the scene switching
 
 public class ConverterSceneController implements Initializable {
+    @FXML
+    MenuButton conversionModeSelector;
+    @FXML
+    MenuItem speedConversionModeItem;
+    @FXML
+    MenuItem weightConversionModeItem;
+    @FXML
+    MenuItem distanceConversionModeItem;
+    @FXML
+    MenuItem timeConversionModeItem;
+
     @FXML
     Button clear;
     @FXML
@@ -204,6 +213,22 @@ public class ConverterSceneController implements Initializable {
     }
 
     /**
+     * Defines the conversion as a conversion of distance.
+     */
+    @FXML
+    private void handleDistanceConversionSelected(ActionEvent actionEvent) {
+        // TODO : set distance units
+    }
+
+    /**
+     * Defines the conversion as a conversion of time.
+     */
+    @FXML
+    private void handleTimeConversionSelected(ActionEvent actionEvent) {
+        // TODO : set time units
+    }
+
+    /**
      * Defines the unit to convert from to unit 1.
      */
     @FXML
@@ -223,7 +248,7 @@ public class ConverterSceneController implements Initializable {
      * Defines the unit to convert to to unit 1.
      */
     @FXML
-    private void handleTOUnit1Selected(ActionEvent actionEvent) {
+    private void handleToUnit1Selected(ActionEvent actionEvent) {
         // TODO : set unit 1
     }
 
@@ -231,7 +256,7 @@ public class ConverterSceneController implements Initializable {
      * Defines the unit to convert to to unit 2.
      */
     @FXML
-    private void handleTOUnit2Selected(ActionEvent actionEvent) {
+    private void handleToUnit2Selected(ActionEvent actionEvent) {
         // TODO : set unit 2
     }
 }

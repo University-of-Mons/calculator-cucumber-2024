@@ -46,16 +46,20 @@
                                 <Cursor fx:constant="DEFAULT"/>
                             </cursor>
                         </MenuButton>
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
+                        <MenuButton fx:id="conversionModeSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
                                     prefWidth="160.0"
                                     style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;"
                                     stylesheets="@style.css" text="Conversion" textFill="WHITE" GridPane.columnIndex="3"
                                     GridPane.columnSpan="3" GridPane.rowIndex="1">
                             <items>
-                                <MenuItem mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;"
+                                <MenuItem fx:id="speedConversionModeItem" mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;"
                                           text="Speed" onAction="#handleSpeedConversionSelected"/>
-                                <MenuItem mnemonicParsing="false" style="-fx-text-fill: white;" text="Weight"
+                                <MenuItem fx:id="weightConversionModeItem" mnemonicParsing="false" style="-fx-text-fill: white;" text="Weight"
                                           onAction="#handleWeightConversionSelected"/>
+                                <MenuItem fx:id="distanceConversionModeItem" mnemonicParsing="false" style="-fx-text-fill: white;" text="Distance"
+                                          onAction="#handleDistanceConversionSelected"/>
+                                <MenuItem fx:id="timeConversionModeItem" mnemonicParsing="false" style="-fx-text-fill: white;" text="Time"
+                                          onAction="#handleTimeConversionSelected"/>
                             </items>
                             <font>
                                 <Font size="16.0"/>
