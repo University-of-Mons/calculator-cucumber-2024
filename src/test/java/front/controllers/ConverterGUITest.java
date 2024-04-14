@@ -1,7 +1,6 @@
 package front.controllers;
 
 import back.converter.Units;
-import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
@@ -98,7 +97,10 @@ class ConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableSpeedUnits(FxRobot robot) {
-        checkAvailableUnits(robot, "#speedConversionModeItem", Units.Speed.values());
+        List<String> expectedItems = Arrays.stream(Units.Speed.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, "#speedConversionModeItem", expectedItems);
     }
 
     /**
@@ -106,7 +108,10 @@ class ConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableWeightUnits(FxRobot robot) {
-        checkAvailableUnits(robot, "#weightConversionModeItem", Units.Weight.values());
+        List<String> expectedItems = Arrays.stream(Units.Weight.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, "#weightConversionModeItem", expectedItems);
     }
 
     /**
@@ -114,7 +119,10 @@ class ConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableDistanceUnits(FxRobot robot) {
-        checkAvailableUnits(robot, "#distanceConversionModeItem", Units.Distance.values());
+        List<String> expectedItems = Arrays.stream(Units.Distance.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, "#distanceConversionModeItem", expectedItems);
     }
 
     /**
@@ -122,13 +130,16 @@ class ConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableTimeUnits(FxRobot robot) {
-        checkAvailableUnits(robot, "#timeConversionModeItem", Units.Time.values());
+        List<String> expectedItems = Arrays.stream(Units.Time.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, "#timeConversionModeItem", expectedItems);
     }
 
     /**
      * Selects the unit type and triggers the verification of the available units.
      */
-    private void checkAvailableUnits(FxRobot robot, String conversionModeItem, Enum<?>[] units) {
+    private void checkAvailableUnits(FxRobot robot, String conversionModeItem, List<String> units) {
         try {
             selectConversionMode(conversionModeItem);
             verifyUnitSelectors(units);
@@ -153,21 +164,17 @@ class ConverterGUITest extends ApplicationTest {
      *  Then, verifies that both unit selectors have all expected units available.
      * @param units The units of the enum that we are testing (example : Units.Speed.values()).
      */
-    private void verifyUnitSelectors(Enum<?>[] units) {
-        List<String> expectedItems = Arrays.stream(units)
-                .map(unit -> ((Units.Unit) unit).getSymbol())
-                .toList();
-
+    private void verifyUnitSelectors(List<String> units) {
         MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
         List<String> firstSelectorItems = firstUnitSelector.getItems().stream()
                 .map(MenuItem::getText)
                 .collect(Collectors.toList());
-        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(expectedItems);
+        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(units);
 
         MenuButton secondUnitSelector = lookup("#secondUnitSelector").query();
         List<String> secondSelectorItems = secondUnitSelector.getItems().stream()
                 .map(MenuItem::getText)
                 .collect(Collectors.toList());
-        Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(expectedItems);
+        Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(units);
     }
 }
