@@ -19,7 +19,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 // TODO : beautiful history
-// TODO : better unit selection text in menus
 
 public class ConverterSceneController implements Initializable {
     @FXML
