@@ -12,25 +12,67 @@ import back.visitor.Visitor;
  * @see Operation
  */
 public class MyNumber implements Expression {
-    private final int value;
+    private final AbstractValue real;
+    // INT - REAL - RATIONAL
+
+    private final AbstractValue imaginary;
+    // INT - REAL - RATIONAL
 
     /**
      * getter method to obtain the value contained in the object
      *
      * @return The integer number contained in the object
      */
-    public int getValue() {
-        return value;
+
+    public AbstractValue getReal() {
+        return real;
     }
 
     /**
-     * Constructor method
+     * Getter method to obtain the imaginary part of the object
      *
-     * @param v The integer value to be contained in the object
+     * @return The imaginary part of the object
      */
-    public /*constructor*/ MyNumber(int v) {
-        value = v;
+    public AbstractValue getImaginary() {
+        return imaginary;
     }
+
+    public MyNumber(AbstractValue v) {
+        real = v;
+        // TODO: add a switch to check the type of v to create the same type.
+        imaginary = new IntValue(0);
+    }
+
+    public MyNumber(int v) {
+        real = new IntValue(v);
+        imaginary = new IntValue(0);
+    }
+
+    /**
+     * Constructor method for complex numbers
+     *
+     * @param real The real part of the complex number
+     * @param imaginary The imaginary part of the complex number
+     */
+    public MyNumber(AbstractValue real, AbstractValue imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    public MyNumber(int real, int imaginary) {
+        this.real = new IntValue(real);
+        this.imaginary = new IntValue(imaginary);
+    }
+
+    /**
+     * Method to check if the number is imaginary
+     *
+     * @return True if the number is imaginary, false otherwise.
+     */
+    public boolean isImaginary() {
+        return !imaginary.isEqualsZero();
+    }
+
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -50,7 +92,35 @@ public class MyNumber implements Expression {
      */
     @Override
     public String toString() {
-        return Integer.toString(value);
+        if (real.isEqualsZero()) {
+            return toStringPurelyImaginary();
+        } else {
+            return toStringWithReal();
+        }
+    }
+
+    private String toStringPurelyImaginary() {
+        if (imaginary.isEqualsZero()) {
+            return "0";
+        } else if (imaginary.equals(new IntValue(1))) {
+            return "i";
+        } else {
+            return imaginary + "i";
+        }
+    }
+
+    private String toStringWithReal() {
+        if (imaginary.isEqualsZero()) {
+            return real.toString();
+        } else if (imaginary.equals(new IntValue(1))) {
+            return real + "+i";
+        } else if (imaginary.equals(new IntValue(-1))) {
+            return real + "-i";
+        } else if (imaginary.isPositive()) {
+            return real + "+" + imaginary + "i";
+        } else {
+            return real + "" + imaginary + "i";
+        }
     }
 
     /**
@@ -73,7 +143,7 @@ public class MyNumber implements Expression {
         if (!(o instanceof MyNumber)) {
             return false;
         }
-        return this.value == ((MyNumber) o).value;
+        return this.real.equals(((MyNumber) o).real) && this.imaginary.equals(((MyNumber) o).imaginary);
         // Used == since the contained value is a primitive value
         // If it had been a Java object, .equals() would be needed
     }
@@ -87,7 +157,10 @@ public class MyNumber implements Expression {
      */
     @Override
     public int hashCode() {
-        return value;
+        if (isImaginary()) {
+            return real.hashCode() + imaginary.hashCode();
+        }
+        return real.hashCode();
     }
 
 }

@@ -25,6 +25,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(calculatorParser.ExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ModulusInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModulusInfix(calculatorParser.ModulusInfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code MulDivInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
@@ -39,6 +46,20 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParensInfix(calculatorParser.ParensInfixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ImaginaryInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImaginaryInfix(calculatorParser.ImaginaryInfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AtomInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAtomInfix(calculatorParser.AtomInfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code AddSubInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
@@ -46,12 +67,12 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAddSubInfix(calculatorParser.AddSubInfixContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code NumberInfix}
-	 * labeled alternative in {@link calculatorParser#infix}.
+	 * Visit a parse tree produced by the {@code ModulusPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberInfix(calculatorParser.NumberInfixContext ctx);
+	T visitModulusPrefix(calculatorParser.ModulusPrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDivPrefix}
 	 * labeled alternative in {@link calculatorParser#prefix}.
@@ -74,12 +95,26 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParensPrefix(calculatorParser.ParensPrefixContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code NumberPrefix}
+	 * Visit a parse tree produced by the {@code ImaginaryPrefix}
 	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberPrefix(calculatorParser.NumberPrefixContext ctx);
+	T visitImaginaryPrefix(calculatorParser.ImaginaryPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AtomPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAtomPrefix(calculatorParser.AtomPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ModulusPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModulusPostfix(calculatorParser.ModulusPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDivPostfix}
 	 * labeled alternative in {@link calculatorParser#postfix}.
@@ -102,10 +137,37 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParensPostfix(calculatorParser.ParensPostfixContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code NumberPostfix}
+	 * Visit a parse tree produced by the {@code ImaginaryPostfix}
 	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberPostfix(calculatorParser.NumberPostfixContext ctx);
+	T visitImaginaryPostfix(calculatorParser.ImaginaryPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AtomPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAtomPostfix(calculatorParser.AtomPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link calculatorParser#imaginaryAndReal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImaginaryAndReal(calculatorParser.ImaginaryAndRealContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ImaginaryAtom}
+	 * labeled alternative in {@link calculatorParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImaginaryAtom(calculatorParser.ImaginaryAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code RealAtom}
+	 * labeled alternative in {@link calculatorParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRealAtom(calculatorParser.RealAtomContext ctx);
 }

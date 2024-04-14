@@ -1,10 +1,8 @@
 package back.visitor;
 
 import back.calculator.*;
-import back.calculator.operators.Divides;
-import back.calculator.operators.Minus;
-import back.calculator.operators.Plus;
-import back.calculator.operators.Times;
+import back.calculator.operators.*;
+import back.calculator.types.IntValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 import org.antlr.v4.runtime.Token;
@@ -61,6 +59,18 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return params;
     }
 
+    @Override
+    public Expression visitModulusInfix(calculatorParser.ModulusInfixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
 
     @Override
     public Expression visitMulDivInfix(calculatorParser.MulDivInfixContext ctx) {
@@ -87,12 +97,48 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitNumberInfix(calculatorParser.NumberInfixContext ctx) {
+    public Expression visitImaginaryInfix(calculatorParser.ImaginaryInfixContext ctx) {
+        return visit(ctx.imaginaryAndReal());
+    }
+
+    @Override
+    public Expression visitAtomInfix(calculatorParser.AtomInfixContext ctx) {
+        return visit(ctx.atom());
+    }
+
+    @Override
+    public Expression visitRealAtom(calculatorParser.RealAtomContext ctx) {
         if (ctx.SUB() != null)
             // '-' Infix
-            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
+            return new MyNumber(new IntValue(-Integer.parseInt(ctx.NUMBER().getText())));
         // NUMBER
-        return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+        return new MyNumber(new IntValue(Integer.parseInt(ctx.NUMBER().getText())));
+    }
+
+    @Override
+    public Expression visitImaginaryAtom(calculatorParser.ImaginaryAtomContext ctx) {
+        int value = 1;
+        if (ctx.NUMBER() != null)
+            value = Integer.parseInt(ctx.NUMBER().getText());
+        if (ctx.SUB() != null)
+
+            // '-' Atom
+            return new MyNumber(0,-value);
+        // Atom
+        return new MyNumber(0,value);
+    }
+
+    @Override
+    public Expression visitModulusPrefix(calculatorParser.ModulusPrefixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
     }
 
     @Override
@@ -120,12 +166,21 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitNumberPrefix(calculatorParser.NumberPrefixContext ctx) {
-        if (ctx.SUB() != null)
-            // '-' Prefix
-            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
-        // NUMBER
-        return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+    public Expression visitAtomPrefix(calculatorParser.AtomPrefixContext ctx) {
+        return visit(ctx.atom());
+    }
+
+    @Override
+    public Expression visitModulusPostfix(calculatorParser.ModulusPostfixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
     }
 
     @Override
@@ -153,12 +208,24 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitNumberPostfix(calculatorParser.NumberPostfixContext ctx) {
-        if (ctx.SUB() != null)
-            // Postfix '-'
-            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
-        // NUMBER
-        return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+    public Expression visitAtomPostfix(calculatorParser.AtomPostfixContext ctx) {
+        return visit(ctx.atom());
     }
 
+
+    @Override
+    public Expression visitImaginaryAndReal(calculatorParser.ImaginaryAndRealContext ctx) {
+        int real = Integer.parseInt(ctx.real.getText());
+        int imaginary = 1;
+        if (ctx.getChild(0) == ctx.SUB()) {
+            real *= -1;
+        }
+        if (ctx.im != null) {
+            imaginary = Integer.parseInt(ctx.im.getText());
+        }
+        if (ctx.op.getType() == SUB) {
+            imaginary *= -1;
+        }
+        return new MyNumber(real, imaginary);
+    }
 }

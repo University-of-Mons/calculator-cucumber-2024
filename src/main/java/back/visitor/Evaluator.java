@@ -52,6 +52,11 @@ public class Evaluator extends Visitor {
         //second loop to accumulate all the evaluated subresults
         MyNumber temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
+        if (max == 1) {
+            // unary operation
+            computedValue = o.op(temp);
+            return;
+        }
         for (int counter = 1; counter < max; counter++) {
             temp = o.op(temp, evaluatedArgs.get(counter));
         }

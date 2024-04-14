@@ -39,8 +39,35 @@ class TestMyNumber {
     }
 
     @Test
-    void testToString() {
+    void testToStringOnlyReal() {
         assertEquals(Integer.toString(value), number.toString());
+        assertEquals("0", new MyNumber(0).toString());
+    }
+
+    @Test
+    void testToStringOnlyImaginary() {
+        MyNumber imaginaryNumber = new MyNumber(0, value);
+        assertEquals(value + "i", imaginaryNumber.toString());
+        MyNumber imaginaryNumber2 = new MyNumber(0, 1);
+        assertEquals("i", imaginaryNumber2.toString());
+    }
+
+    @Test
+    void testToStringRealAndImaginary() {
+        MyNumber complexNumber = new MyNumber(value, value);
+        assertEquals(value + "+" + value + "i", complexNumber.toString());
+    }
+
+    @Test
+    void testToStringNegativeImaginary() {
+        MyNumber negativeImaginaryNumber = new MyNumber(0, -value);
+        assertEquals("-" + value + "i", negativeImaginaryNumber.toString());
+    }
+
+    @Test
+    void testToStringRealAndNegativeImaginary() {
+        MyNumber complexNumber = new MyNumber(value, -value);
+        assertEquals(value + "-" + value + "i", complexNumber.toString());
     }
 
 }
