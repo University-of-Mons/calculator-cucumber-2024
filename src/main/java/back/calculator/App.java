@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 
 import front.scenes.SceneLoader;
 import front.scenes.Scenes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * A very simple calculator in Java
@@ -23,11 +26,14 @@ public class App extends Application {
 
     private static String userInput = "";
 
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
     private static boolean isRationalMode = true; // TODO : Turn this on
 
     private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
+        logger.info("Starting the application");
         launch(args);
     }
 
@@ -60,6 +66,10 @@ public class App extends Application {
 
     public static void setUserInput(String userInput) {
         App.userInput = userInput;
+    }
+
+    public static Logger getLogger() {
+        return logger;
     }
 
     public static boolean isRationalMode() {
