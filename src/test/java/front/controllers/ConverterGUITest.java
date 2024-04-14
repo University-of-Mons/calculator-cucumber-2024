@@ -1,6 +1,7 @@
 package front.controllers;
 
 import back.converter.Units;
+import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
@@ -67,6 +68,7 @@ class ConverterGUITest extends ApplicationTest {
      */
     @BeforeEach
     void clear() {
+        Scenes.CONVERTER_SCENE = SceneLoader.load("ConverterScene.fxml");
         clickOn("#clear");
         Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("");
     }
