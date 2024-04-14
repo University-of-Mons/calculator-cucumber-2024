@@ -68,7 +68,6 @@ class ConverterGUITest extends ApplicationTest {
      */
     @BeforeEach
     void clear() {
-        Scenes.CONVERTER_SCENE = SceneLoader.load("ConverterScene.fxml");
         clickOn("#clear");
         Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("");
     }

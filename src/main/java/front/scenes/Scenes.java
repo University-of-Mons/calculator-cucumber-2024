@@ -7,7 +7,7 @@ import javafx.scene.Scene;
  **/
 public final class Scenes {
     public final static Scene MAIN_SCENE = SceneLoader.load("MainScene.fxml");
-    public static Scene CONVERTER_SCENE = SceneLoader.load("ConverterScene.fxml");
+    public final static Scene CONVERTER_SCENE = SceneLoader.load("ConverterScene.fxml");
 
     private Scenes() {
         // Private constructor to hide the implicit public one
