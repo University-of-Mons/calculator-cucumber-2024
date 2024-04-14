@@ -29,7 +29,7 @@ public class RationalValue extends AbstractValue {
                         this.den = rationalDen.getNum();
                         break;
                 }
-            break;
+                break;
 
             case RATIONAL:
                 RationalValue rationalNum = (RationalValue) num;
@@ -69,6 +69,10 @@ public class RationalValue extends AbstractValue {
         int pgcd = pgcd(this.num, this.den);
         this.num = this.num / pgcd;
         this.den = this.den / pgcd;
+        if (this.den < 0){
+            this.den = - this.den;
+            this.num = - this.num;
+        }
     }
 
     @Override
