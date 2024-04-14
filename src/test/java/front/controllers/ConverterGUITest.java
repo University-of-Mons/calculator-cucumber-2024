@@ -154,7 +154,7 @@ class ConverterGUITest extends ApplicationTest {
      */
     private void verifyUnitSelectors(Enum<?>[] units) {
         List<String> expectedItems = Arrays.stream(units)
-                .map(Enum::toString)
+                .map(unit -> ((Units.Unit) unit).getSymbol())
                 .toList();
 
         MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
