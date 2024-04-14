@@ -56,7 +56,7 @@ Feature: Integer Arithmetic Expressions
     Given an integer operation '/'
     When I provide a first number 7
     And I provide a second number 5
-    Then the operation evaluates to 1
+    Then the operation evaluates to "7/5"
 
   Scenario: Dividing an integer number
     Given an integer operation '/'
@@ -86,8 +86,8 @@ Feature: Integer Arithmetic Expressions
     Examples:
       | n1 | n2 | result |
       | 35 | 5  | 7      |
-      | 7  | 5  | 1      |
-      | 5  | 7  | 0      |
+      | 7  | 5  | "7/5"  |
+      | 5  | 7  | "5/7"  |
 
 
   ##################################### Evaluation of nested expression tests #####################################

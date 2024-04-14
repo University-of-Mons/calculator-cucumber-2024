@@ -13,8 +13,10 @@ import back.visitor.Visitor;
  */
 public class MyNumber implements Expression {
     private final AbstractValue real;
+    // INT - REAL - RATIONAL
 
     private final AbstractValue imaginary;
+    // INT - REAL - RATIONAL
 
     /**
      * getter method to obtain the value contained in the object
@@ -70,6 +72,7 @@ public class MyNumber implements Expression {
     public boolean isImaginary() {
         return !imaginary.isEqualsZero();
     }
+
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
