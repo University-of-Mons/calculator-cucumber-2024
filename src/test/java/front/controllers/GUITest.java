@@ -34,10 +34,10 @@ class GUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        Scenes.setMainScene(SceneLoader.load("MainScene.fxml"));
+        //Scenes.setMainScene(SceneLoader.load("MainScene.fxml"));
         stage.setResizable(false);
         stage.setTitle("Please use gradle instead of maven");
-        stage.setScene(Scenes.getMainScene());
+        stage.setScene(Scenes.MAIN_SCENE);
         stage.show();
     }
 
