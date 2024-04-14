@@ -1,10 +1,12 @@
 package back.calculator;
 
+import back.calculator.types.MyNumber;
+import back.converter.Converter;
+import back.converter.Units;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +44,7 @@ public class App extends Application {
         stage = _stage;
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
-        setScene(Scenes.MAIN_SCENE);
+        setScene(Scenes.CONVERTER_SCENE);
         stage.show();
     }
 
@@ -74,5 +76,9 @@ public class App extends Application {
 
     public static boolean isRationalMode() {
         return isRationalMode;
+    }
+
+    public static MyNumber convert(float value, Units.Unit from, Units.Unit to) {
+        return Converter.convert(value, from, to);
     }
 }
