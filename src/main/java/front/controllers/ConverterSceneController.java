@@ -137,7 +137,7 @@ public class ConverterSceneController implements Initializable {
     private void equalsButtonClicked(MouseEvent event) {
         MyNumber result = App.convert(Float.parseFloat(inputField.getText()), firstSelectedUnit, secondSelectedUnit);
         String resultString = result.toString();
-        switchHistory(inputField.getText(), resultString);
+        switchHistory(inputField.getText() + firstSelectedUnit.getSymbol(), resultString + secondSelectedUnit.getSymbol());
         inputField.setText(resultString);
         // Move the cursor to the end of the text
         inputField.positionCaret(inputField.getText().length());
@@ -298,6 +298,7 @@ public class ConverterSceneController implements Initializable {
                 } else {
                     logger.error("Invalid selector passed to replaceSelectorItem.");
                 }
+                selector.setText(value.getSymbol());
                 logger.info(value + " selected");
             });
             selector.getItems().add(item);
