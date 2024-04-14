@@ -68,7 +68,7 @@
                                 <Cursor fx:constant="DEFAULT"/>
                             </cursor>
                         </MenuButton>
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
+                        <MenuButton fx:id="firstUnitSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
                                     prefWidth="160.0"
                                     style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;"
                                     stylesheets="@style.css" text="From" textFill="WHITE" GridPane.columnIndex="3"
@@ -86,7 +86,7 @@
                                 <Cursor fx:constant="DEFAULT"/>
                             </cursor>
                         </MenuButton>
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
+                        <MenuButton fx:id="secondUnitSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
                                     prefWidth="160.0"
                                     style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;"
                                     stylesheets="@style.css" text="To" textFill="WHITE" GridPane.columnIndex="3"
