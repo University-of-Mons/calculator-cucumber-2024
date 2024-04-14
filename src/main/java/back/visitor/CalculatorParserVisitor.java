@@ -239,7 +239,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     public Expression visitRealNumber(calculatorParser.RealNumberContext ctx) {
         BigDecimal real = new BigDecimal(ctx.FLOAT().getText());
         if (ctx.getChild(0) == ctx.SUB()){
-            real = real.multiply(new BigDecimal(-1));
+            real = real.negate();
 
         }
         RealValue realValue = new RealValue(real);

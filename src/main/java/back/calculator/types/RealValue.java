@@ -48,12 +48,12 @@ public class RealValue extends AbstractValue{
 
     @Override
     public boolean isEqualsZero() {
-        return false;
+        return this.value.compareTo(BigDecimal.ZERO) == 0;
     }
 
     @Override
     public boolean isPositive() {
-        return false;
+        return this.value.compareTo(BigDecimal.ZERO) > 0;
     }
 
     @Override
@@ -63,11 +63,15 @@ public class RealValue extends AbstractValue{
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (!(o instanceof RealValue)) return false;
+        RealValue realValue = (RealValue) o;
+        return this.value.compareTo(realValue.value) == 0;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return (this.value.hashCode());
     }
 }
+
