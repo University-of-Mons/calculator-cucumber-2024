@@ -27,12 +27,13 @@ public class MainViewController implements Initializable {
     public static final String STANDARD_MODE = "Standard";
     public static final String RATIONAL_MODE = "Rational";
     public static final String COMPLEX_MODE = "Complex";
+    public static final String TIME_MODE = "Time";
     private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
 
     @FXML
     private BorderPane root;
     @FXML
-    private CheckMenuItem standardMode, rationalMode, complexMode;
+    private CheckMenuItem standardMode, rationalMode, complexMode, timeMode;
     @FXML
     private Menu modeMenu, zoomMenu; // unused
     @FXML
@@ -55,7 +56,7 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        modeMenuItems = List.of(standardMode, rationalMode, complexMode);
+        modeMenuItems = List.of(standardMode, rationalMode, complexMode, timeMode);
         updateMode(STANDARD_MODE);
     }
 
@@ -91,6 +92,13 @@ public class MainViewController implements Initializable {
     private void onComplexMode() {
         if (!currentMode.equals(COMPLEX_MODE)) {
             updateMode(COMPLEX_MODE);
+        }
+    }
+
+    @FXML
+    private void onTimeMode() {
+        if (!currentMode.equals(TIME_MODE)) {
+            updateMode(TIME_MODE);
         }
     }
 
