@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.Token;
 import back.parser.calculatorBaseVisitor;
 import back.parser.calculatorParser;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -100,6 +101,10 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     @Override
     public Expression visitImaginaryInfix(calculatorParser.ImaginaryInfixContext ctx) {
         return visit(ctx.imaginaryAndReal());
+    }
+    @Override
+    public Expression visitRealInfix(calculatorParser.RealInfixContext ctx) {
+        return visit(ctx.realNumber());
     }
 
     @Override
@@ -232,11 +237,12 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitRealNumber(calculatorParser.RealNumberContext ctx) {
-        float real = Float.parseFloat(ctx.val.getText());
+        BigDecimal real = new BigDecimal(ctx.FLOAT().getText());
         if (ctx.getChild(0) == ctx.SUB()){
-            real *= -1;
+            real = real.multiply(new BigDecimal(-1));
 
         }
-        return new MyNumber(new RealValue(real));
+        RealValue realValue = new RealValue(real);
+        return new MyNumber(realValue);
     }
 }

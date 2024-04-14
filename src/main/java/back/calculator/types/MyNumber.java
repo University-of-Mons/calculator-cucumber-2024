@@ -36,16 +36,7 @@ public class MyNumber implements Expression {
 
     public MyNumber(AbstractValue v) {
         real = v;
-        switch (v.getType()) {
-            case INT:
-                imaginary = new IntValue(0);
-                break;
-            case REAL:
-                imaginary = new RealValue(0);
-                break;
-            default:
-                imaginary = new IntValue(0);
-        }
+        imaginary = new IntValue(0);
     }
 
     public MyNumber(int v) {

@@ -5,9 +5,10 @@ import java.math.BigDecimal;
 public class RealValue extends AbstractValue{
 
     private BigDecimal value;
+    private final Type type = Type.REAL;
 
-    public RealValue(float value) {
-        this.value = BigDecimal.valueOf(value);
+    public RealValue(BigDecimal value) {
+        this.value = value;
     }
 
     @Override
@@ -27,17 +28,17 @@ public class RealValue extends AbstractValue{
 
     @Override
     public AbstractValue sub(AbstractValue other) {
-        return null;
+        return new RealValue(this.value.subtract(((RealValue) other).value));
     }
 
     @Override
     public AbstractValue mul(AbstractValue other) {
-        return null;
+        return new RealValue(this.value.multiply(((RealValue) other).value));
     }
 
     @Override
     public AbstractValue div(AbstractValue other) {
-        return null;
+        return new RealValue(this.value.divide(((RealValue) other).value));
     }
 
     @Override
@@ -57,7 +58,7 @@ public class RealValue extends AbstractValue{
 
     @Override
     public String toString() {
-        return "";
+        return this.value.toString();
     }
 
     @Override
