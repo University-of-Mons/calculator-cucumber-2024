@@ -4,6 +4,8 @@ import back.calculator.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,8 +35,9 @@ public final class SceneLoader {
             Parent sceneParent = fxmlLoader.load();
             return new Scene(sceneParent, 400, 500);
         } catch (IOException e) {
-            System.out.println("FATAL ERROR while trying to load scene " + url);
-            e.printStackTrace();
+            Logger logger = LoggerFactory.getLogger(SceneLoader.class);
+            String errorMessage = "FATAL ERROR while trying to load scene " + url;
+            logger.error(errorMessage);
         }
         return null;
     }

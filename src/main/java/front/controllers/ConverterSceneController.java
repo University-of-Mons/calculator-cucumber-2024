@@ -2,6 +2,9 @@ package front.controllers;
 
 import back.calculator.App;
 import back.calculator.Expression;
+import back.calculator.types.MyNumber;
+import back.converter.Units;
+import front.scenes.Scenes;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +16,6 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-// TODO : i'm waiting for issue #25 to be resolved to implement the scene switching
 
 public class ConverterSceneController implements Initializable {
     @FXML
@@ -117,9 +118,11 @@ public class ConverterSceneController implements Initializable {
      * Handles the behavior that the app should have when the equals button is clicked.
      */
     private void equalsButtonClicked(MouseEvent event) {
-        // TODO : I was doing history for conversions
-        switchHistory(inputField.getText(), "oui");
-        inputField.setText("oui");
+        // TODO : actually retrieve the input units
+        MyNumber result = App.convert(Float.parseFloat(inputField.getText()), Units.Distance.METER, Units.Distance.KILOMETER);
+        String resultString = result.toString();
+        switchHistory(inputField.getText(), resultString);
+        inputField.setText(resultString);
         // Move the cursor to the end of the text
         inputField.positionCaret(inputField.getText().length());
     }
@@ -131,6 +134,7 @@ public class ConverterSceneController implements Initializable {
     private void regularButtonClicked(MouseEvent event) {
         Button button = (Button) event.getSource();
         String buttonText = button.getText();
+
 
         int cursorPosition = inputField.getCaretPosition();
         inputField.insertText(cursorPosition, buttonText);
@@ -185,7 +189,7 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleBasicModeSelected(ActionEvent actionEvent) {
-        // TODO : switch to basic scene
+        App.setScene(Scenes.MAIN_SCENE);
     }
 
     /**
@@ -193,7 +197,7 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleAdvancedModeSelected(ActionEvent actionEvent) {
-        // TODO : switch to advanced scene
+        App.setScene(Scenes.MAIN_SCENE);
     }
 
     /**
