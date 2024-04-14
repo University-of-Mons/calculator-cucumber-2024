@@ -25,6 +25,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(calculatorParser.ExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code RealInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRealInfix(calculatorParser.RealInfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ModulusInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
@@ -102,6 +109,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImaginaryPrefix(calculatorParser.ImaginaryPrefixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code RealPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRealPrefix(calculatorParser.RealPrefixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code AtomPrefix}
 	 * labeled alternative in {@link calculatorParser#prefix}.
 	 * @param ctx the parse tree
@@ -144,6 +158,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImaginaryPostfix(calculatorParser.ImaginaryPostfixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code RealPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRealPostfix(calculatorParser.RealPostfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code AtomPostfix}
 	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
@@ -156,6 +177,12 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitImaginaryAndReal(calculatorParser.ImaginaryAndRealContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link calculatorParser#realNumber}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRealNumber(calculatorParser.RealNumberContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ImaginaryAtom}
 	 * labeled alternative in {@link calculatorParser#atom}.

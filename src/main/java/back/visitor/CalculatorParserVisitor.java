@@ -5,6 +5,7 @@ import back.calculator.operators.*;
 import back.calculator.types.IntValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
+import back.calculator.types.RealValue;
 import org.antlr.v4.runtime.Token;
 import back.parser.calculatorBaseVisitor;
 import back.parser.calculatorParser;
@@ -227,5 +228,15 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
             imaginary *= -1;
         }
         return new MyNumber(real, imaginary);
+    }
+
+    @Override
+    public Expression visitRealNumber(calculatorParser.RealNumberContext ctx) {
+        float real = Float.parseFloat(ctx.val.getText());
+        if (ctx.getChild(0) == ctx.SUB()){
+            real *= -1;
+
+        }
+        return new MyNumber(new RealValue(real));
     }
 }
