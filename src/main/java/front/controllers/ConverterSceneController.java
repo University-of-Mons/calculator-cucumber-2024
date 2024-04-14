@@ -18,6 +18,9 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+// TODO : beautiful history
+// TODO : better unit selection text in menus
+
 public class ConverterSceneController implements Initializable {
     @FXML
     MenuButton firstUnitSelector;
@@ -85,6 +88,8 @@ public class ConverterSceneController implements Initializable {
     @FXML
     TextField inputField;
 
+    Units.Unit firstSelectedUnit, secondSelectedUnit;
+
     private static Logger logger;
 
     static {
@@ -111,6 +116,8 @@ public class ConverterSceneController implements Initializable {
                 equalsButtonClicked(null);
             }
         });
+        // Set default unit type to speed and fill unit selectors
+        handleSpeedConversionSelected(null);
     }
 
     /**
@@ -129,8 +136,7 @@ public class ConverterSceneController implements Initializable {
      * Handles the behavior that the app should have when the equals button is clicked.
      */
     private void equalsButtonClicked(MouseEvent event) {
-        // TODO : actually retrieve the input units
-        MyNumber result = App.convert(Float.parseFloat(inputField.getText()), Units.Distance.METER, Units.Distance.KILOMETER);
+        MyNumber result = App.convert(Float.parseFloat(inputField.getText()), firstSelectedUnit, secondSelectedUnit);
         String resultString = result.toString();
         switchHistory(inputField.getText(), resultString);
         inputField.setText(resultString);
@@ -212,82 +218,91 @@ public class ConverterSceneController implements Initializable {
     }
 
     /**
-     * Defines the conversion as a conversion of speed.
+     * Defines the conversion as a conversion of speed. Sets the appropriate available units in the menus and set the
+     * texts of the menus accordingly.
      */
     @FXML
     private void handleSpeedConversionSelected(ActionEvent actionEvent) {
-        replaceSelectorItems(firstUnitSelector, Units.Speed.values());
-        replaceSelectorItems(secondUnitSelector, Units.Speed.values());
+        Units.Speed[] values = Units.Speed.values();
+        replaceSelectorItems(firstUnitSelector, values);
+        replaceSelectorItems(secondUnitSelector, values);
+        conversionModeSelector.setText("Speed");
+        firstSelectedUnit = values[0];
+        secondSelectedUnit = values[0];
+        firstUnitSelector.setText(firstSelectedUnit.toString());
+        secondUnitSelector.setText(secondSelectedUnit.toString());
     }
 
     /**
-     * Defines the conversion as a conversion of weight.
+     * Defines the conversion as a conversion of weight. Sets the appropriate available units in the menus and set the
+     * texts of the menus accordingly.
      */
     @FXML
     private void handleWeightConversionSelected(ActionEvent actionEvent) {
-        replaceSelectorItems(firstUnitSelector, Units.Weight.values());
-        replaceSelectorItems(secondUnitSelector, Units.Weight.values());
+        Units.Weight[] values = Units.Weight.values();
+        replaceSelectorItems(firstUnitSelector, values);
+        replaceSelectorItems(secondUnitSelector, values);
+        conversionModeSelector.setText("Weight");
+        firstSelectedUnit = values[0];
+        secondSelectedUnit = values[0];
+        firstUnitSelector.setText(firstSelectedUnit.toString());
+        secondUnitSelector.setText(secondSelectedUnit.toString());
     }
 
     /**
-     * Defines the conversion as a conversion of distance.
+     * Defines the conversion as a conversion of distance. Sets the appropriate available units in the menus and set the
+     * texts of the menus accordingly.
      */
     @FXML
     private void handleDistanceConversionSelected(ActionEvent actionEvent) {
-        replaceSelectorItems(firstUnitSelector, Units.Distance.values());
-        replaceSelectorItems(secondUnitSelector, Units.Distance.values());
+        Units.Distance[] values = Units.Distance.values();
+        replaceSelectorItems(firstUnitSelector, values);
+        replaceSelectorItems(secondUnitSelector, values);
+        conversionModeSelector.setText("Distance");
+        firstSelectedUnit = values[0];
+        secondSelectedUnit = values[0];
+        firstUnitSelector.setText(firstSelectedUnit.toString());
+        secondUnitSelector.setText(secondSelectedUnit.toString());
     }
 
     /**
-     * Defines the conversion as a conversion of time.
+     * Defines the conversion as a conversion of time. Sets the appropriate available units in the menus and set the
+     * texts of the menus accordingly.
      */
     @FXML
     private void handleTimeConversionSelected(ActionEvent actionEvent) {
-        replaceSelectorItems(firstUnitSelector, Units.Time.values());
-        replaceSelectorItems(secondUnitSelector, Units.Time.values());
+        Units.Time[] values = Units.Time.values();
+        replaceSelectorItems(firstUnitSelector, values);
+        replaceSelectorItems(secondUnitSelector, values);
+        conversionModeSelector.setText("Time");
+        firstSelectedUnit = values[0];
+        secondSelectedUnit = values[0];
+        firstUnitSelector.setText(firstSelectedUnit.toString());
+        secondUnitSelector.setText(secondSelectedUnit.toString());
     }
 
+    /**
+     * Replaces the items of the given selector by the given values.
+     * @param selector The selector of which the items must be replaced.
+     * @param values The values to put in that selector.
+     */
     private void replaceSelectorItems(MenuButton selector, Units.Unit[] values) {
         selector.getItems().clear();
 
         for (Units.Unit value : values) {
             MenuItem item = new MenuItem(value.toString());
             item.setOnAction(event -> {
+                if (selector.equals(firstUnitSelector)) {
+                    firstSelectedUnit = value;
+                } else if (selector.equals(secondUnitSelector)) {
+                    secondSelectedUnit = value;
+                } else {
+                    logger.error("Invalid selector passed to replaceSelectorItem.");
+                }
+                selector.setText(value.toString());
                 logger.info(value + " selected");
             });
             selector.getItems().add(item);
         }
-    }
-
-    /**
-     * Defines the unit to convert from to unit 1.
-     */
-    @FXML
-    private void handleFromUnit1Selected(ActionEvent actionEvent) {
-        // TODO : set unit 1
-    }
-
-    /**
-     * Defines the unit to convert from to unit 2.
-     */
-    @FXML
-    private void handleFromUnit2Selected(ActionEvent actionEvent) {
-        // TODO : set unit 2
-    }
-
-    /**
-     * Defines the unit to convert to to unit 1.
-     */
-    @FXML
-    private void handleToUnit1Selected(ActionEvent actionEvent) {
-        // TODO : set unit 1
-    }
-
-    /**
-     * Defines the unit to convert to to unit 2.
-     */
-    @FXML
-    private void handleToUnit2Selected(ActionEvent actionEvent) {
-        // TODO : set unit 2
     }
 }

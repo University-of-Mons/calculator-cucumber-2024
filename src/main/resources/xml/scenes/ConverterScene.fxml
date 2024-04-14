@@ -73,12 +73,6 @@
                                     style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;"
                                     stylesheets="@style.css" text="From" textFill="WHITE" GridPane.columnIndex="3"
                                     GridPane.columnSpan="3" GridPane.rowIndex="2">
-                            <items>
-                                <MenuItem mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;"
-                                          text="Unit 1" onAction="#handleFromUnit1Selected"/>
-                                <MenuItem mnemonicParsing="false" style="-fx-text-fill: white;" text="Unit 2"
-                                          onAction="#handleFromUnit2Selected"/>
-                            </items>
                             <font>
                                 <Font size="16.0"/>
                             </font>
@@ -91,12 +85,6 @@
                                     style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;"
                                     stylesheets="@style.css" text="To" textFill="WHITE" GridPane.columnIndex="3"
                                     GridPane.columnSpan="3" GridPane.rowIndex="3">
-                            <items>
-                                <MenuItem mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;"
-                                          text="Unit 1" onAction="#handleToUnit1Selected"/>
-                                <MenuItem mnemonicParsing="false" style="-fx-text-fill: white;" text="Unit 2"
-                                          onAction="#handleToUnit2Selected"/>
-                            </items>
                             <font>
                                 <Font size="16.0"/>
                             </font>
