@@ -1,6 +1,7 @@
 package front.controllers;
 
 import back.converter.Units;
+import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
@@ -154,7 +155,7 @@ class ConverterGUITest extends ApplicationTest {
      */
     private void verifyUnitSelectors(Enum<?>[] units) {
         List<String> expectedItems = Arrays.stream(units)
-                .map(Enum::toString)
+                .map(unit -> ((Units.Unit) unit).getSymbol())
                 .toList();
 
         MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
