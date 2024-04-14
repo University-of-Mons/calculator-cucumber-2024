@@ -26,6 +26,7 @@ public class App extends Application {
     private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
+        logger.info("Starting the application");
         launch(args);
     }
 

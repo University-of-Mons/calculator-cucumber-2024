@@ -20,10 +20,5 @@
             <AppenderRef ref="console"/>
             <AppenderRef ref="LogFile"/>
         </Root>
-
-        <Root level="error">
-            <AppenderRef ref="console"/>
-            <AppenderRef ref="LogFile"/>
-        </Root>
     </Loggers>
 </Configuration>
