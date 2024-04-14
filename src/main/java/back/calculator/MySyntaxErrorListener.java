@@ -64,9 +64,9 @@ public class MySyntaxErrorListener extends BaseErrorListener {
         Collections.reverse(stack);
 
         message = "Syntax Error!\n" +
-                "Token \"" + ((Token) offendingSymbol).getText() + "\" (line " + line +
+                "\t Token \"" + ((Token) offendingSymbol).getText() + "\" (line " + line +
                 ", column " + (charPositionInLine + 1) + ") " + msg + "\n" +
-                "Rule stack: " + stack;
+                "\t Rule stack: " + stack;
 
     }
 }
