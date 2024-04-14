@@ -1,9 +1,6 @@
 package visitor;
 
-import calculator.Expression;
-import calculator.MyNumber;
-import calculator.Notation;
-import calculator.Operation;
+import calculator.*;
 
 /**
  * Evaluation is a concrete visitor that serves to
@@ -72,6 +69,16 @@ public class Printer extends Visitor {
             result.append(o.getSymbol());
         }
 
+    }
+
+    /**
+     * Use the visitor design pattern to visit a Not operation
+     *
+     * @param n The Not operation being visited
+     */
+    public void visit(Not n) {
+        result.append("!");
+        n.arg.accept(this);
     }
 
 }

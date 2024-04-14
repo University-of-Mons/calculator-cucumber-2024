@@ -35,6 +35,24 @@ Feature: Integer Arithmetic Expressions
     When I provide a first number 7
     And I provide a second number 5
     Then the operation evaluates to 1
+
+  Scenario: Boolean And two integer numbers
+    Given an integer operation '&'
+    When I provide a first number 1
+    And I provide a second number 0
+    Then the operation evaluates to 0
+
+  Scenario: Boolean Or two integer numbers
+    Given an integer operation '|'
+    When I provide a first number 1
+    And I provide a second number 0
+    Then the operation evaluates to 1
+
+  Scenario: Boolean Xor two integer numbers
+    Given an integer operation '^'
+    When I provide a first number 1
+    And I provide a second number 1
+    Then the operation evaluates to 0
     
   # This is an example of a scenario in which we provide a list of numbers as input.
   # (In fact, this is not entirely true, since what is given as input is a table of
@@ -57,9 +75,9 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to <result>
 
     Examples:
-      |n1|n2|result|
-      |4|5|9|
-      |5|3|8|
+      | n1 | n2 | result |
+      | 4  | 5  | 9      |
+      | 5  | 3  | 8      |
 
   Scenario Outline: Dividing two integer numbers
     Given an integer operation '/'
@@ -68,10 +86,10 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to <result>
 
     Examples:
-      |n1|n2|result|
-      |35|5|7|
-      |7|5|1|
-      |5|7|0|
+      | n1 | n2 | result |
+      | 35 | 5  | 7      |
+      | 7  | 5  | 1      |
+      | 5  | 7  | 0      |
 
   Scenario Outline: Evaluating arithmetic operations with two integer parameters
     Given an integer operation <op>
@@ -80,33 +98,35 @@ Feature: Integer Arithmetic Expressions
     Then the operation evaluates to <result>
 
     Examples:
-      | op  |n1|n2|result|
-      | "+" | 4| 5|     9|
-      | "-" | 8| 5|     3|
-      | "*" | 7| 2|    14|
-      | "/" | 6| 2|     3|
+      | op   | n1 | n2 | result |
+      | "+"  | 4  | 5  | 9      |
+      | "-"  | 8  | 5  | 3      |
+      | "*"  | 7  | 2  | 14     |
+      | "/"  | 6  | 2  | 3      |
+      | "&"  | 1  | 0  | 0      |
+      | "\|" | 0  | 1  | 1      |
+      | "^"  | 0  | 0  | 0      |
 
 
-
-Scenario: Printing the sum of two integer numbers
+  Scenario: Printing the sum of two integer numbers
     Given the sum of two numbers 8 and 6
     Then its INFIX notation is (8 + 6)
     And its PREFIX notation is +(8, 6)
     And its POSTFIX notation is (8, 6)+
 
-Scenario: Printing the difference of two integer numbers
+  Scenario: Printing the difference of two integer numbers
     Given the difference of two numbers 8 and 6
     Then its INFIX notation is (8 - 6)
     And its PREFIX notation is -(8, 6)
     And its POSTFIX notation is (8, 6)-
 
-Scenario: Printing the product of two integer numbers
+  Scenario: Printing the product of two integer numbers
     Given the product of two numbers 8 and 6
     Then its INFIX notation is (8 * 6)
     And its PREFIX notation is *(8, 6)
     And its POSTFIX notation is (8, 6)*
 
-Scenario: Printing the quotient of two integer numbers
+  Scenario: Printing the quotient of two integer numbers
     Given the quotient of two numbers 8 and 6
     Then its INFIX notation is (8 / 6)
     And its PREFIX notation is /(8, 6)

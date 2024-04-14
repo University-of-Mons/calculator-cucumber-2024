@@ -2,6 +2,7 @@ package visitor;
 
 import calculator.Expression;
 import calculator.MyNumber;
+import calculator.Not;
 import calculator.Operation;
 
 import java.util.ArrayList;
@@ -52,6 +53,19 @@ public class Evaluator extends Visitor {
         }
         // store the accumulated result
         computedValue = temp;
+    }
+
+    /** Use the visitor design pattern to visit a Not operation
+     *
+     * @param not The Not operation being visited
+     */
+    public void visit(Not not) {
+        not.arg.accept(this);
+        if (computedValue == 0) {
+            computedValue = 1;
+        } else {
+            computedValue = 0;
+        }
     }
 
 }

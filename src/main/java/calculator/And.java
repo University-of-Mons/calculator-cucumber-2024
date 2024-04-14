@@ -1,0 +1,31 @@
+package calculator;
+
+import java.util.List;
+
+/** This class represents the boolean operation "AND".
+ * The class extends an abstract superclass Operation.
+ * Other subclasses of Operation represent other arithmetic operations.
+ * @see Operation
+ * @see Or
+ * @see Not
+ * @see Xor
+ */
+public final class And extends Operation {
+
+    /**
+     * Class constructor specifying a number of Expressions to AND.
+     *
+     * @param elist The list of Expressions to AND
+     * @throws IllegalConstruction    If an empty list of expressions is passed as parameter
+     */
+    public And(List<Expression> elist) throws IllegalConstruction {
+        super(elist);
+        symbol = "&";
+        neutral = 1;
+    }
+
+    @Override
+    public int op(int l, int r) {
+        return l & r;
+    }
+}

@@ -1,6 +1,7 @@
 package visitor;
 
 import calculator.MyNumber;
+import calculator.Not;
 import calculator.Operation;
 
 /**
@@ -20,4 +21,12 @@ public abstract class Visitor {
      *
      * @param o The operation being visited
      */   public abstract void visit(Operation o);
+
+    /**
+     * The Visitor can traverse a Not operation (a subtype of Expression)
+     *
+     * @param n The Not operation being visited
+     */
+    public abstract void visit(Not n);
+
 }

@@ -39,6 +39,9 @@ public class CalculatorSteps {
 				case "-"	->	op = new Minus(params);
 				case "*"	->	op = new Times(params);
 				case "/"	->	op = new Divides(params);
+				case "&"	->	op = new And(params);
+				case "|"	->	op = new Or(params);
+				case "^"	->	op = new Xor(params);
 				default		->	fail();
 			}
 		} catch (IllegalConstruction e) {
@@ -103,6 +106,45 @@ public class CalculatorSteps {
 		    op = new Divides(params);}
 		catch(IllegalConstruction e) { fail(); }
 	}
+
+	@Given("^the and of two numbers (\\d+) and (\\d+)$")
+	public void givenTheAnd(int n1, int n2) {
+		try {
+			params = new ArrayList<>();
+		    params.add(new MyNumber(n1));
+		    params.add(new MyNumber(n2));
+		    op = new And(params);}
+		catch(IllegalConstruction e) { fail(); }
+	}
+
+	@Given("^the or of two numbers (\\d+) and (\\d+)$")
+	public void givenTheOr(int n1, int n2) {
+		try {
+			params = new ArrayList<>();
+		    params.add(new MyNumber(n1));
+		    params.add(new MyNumber(n2));
+		    op = new Or(params);}
+		catch(IllegalConstruction e) { fail(); }
+	}
+
+	@Given("^the xor of two numbers (\\d+) and (\\d+)$")
+	public void givenTheXor(int n1, int n2) {
+		try {
+			params = new ArrayList<>();
+		    params.add(new MyNumber(n1));
+		    params.add(new MyNumber(n2));
+		    op = new Xor(params);}
+		catch(IllegalConstruction e) { fail(); }
+	}
+
+//	@Given("^the not of a number (\\d+)$")
+//	public void givenTheNot(int n1) {
+//		try {
+//			params = new ArrayList<>();
+//		    params.add(new MyNumber(n1));
+//		    op = new Not(params);}
+//		catch(IllegalConstruction e) { fail(); }
+//	}
 
 	@Then("^its (.*) notation is (.*)$")
 	public void thenItsNotationIs(String notation, String s) {
