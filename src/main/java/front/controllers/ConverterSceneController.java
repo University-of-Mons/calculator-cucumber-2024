@@ -1,7 +1,6 @@
 package front.controllers;
 
 import back.calculator.App;
-import back.calculator.Expression;
 import back.calculator.types.MyNumber;
 import back.converter.Units;
 import front.scenes.Scenes;
@@ -12,12 +11,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ConverterSceneController implements Initializable {
+    @FXML
+    MenuButton firstUnitSelector;
+    @FXML
+    MenuButton secondUnitSelector;
     @FXML
     MenuButton conversionModeSelector;
     @FXML
@@ -79,6 +84,12 @@ public class ConverterSceneController implements Initializable {
 
     @FXML
     TextField inputField;
+
+    private static Logger logger;
+
+    static {
+        logger = LoggerFactory.getLogger(ConverterSceneController.class);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -205,7 +216,8 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleSpeedConversionSelected(ActionEvent actionEvent) {
-        // TODO : set speed units
+        replaceSelectorItems(firstUnitSelector, Units.Speed.values());
+        replaceSelectorItems(secondUnitSelector, Units.Speed.values());
     }
 
     /**
@@ -213,7 +225,8 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleWeightConversionSelected(ActionEvent actionEvent) {
-        // TODO : set weight units
+        replaceSelectorItems(firstUnitSelector, Units.Weight.values());
+        replaceSelectorItems(secondUnitSelector, Units.Weight.values());
     }
 
     /**
@@ -221,7 +234,8 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleDistanceConversionSelected(ActionEvent actionEvent) {
-        // TODO : set distance units
+        replaceSelectorItems(firstUnitSelector, Units.Distance.values());
+        replaceSelectorItems(secondUnitSelector, Units.Distance.values());
     }
 
     /**
@@ -229,7 +243,20 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleTimeConversionSelected(ActionEvent actionEvent) {
-        // TODO : set time units
+        replaceSelectorItems(firstUnitSelector, Units.Time.values());
+        replaceSelectorItems(secondUnitSelector, Units.Time.values());
+    }
+
+    private void replaceSelectorItems(MenuButton selector, Units.Unit[] values) {
+        selector.getItems().clear();
+
+        for (Units.Unit value : values) {
+            MenuItem item = new MenuItem(value.toString());
+            item.setOnAction(event -> {
+                logger.info(value + " selected");
+            });
+            selector.getItems().add(item);
+        }
     }
 
     /**

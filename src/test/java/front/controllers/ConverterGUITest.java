@@ -1,8 +1,8 @@
 package front.controllers;
 
-import back.calculator.App;
-import front.scenes.SceneLoader;
+import back.converter.Units;
 import front.scenes.Scenes;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -12,22 +12,33 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
+import javafx.scene.control.*;
 import org.testfx.api.FxRobotException;
 import org.testfx.api.FxToolkit;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
 
+/**
+ * Tests for the GUI, more specifically the units converter feature.
+ */
 @ExtendWith(ApplicationExtension.class)
 class ConverterGUITest extends ApplicationTest {
     private static Stage stage;
 
-    private static final String inputField = "#inputField";
+    /**
+     * The id of the input field of the application where the user can input data to be taken into account in
+     * computations.
+     */
+    private static final String inputFieldId = "#inputField";
 
     /**
      * Will be called with {@code @Before} semantics, i.e. before each test method.
@@ -51,12 +62,18 @@ class ConverterGUITest extends ApplicationTest {
         release(new MouseButton[]{});
     }
 
+    /**
+     * Clears the input.
+     */
     @BeforeEach
     void clear() {
         clickOn("#clear");
-        Assertions.assertThat((TextField) lookup(inputField).query()).hasText("");
+        Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("");
     }
 
+    /**
+     * Verifies that all numbers are available.
+     */
     @Test
     void checkNumberButtons(FxRobot robot) {
         clickOn("#one");
@@ -72,22 +89,84 @@ class ConverterGUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup(inputField).query()).hasText("123456789,000");
+        Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("123456789,000");
     }
 
+    /**
+     * Helper for checkAvailableUnits with the speed units.
+     */
     @Test
-    void checkAvailableConversions(FxRobot robot) {
+    void checkAvailableSpeedUnits(FxRobot robot) {
+        checkAvailableUnits(robot, "#speedConversionModeItem", Units.Speed.values());
+    }
+
+    /**
+     * Helper for checkAvailableUnits with the weight units.
+     */
+    @Test
+    void checkAvailableWeightUnits(FxRobot robot) {
+        checkAvailableUnits(robot, "#weightConversionModeItem", Units.Weight.values());
+    }
+
+    /**
+     * Helper for checkAvailableUnits with the distance units.
+     */
+    @Test
+    void checkAvailableDistanceUnits(FxRobot robot) {
+        checkAvailableUnits(robot, "#distanceConversionModeItem", Units.Distance.values());
+    }
+
+    /**
+     * Helper for checkAvailableUnits with the time units.
+     */
+    @Test
+    void checkAvailableTimeUnits(FxRobot robot) {
+        checkAvailableUnits(robot, "#timeConversionModeItem", Units.Time.values());
+    }
+
+    /**
+     * Selects the unit type and triggers the verification of the available units.
+     */
+    private void checkAvailableUnits(FxRobot robot, String conversionModeItem, Enum<?>[] units) {
         try {
-            clickOn("#conversionModeSelector");
-            clickOn("#speedConversionModeItem");
-            clickOn("#conversionModeSelector");
-            clickOn("#weightConversionModeItem");
-            clickOn("#conversionModeSelector");
-            clickOn("#distanceConversionModeItem");
-            clickOn("#conversionModeSelector");
-            clickOn("#timeConversionModeItem");
+            selectConversionMode(conversionModeItem);
+            verifyUnitSelectors(units);
         } catch (FxRobotException e) {
             fail();
         }
+    }
+
+    /**
+     * Selects the unit type that we are going to verify (speed, weight...).
+     */
+    private void selectConversionMode(String conversionModeItem) {
+        clickOn("#conversionModeSelector");
+        clickOn(conversionModeItem);
+    }
+
+    /**
+     * Constructs three lists :
+     *  - the expected units,
+     *  - the units of the first unit selector and
+     *  - the units of the second unit selector.
+     *  Then, verifies that both unit selectors have all expected units available.
+     * @param units The units of the enum that we are testing (example : Units.Speed.values()).
+     */
+    private void verifyUnitSelectors(Enum<?>[] units) {
+        List<String> expectedItems = Arrays.stream(units)
+                .map(Enum::toString)
+                .toList();
+
+        MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
+        List<String> firstSelectorItems = firstUnitSelector.getItems().stream()
+                .map(MenuItem::getText)
+                .collect(Collectors.toList());
+        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(expectedItems);
+
+        MenuButton secondUnitSelector = lookup("#secondUnitSelector").query();
+        List<String> secondSelectorItems = secondUnitSelector.getItems().stream()
+                .map(MenuItem::getText)
+                .collect(Collectors.toList());
+        Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(expectedItems);
     }
 }
