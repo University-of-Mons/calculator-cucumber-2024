@@ -19,33 +19,6 @@ public class Calculator {
     }
 
     /**
-     * Prints an arithmetic expression provided as input parameter.
-     *
-     * @param e the arithmetic Expression to be printed
-     * @see #printExpressionDetails(Expression)
-     */
-    public void print(Expression e) {
-        System.out.println("The result of evaluating expression " + e);
-        System.out.println("is: " + eval(e) + ".");
-        System.out.println();
-    }
-
-    /**
-     * Prints verbose details of an arithmetic expression provided as input parameter.
-     *
-     * @param e the arithmetic Expression to be printed
-     * @see #print(Expression)
-     */
-    public void printExpressionDetails(Expression e) {
-        print(e);
-        Calculator calc = new Calculator();
-        System.out.print("It contains " + calc.depth(e) + " levels of nested expressions, ");
-        System.out.print(calc.numbersCount(e) + " operations");
-        System.out.println(" and " + calc.numbersCount(e) + " numbers.");
-        System.out.println();
-    }
-
-    /**
      * Evaluates an arithmetic expression and returns its result
      *
      * @param e the arithmetic Expression to be evaluated
