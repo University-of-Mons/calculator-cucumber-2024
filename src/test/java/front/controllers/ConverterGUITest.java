@@ -1,5 +1,6 @@
 package front.controllers;
 
+import back.calculator.App;
 import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import javafx.scene.control.TextField;
@@ -37,10 +38,9 @@ class ConverterGUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        Scenes.setMainScene(SceneLoader.load("ConverterScene.fxml"));
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
-        stage.setScene(Scenes.getMainScene());
+        stage.setScene(Scenes.CONVERTER_SCENE);
         stage.show();
     }
 
