@@ -22,6 +22,10 @@ public abstract class AbstractValue {
         return type;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     @Override
     public abstract String toString();
 
