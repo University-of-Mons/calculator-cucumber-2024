@@ -13,8 +13,11 @@ import back.visitor.Visitor;
  */
 public class MyNumber implements Expression {
     private final AbstractValue real;
+    // INT - REAL - RATIONAL
 
     private final AbstractValue imaginary;
+    // INT - REAL - RATIONAL
+
     /**
      * getter method to obtain the value contained in the object
      *
@@ -36,6 +39,7 @@ public class MyNumber implements Expression {
 
     public MyNumber(AbstractValue v) {
         real = v;
+        // TODO: add a switch to check the type of v to create the same type.
         imaginary = new IntValue(0);
     }
 
@@ -68,6 +72,7 @@ public class MyNumber implements Expression {
     public boolean isImaginary() {
         return !imaginary.isEqualsZero();
     }
+
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -117,8 +122,6 @@ public class MyNumber implements Expression {
             return real + "" + imaginary + "i";
         }
     }
-
-
 
     /**
      * Two MyNumber expressions are equal if the values they contain are equal

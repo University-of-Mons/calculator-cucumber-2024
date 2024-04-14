@@ -4,6 +4,7 @@ import back.calculator.*;
 import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
+import back.calculator.types.RationalValue;
 
 import java.util.List;
 

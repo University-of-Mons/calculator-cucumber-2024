@@ -1,11 +1,13 @@
 package back.calculator.types;
 
+import back.calculator.App;
+
 public class IntValue extends AbstractValue {
-    private final Type type = Type.INT;
 
     private int value;
 
     public IntValue(int value) {
+        this.setType(Type.INT);
         this.value = value;
     }
 
@@ -56,6 +58,19 @@ public class IntValue extends AbstractValue {
     @Override
     public AbstractValue div(AbstractValue other) {
         // Check for the type but atm there is only one type
+        if (this.value == ((IntValue) other).getValue()) {
+            return new IntValue(1);
+        }
+        if (((IntValue) other).getValue() == 1) {
+            return new IntValue(this.value);
+        }
+        if (this.value % ((IntValue) other).getValue() == 0) {
+            return new IntValue(this.value / ((IntValue) other).getValue());
+        }
+        if (App.isRationalMode()){
+            return new RationalValue(this, other);
+        }
+
         return new IntValue(this.value / ((IntValue) other).getValue());
     }
 
