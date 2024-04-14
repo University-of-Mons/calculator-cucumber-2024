@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import back.parser.calculatorLexer;
 import back.parser.calculatorParser;
 import back.visitor.CalculatorParserVisitor;
+import org.slf4j.Logger;
 
 /**
  * Main class for the parser of the calculator. It uses the ANTLR4 library to parse the input. <br>
@@ -52,8 +53,9 @@ public class ExpressionParser {
 
         if (errorListener.hasSyntaxError()) {
             // Report the syntax error
-            // TODO: Log the error message here
-            System.err.println(errorListener.getMessage());
+            Logger logger = App.getLogger();
+            String errorMessage = errorListener.getMessage();
+            logger.error(errorMessage);
             throw new IllegalConstruction();
         }
 
