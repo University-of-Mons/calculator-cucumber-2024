@@ -39,8 +39,8 @@ jobs:
       - name: Build with Maven (excluding tests)
         run: mvn -B package -DskipTests --file pom.xml
 
-      - name: Run Maven tests
-        run: mvn test -Dtest="!checkAvailableSpeedUnits,!checkAvailableWeightUnits,!checkAvailableDistanceUnits,!checkAvailableTimeUnits"
+      - name: Run Maven tests (headless compatible only)
+        run: mvn test -Dtest=\!HeadlessIncompatibleConverterGUITest
 
       - name: Publish Test Report
         if: ${{ always() }}
