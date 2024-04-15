@@ -37,10 +37,7 @@ jobs:
         run: Xvfb $DISPLAY -ac -screen 0 1600x1200x24 > /dev/null 2>&1 &
 
       - name: Build with Maven (excluding tests)
-        run: mvn -B package -DskipTests --file pom.xml
-
-      - name: Run Maven tests (headless compatible only)
-        run: mvn test -Dtest=\!HeadlessIncompatibleConverterGUITest
+        run: mvn -B package --file pom.xml
 
       - name: Publish Test Report
         if: ${{ always() }}
