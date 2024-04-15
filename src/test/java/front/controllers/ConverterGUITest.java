@@ -174,6 +174,7 @@ class ConverterGUITest extends ApplicationTest {
     private void selectConversionMode(String conversionModeItem) {
         clickOn("#conversionModeSelector");
         clickOn(conversionModeItem);
+        System.out.println("[FIX TESTS] clicked on " + conversionModeItem);
     }
 
     /**
@@ -185,6 +186,11 @@ class ConverterGUITest extends ApplicationTest {
      * @param units The units of the enum that we are testing (example : Units.Speed.values()).
      */
     private void verifyUnitSelectors(List<String> units) {
+        System.out.println("[FIX TESTS] entered verifyUnitSelectors");
+        StringBuilder s = new StringBuilder();
+        for (Object o : units) s.append(o.toString()).append(" ");
+        logger.info(s.toString());
+        System.out.println("s = " + s);
         MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
         List<String> firstSelectorItems = firstUnitSelector.getItems().stream()
                 .map(MenuItem::getText)
