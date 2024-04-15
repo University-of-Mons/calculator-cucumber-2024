@@ -11,6 +11,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testfx.api.FxRobot;
 import javafx.scene.control.*;
 import org.testfx.api.FxRobotException;
@@ -39,6 +41,8 @@ class ConverterGUITest extends ApplicationTest {
      * computations.
      */
     private static final String inputFieldId = "#inputField";
+
+    private Logger logger = LoggerFactory.getLogger(ConverterGUITest.class);
 
     /**
      * Will be called with {@code @Before} semantics, i.e. before each test method.
@@ -100,6 +104,10 @@ class ConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Speed.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
+        StringBuilder s = new StringBuilder();
+        for (Object o : expectedItems) s.append(o.toString()).append(" ");
+        logger.info(s.toString());
+        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#speedConversionModeItem", expectedItems);
     }
 
@@ -111,6 +119,10 @@ class ConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Weight.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
+        StringBuilder s = new StringBuilder();
+        for (Object o : expectedItems) s.append(o.toString()).append(" ");
+        logger.info(s.toString());
+        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#weightConversionModeItem", expectedItems);
     }
 
@@ -122,6 +134,10 @@ class ConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Distance.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
+        StringBuilder s = new StringBuilder();
+        for (Object o : expectedItems) s.append(o.toString()).append(" ");
+        logger.info(s.toString());
+        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#distanceConversionModeItem", expectedItems);
     }
 
@@ -133,6 +149,10 @@ class ConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Time.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
+        StringBuilder s = new StringBuilder();
+        for (Object o : expectedItems) s.append(o.toString()).append(" ");
+        logger.info(s.toString());
+        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#timeConversionModeItem", expectedItems);
     }
 
