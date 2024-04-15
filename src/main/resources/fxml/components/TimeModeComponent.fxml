@@ -31,7 +31,7 @@
             <Font name="Avenir Black" size="30.0" />
         </font>
     </Button>
-    <Button fx:id="btnTimeZone" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onTimeZone" prefHeight="81.0" prefWidth="120.0" text="CET+" textAlignment="CENTER" GridPane.columnIndex="2">
+    <Button fx:id="btnTimeZone" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onTimeZone" prefHeight="81.0" prefWidth="120.0" text="CET" textAlignment="CENTER" GridPane.columnIndex="2">
         <font>
             <Font name="Avenir Black" size="30.0" />
         </font>

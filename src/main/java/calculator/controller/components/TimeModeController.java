@@ -58,7 +58,7 @@ public class TimeModeController implements Initializable, ModeController {
     }
 
     public void onTimeZone() {
-        appendToDisplay("CET+");
+        appendToDisplay("CET");
     }
 
     public void onSplitTime() {
