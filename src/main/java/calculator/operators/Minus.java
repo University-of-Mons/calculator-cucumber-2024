@@ -45,11 +45,24 @@ public final class Minus extends Operation
   public MyNumber op(MyNumber l, MyNumber r) {
     if (l instanceof MyNotANumber || r instanceof MyNotANumber)
         return new MyNotANumber();
-    return new MyNumber(l.getValue() - r.getValue());
+    if (l instanceof ComplexNumber || r instanceof ComplexNumber){
+        return new ComplexNumber(l.getReal() - r.getReal(), l.getImaginary() - r.getImaginary());
+    }
+    return new MyNumber( (float) l.getValue() - r.getValue());
   }
 
-
-  public ComplexNumber op(ComplexNumber l, ComplexNumber r) {
-    return new ComplexNumber(l.getReal() - r.getReal(), l.getImaginary() - r.getImaginary());
+  /**
+   * The actual computation of the (unary) arithmetic subtraction of an integer.
+   * If the number is a MyNotANumber instance, the method returns a new MyNotANumber instance.
+   *
+   * @param l The number.
+   * @return The result of the subtraction, or a new MyNotANumber if the input number is a MyNotANumber.
+   */
+  @Override
+  public MyNumber op(MyNumber l) {
+    if (l instanceof ComplexNumber){
+        return new ComplexNumber(-l.getReal(), -l.getImaginary());
+    }
+    return new MyNumber(-l.getValue());
   }
 }

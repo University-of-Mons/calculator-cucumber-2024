@@ -45,7 +45,7 @@ class TestComplexNumber {
         try {
             Plus plus = new Plus(para);
             ComplexNumber result = new ComplexNumber(real1 + real2, imaginary1 + imaginary2);
-            assertEquals(result.toString(), calc.evalComplex(plus).toString());
+            assertEquals(result.toString(), calc.eval(plus).toString());
         } catch (IllegalConstruction e) {
             fail();
         }
@@ -57,7 +57,7 @@ class TestComplexNumber {
         try {
             Minus minus = new Minus(para);
             ComplexNumber result = new ComplexNumber(real1 - real2, imaginary1 - imaginary2);
-            assertEquals(result.toString(), calc.evalComplex(minus).toString());
+            assertEquals(result.toString(), calc.eval(minus).toString());
         } catch (IllegalConstruction e) {
             fail();
         }
@@ -69,7 +69,7 @@ class TestComplexNumber {
         try {
             Times times = new Times(para);
             ComplexNumber result = new ComplexNumber(real1 * real2 - imaginary1 * imaginary2, real1 * imaginary2 + real2 * imaginary1);
-            assertEquals(result.toString(), calc.evalComplex(times).toString());
+            assertEquals(result.toString(), calc.eval(times).toString());
         } catch (IllegalConstruction e) {
             fail();
         }
@@ -81,13 +81,33 @@ class TestComplexNumber {
         try {
             Divides divides = new Divides(para);
             ComplexNumber result = new ComplexNumber((real1 * real2 + imaginary1 * imaginary2) / (real2 * real2 + imaginary2 * imaginary2), (real2 * imaginary1 - real1 * imaginary2) / (real2 * real2 + imaginary2 * imaginary2));
-            assertEquals(result.toString(), calc.evalComplex(divides).toString());
+            assertEquals(result.toString(), calc.eval(divides).toString());
         } catch (IllegalConstruction e) {
             fail();
         }
     }
 
+   @Test
+    void testSqrtWithNumberNegatif() {
+        MyNumber number = new MyNumber(-1);
+        List<Expression> para = Arrays.asList(number);
+        try {
+            Sqrt sqrt = new Sqrt(para);
+            assertEquals(1, calc.eval(sqrt).getValue());
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
 
-
+    @Test
+    void testModulus(){
+        List<Expression> para = Arrays.asList(complexNumber1);
+        try {
+            Modulus modulus = new Modulus(para);
+            assertEquals((int) Math.sqrt(real1 * real1 + imaginary1 * imaginary1), calc.eval(modulus).getValue());
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
 }
 

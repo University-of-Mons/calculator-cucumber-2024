@@ -1,10 +1,9 @@
 package calculator;
 
-import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
-import visitor.ComplexNumberVisitor;
 import visitor.Evaluator;
+
 
 /**
  * This class represents the core logic of a Calculator.
@@ -45,16 +44,4 @@ public class Calculator {
         return v.getResult();
     }
 
-    /*
-     We could also have other methods, e.g. to verify whether an expression is syntactically correct
-     public Boolean validate(Expression e)
-     or to simplify some expression
-     public Expression simplify(Expression e)
-    */
-
-    public ComplexNumber evalComplex(Expression o){
-        ComplexNumberVisitor v = new ComplexNumberVisitor();
-        o.accept(v);
-        return v.getResult();
-    }
 }

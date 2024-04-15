@@ -46,10 +46,9 @@ public final class Times extends Operation
   public MyNumber op(MyNumber l, MyNumber r) {
     if (l instanceof MyNotANumber || r instanceof MyNotANumber)
         return new MyNotANumber();
-    return new MyNumber(l.getValue() * r.getValue());
-  }
-
-  public ComplexNumber op(ComplexNumber l, ComplexNumber r) {
-    return new ComplexNumber(l.getReal() * r.getReal() - l.getImaginary() * r.getImaginary(), l.getReal() * r.getImaginary() + l.getImaginary() * r.getReal());
+    if (l instanceof ComplexNumber || r instanceof ComplexNumber){
+        return new ComplexNumber(l.getReal() * r.getReal() - l.getImaginary() * r.getImaginary(), l.getReal() * r.getImaginary() + l.getImaginary() * r.getReal());
+    }
+    return new MyNumber((float) l.getValue() * r.getValue());
   }
  }

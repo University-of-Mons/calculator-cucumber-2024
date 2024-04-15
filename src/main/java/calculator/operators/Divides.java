@@ -41,17 +41,16 @@ public final class Divides extends Operation {
   public MyNumber op(MyNumber l, MyNumber r) {
       if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0)
           return new MyNotANumber();
-      return new MyNumber(l.getValue() / r.getValue());
-  }
-
-  public ComplexNumber op(ComplexNumber l, ComplexNumber r) {
-      int denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
-      if (denominator == 0)
-          return new NotComplexNumber();
-      else {
-          int real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
-          int imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
-          return new ComplexNumber(real, imaginary);
+      if (l instanceof ComplexNumber || r instanceof ComplexNumber) {
+          float denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
+          if (denominator == 0)
+              return new MyNotANumber();
+          else {
+              float real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
+              float imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
+              return new ComplexNumber(real, imaginary);
+          }
       }
+      return new MyNumber((float) l.getValue() / r.getValue());
   }
 }

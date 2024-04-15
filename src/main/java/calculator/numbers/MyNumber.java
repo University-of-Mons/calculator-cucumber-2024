@@ -12,20 +12,22 @@ import visitor.Visitor;
  */
 public class MyNumber implements Expression
 {
-  private final int value;
+  private final float value;
 
     /** getter method to obtain the value contained in the object
      *
-     * @return The integer number contained in the object
+     * @return The floating number contained in the object
      */
-  public Integer getValue() { return value; }
+  public Integer getValue() {
+      return (int) value;
+  }
 
     /**
      * Constructor method
      *
-     * @param v The integer value to be contained in the object
+     * @param v The floating value to be contained in the object
      */
-    public /*constructor*/ MyNumber(int v) {
+    public /*constructor*/ MyNumber(float v) {
 	  value=v;
 	  }
 
@@ -39,14 +41,33 @@ public class MyNumber implements Expression
       v.visit(this);
   }
 
-    /**
-     * Convert a number into a String to allow it to be printed.
-     *
-     * @return	The String that is the result of the conversion.
-     */
+
+  /**
+   * Getter method to obtain the real part of the complex number
+   *
+   * @return The floating number that represents the real part of the complex number
+   */
+  public float getReal() {
+    return getValue();
+  }
+
+  /**
+   * Getter method to obtain the imaginary part of the complex number
+   *
+   * @return The floating number that represents the imaginary part of the complex number
+   */
+  public float getImaginary() {
+      return 0;
+  }
+
+  /**
+   * Convert a number into a String to allow it to be printed.
+   *
+   * @return	The String that is the result of the conversion.
+   */
   @Override
   public String toString() {
-	  return Integer.toString(value);
+	  return Integer.toString((int) value);
   }
 
   /** Two MyNumber expressions are equal if the values they contain are equal
@@ -81,7 +102,7 @@ public class MyNumber implements Expression
      */
   @Override
   public int hashCode() {
-		return value;
+		return (int) value;
   }
 
 }

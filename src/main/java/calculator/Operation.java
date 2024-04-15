@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
 import visitor.Visitor;
@@ -131,5 +130,12 @@ public abstract class Operation implements Expression
 		return result;
 	}
 
-	public abstract ComplexNumber op(ComplexNumber l, ComplexNumber r);
+	/**
+	 * Abstract method representing the actual unary arithmetic operation to compute
+	 * @param l	 a argument of the binary operation
+	 * @return	result of computing the unary operation
+	 */
+	public MyNumber op(MyNumber l) {
+		return l;
+	}
 }
