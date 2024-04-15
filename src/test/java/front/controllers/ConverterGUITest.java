@@ -201,7 +201,7 @@ class ConverterGUITest extends ApplicationTest {
                 .collect(Collectors.toList());
 
         StringBuilder s1 = new StringBuilder();
-        for (Object o : units) s1.append(o.toString()).append(" ");
+        for (Object o : firstSelectorItems) s1.append(o.toString()).append(" ");
         logger.info(s1.toString());
         System.out.println("s1 = " + s1);
 
@@ -213,7 +213,7 @@ class ConverterGUITest extends ApplicationTest {
                 .collect(Collectors.toList());
 
         StringBuilder s2 = new StringBuilder();
-        for (Object o : units) s2.append(o.toString()).append(" ");
+        for (Object o : secondSelectorItems) s2.append(o.toString()).append(" ");
         logger.info(s2.toString());
         System.out.println("s2 = " + s2);
 
