@@ -75,7 +75,7 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Speed.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        checkAvailableUnits(robot, "#speedConversionModeItem", expectedItems);
+        checkAvailableUnits(robot, expectedItems, 0);
     }
 
     /**
@@ -86,7 +86,7 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Weight.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        checkAvailableUnits(robot, "#weightConversionModeItem", expectedItems);
+        checkAvailableUnits(robot, expectedItems, 1);
     }
 
     /**
@@ -97,7 +97,7 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Distance.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        checkAvailableUnits(robot, "#distanceConversionModeItem", expectedItems);
+        checkAvailableUnits(robot, expectedItems, 2);
     }
 
     /**
@@ -108,16 +108,17 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
         List<String> expectedItems = Arrays.stream(Units.Time.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        checkAvailableUnits(robot, "#timeConversionModeItem", expectedItems);
+        checkAvailableUnits(robot, expectedItems, 3);
     }
 
     /**
      * Selects the unit type and triggers the verification of the available units.
      */
-    private void checkAvailableUnits(FxRobot robot, String conversionModeItem, List<String> units) {
+    private void checkAvailableUnits(FxRobot robot, List<String> units, int indexToClick) {
         try {
-            selectConversionMode(conversionModeItem);
+            selectConversionMode(indexToClick);
             verifyUnitSelectors(units);
+            resetConversionMode();
         } catch (FxRobotException e) {
             fail();
         }
@@ -126,9 +127,25 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
     /**
      * Selects the unit type that we are going to verify (speed, weight...).
      */
-    private void selectConversionMode(String conversionModeItem) {
-        clickOn("#conversionModeSelector");
-        clickOn(conversionModeItem);
+    private void selectConversionMode(int indexToClick) {
+        ComboBox<Class<? extends Units.Unit>> selector = lookup("#conversionModeSelector").queryComboBox();
+        clickOn(selector);
+        for (int i = 0; i < indexToClick; i++) {
+            type(KeyCode.DOWN);
+        }
+        type(KeyCode.ENTER);
+    }
+
+    /**
+     * Resets the conversion mode to speed : move the select back to the top of the combo box's list of elements.
+     */
+    private void resetConversionMode() {
+        ComboBox<Class<? extends Units.Unit>> selector = lookup("#conversionModeSelector").queryComboBox();
+        clickOn(selector);
+        for (int i = 0; i < 10; i++) {
+            type(KeyCode.UP);
+        }
+        type(KeyCode.ENTER);
     }
 
     /**
@@ -140,16 +157,16 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
      * @param units The units of the enum that we are testing (example : Units.Speed.values()).
      */
     private void verifyUnitSelectors(List<String> units) {
-        MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
+        ComboBox<Units.Unit> firstUnitSelector = lookup("#firstUnitSelector").queryComboBox();
         List<String> firstSelectorItems = firstUnitSelector.getItems().stream()
-                .map(MenuItem::getText)
+                .map(Units.Unit::getSymbol)
                 .collect(Collectors.toList());
 
         Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(units);
 
-        MenuButton secondUnitSelector = lookup("#secondUnitSelector").query();
+        ComboBox<Units.Unit> secondUnitSelector = lookup("#secondUnitSelector").queryComboBox();
         List<String> secondSelectorItems = secondUnitSelector.getItems().stream()
-                .map(MenuItem::getText)
+                .map(Units.Unit::getSymbol)
                 .collect(Collectors.toList());
 
         Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(units);

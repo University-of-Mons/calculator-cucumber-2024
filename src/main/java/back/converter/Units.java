@@ -1,6 +1,21 @@
 package back.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Units {
+    /**
+     * @return A list of all unit types (speed, weight...) as classes.
+     */
+    public static List<Class<? extends Unit>> getUnitClasses() {
+        List<Class<? extends Unit>> unitClasses = new ArrayList<>();
+        unitClasses.add(Speed.class);
+        unitClasses.add(Weight.class);
+        unitClasses.add(Distance.class);
+        unitClasses.add(Time.class);
+        return unitClasses;
+    }
+
     public interface Unit {
         String getSymbol();
     }
