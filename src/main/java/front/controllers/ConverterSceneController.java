@@ -222,7 +222,6 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleSpeedConversionSelected(ActionEvent actionEvent) {
-        System.out.println("[FIX TESTS] handling speed conversion mode selected");
         Units.Speed[] values = Units.Speed.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -239,7 +238,6 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleWeightConversionSelected(ActionEvent actionEvent) {
-        System.out.println("[FIX TESTS] handling weight conversion mode selected");
         Units.Weight[] values = Units.Weight.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -256,7 +254,6 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleDistanceConversionSelected(ActionEvent actionEvent) {
-        System.out.println("[FIX TESTS] handling distance conversion mode selected");
         Units.Distance[] values = Units.Distance.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -273,7 +270,6 @@ public class ConverterSceneController implements Initializable {
      */
     @FXML
     private void handleTimeConversionSelected(ActionEvent actionEvent) {
-        System.out.println("[FIX TESTS] handling time conversion mode selected");
         Units.Time[] values = Units.Time.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -290,11 +286,6 @@ public class ConverterSceneController implements Initializable {
      * @param values The values to put in that selector.
      */
     private void replaceSelectorItems(MenuButton selector, Units.Unit[] values) {
-        System.out.println("[FIX TESTS] replacing items of selector containing text : " + selector.getText());
-        StringBuilder s = new StringBuilder();
-        for (Object o : selector.getItems()) s.append(o.toString()).append(" ");
-        logger.info(s.toString());
-        System.out.println("current items = " + s);
         selector.getItems().clear();
 
         for (Units.Unit value : values) {
@@ -312,18 +303,5 @@ public class ConverterSceneController implements Initializable {
             });
             selector.getItems().add(item);
         }
-
-        StringBuilder sn = new StringBuilder();
-        for (MenuItem o : selector.getItems()) sn.append(o.getText()).append(" ");
-        logger.info(sn.toString());
-        System.out.println("new items = " + sn);
-    }
-
-    public void temp(MouseEvent mouseEvent) {
-        System.out.println("[FIX TESTS] handling click on conversionModeSelector");
-    }
-
-    public void tempp(ActionEvent actionEvent) {
-        System.out.println("[FIX TESTS] handling action on conversionModeSelector");
     }
 }

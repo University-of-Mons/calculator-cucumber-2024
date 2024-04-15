@@ -72,14 +72,9 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableSpeedUnits(FxRobot robot) {
-        System.out.println("new test\n========");
         List<String> expectedItems = Arrays.stream(Units.Speed.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        StringBuilder s = new StringBuilder();
-        for (Object o : expectedItems) s.append(o.toString()).append(" ");
-        logger.info(s.toString());
-        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#speedConversionModeItem", expectedItems);
     }
 
@@ -88,14 +83,9 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableWeightUnits(FxRobot robot) {
-        System.out.println("new test\n========");
         List<String> expectedItems = Arrays.stream(Units.Weight.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        StringBuilder s = new StringBuilder();
-        for (Object o : expectedItems) s.append(o.toString()).append(" ");
-        logger.info(s.toString());
-        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#weightConversionModeItem", expectedItems);
     }
 
@@ -104,14 +94,9 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableDistanceUnits(FxRobot robot) {
-        System.out.println("new test\n========");
         List<String> expectedItems = Arrays.stream(Units.Distance.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        StringBuilder s = new StringBuilder();
-        for (Object o : expectedItems) s.append(o.toString()).append(" ");
-        logger.info(s.toString());
-        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#distanceConversionModeItem", expectedItems);
     }
 
@@ -120,14 +105,9 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
      */
     @Test
     void checkAvailableTimeUnits(FxRobot robot) {
-        System.out.println("new test\n========");
         List<String> expectedItems = Arrays.stream(Units.Time.values())
                 .map(Units.Unit::getSymbol)
                 .toList();
-        StringBuilder s = new StringBuilder();
-        for (Object o : expectedItems) s.append(o.toString()).append(" ");
-        logger.info(s.toString());
-        System.out.println("s = " + s);
         checkAvailableUnits(robot, "#timeConversionModeItem", expectedItems);
     }
 
@@ -149,7 +129,6 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
     private void selectConversionMode(String conversionModeItem) {
         clickOn("#conversionModeSelector");
         clickOn(conversionModeItem);
-        System.out.println("[FIX TESTS] clicked on " + conversionModeItem);
     }
 
     /**
@@ -161,37 +140,18 @@ class HeadlessIncompatibleConverterGUITest extends ApplicationTest {
      * @param units The units of the enum that we are testing (example : Units.Speed.values()).
      */
     private void verifyUnitSelectors(List<String> units) {
-        System.out.println("[FIX TESTS] entered verifyUnitSelectors");
-        StringBuilder s = new StringBuilder();
-        for (Object o : units) s.append(o.toString()).append(" ");
-        logger.info(s.toString());
-        System.out.println("s = " + s);
-
-
-
         MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
         List<String> firstSelectorItems = firstUnitSelector.getItems().stream()
                 .map(MenuItem::getText)
                 .collect(Collectors.toList());
 
-        StringBuilder s1 = new StringBuilder();
-        for (Object o : firstSelectorItems) s1.append(o.toString()).append(" ");
-        logger.info(s1.toString());
-        System.out.println("s1 = " + s1);
-
-
+        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(units);
 
         MenuButton secondUnitSelector = lookup("#secondUnitSelector").query();
         List<String> secondSelectorItems = secondUnitSelector.getItems().stream()
                 .map(MenuItem::getText)
                 .collect(Collectors.toList());
 
-        StringBuilder s2 = new StringBuilder();
-        for (Object o : secondSelectorItems) s2.append(o.toString()).append(" ");
-        logger.info(s2.toString());
-        System.out.println("s2 = " + s2);
-
-        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(units);
         Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(units);
     }
 }
