@@ -1,7 +1,5 @@
 package back.calculator.types;
 
-import back.calculator.App;
-
 public class RationalValue extends AbstractValue {
 
     private int num;
@@ -146,17 +144,22 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public AbstractValue div(AbstractValue other) {
-        // TODO : Vérifier si le résultat est entier ??
         return new RationalValue(this, other);
+    }
+
+    public RationalValue convertReal(double number){
+        String strNumber = Double.toString(number);
+        int numberAfterComma = strNumber.length() - strNumber.indexOf('.') - 1;
+        int num = (int) number * (10 ^ numberAfterComma);
+        int den = 10 ^ numberAfterComma;
+        return new RationalValue(new IntValue(num), new IntValue(den));
     }
 
     @Override
     public AbstractValue sqrt() {
-        // TODO : How to implement that ?
-        // Change the App.RationalMode if sqrt is real ?
-//        this.num = Math.sqrt(this.num);
-//        this.den = Math.sqrt(this.den)
-        return null;
+        RationalValue num = convertReal(Math.sqrt(this.num));
+        RationalValue den = convertReal(Math.sqrt(this.den));
+        return new RationalValue(num,den);
     }
 
     public int getNum(){
@@ -197,7 +200,7 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public int hashCode() {
-        // TODO : better solution ?
-        return Float.hashCode(this.num / this.den);
+        String str = new String(this.toString());
+        return str.hashCode();
     }
 }
