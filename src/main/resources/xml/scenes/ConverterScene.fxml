@@ -47,7 +47,7 @@
                             </cursor>
                         </MenuButton>
                         <MenuButton fx:id="conversionModeSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
-                                    prefWidth="160.0"
+                                    prefWidth="160.0" onMouseClicked="#temp" onAction="#tempp"
                                     style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;"
                                     stylesheets="@style.css" text="Conversion" textFill="WHITE" GridPane.columnIndex="3"
                                     GridPane.columnSpan="3" GridPane.rowIndex="1">

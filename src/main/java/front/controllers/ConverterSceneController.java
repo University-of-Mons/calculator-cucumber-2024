@@ -318,4 +318,12 @@ public class ConverterSceneController implements Initializable {
         logger.info(sn.toString());
         System.out.println("new items = " + sn);
     }
+
+    public void temp(MouseEvent mouseEvent) {
+        System.out.println("[FIX TESTS] handling click on conversionModeSelector");
+    }
+
+    public void tempp(ActionEvent actionEvent) {
+        System.out.println("[FIX TESTS] handling action on conversionModeSelector");
+    }
 }
