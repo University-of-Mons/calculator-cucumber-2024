@@ -1,11 +1,20 @@
 package back.calculator.types;
 
+
+/**
+ * Represents a rational number with a numerator and a denominator.
+ */
 public class RationalValue extends AbstractValue {
 
     private int num;
 
     private int den;
 
+    /**
+     * Constructor for a rational number.
+     * @param num The AbstractValue of the numerator
+     * @param den The AbstractValue of the denominator
+     */
     public RationalValue(AbstractValue num, AbstractValue den) {
         switch (num.getType()) {
             case INT:
@@ -63,6 +72,9 @@ public class RationalValue extends AbstractValue {
         }
     }
 
+    /**
+     * Simplify the rational number
+     */
     private void reduce(){
         int pgcd = pgcd(this.num, this.den);
         this.num = this.num / pgcd;
@@ -147,19 +159,24 @@ public class RationalValue extends AbstractValue {
         return new RationalValue(this, other);
     }
 
+    /**
+     * Convert a real number to a rational number
+     * @param number the real number (double) to convert
+     * @return A RationalValue equivalent to the real number
+     */
     public RationalValue convertReal(double number){
         String strNumber = Double.toString(number);
         int numberAfterComma = strNumber.length() - strNumber.indexOf('.') - 1;
-        int num = (int) number * (10 ^ numberAfterComma);
-        int den = 10 ^ numberAfterComma;
-        return new RationalValue(new IntValue(num), new IntValue(den));
+        int newNum = (int) number * (10 ^ numberAfterComma);
+        int newDen = 10 ^ numberAfterComma;
+        return new RationalValue(new IntValue(newNum), new IntValue(newDen));
     }
 
     @Override
     public AbstractValue sqrt() {
-        RationalValue num = convertReal(Math.sqrt(this.num));
-        RationalValue den = convertReal(Math.sqrt(this.den));
-        return new RationalValue(num,den);
+        RationalValue newNum = convertReal(Math.sqrt(this.num));
+        RationalValue newDen = convertReal(Math.sqrt(this.den));
+        return new RationalValue(newNum,newDen);
     }
 
     public int getNum(){
@@ -177,7 +194,7 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public boolean isPositive() {
-        return (this.num >= 0 & this.den >= 0);
+        return (this.num >= 0 && this.den >= 0);
     }
 
     @Override
@@ -189,9 +206,8 @@ public class RationalValue extends AbstractValue {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!((o instanceof IntValue) || o instanceof RationalValue)) return false;
-        if (o instanceof IntValue) {
-            IntValue intValue = (IntValue) o;
-            return (this.num == intValue.getValue() & this.den == 1);
+        if (o instanceof IntValue value) {
+            return (this.num == value.getValue() && this.den == 1);
         } else{
             RationalValue rational = (RationalValue) o;
             return (this.num == rational.getNum() && this.den == rational.getDen());
@@ -200,7 +216,7 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public int hashCode() {
-        String str = new String(this.toString());
+        String str = this.toString();
         return str.hashCode();
     }
 }
