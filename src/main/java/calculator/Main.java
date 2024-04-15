@@ -33,7 +33,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Parser<Integer> a = new Parser<>();
-            Expression<Integer> b = a.parse("+(5 -(5))", Parser::stringToInteger);
+            Expression<Integer> b = a.parse("-4", Parser::stringToInteger);
             System.out.println(b);
 
             Expression<Integer> e;

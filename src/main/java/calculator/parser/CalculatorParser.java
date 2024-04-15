@@ -613,15 +613,12 @@ public class CalculatorParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class SignedAtomContext extends ParserRuleContext {
 		public TerminalNode PLUS() { return getToken(CalculatorParser.PLUS, 0); }
-		public ScientificContext scientific() {
-			return getRuleContext(ScientificContext.class,0);
+		public AtomContext atom() {
+			return getRuleContext(AtomContext.class,0);
 		}
 		public TerminalNode MINUS() { return getToken(CalculatorParser.MINUS, 0); }
 		public Func_Context func_() {
 			return getRuleContext(Func_Context.class,0);
-		}
-		public AtomContext atom() {
-			return getRuleContext(AtomContext.class,0);
 		}
 		public SignedAtomContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -647,7 +644,7 @@ public class CalculatorParser extends Parser {
 				setState(94);
 				match(PLUS);
 				setState(95);
-				scientific();
+				atom();
 				}
 				break;
 			case MINUS:
@@ -656,7 +653,7 @@ public class CalculatorParser extends Parser {
 				setState(96);
 				match(MINUS);
 				setState(97);
-				scientific();
+				atom();
 				}
 				break;
 			case COS:
@@ -1108,23 +1105,23 @@ public class CalculatorParser extends Parser {
 		"\u0000\u0000XY\u0001\u0000\u0000\u0000YZ\u0005\u000b\u0000\u0000Z]\u0001"+
 		"\u0000\u0000\u0000[]\u0003\f\u0006\u0000\\O\u0001\u0000\u0000\u0000\\"+
 		"[\u0001\u0000\u0000\u0000]\u000b\u0001\u0000\u0000\u0000^_\u0005\f\u0000"+
-		"\u0000_e\u0003\u0010\b\u0000`a\u0005\r\u0000\u0000ae\u0003\u0010\b\u0000"+
-		"be\u0003\u0016\u000b\u0000ce\u0003\u000e\u0007\u0000d^\u0001\u0000\u0000"+
-		"\u0000d`\u0001\u0000\u0000\u0000db\u0001\u0000\u0000\u0000dc\u0001\u0000"+
-		"\u0000\u0000e\r\u0001\u0000\u0000\u0000fn\u0003\u0010\b\u0000gn\u0003"+
-		"\u0014\n\u0000hn\u0003\u0012\t\u0000ij\u0005\n\u0000\u0000jk\u0003\u0002"+
-		"\u0001\u0000kl\u0005\u000b\u0000\u0000ln\u0001\u0000\u0000\u0000mf\u0001"+
-		"\u0000\u0000\u0000mg\u0001\u0000\u0000\u0000mh\u0001\u0000\u0000\u0000"+
-		"mi\u0001\u0000\u0000\u0000n\u000f\u0001\u0000\u0000\u0000op\u0005\u0017"+
-		"\u0000\u0000p\u0011\u0001\u0000\u0000\u0000qr\u0007\u0003\u0000\u0000"+
-		"r\u0013\u0001\u0000\u0000\u0000st\u0005\u0016\u0000\u0000t\u0015\u0001"+
-		"\u0000\u0000\u0000uv\u0003\u0018\f\u0000vw\u0005\n\u0000\u0000w|\u0003"+
-		"\u0002\u0001\u0000xy\u0005\u0010\u0000\u0000y{\u0003\u0002\u0001\u0000"+
-		"zx\u0001\u0000\u0000\u0000{~\u0001\u0000\u0000\u0000|z\u0001\u0000\u0000"+
-		"\u0000|}\u0001\u0000\u0000\u0000}\u007f\u0001\u0000\u0000\u0000~|\u0001"+
-		"\u0000\u0000\u0000\u007f\u0080\u0005\u000b\u0000\u0000\u0080\u0017\u0001"+
-		"\u0000\u0000\u0000\u0081\u0082\u0007\u0004\u0000\u0000\u0082\u0019\u0001"+
-		"\u0000\u0000\u0000\r#-8>CGMSW\\dm|";
+		"\u0000_e\u0003\u000e\u0007\u0000`a\u0005\r\u0000\u0000ae\u0003\u000e\u0007"+
+		"\u0000be\u0003\u0016\u000b\u0000ce\u0003\u000e\u0007\u0000d^\u0001\u0000"+
+		"\u0000\u0000d`\u0001\u0000\u0000\u0000db\u0001\u0000\u0000\u0000dc\u0001"+
+		"\u0000\u0000\u0000e\r\u0001\u0000\u0000\u0000fn\u0003\u0010\b\u0000gn"+
+		"\u0003\u0014\n\u0000hn\u0003\u0012\t\u0000ij\u0005\n\u0000\u0000jk\u0003"+
+		"\u0002\u0001\u0000kl\u0005\u000b\u0000\u0000ln\u0001\u0000\u0000\u0000"+
+		"mf\u0001\u0000\u0000\u0000mg\u0001\u0000\u0000\u0000mh\u0001\u0000\u0000"+
+		"\u0000mi\u0001\u0000\u0000\u0000n\u000f\u0001\u0000\u0000\u0000op\u0005"+
+		"\u0017\u0000\u0000p\u0011\u0001\u0000\u0000\u0000qr\u0007\u0003\u0000"+
+		"\u0000r\u0013\u0001\u0000\u0000\u0000st\u0005\u0016\u0000\u0000t\u0015"+
+		"\u0001\u0000\u0000\u0000uv\u0003\u0018\f\u0000vw\u0005\n\u0000\u0000w"+
+		"|\u0003\u0002\u0001\u0000xy\u0005\u0010\u0000\u0000y{\u0003\u0002\u0001"+
+		"\u0000zx\u0001\u0000\u0000\u0000{~\u0001\u0000\u0000\u0000|z\u0001\u0000"+
+		"\u0000\u0000|}\u0001\u0000\u0000\u0000}\u007f\u0001\u0000\u0000\u0000"+
+		"~|\u0001\u0000\u0000\u0000\u007f\u0080\u0005\u000b\u0000\u0000\u0080\u0017"+
+		"\u0001\u0000\u0000\u0000\u0081\u0082\u0007\u0004\u0000\u0000\u0082\u0019"+
+		"\u0001\u0000\u0000\u0000\r#-8>CGMSW\\dm|";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

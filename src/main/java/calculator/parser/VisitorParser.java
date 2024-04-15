@@ -2,10 +2,7 @@ package calculator.parser;
 
 import calculator.Expression;
 import calculator.IllegalConstruction;
-import calculator.operation.Divides;
-import calculator.operation.Minus;
-import calculator.operation.Plus;
-import calculator.operation.Times;
+import calculator.operation.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
         this.baseParser = baseParser;
     }
 
-    private Expression<T> createOperation(String op, List<Expression<T>> insideExpression){
+    private Expression<T> createOperation(String op, List<Expression<T>> insideExpression) {
         try {
             return switch (op) {
                 case "*" -> new Times<>(insideExpression);
@@ -58,7 +55,7 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
             insideExpression.add(visit(ctx.multiplyingExpression()));
 
             String op = ctx.children.get(1).getText();
-            return createOperation(op,insideExpression);
+            return createOperation(op, insideExpression);
         }
         log.error("Illegal expression");
         return null;
@@ -78,7 +75,7 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
             insideExpression.add(visit(ctx.powExpression()));
 
             String op = ctx.children.get(1).getText();
-            return createOperation(op,insideExpression);
+            return createOperation(op, insideExpression);
         }
         log.error("Illegal multiplyingExpression");
         return null;
@@ -101,7 +98,8 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
         return null;
     }
 
-    @Override public Expression<T> visitPostfix_expression(CalculatorParser.Postfix_expressionContext ctx) {
+    @Override
+    public Expression<T> visitPostfix_expression(CalculatorParser.Postfix_expressionContext ctx) {
         log.trace("Visit postfix expression : {}", ctx.getText());
 
         if (ctx.children.size() == 1) {
@@ -110,16 +108,17 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
         } else {
             // LPAREN (postfix_multiplyingExpression COMMA?)+ RPAREN (PLUS | MINUS)
             List<Expression<T>> insideExpression = new ArrayList<>();
-            for (var expr:ctx.postfix_expression()) {
+            for (var expr : ctx.postfix_expression()) {
                 insideExpression.add(visit(expr));
             }
 
             String op = ctx.children.getLast().getText();
-            return createOperation(op,insideExpression);
+            return createOperation(op, insideExpression);
         }
     }
 
-    @Override public Expression<T> visitPrefix_expression(CalculatorParser.Prefix_expressionContext ctx) {
+    @Override
+    public Expression<T> visitPrefix_expression(CalculatorParser.Prefix_expressionContext ctx) {
         log.trace("Visit prefix multiplying expression : {}", ctx.getText());
 
         if (ctx.children.size() == 1) {
@@ -128,12 +127,12 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
         } else {
             // LPAREN (prefix_multiplyingExpression COMMA?)+ RPAREN (PLUS | MINUS)
             List<Expression<T>> insideExpression = new ArrayList<>();
-            for (var expr:ctx.prefix_expression()) {
+            for (var expr : ctx.prefix_expression()) {
                 insideExpression.add(visit(expr));
             }
 
             String op = ctx.children.getFirst().getText();
-            return createOperation(op,insideExpression);
+            return createOperation(op, insideExpression);
         }
     }
 
@@ -143,14 +142,30 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
         log.trace("Visit signed atom expression : {}", text);
 
         if (ctx.func_() == null) {
-            if (ctx.atom() != null && ctx.atom().LPAREN() != null) {
+            if (ctx.atom().LPAREN() != null) {
                 return visit(ctx.atom().expression());
             }
-            log.trace("base {}", baseParser.fromString(text));
-            return baseParser.fromString(text);
+            Expression<T> expr = visit(ctx.atom());
+            if (ctx.MINUS() != null) {
+                try {
+                    expr = new Opposite<>(List.of(expr));
+                } catch (IllegalConstruction e) {
+                    expr = null;
+                }
+            }
+            return expr;
         }
         // todo : add functions
         log.error("function not yet implemented");
         return null;
+    }
+
+    @Override
+    public Expression<T> visitScientific(CalculatorParser.ScientificContext ctx) {
+        String text = ctx.getText();
+        log.trace("Visit signed atom scientific : {}", text);
+        Expression<T> expr = baseParser.fromString(text);
+        log.trace("base {}", expr);
+        return expr;
     }
 }

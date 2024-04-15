@@ -72,8 +72,8 @@ prefix_expression
 
 // Atom
 signedAtom
-    : PLUS scientific
-    | MINUS scientific
+    : PLUS atom
+    | MINUS atom
     | func_
     | atom
     ;

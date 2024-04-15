@@ -30,15 +30,6 @@ public abstract class Operation<T> implements Expression<T> {
      */
     @Getter
     protected String symbol;
-
-    @Getter
-    protected int priority;
-
-    /**
-     * The neutral element of the operation (e.g. 1 for *, 0 for +)
-     */
-    protected int neutral;
-
     /**
      * To construct an operation with a list of expressions as arguments,
      * as well as the Notation used to represent the operation.
@@ -139,7 +130,6 @@ public abstract class Operation<T> implements Expression<T> {
     public int hashCode() {
         int result = 5;
         int prime = 31;
-        result = prime * result + neutral;
         result = prime * result + symbol.hashCode();
         result = prime * result + args.hashCode();
         return result;

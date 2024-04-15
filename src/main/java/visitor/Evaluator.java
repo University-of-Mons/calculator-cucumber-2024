@@ -1,8 +1,11 @@
 package visitor;
 
 import calculator.Expression;
-import calculator.operation.Operation;
 import calculator.Value;
+import calculator.operand.Operand;
+import calculator.operation.Minus;
+import calculator.operation.Operation;
+import calculator.operation.Opposite;
 
 import java.util.ArrayList;
 
@@ -50,6 +53,9 @@ public class Evaluator<T> extends Visitor<T> {
         //second loop to accumulate all the evaluated subresults
         Value<T> temp = evaluatedArgs.getFirst();
         int max = evaluatedArgs.size();
+        if (o instanceof Opposite<T>) {
+            temp = o.op(temp,null);
+        }
         for (int counter = 1; counter < max; counter++) {
             temp = o.op(temp, evaluatedArgs.get(counter));
         }

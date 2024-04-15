@@ -86,4 +86,9 @@ public class MyNumber extends Value<Integer> {
     public Value<Integer> div(Value<Integer> other) {
         return new MyNumber(this.getVal() / other.getVal());
     }
+
+    @Override
+    public Value<Integer> opposite() {
+        return new MyNumber(-this.getVal());
+    }
 }
