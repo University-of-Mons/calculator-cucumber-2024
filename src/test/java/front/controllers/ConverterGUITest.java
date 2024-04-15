@@ -195,6 +195,9 @@ class ConverterGUITest extends ApplicationTest {
         for (Object o : units) s.append(o.toString()).append(" ");
         logger.info(s.toString());
         System.out.println("s = " + s);
+
+
+
         MenuButton firstUnitSelector = lookup("#firstUnitSelector").query();
         List<String> firstSelectorItems = firstUnitSelector.getItems().stream()
                 .map(MenuItem::getText)
@@ -205,7 +208,7 @@ class ConverterGUITest extends ApplicationTest {
         logger.info(s1.toString());
         System.out.println("s1 = " + s1);
 
-        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(units);
+
 
         MenuButton secondUnitSelector = lookup("#secondUnitSelector").query();
         List<String> secondSelectorItems = secondUnitSelector.getItems().stream()
@@ -217,6 +220,7 @@ class ConverterGUITest extends ApplicationTest {
         logger.info(s2.toString());
         System.out.println("s2 = " + s2);
 
+        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(units);
         Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(units);
     }
 }
