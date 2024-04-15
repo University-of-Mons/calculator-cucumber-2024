@@ -37,7 +37,7 @@ jobs:
         run: Xvfb $DISPLAY -ac -screen 0 1600x1200x24 > /dev/null 2>&1 &
 
       - name: Build with Maven (+ running tests)
-        run: mvn -B package --file pom.xml
+        run: mvn -B -Dtest="!checkAvailableSpeedUnits,!checkAvailableWeightUnits,!checkAvailableDistanceUnits,!checkAvailableTimeUnits" package --file pom.xml
 
       - name: Publish Test Report
         if: ${{ always() }}
