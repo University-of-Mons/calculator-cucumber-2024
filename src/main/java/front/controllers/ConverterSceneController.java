@@ -314,7 +314,7 @@ public class ConverterSceneController implements Initializable {
         }
 
         StringBuilder sn = new StringBuilder();
-        for (Object o : selector.getItems()) sn.append(o.toString()).append(" ");
+        for (MenuItem o : selector.getItems()) sn.append(o.getText()).append(" ");
         logger.info(sn.toString());
         System.out.println("new items = " + sn);
     }
