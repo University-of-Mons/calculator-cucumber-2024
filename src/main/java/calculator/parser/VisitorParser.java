@@ -76,9 +76,13 @@ public class VisitorParser<T> extends CalculatorBaseVisitor<Expression<T>> {
 
             String op = ctx.children.get(1).getText();
             return createOperation(op, insideExpression);
+        } else {
+            List<Expression<T>> insideExpression = new ArrayList<>();
+            for (var expr: ctx.expression()) {
+                insideExpression.add(visit(expr));
+            }
+            return createOperation("*",insideExpression);
         }
-        log.error("Illegal multiplyingExpression");
-        return null;
     }
 
     @Override

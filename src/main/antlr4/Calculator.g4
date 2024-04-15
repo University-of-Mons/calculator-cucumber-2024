@@ -50,6 +50,7 @@ expression
 multiplyingExpression
     : powExpression
     | multiplyingExpression ((TIMES | DIV) powExpression)
+    | LPAREN expression RPAREN (LPAREN expression RPAREN)+
     ;
 
 powExpression

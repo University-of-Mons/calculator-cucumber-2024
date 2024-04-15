@@ -48,6 +48,8 @@ class TestParser {
             assertEquals(new MyNumber(120), calculator.eval(expression));
             expression = parser.parse("-3", Parser::stringToInteger);
             assertEquals(new MyNumber(-3), calculator.eval(expression));
+            expression = parser.parse("((4))(2+2)(8/2)(-1)", Parser::stringToInteger);
+            assertEquals(new MyNumber(-64), calculator.eval(expression));
         } catch (IllegalExpression e) {
             throw new RuntimeException(e);
         }
