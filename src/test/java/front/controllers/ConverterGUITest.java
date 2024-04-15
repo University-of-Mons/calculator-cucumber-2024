@@ -95,4 +95,109 @@ class ConverterGUITest extends ApplicationTest {
         clickOn("#zero");
         Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("123456789,000");
     }
+
+    /**
+     * Helper for checkAvailableUnits with the speed units.
+     */
+    @Test
+    void checkAvailableSpeedUnits(FxRobot robot) {
+        List<String> expectedItems = Arrays.stream(Units.Speed.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, expectedItems, 0);
+    }
+
+    /**
+     * Helper for checkAvailableUnits with the weight units.
+     */
+    @Test
+    void checkAvailableWeightUnits(FxRobot robot) {
+        List<String> expectedItems = Arrays.stream(Units.Weight.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, expectedItems, 1);
+    }
+
+    /**
+     * Helper for checkAvailableUnits with the distance units.
+     */
+    @Test
+    void checkAvailableDistanceUnits(FxRobot robot) {
+        List<String> expectedItems = Arrays.stream(Units.Distance.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, expectedItems, 2);
+    }
+
+    /**
+     * Helper for checkAvailableUnits with the time units.
+     */
+    @Test
+    void checkAvailableTimeUnits(FxRobot robot) {
+        List<String> expectedItems = Arrays.stream(Units.Time.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, expectedItems, 3);
+    }
+
+    /**
+     * Selects the unit type and triggers the verification of the available units.
+     */
+    private void checkAvailableUnits(FxRobot robot, List<String> units, int indexToClick) {
+        try {
+            selectConversionMode(indexToClick);
+            verifyUnitSelectors(units);
+            resetConversionMode();
+        } catch (FxRobotException e) {
+            fail();
+        }
+    }
+
+    /**
+     * Selects the unit type that we are going to verify (speed, weight...).
+     */
+    private void selectConversionMode(int indexToClick) {
+        ComboBox<Class<? extends Units.Unit>> selector = lookup("#conversionModeSelector").queryComboBox();
+        clickOn(selector);
+        for (int i = 0; i < indexToClick; i++) {
+            type(KeyCode.DOWN);
+        }
+        type(KeyCode.ENTER);
+    }
+
+    /**
+     * Resets the conversion mode to speed : move the select back to the top of the combo box's list of elements.
+     */
+    private void resetConversionMode() {
+        ComboBox<Class<? extends Units.Unit>> selector = lookup("#conversionModeSelector").queryComboBox();
+        clickOn(selector);
+        for (int i = 0; i < 10; i++) {
+            type(KeyCode.UP);
+        }
+        type(KeyCode.ENTER);
+    }
+
+    /**
+     * Constructs three lists :
+     *  - the expected units,
+     *  - the units of the first unit selector and
+     *  - the units of the second unit selector.
+     *  Then, verifies that both unit selectors have all expected units available.
+     * @param units The units of the enum that we are testing (example : Units.Speed.values()).
+     */
+    private void verifyUnitSelectors(List<String> units) {
+        ComboBox<Units.Unit> firstUnitSelector = lookup("#firstUnitSelector").queryComboBox();
+        List<String> firstSelectorItems = firstUnitSelector.getItems().stream()
+                .map(Units.Unit::getSymbol)
+                .collect(Collectors.toList());
+
+        Assertions.assertThat(firstSelectorItems).containsExactlyInAnyOrderElementsOf(units);
+
+        ComboBox<Units.Unit> secondUnitSelector = lookup("#secondUnitSelector").queryComboBox();
+        List<String> secondSelectorItems = secondUnitSelector.getItems().stream()
+                .map(Units.Unit::getSymbol)
+                .collect(Collectors.toList());
+
+        Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(units);
+    }
 }
