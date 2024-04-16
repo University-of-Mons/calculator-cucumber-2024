@@ -271,10 +271,7 @@ public class Converter {
      * @return The converted value
      */
     public static MyNumber convert(float value, Units.Unit from, Units.Unit to) {
-        // TODO : what should I do here ????
-        //  - Add float constructor
-        //  - Use real numbers from issue #7
-        //  - Round to integers
+        // TODO Use real numbers from issue #7
         if (from instanceof Units.Speed && to instanceof Units.Speed) {
             float result = convertSpeed(value, (Units.Speed) from, (Units.Speed) to);
             return new MyNumber((int) result);

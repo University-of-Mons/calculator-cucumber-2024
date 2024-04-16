@@ -22,8 +22,6 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-// TODO : beautiful history
-
 public class ConverterSceneController implements Initializable {
     @FXML
     ComboBox<Units.Unit> firstUnitSelector;
@@ -264,11 +262,6 @@ public class ConverterSceneController implements Initializable {
         replaceSelectorItems(secondUnitSelector, values);
         firstUnitSelector.setValue(Units.Speed.METERS_PER_SECOND);
         secondUnitSelector.setValue(Units.Speed.METERS_PER_SECOND);
-        // conversionModeSelector.setText("Speed");
-//        firstSelectedUnit = values[0];
-//        secondSelectedUnit = values[0];
-        // firstUnitSelector.setText(firstSelectedUnit.getSymbol());
-//        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -282,11 +275,6 @@ public class ConverterSceneController implements Initializable {
         replaceSelectorItems(secondUnitSelector, values);
         firstUnitSelector.setValue(Units.Weight.GRAM);
         secondUnitSelector.setValue(Units.Weight.GRAM);
-        // conversionModeSelector.setText("Weight");
-//        firstSelectedUnit = values[0];
-//        secondSelectedUnit = values[0];
-//        firstUnitSelector.setText(firstSelectedUnit.getSymbol());
-//        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -300,11 +288,6 @@ public class ConverterSceneController implements Initializable {
         replaceSelectorItems(secondUnitSelector, values);
         firstUnitSelector.setValue(Units.Distance.METER);
         secondUnitSelector.setValue(Units.Distance.METER);
-        // conversionModeSelector.setText("Distance");
-//        firstSelectedUnit = values[0];
-//        secondSelectedUnit = values[0];
-//        firstUnitSelector.setText(firstSelectedUnit.getSymbol());
-//        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -318,11 +301,6 @@ public class ConverterSceneController implements Initializable {
         replaceSelectorItems(secondUnitSelector, values);
         firstUnitSelector.setValue(Units.Time.SECOND);
         secondUnitSelector.setValue(Units.Time.SECOND);
-        // conversionModeSelector.setText("Time");
-//        firstSelectedUnit = values[0];
-//        secondSelectedUnit = values[0];
-//        firstUnitSelector.setText(firstSelectedUnit.getSymbol());
-//        secondUnitSelector.setText(secondSelectedUnit.getSymbol());
     }
 
     /**
@@ -335,20 +313,5 @@ public class ConverterSceneController implements Initializable {
         for (Units.Unit unit : values) {
             selector.getItems().add(unit);
         }
-//        for (Units.Unit value : values) {
-//            MenuItem item = new MenuItem(value.getSymbol());
-//            item.setOnAction(event -> {
-//                if (selector.equals(firstUnitSelector)) {
-//                    firstSelectedUnit = value;
-//                } else if (selector.equals(secondUnitSelector)) {
-//                    secondSelectedUnit = value;
-//                } else {
-//                    logger.error("Invalid selector passed to replaceSelectorItem.");
-//                }
-//                selector.setText(value.getSymbol());
-//                logger.info(value + " selected");
-//            });
-//            selector.getItems().add(item);
-//        }
     }
 }
