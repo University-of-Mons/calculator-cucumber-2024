@@ -116,7 +116,7 @@ public class RationalValue extends AbstractValue {
             case INT:
                 IntValue integer = (IntValue) other;
                 int intNum2 = integer.getValue() * this.den;
-                this.num += intNum2;
+                this.num -= intNum2;
                 break;
             case RATIONAL:
                 RationalValue rational = (RationalValue) other;
@@ -174,6 +174,8 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public AbstractValue sqrt() {
+        // A square root of a rational number is a real number
+        // So this method leads to a loss of precision, but it is necessary to match other extensions features
         RationalValue newNum = convertReal(Math.sqrt(this.num));
         RationalValue newDen = convertReal(Math.sqrt(this.den));
         return new RationalValue(newNum,newDen);
