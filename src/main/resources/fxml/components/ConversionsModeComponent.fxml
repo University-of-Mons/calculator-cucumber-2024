@@ -34,7 +34,7 @@
             </font>
          </Label>
          <Region prefWidth="20"/>
-         <TextField fx:id="FromPreComma" editable="false" prefWidth="100.0" prefHeight="40.0">
+         <TextField fx:id="textFieldFrom1" editable="false" prefWidth="100.0" prefHeight="40.0" onMouseClicked="#clickOnFrom1">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
@@ -45,13 +45,13 @@
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </Label>
-         <TextField fx:id="FromPostComma" alignment="CENTER_RIGHT" editable="false" prefWidth="100.0" prefHeight="40.0">
+         <TextField fx:id="textFieldFrom2" editable="false" prefWidth="100.0" prefHeight="40.0" onMouseClicked="#clickOnFrom2">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </TextField>
          <Region prefWidth="30.0"/>
-         <TextField fx:id="FromUnit" alignment="CENTER_RIGHT" editable="false" prefWidth="50.0" prefHeight="40.0">
+         <TextField fx:id="textFieldFromUnit" editable="false" prefWidth="50.0" prefHeight="40.0">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
@@ -65,7 +65,7 @@
             </font>
          </Label>
          <Region prefWidth="20"/>
-         <TextField fx:id="ToPreComma" editable="false" prefWidth="100.0" prefHeight="40.0">
+         <TextField fx:id="textFieldTo1" editable="false" prefWidth="100.0" prefHeight="40.0">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
@@ -76,13 +76,13 @@
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </Label>
-         <TextField fx:id="ToPostComma" editable="false" prefWidth="100.0" prefHeight="40.0">
+         <TextField fx:id="textFieldTo2" editable="false" prefWidth="100.0" prefHeight="40.0">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </TextField>
          <Region prefWidth="30.0"/>
-         <TextField fx:id="ToUnit" editable="false" prefWidth="50.0" prefHeight="40.0">
+         <TextField fx:id="textFieldToUnit" editable="false" prefWidth="50.0" prefHeight="40.0">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
