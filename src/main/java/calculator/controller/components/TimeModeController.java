@@ -1,7 +1,7 @@
 package calculator.controller.components;
 
 import calculator.Calculator;
-import calculator.Parser;
+import calculator.TimeParser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,7 +48,7 @@ public class TimeModeController implements Initializable, ModeController {
             expression.setText(display.getText()+" = ");
             Calculator calculator = new Calculator();
             try{
-                Parser parser = new Parser(display.getText(), calculator);
+                TimeParser parser = new TimeParser(display.getText(), calculator);
                 display.setText(parser.evaluate().toString());}
             catch (Exception e){
                 display.setText("Error");

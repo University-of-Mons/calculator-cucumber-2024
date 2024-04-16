@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
+import calculator.numbers.MyTime;
 import visitor.CountingVisitor;
 import visitor.Evaluator;
 import visitor.ExpressionVisitor;
@@ -43,6 +44,12 @@ public class Calculator {
         e.accept(v);
         // and return the result of the evaluation at the end of the process
         return v.getResult();
+    }
+
+    public MyTime timeEval(Expression e){
+        Evaluator v = new Evaluator();
+        e.accept(v);
+        return v.getTimeResult();
     }
 
     /*

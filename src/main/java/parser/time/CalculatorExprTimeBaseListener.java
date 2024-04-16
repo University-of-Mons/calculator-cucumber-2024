@@ -40,54 +40,6 @@ public class CalculatorExprTimeBaseListener implements CalculatorExprTimeListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterYear(CalculatorExprTimeParser.YearContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitYear(CalculatorExprTimeParser.YearContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOther(CalculatorExprTimeParser.OtherContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOther(CalculatorExprTimeParser.OtherContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTimeOnly(CalculatorExprTimeParser.TimeOnlyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTimeOnly(CalculatorExprTimeParser.TimeOnlyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTimeDate(CalculatorExprTimeParser.TimeDateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTimeDate(CalculatorExprTimeParser.TimeDateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterParensInfix(CalculatorExprTimeParser.ParensInfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -95,6 +47,18 @@ public class CalculatorExprTimeBaseListener implements CalculatorExprTimeListene
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParensInfix(CalculatorExprTimeParser.ParensInfixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDateInfix(CalculatorExprTimeParser.DateInfixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDateInfix(CalculatorExprTimeParser.DateInfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -148,6 +112,18 @@ public class CalculatorExprTimeBaseListener implements CalculatorExprTimeListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDatePrefix(CalculatorExprTimeParser.DatePrefixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDatePrefix(CalculatorExprTimeParser.DatePrefixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParensPrefix(CalculatorExprTimeParser.ParensPrefixContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -179,6 +155,18 @@ public class CalculatorExprTimeBaseListener implements CalculatorExprTimeListene
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTimePostfix(CalculatorExprTimeParser.TimePostfixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDatePostfix(CalculatorExprTimeParser.DatePostfixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDatePostfix(CalculatorExprTimeParser.DatePostfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

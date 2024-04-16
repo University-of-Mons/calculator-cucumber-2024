@@ -5,7 +5,7 @@ import visitor.Visitor;
 import java.time.LocalDateTime;
 
 public class MyTime implements Expression{
-    private final LocalDateTime time;
+    private LocalDateTime time;
 
     /** getter method to obtain the value contained in the object
      *
@@ -20,6 +20,23 @@ public class MyTime implements Expression{
      */
     public /*constructor*/ MyTime(int year, int month, int day, int hour, int minute, int second) {
         time = LocalDateTime.of(year, month, day, hour, minute, second);
+    }
+
+    public MyTime(int hour, int minute, int second) {
+        time = LocalDateTime.of(0, 1, 1, hour, minute, second);
+    }
+
+    public void adjustTimeZone(int hours) {
+        if (hours > 0)
+            time = time.plusHours(hours);
+        else
+            time = time.minusHours(-hours);
+    }
+
+    public void adjustTimeFormat(String format) {
+        if (format.equals("PM")) {
+            time = time.plusHours(12);
+        }
     }
 
     /**

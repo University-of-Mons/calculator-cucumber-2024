@@ -1,13 +1,13 @@
 package calculator;
 
 import calculator.numbers.Expression;
-import calculator.numbers.MyNumber;
-import parser.time.CalculatorExprTimeLexer;
-import parser.time.CalculatorExprTimeParser;
+import calculator.numbers.MyTime;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import parser.time.CalculatorExprTimeLexer;
+import parser.time.CalculatorExprTimeParser;
 import visitor.TimeParserVisitor;
 
 public class TimeParser {
@@ -31,10 +31,9 @@ public class TimeParser {
      * This method evaluate the expression
      * @return the result of the expression
      */
-    //TODO A MODIFIER
-    public MyNumber evaluate(){
+    public MyTime evaluate(){
         TimeParserVisitor visitor = new TimeParserVisitor(c);
         Expression e = visitor.visit(tree);
-        return c.eval(e);
+        return c.timeEval(e);
     }
 }

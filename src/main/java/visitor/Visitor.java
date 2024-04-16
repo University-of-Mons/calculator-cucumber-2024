@@ -1,5 +1,6 @@
 package visitor;
 
+import calculator.TimeOperation;
 import calculator.numbers.MyNumber;
 import calculator.Operation;
 import calculator.numbers.MyTime;
@@ -31,4 +32,10 @@ public abstract class Visitor {
      *
      * @param o The operation being visited
      */   public abstract void visit(Operation o);
+
+    /**
+     * The Visitor can traverse a time operation (a subtype of Expression)
+     *
+     * @param o The operation being visited
+     */   public abstract void visit(TimeOperation o);
 }

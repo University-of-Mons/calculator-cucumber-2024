@@ -22,38 +22,19 @@ public interface CalculatorExprTimeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExp(CalculatorExprTimeParser.ExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorExprTimeParser#year}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitYear(CalculatorExprTimeParser.YearContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CalculatorExprTimeParser#other}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOther(CalculatorExprTimeParser.OtherContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code TimeOnly}
-	 * labeled alternative in {@link CalculatorExprTimeParser#format}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTimeOnly(CalculatorExprTimeParser.TimeOnlyContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code TimeDate}
-	 * labeled alternative in {@link CalculatorExprTimeParser#format}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTimeDate(CalculatorExprTimeParser.TimeDateContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code parensInfix}
 	 * labeled alternative in {@link CalculatorExprTimeParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParensInfix(CalculatorExprTimeParser.ParensInfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code dateInfix}
+	 * labeled alternative in {@link CalculatorExprTimeParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDateInfix(CalculatorExprTimeParser.DateInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code timeInfix}
 	 * labeled alternative in {@link CalculatorExprTimeParser#infix}.
@@ -83,6 +64,13 @@ public interface CalculatorExprTimeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTimePrefix(CalculatorExprTimeParser.TimePrefixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code datePrefix}
+	 * labeled alternative in {@link CalculatorExprTimeParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDatePrefix(CalculatorExprTimeParser.DatePrefixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code parensPrefix}
 	 * labeled alternative in {@link CalculatorExprTimeParser#prefix}.
 	 * @param ctx the parse tree
@@ -103,6 +91,13 @@ public interface CalculatorExprTimeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTimePostfix(CalculatorExprTimeParser.TimePostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code datePostfix}
+	 * labeled alternative in {@link CalculatorExprTimeParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDatePostfix(CalculatorExprTimeParser.DatePostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parensPostfix}
 	 * labeled alternative in {@link CalculatorExprTimeParser#postfix}.

@@ -12,35 +12,29 @@ exp : infix
     | postfix
     ;
 
-// members
-year : DIGIT DIGIT DIGIT DIGIT
-     ;
-other : DIGIT DIGIT
-      ;
-
-// format
-
-format : other ':' other ':' other (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') DIGIT)?   # TimeOnly
-       | year ':' other ':' other ':' other ':' other ':' other (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') DIGIT)?   # TimeDate
-       ;
-
 // infix expression
 
 infix : infix op=('+' | '-') infix   # AddSubInfix
-      | format                    # timeInfix
+      | NUMBER ':' NUMBER ':' NUMBER (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # timeInfix
+      | NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER
+        (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # dateInfix
       | '(' infix ')'                 # parensInfix
       ;
 
 // prefix expression
 
-prefix : op=('+' | '-') '(' (prefix ((',')?)? prefix)+ ')'   # AddSubPrefix
-        | format                                        # timePrefix
+prefix :  op=('+' | '-') '(' prefix ((',')? prefix)+ ')'   # AddSubPrefix
+        | NUMBER ':' NUMBER ':' NUMBER (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # timePrefix
+        | NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER
+          (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # datePrefix
         | '(' prefix ')'                                # parensPrefix
         ;
 
 // postfix expression
-postfix : '(' (postfix ((',')?)? postfix)+ ')' op=('+' | '-')     # AddSubPostfix
-        | format                                           # timePostfix
+postfix : '(' postfix ((',')? postfix)+ ')' op=('+' | '-')   # AddSubPostfix
+        | NUMBER ':' NUMBER ':' NUMBER (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # timePostfix
+        | NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER
+          (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # datePostfix
         | '(' postfix ')'                                   # parensPostfix
         ;
 
@@ -50,5 +44,5 @@ CETADD: 'CET+';
 CETSUB : 'CET-';
 ADD : '+';
 SUB : '-';
-DIGIT : [0-9] ;
+NUMBER : [0-9]+ ;
 WS : [ \t\n\r]+ -> skip ;
