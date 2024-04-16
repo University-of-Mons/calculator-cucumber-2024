@@ -176,6 +176,7 @@ public class RationalValue extends AbstractValue {
     public AbstractValue sqrt() {
         // A square root of a rational number is a real number
         // So this method leads to a loss of precision, but it is necessary to match other extensions features
+        // TODO : Change the double to RealNumber when it is implemented
         RationalValue newNum = convertReal(Math.sqrt(this.num));
         RationalValue newDen = convertReal(Math.sqrt(this.den));
         return new RationalValue(newNum,newDen);
