@@ -53,11 +53,23 @@ public class TestRational {
 
     @Test
     void testAdd() {
+        // Make a test similar than above but with an integer
         RationalValue r = new RationalValue(new IntValue(1), new IntValue(2));
-        RationalValue r2 = new RationalValue(new IntValue(1), new IntValue(3));
-        RationalValue r3 = (RationalValue) r.add(r2);
-        assertEquals(5, r3.getNum());
-        assertEquals(6, r3.getDen());
+        IntValue i = new IntValue(1);
+        RationalValue r2 = (RationalValue) r.add(i);
+        assertEquals(3, r2.getNum());
+        assertEquals(2, r2.getDen());
+
+        RationalValue r3 = new RationalValue(new IntValue(1), new IntValue(2));
+        RationalValue r4 = new RationalValue(new IntValue(1), new IntValue(3));
+        RationalValue r5 = (RationalValue) r3.add(r4);
+        assertEquals(5, r5.getNum());
+        assertEquals(6, r5.getDen());
+
+        RationalValue r6 = new RationalValue(new IntValue(1), new IntValue(2));
+        RationalValue r7 = new RationalValue(new IntValue(1), new IntValue(2));
+        IntValue i2 = (IntValue) r6.add(r7);
+        assertEquals(1, i2.getValue());
     }
 
     @Test
@@ -67,15 +79,38 @@ public class TestRational {
         RationalValue r3 = (RationalValue) r.sub(r2);
         assertEquals(1, r3.getNum());
         assertEquals(6, r3.getDen());
+
+        RationalValue r4 = new RationalValue(new IntValue(1), new IntValue(2));
+        IntValue i = new IntValue(1);
+        RationalValue r5 = (RationalValue) r4.sub(i);
+        assertEquals(-1, r5.getNum());
+        assertEquals(2, r5.getDen());
+
+        // Add a test for line 120
+        RationalValue r6 = new RationalValue(new IntValue(1), new IntValue(2));
+        RationalValue r7 = new RationalValue(new IntValue(1), new IntValue(2));
+        IntValue i2 = (IntValue) r6.sub(r7);
+        assertEquals(0, i2.getValue());
     }
 
     @Test
     void testMul() {
         RationalValue r = new RationalValue(new IntValue(1), new IntValue(2));
-        RationalValue r2 = new RationalValue(new IntValue(1), new IntValue(3));
-        RationalValue r3 = (RationalValue) r.mul(r2);
-        assertEquals(1, r3.getNum());
-        assertEquals(6, r3.getDen());
+        IntValue i = new IntValue(3);
+        RationalValue r_ = (RationalValue) r.mul(i);
+        assertEquals(3, r_.getNum());
+
+        RationalValue r2 = new RationalValue(new IntValue(1), new IntValue(2));
+        IntValue i2 = new IntValue(2);
+        IntValue r3 = (IntValue) r2.mul(i2);
+        assertEquals(1, r3.getValue());
+
+
+        RationalValue r4 = new RationalValue(new IntValue(1), new IntValue(2));
+        RationalValue r5 = new RationalValue(new IntValue(1), new IntValue(3));
+        RationalValue r6 = (RationalValue) r4.mul(r5);
+        assertEquals(1, r6.getNum());
+        assertEquals(6, r6.getDen());
     }
 
     @Test
