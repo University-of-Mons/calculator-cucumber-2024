@@ -44,7 +44,7 @@ public class App extends Application {
         stage = _stage;
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
-        setScene(Scenes.MAIN_SCENE);
+        setScene(Scenes.CONVERTER_SCENE);
         stage.show();
     }
 

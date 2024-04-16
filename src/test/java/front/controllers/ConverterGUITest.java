@@ -2,14 +2,12 @@ package front.controllers;
 
 import back.converter.Units;
 import front.scenes.Scenes;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -199,5 +197,52 @@ class ConverterGUITest extends ApplicationTest {
                 .collect(Collectors.toList());
 
         Assertions.assertThat(secondSelectorItems).containsExactlyInAnyOrderElementsOf(units);
+    }
+
+    /**
+     * Test the conversion history
+     */
+    @Test
+    void testHistory(FxRobot robot) {
+        // Input 1000 in weight conversion (1000 grams by default)
+        selectConversionMode(1);
+        clickOn("#one");
+
+        // Select kilogram as second unit
+        ComboBox<Units.Unit> secondUnitSelector = lookup("#secondUnitSelector").queryComboBox();
+        clickOn(secondUnitSelector);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+
+        zeroZeroZeroEquals();
+        // Expected : 1 kilogram
+        Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("1");
+
+        // Fill history
+        for (int i = 0; i < 4; i++) zeroZeroZeroEquals();
+
+        // Verify history
+        Assertions.assertThat((Label) lookup("#lastExpression").query()).hasText("1000g");
+        Assertions.assertThat((Label) lookup("#lastResult").query()).hasText("1kg");
+        Assertions.assertThat((Label) lookup("#lastExpression1").query()).hasText("1000g");
+        Assertions.assertThat((Label) lookup("#lastResult1").query()).hasText("1kg");
+        Assertions.assertThat((Label) lookup("#lastExpression2").query()).hasText("1000g");
+        Assertions.assertThat((Label) lookup("#lastResult2").query()).hasText("1kg");
+        Assertions.assertThat((Label) lookup("#lastExpression3").query()).hasText("1000g");
+        Assertions.assertThat((Label) lookup("#lastResult3").query()).hasText("1kg");
+        Assertions.assertThat((Label) lookup("#lastExpression4").query()).hasText("1000g");
+        Assertions.assertThat((Label) lookup("#lastResult4").query()).hasText("1kg");
+        resetConversionMode();
+    }
+
+    /**
+     * Inputs three zeroes and presses enter.
+     */
+    void zeroZeroZeroEquals() {
+        clickOn("#zero");
+        clickOn("#zero");
+        clickOn("#zero");
+        // Trigger conversion with keyboard shortcut (variation from previous tests)
+        type(KeyCode.ENTER);
     }
 }

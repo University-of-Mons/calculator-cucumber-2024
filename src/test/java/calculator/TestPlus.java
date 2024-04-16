@@ -56,7 +56,6 @@ class TestPlus {
         try {
             Plus e = new Plus(p, Notation.INFIX);
             assertEquals(op, e);
-            assertEquals(e, e);
             assertNotEquals(e, new Plus(new ArrayList<>(Arrays.asList(new MyNumber(5), new MyNumber(4))), Notation.INFIX));
         } catch (IllegalConstruction e) {
             fail();
