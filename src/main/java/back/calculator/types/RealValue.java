@@ -1,14 +1,18 @@
 package back.calculator.types;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class RealValue extends AbstractValue{
 
     private BigDecimal value;
-    private final Type type = Type.REAL;
+
+    private final MathContext precision = new MathContext(3, RoundingMode.HALF_UP);
 
     public RealValue(BigDecimal value) {
         this.value = value;
+        type = Type.REAL;
     }
 
     @Override
@@ -28,23 +32,54 @@ public class RealValue extends AbstractValue{
 
     @Override
     public AbstractValue sub(AbstractValue other) {
-        return new RealValue(this.value.subtract(((RealValue) other).value));
+        switch (other.getType()){
+            case INT:
+                BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
+                this.value = this.value.subtract(otherValue);
+                break;
+
+            case REAL:
+                this.value = this.value.subtract(((RealValue) other).value);
+                break;
+        }
+        return this;
     }
 
     @Override
     public AbstractValue mul(AbstractValue other) {
-        return new RealValue(this.value.multiply(((RealValue) other).value));
+        switch (other.getType()){
+            case INT:
+                BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
+                this.value = this.value.multiply(otherValue/*,this.precision*/);
+                break;
+
+            case REAL:
+                this.value = this.value.multiply(((RealValue) other).value/*this.precision*/);
+                break;
+        }
+        return this;
     }
 
     @Override
     public AbstractValue div(AbstractValue other) {
-        return new RealValue(this.value.divide(((RealValue) other).value));
+        switch (other.getType()){
+            case INT:
+                BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
+                this.value = this.value.divide(otherValue/*,this.precision*/);
+                break;
+
+            case REAL:
+                this.value = this.value.divide(((RealValue) other).value/*,this.precision*/);
+                break;
+        }
+        return this;
     }
 
     @Override
     public AbstractValue sqrt() {
-        return null;
+        return new RealValue(this.value.sqrt(this.precision));
     }
+
 
     @Override
     public boolean isEqualsZero() {

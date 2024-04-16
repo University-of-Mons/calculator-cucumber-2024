@@ -66,10 +66,10 @@ public class CalculatorSteps {
                 case "-" -> op = new Minus(params);
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
-                default -> fail("Unknown operation!");
+                default -> throw new IllegalArgumentException("Unknown operation!");
             }
-        }catch (IllegalConstruction e){
-            fail("Illegal construction!");
+        }catch (back.calculator.IllegalConstruction e){
+            throw new IllegalArgumentException("Illegal construction!");
         }
     }
 
@@ -205,6 +205,11 @@ public class CalculatorSteps {
     @Then("the operation evaluates to {string}")
     public void thenTheOperationEvaluatesTo(String val) {
         assertEquals(val, c.eval(op).toString());
+    }
+
+    @Then("^the operation evaluates to (-?\\d+)(.)(\\d+)$")
+    public void thenTheOperationWithRealValueEvaluatesTo(int part1, char dot, int decimal){
+        assertEquals(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal))), c.eval(op));
     }
 
     @Then("the (.*) with NaN member evaluates to (.*)$")

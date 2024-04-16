@@ -2,7 +2,7 @@ package back.calculator.types;
 
 public abstract class AbstractValue {
 
-    private Type type;
+    protected Type type;
 
     public abstract AbstractValue add(AbstractValue other);
 
