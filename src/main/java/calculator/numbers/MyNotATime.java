@@ -2,7 +2,7 @@ package calculator.numbers;
 
 public class MyNotATime extends MyTime {
     public MyNotATime() {
-        super(0, 0, 0, 0, 0, 0);
+        super(0, 1, 1, 0, 0, 0);
     }
 
     @Override

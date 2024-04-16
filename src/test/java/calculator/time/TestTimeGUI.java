@@ -1,7 +1,7 @@
-package calculator;
+package calculator.time;
 
+import calculator.AppStarter;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class TestTimeGUI {
     void testClickNewButtons(FxRobot fxRobot){
         fxRobot.clickOn("#btnTimeZone");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
-        Assertions.assertEquals("CET+", display.getText());
+        Assertions.assertEquals("CET", display.getText());
         fxRobot.clickOn("#btnClear");
         fxRobot.clickOn("#btnSplitTime");
         Assertions.assertEquals(":", display.getText());

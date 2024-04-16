@@ -103,7 +103,7 @@ public abstract class TimeOperation implements Expression {
 
         if (getClass() != o.getClass()) return false; // getClass() instead of instanceof() because an addition is not the same as a multiplication
 
-        Operation other = (Operation) o;
+        TimeOperation other = (TimeOperation) o;
         return this.args.equals(other.getArgs());
     }
 

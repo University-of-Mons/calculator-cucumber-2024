@@ -75,12 +75,10 @@ public class MyTime implements Expression{
         }
 
         // If the object is of another type then return false
-        if (!(o instanceof MyNumber)) {
+        if (!(o instanceof MyTime)) {
             return false;
         }
-        return this.time == ((MyTime)o).time;
-        // Used == since the contained value is a primitive value
-        // If it had been a Java object, .equals() would be needed
+        return this.time.equals(((MyTime)o).time);
     }
 
     /** The method hashCode needs to be overridden it the equals method is overridden;
