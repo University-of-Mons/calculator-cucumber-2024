@@ -46,6 +46,7 @@ class GUITest extends ApplicationTest {
         FxToolkit.hideStage();
         release(new KeyCode[]{});
         release(new MouseButton[]{});
+
     }
 
     @BeforeEach
@@ -81,8 +82,30 @@ class GUITest extends ApplicationTest {
         clickOn("#divide");
         clickOn("#openParen");
         clickOn("#closeParen");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("+-*/()");
+        clickOn("#modulus");
+        clickOn("#eNotation");
+        clickOn("#i");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("+-*/()|Ei");
     }
+    @Test
+    void checkSinButton(FxRobot robot) {
+        clickOn("#sin");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("sin");
+    }
+
+    @Test
+    void checkCosButton(FxRobot robot) {
+        clickOn("#cos");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("cos");
+    }
+
+    @Test
+    void checkLnButton(FxRobot robot) {
+        clickOn("#ln");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("ln");
+    }
+
+
 
     @Test
     void checkEqualsButton(FxRobot robot) {

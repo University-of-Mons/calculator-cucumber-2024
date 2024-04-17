@@ -33,7 +33,7 @@ public final class SceneLoader {
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         try {
             Parent sceneParent = fxmlLoader.load();
-            return new Scene(sceneParent, 400, 500);
+            return new Scene(sceneParent, 500, 500);
         } catch (IOException e) {
             Logger logger = LoggerFactory.getLogger(SceneLoader.class);
             String errorMessage = "FATAL ERROR while trying to load scene " + url;

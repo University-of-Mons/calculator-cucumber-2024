@@ -125,6 +125,8 @@ public class ConverterSceneController implements Initializable {
                 handleDistanceConversionSelected(null);
             } else if (newValue.equals(Units.Time.class)) {
                 handleTimeConversionSelected(null);
+            } else if (newValue.equals(Units.Angles.class)) {
+                logger.error("Angles conversion not implemented yet.");
             } else {
                 handleSpeedConversionSelected(null);
                 logger.error("Invalid unit type selected. Defaulted to speed.");
