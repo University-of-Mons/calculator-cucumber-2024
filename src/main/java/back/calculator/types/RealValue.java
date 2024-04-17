@@ -8,7 +8,7 @@ public class RealValue extends AbstractValue{
 
     private BigDecimal value;
 
-    private final MathContext precision = new MathContext(3, RoundingMode.HALF_UP);
+    private final MathContext precision = new MathContext(5);
 
     public RealValue(BigDecimal value) {
         this.value = value;
@@ -19,7 +19,7 @@ public class RealValue extends AbstractValue{
     public AbstractValue add(AbstractValue other) {
         switch (other.getType()){
             case INT:
-                BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
+                BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue(), this.precision);
                 this.value = this.value.add(otherValue);
                 break;
 
@@ -39,11 +39,11 @@ public class RealValue extends AbstractValue{
         switch (other.getType()){
             case INT:
                 BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
-                this.value = this.value.subtract(otherValue);
+                this.value = this.value.subtract(otherValue, this.precision);
                 break;
 
             case REAL:
-                this.value = this.value.subtract(((RealValue) other).value);
+                this.value = this.value.subtract(((RealValue) other).value, this.precision);
                 break;
         }
         return this;
@@ -54,11 +54,11 @@ public class RealValue extends AbstractValue{
         switch (other.getType()){
             case INT:
                 BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
-                this.value = this.value.multiply(otherValue/*,this.precision*/);
+                this.value = this.value.multiply(otherValue,this.precision);
                 break;
 
             case REAL:
-                this.value = this.value.multiply(((RealValue) other).value/*this.precision*/);
+                this.value = this.value.multiply(((RealValue) other).value,this.precision);
                 break;
         }
         return this;
@@ -69,11 +69,11 @@ public class RealValue extends AbstractValue{
         switch (other.getType()){
             case INT:
                 BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
-                this.value = this.value.divide(otherValue/*,this.precision*/);
+                this.value = this.value.divide(otherValue,this.precision);
                 break;
 
             case REAL:
-                this.value = this.value.divide(((RealValue) other).value/*,this.precision*/);
+                this.value = this.value.divide(((RealValue) other).value, this.precision);
                 break;
         }
         return this;

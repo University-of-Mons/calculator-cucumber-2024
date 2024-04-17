@@ -40,6 +40,13 @@ public class calculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitENotationInfix(calculatorParser.ENotationInfixContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitModulusInfix(calculatorParser.ModulusInfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -124,6 +131,13 @@ public class calculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitENotationPrefix(calculatorParser.ENotationPrefixContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitAtomPrefix(calculatorParser.AtomPrefixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -173,6 +187,13 @@ public class calculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitENotationPostfix(calculatorParser.ENotationPostfixContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitAtomPostfix(calculatorParser.AtomPostfixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -188,6 +209,13 @@ public class calculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitRealNumber(calculatorParser.RealNumberContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitENotation(calculatorParser.ENotationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

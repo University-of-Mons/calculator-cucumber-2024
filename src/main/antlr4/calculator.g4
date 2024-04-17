@@ -16,6 +16,7 @@ infix: ((MODULUS infix MODULUS) | ('modulus' '(' infix ')')) # ModulusInfix
     | infix op=('*'| '/') infix   # MulDivInfix
     | imaginaryAndReal            # ImaginaryInfix
     | realNumber                  # RealInfix
+    | eNotation                   # ENotationInfix
     | infix op=('+' | '-') infix  # AddSubInfix
     | '(' infix ')'               # ParensInfix
     | atom                        # AtomInfix
@@ -30,6 +31,7 @@ prefix: ((MODULUS prefix MODULUS) | ('modulus' '(' prefix ')'))      # ModulusPr
     | '(' prefix ')'                                                 # ParensPrefix
     | imaginaryAndReal                                               # ImaginaryPrefix
     | realNumber                                                     # RealPrefix
+    | eNotation                                                      # ENotationPrefix
     | atom                                                           # AtomPrefix
     ;
 
@@ -39,11 +41,13 @@ postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')')) # ModulusPos
     | '(' postfix ')'                                                     # ParensPostfix
     | imaginaryAndReal                                                   # ImaginaryPostfix
     | realNumber                                                        # RealPostfix
+    | eNotation                                                         # ENotationPostfix
     | atom                                                              # AtomPostfix
     ;
 
 imaginaryAndReal: SUB? real=NUMBER op=('+' | '-') im=NUMBER? I;
 realNumber: SUB? val=FLOAT;
+eNotation: SUB? val=FLOAT E SUB? NUMBER;
 
 // Defined to reference as constants in the Java code
 ADD: '+';
@@ -60,6 +64,7 @@ atom: SUB? NUMBER? I # ImaginaryAtom
     ;
 
 I: 'i';
+E: 'E';
 NUMBER:[0-9]+;
 FLOAT: [0-9]+ '.' [0-9]+;
 WS: [ \t\r\n]+ -> skip; // skip tabs, newlines

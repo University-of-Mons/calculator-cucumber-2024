@@ -251,9 +251,7 @@ public class CalculatorSteps {
     }
 
     @Then("its parsing is {string}")
-    public void thenItsParsingIs(String s) {
-        assertEquals(s, params.get(0).toString());
-    }
+    public void thenItsParsingIs(String s) {assertEquals(s, params.get(0).toString());}
 
 
 // ############################### When ###############################

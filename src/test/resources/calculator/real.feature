@@ -59,3 +59,15 @@ Feature: Real numbers arithmetic operations
   Scenario: Parsing a real number with a leading zero
     Given the following expression '0.123'
     Then its parsing is '0.123'
+
+  Scenario: Parsing a real number with scientific representation positive exponent
+    Given the following expression '3.141E2'
+    Then its parsing is '314.1'
+
+  Scenario: Parsing a real number with scientific representation negative exponent
+    Given the following expression '3.141E-2'
+    Then its parsing is '0.03141'
+
+  Scenario: Parsing a small real number and getting scientific representation
+    Given the following expression '0.000000000314'
+    Then its parsing is '3.14E-10'

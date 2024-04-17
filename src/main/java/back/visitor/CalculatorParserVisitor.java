@@ -11,6 +11,7 @@ import back.parser.calculatorBaseVisitor;
 import back.parser.calculatorParser;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -105,6 +106,11 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     @Override
     public Expression visitRealInfix(calculatorParser.RealInfixContext ctx) {
         return visit(ctx.realNumber());
+    }
+
+    @Override
+    public Expression visitENotationInfix(calculatorParser.ENotationInfixContext ctx) {
+        return visit(ctx.eNotation());
     }
 
     @Override
@@ -237,11 +243,18 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitRealNumber(calculatorParser.RealNumberContext ctx) {
-        BigDecimal real = new BigDecimal(ctx.FLOAT().getText());
+        BigDecimal real = new BigDecimal(ctx.FLOAT().getText(), new MathContext(5));
         if (ctx.getChild(0) == ctx.SUB()){
             real = real.negate();
 
         }
+        RealValue realValue = new RealValue(real);
+        return new MyNumber(realValue);
+    }
+
+    @Override
+    public Expression visitENotation(calculatorParser.ENotationContext ctx){
+        BigDecimal real = new BigDecimal(ctx.getText());
         RealValue realValue = new RealValue(real);
         return new MyNumber(realValue);
     }
