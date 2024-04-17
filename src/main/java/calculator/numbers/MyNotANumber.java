@@ -1,22 +1,19 @@
 package calculator.numbers;
 
-import calculator.numbers.MyNumber;
-
 /**
  * MyNotANumber is a class that extends MyNumber.
  * It represents a non-numeric value (NaN) in the context of the calculator.
  *
- * @see ComplexNumber
  * @see MyNumber
  *
  */
-public class MyNotANumber extends ComplexNumber {
+public class MyNotANumber extends MyNumber{
 
     /**
      * Default constructor.
      */
     public MyNotANumber() {
-        super(0,0);
+        super(0);
     }
 
     /**

@@ -1,5 +1,5 @@
+// Generated from /home/administrateur/Documents/cours/Mas1/Q2/Software evolution/calculator-cucumber-2024/src/main/antlr4/Calculator/CalculatorExpr.g4 by ANTLR 4.13.1
 package parser;
-
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -29,49 +29,73 @@ public interface CalculatorExprListener extends ParseTreeListener {
 	void exitExp(CalculatorExprParser.ExpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code intInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void enterIntInfix(CalculatorExprParser.IntInfixContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code intInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void exitIntInfix(CalculatorExprParser.IntInfixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parensInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void enterParensInfix(CalculatorExprParser.ParensInfixContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code parensInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void exitParensInfix(CalculatorExprParser.ParensInfixContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code sqrtInfix}
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqrtInfix(CalculatorExprParser.SqrtInfixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code sqrtInfix}
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqrtInfix(CalculatorExprParser.SqrtInfixContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code complexInfix}
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplexInfix(CalculatorExprParser.ComplexInfixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code complexInfix}
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplexInfix(CalculatorExprParser.ComplexInfixContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code MulDivInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void enterMulDivInfix(CalculatorExprParser.MulDivInfixContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code MulDivInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void exitMulDivInfix(CalculatorExprParser.MulDivInfixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code AddSubInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void enterAddSubInfix(CalculatorExprParser.AddSubInfixContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code AddSubInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 */
 	void exitAddSubInfix(CalculatorExprParser.AddSubInfixContext ctx);
@@ -171,4 +195,88 @@ public interface CalculatorExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParensPostfix(CalculatorExprParser.ParensPostfixContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code MulDivComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void enterMulDivComplex(CalculatorExprParser.MulDivComplexContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MulDivComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void exitMulDivComplex(CalculatorExprParser.MulDivComplexContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComplexMinus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplexMinus(CalculatorExprParser.ComplexMinusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComplexMinus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplexMinus(CalculatorExprParser.ComplexMinusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComplexI}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplexI(CalculatorExprParser.ComplexIContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComplexI}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplexI(CalculatorExprParser.ComplexIContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Modulus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void enterModulus(CalculatorExprParser.ModulusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Modulus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void exitModulus(CalculatorExprParser.ModulusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ParensComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void enterParensComplex(CalculatorExprParser.ParensComplexContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ParensComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void exitParensComplex(CalculatorExprParser.ParensComplexContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AddSubComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void enterAddSubComplex(CalculatorExprParser.AddSubComplexContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AddSubComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void exitAddSubComplex(CalculatorExprParser.AddSubComplexContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComplexPlus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplexPlus(CalculatorExprParser.ComplexPlusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComplexPlus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplexPlus(CalculatorExprParser.ComplexPlusContext ctx);
 }

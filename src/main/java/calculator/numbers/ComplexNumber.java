@@ -22,18 +22,6 @@ public class ComplexNumber extends MyNumber{
     }
 
 
-
-
-    /**
-     * Getter method to obtain the real part of the complex number
-     *
-     * @return The floating number that represents the real part of the complex number
-     */
-    @Override
-    public float getReal() {
-        return this.getValue();
-    }
-
     /**
      * Getter method to obtain the imaginary part of the complex number
      *
@@ -51,7 +39,27 @@ public class ComplexNumber extends MyNumber{
      */
     @Override
     public String toString() {
-        return (int) this.getReal() + " + " + (int) this.getImaginary()+ "i";
+        if ((int) this.getImaginary() ==0) {
+            return (int) this.getReal() + "";
+        }
+        if ((int) this.getReal() ==0) {
+            if ((int) this.getImaginary() == 1)
+                return "i";
+            else
+                return (int) this.getImaginary() + "i";
+        }
+        else
+            if ((int) this.getImaginary() < 0) {
+                if ((int) this.getImaginary() == -1)
+                    return (int) this.getReal() + " - i";
+                else
+                    return (int) this.getReal() + " - " + (int) -this.getImaginary() + "i";
+            }
+            else
+                if ((int) this.getImaginary()==1)
+                    return (int) this.getReal() + " + i";
+                else
+                    return (int) this.getReal() + " + " + (int) this.getImaginary()+ "i";
     }
 
     /**

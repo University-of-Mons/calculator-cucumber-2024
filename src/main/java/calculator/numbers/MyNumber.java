@@ -28,7 +28,7 @@ public class MyNumber implements Expression
      * @param v The floating value to be contained in the object
      */
     public /*constructor*/ MyNumber(float v) {
-	  value=v;
+        value=v;
 	  }
 
     /**
@@ -48,7 +48,7 @@ public class MyNumber implements Expression
    * @return The floating number that represents the real part of the complex number
    */
   public float getReal() {
-    return getValue();
+      return value;
   }
 
   /**
@@ -89,7 +89,7 @@ public class MyNumber implements Expression
       if (!(o instanceof MyNumber)) {
             return false;
       }
-      return this.value == ((MyNumber)o).value;
+      return (int) this.value == (int) ((MyNumber)o).value;
       // Used == since the contained value is a primitive value
       // If it had been a Java object, .equals() would be needed
   }

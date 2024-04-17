@@ -1,3 +1,4 @@
+// Generated from /home/administrateur/Documents/cours/Mas1/Q2/Software evolution/calculator-cucumber-2024/src/main/antlr4/Calculator/CalculatorExpr.g4 by ANTLR 4.13.1
 package parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -23,28 +24,42 @@ public interface CalculatorExprVisitor<T> extends ParseTreeVisitor<T> {
 	T visitExp(CalculatorExprParser.ExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code intInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitIntInfix(CalculatorExprParser.IntInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parensInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParensInfix(CalculatorExprParser.ParensInfixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code sqrtInfix}
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqrtInfix(CalculatorExprParser.SqrtInfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code complexInfix}
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexInfix(CalculatorExprParser.ComplexInfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code MulDivInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMulDivInfix(CalculatorExprParser.MulDivInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AddSubInfix}
-	 * labeled alternative in .
+	 * labeled alternative in {@link CalculatorExprParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -105,4 +120,53 @@ public interface CalculatorExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitParensPostfix(CalculatorExprParser.ParensPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code MulDivComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMulDivComplex(CalculatorExprParser.MulDivComplexContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexMinus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexMinus(CalculatorExprParser.ComplexMinusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexI}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexI(CalculatorExprParser.ComplexIContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Modulus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModulus(CalculatorExprParser.ModulusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ParensComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParensComplex(CalculatorExprParser.ParensComplexContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AddSubComplex}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAddSubComplex(CalculatorExprParser.AddSubComplexContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexPlus}
+	 * labeled alternative in {@link CalculatorExprParser#complex}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexPlus(CalculatorExprParser.ComplexPlusContext ctx);
 }

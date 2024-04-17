@@ -14,7 +14,9 @@ exp : infix
 
 // infix expression
 
-infix : infix op=('*' | '/') infix    # MulDivInfix
+infix : complex                       # complexInfix
+      | 'sqrt' '(' SUB? NUMBER ')'         # sqrtInfix
+      | infix op=('*' | '/') infix    # MulDivInfix
       | infix op=('+' | '-') infix    # AddSubInfix
       | SUB? NUMBER                   # intInfix
       | '(' infix ')'                 # parensInfix
@@ -33,6 +35,15 @@ postfix : '(' postfix ((',')? postfix)+ ')' op=('*' | '/')     # MulDivPostfix
         | '(' postfix ((',')? postfix)+ ')' op=('+' | '-')     # AddSubPostfix
         | SUB? NUMBER                                            # intPostfix
         | '(' postfix ')'                                   # parensPostfix
+        ;
+//complex expression
+complex : NUMBER '+' NUMBER? 'i' # ComplexPlus
+        | NUMBER '-' NUMBER? 'i' # ComplexMinus
+        | NUMBER? 'i'    # ComplexI
+        | '|' complex '|' # Modulus
+        | complex op=('*' | '/') complex # MulDivComplex
+        | complex op=('+' | '-') complex # AddSubComplex
+        | '(' complex ')' # ParensComplex
         ;
 
 MUL : '*';
