@@ -28,8 +28,6 @@ public final class Divides<T> extends Operation<T> {
     public Divides(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "/";
-        priority = 1;
-        neutral = 1;
     }
 
     /**

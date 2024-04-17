@@ -3,10 +3,7 @@ package calculator;
 //Import Junit5 libraries for unit testing:
 
 import calculator.operand.MyNumber;
-import calculator.operation.Divides;
-import calculator.operation.Minus;
-import calculator.operation.Plus;
-import calculator.operation.Times;
+import calculator.operation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -58,9 +55,18 @@ class TestEvaluator {
     void testDivisionByZero() {
         List<Expression<Integer>> params = Arrays.asList(new MyNumber(value1), new MyNumber(0));
         try {
-            Plus<Integer> plus = new Plus<>( Arrays.asList(new Divides<>(params), new MyNumber(4)));
+            Plus<Integer> plus = new Plus<>(Arrays.asList(new Divides<>(params), new MyNumber(4)));
             assertEquals(new MyNaN<>(), calc.eval(plus));
         } catch (IllegalConstruction | ArithmeticException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testOpposite() {
+        try {
+            assertEquals(new MyNumber(-value1), calc.eval(new Opposite<>(List.of(new MyNumber(value1)))));
+        } catch (IllegalConstruction e) {
             fail();
         }
     }

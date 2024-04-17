@@ -50,6 +50,7 @@ expression
 multiplyingExpression
     : powExpression
     | multiplyingExpression ((TIMES | DIV) powExpression)
+    | LPAREN expression RPAREN (LPAREN expression RPAREN)+
     ;
 
 powExpression
@@ -72,8 +73,8 @@ prefix_expression
 
 // Atom
 signedAtom
-    : PLUS scientific
-    | MINUS scientific
+    : PLUS atom
+    | MINUS atom
     | func_
     | atom
     ;

@@ -27,8 +27,6 @@ public final class Minus<T> extends Operation<T> {
     public /*constructor*/ Minus(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "-";
-        priority = 0;
-        neutral = 0;
     }
 
     /**

@@ -46,4 +46,9 @@ public class MyNaN<T> extends Value<T> {
     public Value<T> div(Value<T> other) {
         return new MyNaN<>();
     }
+
+    @Override
+    public Value<T> opposite() {
+        return null;
+    }
 }

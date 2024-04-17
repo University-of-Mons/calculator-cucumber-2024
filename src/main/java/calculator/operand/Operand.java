@@ -10,4 +10,6 @@ public interface Operand<T> {
     Value<T> times(Value<T> other);
 
     Value<T> div(Value<T> other);
+
+    Value<T> opposite();
 }

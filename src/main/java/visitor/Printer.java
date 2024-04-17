@@ -4,6 +4,7 @@ import calculator.Expression;
 import calculator.Notation;
 import calculator.operation.Operation;
 import calculator.Value;
+import calculator.operation.Opposite;
 
 /**
  * Evaluation is a concrete visitor that serves to
@@ -49,7 +50,7 @@ public class Printer<T> extends Visitor<T> {
      * @param o The operation being visited
      */
     public void visit(Operation<T> o) {
-        if (n.equals(Notation.PREFIX)) {
+        if (n.equals(Notation.PREFIX) || o instanceof Opposite<T>) {
             result.append(o.getSymbol());
         }
         result.append("(");
