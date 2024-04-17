@@ -182,6 +182,31 @@ public class RationalValue extends AbstractValue {
         return new RationalValue(newNum,newDen);
     }
 
+    @Override
+    public AbstractValue cos() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue sin() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue ln() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue exp() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue atan() {
+        return null;
+    }
+
     public int getNum(){
         return this.num;
     }

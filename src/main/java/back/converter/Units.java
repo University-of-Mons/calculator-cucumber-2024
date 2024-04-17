@@ -13,6 +13,7 @@ public class Units {
         unitClasses.add(Weight.class);
         unitClasses.add(Distance.class);
         unitClasses.add(Time.class);
+        unitClasses.add(Angles.class);
         return unitClasses;
     }
 
@@ -88,6 +89,21 @@ public class Units {
             @Override
             public String getSymbol() {
                 return "h";
+            }
+        }
+    }
+
+    public enum Angles implements Unit {
+        DEGREE {
+            @Override
+            public String getSymbol() {
+                return "°";
+            }
+        },
+        RADIAN {
+            @Override
+            public String getSymbol() {
+                return "rad";
             }
         }
     }

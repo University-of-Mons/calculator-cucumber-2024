@@ -15,11 +15,12 @@ public class UnitsTest {
     @Test
     void testGetUnitClasses() {
         List<Class<? extends Units.Unit>> unitClasses = Units.getUnitClasses();
-        assertEquals(4, unitClasses.size());
+        assertEquals(5, unitClasses.size());
         assertEquals(Units.Speed.class, unitClasses.get(0));
         assertEquals(Units.Weight.class, unitClasses.get(1));
         assertEquals(Units.Distance.class, unitClasses.get(2));
         assertEquals(Units.Time.class, unitClasses.get(3));
+        assertEquals(Units.Angles.class, unitClasses.get(4));
     }
 
     /**

@@ -81,6 +81,31 @@ public class IntValue extends AbstractValue {
     }
 
     @Override
+    public AbstractValue cos() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue sin() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue ln() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue exp() {
+        return null;
+    }
+
+    @Override
+    public AbstractValue atan() {
+        return null;
+    }
+
+    @Override
     public boolean isEqualsZero(){
         return this.value == 0;
     }
