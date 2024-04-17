@@ -17,66 +17,66 @@ public class RealValue extends AbstractValue{
 
     @Override
     public AbstractValue add(AbstractValue other) {
+        RealValue result = null;
         switch (other.getType()){
             case INT:
                 BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue(), this.precision);
-                this.value = this.value.add(otherValue);
+                result = new RealValue(this.value.add(otherValue, this.precision));
                 break;
 
             case REAL:
-                this.value = this.value.add(((RealValue) other).value);
-                break;
-
-            case RATIONAL:
-                //TODO waiting for Rational conversion to real.
+                result = new RealValue(this.value.add(((RealValue) other).value, this.precision));
                 break;
         }
-        return this;
+        return result;
     }
 
     @Override
     public AbstractValue sub(AbstractValue other) {
+        RealValue result = null;
         switch (other.getType()){
             case INT:
                 BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
-                this.value = this.value.subtract(otherValue, this.precision);
+                result = new RealValue(this.value.subtract(otherValue, this.precision));
                 break;
 
             case REAL:
-                this.value = this.value.subtract(((RealValue) other).value, this.precision);
+                result = new RealValue(this.value.subtract(((RealValue) other).value, this.precision));
                 break;
         }
-        return this;
+        return result;
     }
 
     @Override
     public AbstractValue mul(AbstractValue other) {
+        RealValue result = null;
         switch (other.getType()){
             case INT:
                 BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
-                this.value = this.value.multiply(otherValue,this.precision);
+                result = new RealValue(this.value.multiply(otherValue,this.precision));
                 break;
 
             case REAL:
-                this.value = this.value.multiply(((RealValue) other).value,this.precision);
+                result = new RealValue(this.value.multiply(((RealValue) other).value,this.precision));
                 break;
         }
-        return this;
+        return result;
     }
 
     @Override
     public AbstractValue div(AbstractValue other) {
+        RealValue result = null;
         switch (other.getType()){
             case INT:
                 BigDecimal otherValue = new BigDecimal(((IntValue) other).getValue());
-                this.value = this.value.divide(otherValue,this.precision);
+                result = new RealValue(this.value.divide(otherValue, this.precision));
                 break;
 
             case REAL:
-                this.value = this.value.divide(((RealValue) other).value, this.precision);
+                result = new RealValue(this.value.divide(((RealValue) other).value, this.precision));
                 break;
         }
-        return this;
+        return result;
     }
 
     @Override
