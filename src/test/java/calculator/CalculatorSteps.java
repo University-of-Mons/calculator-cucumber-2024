@@ -240,6 +240,18 @@ public class CalculatorSteps {
         } else fail(notation + " is not a correct notation! ");
     }
 
+    @Then("^its (.*) form is (.*)$")
+    public void thenItsFormIs(String notation, String s) {
+        if (notation.equals("CARTESIAN") || notation.equals("POLAR") || notation.equals("EXPONENTIAL")) {
+            // Check if the number printed in the given notation is the same as the expected one
+            if (params.get(0) instanceof MyNumber) {
+                MyNumber number = (MyNumber) params.get(0);
+                number.setRepresentation(ComplexRepresentation.valueOf(notation));
+                assertEquals(s, number.toString());
+            } else fail("The parameter is not a number! ");
+        } else fail(notation + " is not a correct form! ");
+    }
+
     // ########################### Parsing of the operation ###############################
 
     @Then("^its (.*) parsing is (.*)$")

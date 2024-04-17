@@ -55,6 +55,14 @@ Feature: Complex arithmetic expressions
     When I provide a NaN number
     Then the operation evaluates to 'NaN'
 
+  ################################### Complex representation ##################################
+
+  Scenario: Printing a complex number
+    Given the following expression "4+4i"
+    Then its CARTESIAN form is 4+4i
+    And its POLAR form is 5.6569(cos(0.7854)+isin(0.7854))
+    And its EXPONENTIAL form is 5.6569exp(0.7854i)
+
   ################################### Printer with unary ##################################
   Scenario: Printing a complex number
     Given a complex operation '+'

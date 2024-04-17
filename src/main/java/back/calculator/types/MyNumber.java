@@ -1,8 +1,11 @@
 package back.calculator.types;
 
+import back.calculator.ComplexRepresentation;
 import back.calculator.Expression;
 import back.calculator.Operation;
 import back.visitor.Visitor;
+
+import java.math.BigDecimal;
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
@@ -12,11 +15,15 @@ import back.visitor.Visitor;
  * @see Operation
  */
 public class MyNumber implements Expression {
+
+
     private final AbstractValue real;
     // INT - REAL - RATIONAL
 
     private final AbstractValue imaginary;
     // INT - REAL - RATIONAL
+
+    private ComplexRepresentation representation = ComplexRepresentation.CARTESIAN;
 
     /**
      * getter method to obtain the value contained in the object
@@ -39,8 +46,17 @@ public class MyNumber implements Expression {
 
     public MyNumber(AbstractValue v) {
         real = v;
-        // TODO: add a switch to check the type of v to create the same type.
-        imaginary = new IntValue(0);
+        switch (v.getType()) {
+            case REAL:
+                imaginary = new RealValue(BigDecimal.ZERO);
+                break;
+            case RATIONAL:
+                imaginary = new RationalValue(new IntValue(0), new IntValue(1));
+                break;
+            default:
+                imaginary = new IntValue(0);
+
+        }
     }
 
     public MyNumber(int v) {
@@ -73,6 +89,24 @@ public class MyNumber implements Expression {
         return !imaginary.isEqualsZero();
     }
 
+    /**
+     * Method to check if the number is represented in polar, cartesian or exponential form
+     * @see ComplexRepresentation
+     * @return The representation of the number
+     */
+    public ComplexRepresentation getRepresentation() {
+        return representation;
+    }
+
+    /**
+     * Method to set the representation of the number
+     * @see ComplexRepresentation
+     * @param representation The representation to set
+     */
+    public void setRepresentation(ComplexRepresentation representation) {
+        this.representation = representation;
+    }
+
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
@@ -92,6 +126,14 @@ public class MyNumber implements Expression {
      */
     @Override
     public String toString() {
+        return switch (representation) {
+            case POLAR -> toStringPolar();
+            case EXPONENTIAL -> toStringExp();
+            default -> toStringCartesian();
+        };
+    }
+
+    private String toStringCartesian() {
         if (real.isEqualsZero()) {
             return toStringPurelyImaginary();
         } else {
@@ -121,6 +163,25 @@ public class MyNumber implements Expression {
         } else {
             return real + "" + imaginary + "i";
         }
+    }
+
+
+    private String toStringPolar() {
+        // = modulus cos(theta) + i sin(theta)
+        AbstractValue modulus = real.mul(real).add(imaginary.mul(imaginary)).sqrt();
+
+        AbstractValue arg = imaginary.div(real.add(modulus)).atan().mul(new IntValue(2));
+
+        return modulus + "(cos(" + arg + ")+isin(" + arg + "))";
+    }
+
+    private String toStringExp() {
+        // val = modulus exp(i theta)
+        AbstractValue modulus = real.mul(real).add(imaginary.mul(imaginary)).sqrt();
+
+        AbstractValue arg = imaginary.div(real.add(modulus)).atan().mul(new IntValue(2));
+
+        return modulus + "exp("+arg+"i)";
     }
 
     /**

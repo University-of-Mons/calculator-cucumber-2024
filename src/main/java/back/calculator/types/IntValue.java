@@ -2,6 +2,9 @@ package back.calculator.types;
 
 import back.calculator.App;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 public class IntValue extends AbstractValue {
 
     private int value;
@@ -27,9 +30,14 @@ public class IntValue extends AbstractValue {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof IntValue)) return false;
-        IntValue intValue = (IntValue) o;
-        return value == intValue.value;
+        if (!(o instanceof AbstractValue abstractValue)){
+            return false;
+        }
+        return switch (abstractValue.getType()) {
+            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).equals(abstractValue);
+            case RATIONAL -> new RationalValue(this, new IntValue(1)).equals(abstractValue);
+            default -> value == ((IntValue) abstractValue).getValue();
+        };
     }
 
     @Override
@@ -39,24 +47,43 @@ public class IntValue extends AbstractValue {
 
     @Override
     public AbstractValue add(AbstractValue other) {
-        // Check for the type but atm there is only one type
-        return new IntValue(this.value + ((IntValue) other).getValue());
+        return switch (other.getType()) {
+            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).add((other));
+            case RATIONAL -> new RationalValue(new IntValue(this.value), new IntValue(1)).add(other);
+            default -> new IntValue(this.value + ((IntValue) other).getValue());
+        };
     }
 
     @Override
     public AbstractValue sub(AbstractValue other) {
-        // Check for the type but atm there is only one type
-        return new IntValue(this.value - ((IntValue) other).getValue());
+        return switch (other.getType()) {
+            // TODO: change précision
+            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).sub((other));
+            case RATIONAL -> new RationalValue(new IntValue(this.value), new IntValue(1)).sub(other);
+            default -> new IntValue(this.value - ((IntValue) other).getValue());
+        };
     }
 
     @Override
     public AbstractValue mul(AbstractValue other) {
-        // Check for the type but atm there is only one type
-        return new IntValue(this.value * ((IntValue) other).getValue());
+        return switch (other.getType()) {
+            // TODO: check precision
+            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).mul((other));
+            case RATIONAL -> new RationalValue(new IntValue(this.value), new IntValue(1)).mul(other);
+            default -> new IntValue(this.value * ((IntValue) other).getValue());
+        };
     }
 
     @Override
     public AbstractValue div(AbstractValue other) {
+        switch (other.getType()) {
+            case REAL:
+                // TODO: check precision
+                return new RealValue(new BigDecimal(this.value, new MathContext(5))).div((other));
+            case RATIONAL:
+                return new RationalValue(new IntValue(this.value), new IntValue(1)).div(other);
+        }
+
         // Check for the type but atm there is only one type
         if (this.value == ((IntValue) other).getValue()) {
             return new IntValue(1);
@@ -76,8 +103,8 @@ public class IntValue extends AbstractValue {
 
     @Override
     public AbstractValue sqrt() {
-        // This should return a double but atm there is only int type available
-        return new IntValue((int) Math.sqrt(this.value));
+        // TODO: Check for precision here
+        return new RealValue(new BigDecimal(Double.toString(Math.sqrt(this.value)), new MathContext(5)));
     }
 
     @Override
