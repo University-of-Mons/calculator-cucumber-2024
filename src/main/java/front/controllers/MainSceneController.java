@@ -56,6 +56,8 @@ public class MainSceneController implements Initializable {
     Button zero;
     @FXML
     Button i;
+    @FXML
+    Button coma;
 
     @FXML
     Label lastExpression;

@@ -66,10 +66,11 @@ class GUITest extends ApplicationTest {
         clickOn("#eight");
         clickOn("#nine");
         clickOn("#dot");
+        clickOn("#coma");
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("123456789,000");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("123456789.,000");
     }
 
     @Test
