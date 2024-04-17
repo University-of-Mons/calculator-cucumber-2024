@@ -89,6 +89,18 @@ Feature: Integer Arithmetic Expressions
       | 7  | 5  | "7/5"  |
       | 5  | 7  | "5/7"  |
 
+  Scenario Outline: Evaluating the operation between real and integer numbers
+    Given an integer operation <op>
+    When I provide a first number <int>
+    And I provide a second real number <real>
+    Then the operation evaluates to <res>
+
+    Examples:
+      | op  | int | real | res |
+      | '+' | 3   | 1.2  | 4.2 |
+      | '-' | 3   | 1.5  | 1.5 |
+      | '*' | 3   | 0.5  | 1.5 |
+      | '/' | 3   | 0.5  | 6.0 |
 
   ##################################### Evaluation of nested expression tests #####################################
 

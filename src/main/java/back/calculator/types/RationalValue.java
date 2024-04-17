@@ -12,6 +12,7 @@ public class RationalValue extends AbstractValue {
 
     /**
      * Constructor for a rational number.
+     *
      * @param num The AbstractValue of the numerator
      * @param den The AbstractValue of the denominator
      */
@@ -75,13 +76,13 @@ public class RationalValue extends AbstractValue {
     /**
      * Simplify the rational number
      */
-    private void reduce(){
+    private void reduce() {
         int pgcd = pgcd(this.num, this.den);
         this.num = this.num / pgcd;
         this.den = this.den / pgcd;
-        if (this.den < 0){
-            this.den = - this.den;
-            this.num = - this.num;
+        if (this.den < 0) {
+            this.den = -this.den;
+            this.num = -this.num;
         }
     }
 
@@ -161,10 +162,11 @@ public class RationalValue extends AbstractValue {
 
     /**
      * Convert a real number to a rational number
+     *
      * @param number the real number (double) to convert
      * @return A RationalValue equivalent to the real number
      */
-    public RationalValue convertReal(double number){
+    public RationalValue convertReal(double number) {
         String strNumber = Double.toString(number);
         int numberAfterComma = strNumber.length() - strNumber.indexOf('.') - 1;
         int newNum = (int) number * (10 ^ numberAfterComma);
@@ -173,13 +175,17 @@ public class RationalValue extends AbstractValue {
     }
 
     @Override
-    public AbstractValue sqrt() {
+    public AbstractValue sqrt() throws IllegalArgumentException {
+        if (this.num < 0) {
+            throw new IllegalArgumentException("Cannot compute the square root of a negative number");
+        }
+
         // A square root of a rational number is a real number
         // So this method leads to a loss of precision, but it is necessary to match other extensions features
         // TODO : Change the double to RealNumber when it is implemented
         RationalValue newNum = convertReal(Math.sqrt(this.num));
         RationalValue newDen = convertReal(Math.sqrt(this.den));
-        return new RationalValue(newNum,newDen);
+        return new RationalValue(newNum, newDen);
     }
 
     @Override
@@ -207,11 +213,11 @@ public class RationalValue extends AbstractValue {
         return null;
     }
 
-    public int getNum(){
+    public int getNum() {
         return this.num;
     }
 
-    public int getDen(){
+    public int getDen() {
         return this.den;
     }
 
@@ -236,7 +242,7 @@ public class RationalValue extends AbstractValue {
         if (!((o instanceof IntValue) || o instanceof RationalValue)) return false;
         if (o instanceof IntValue value) {
             return (this.num == value.getValue() && this.den == 1);
-        } else{
+        } else {
             RationalValue rational = (RationalValue) o;
             return (this.num == rational.getNum() && this.den == rational.getDen());
         }

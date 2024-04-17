@@ -80,7 +80,10 @@ public class RealValue extends AbstractValue{
     }
 
     @Override
-    public AbstractValue sqrt() {
+    public AbstractValue sqrt() throws IllegalArgumentException {
+        if (this.value.compareTo(BigDecimal.ZERO) < 0){
+            throw new IllegalArgumentException("Cannot take the square root of a negative number");
+        }
         return new RealValue(this.value.sqrt(this.precision));
     }
 
@@ -106,7 +109,7 @@ public class RealValue extends AbstractValue{
 
     @Override
     public AbstractValue atan() {
-        return null;
+        return new RealValue(new BigDecimal(Math.atan(this.value.doubleValue()), this.precision));
     }
 
 
@@ -122,7 +125,7 @@ public class RealValue extends AbstractValue{
 
     @Override
     public String toString() {
-        return this.value.toString();
+        return this.value.stripTrailingZeros().toString();
     }
 
     @Override
