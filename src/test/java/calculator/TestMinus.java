@@ -56,6 +56,7 @@ class TestMinus {
         try {
             Minus e = new Minus(p, Notation.INFIX);
             assertEquals(op, e);
+            assertNotEquals(e, new Minus(new ArrayList<>(Arrays.asList(new MyNumber(5), new MyNumber(4))), Notation.INFIX));
         } catch (IllegalConstruction e) {
             fail();
         }
@@ -64,7 +65,7 @@ class TestMinus {
     @SuppressWarnings("ConstantConditions")
     @Test
     void testNull() {
-        assertDoesNotThrow(() -> op == null); // Direct way to to test if the null case is handled.
+        assertDoesNotThrow(() -> op == null); // Direct way to test if the null case is handled.
     }
 
     @Test
