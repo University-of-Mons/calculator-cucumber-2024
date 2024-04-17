@@ -14,6 +14,16 @@ public abstract class AbstractValue {
 
     public abstract AbstractValue sqrt();
 
+    public abstract AbstractValue cos();
+
+    public abstract AbstractValue sin();
+
+    public abstract AbstractValue ln();
+
+    public abstract AbstractValue exp();
+
+    public abstract AbstractValue atan();
+
     public abstract boolean isEqualsZero();
 
     public abstract boolean isPositive();

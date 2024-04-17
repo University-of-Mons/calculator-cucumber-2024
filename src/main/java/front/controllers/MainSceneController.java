@@ -58,6 +58,18 @@ public class MainSceneController implements Initializable {
     Button i;
     @FXML
     Button coma;
+    @FXML
+    Button modulus;
+    @FXML
+    Button eNotation;
+    @FXML
+    Button sqrt;
+    @FXML
+    Button ln;
+    @FXML
+    Button sin;
+    @FXML
+    Button cos;
 
     @FXML
     Label lastExpression;

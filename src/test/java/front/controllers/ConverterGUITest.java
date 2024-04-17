@@ -137,6 +137,16 @@ class ConverterGUITest extends ApplicationTest {
                 .toList();
         checkAvailableUnits(robot, expectedItems, 3);
     }
+    /*
+    @Test
+    void checkAvailableAnglesUnits(FxRobot robot){
+        List<String> expectedItems = Arrays.stream(Units.Angles.values())
+                .map(Units.Unit::getSymbol)
+                .toList();
+        checkAvailableUnits(robot, expectedItems, 4);
+    }
+
+     */
 
     /**
      * Selects the unit type and triggers the verification of the available units.
