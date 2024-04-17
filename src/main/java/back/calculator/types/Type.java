@@ -1,6 +1,5 @@
 package back.calculator.types;
 
 public enum Type {
-
-    INT, RATIONAL
+    INT, REAL, RATIONAL
 }

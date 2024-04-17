@@ -4,11 +4,13 @@ import back.calculator.*;
 import back.calculator.operators.*;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
+import back.calculator.types.RealValue;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +54,22 @@ public class CalculatorSteps {
             }
         } catch (IllegalConstruction e) {
             fail("Illegal construction!");
+        }
+    }
+
+    @Given("a real operation {string}")
+    public void givenARealOperation(String s){
+        params = new ArrayList<>();
+        try{
+            switch (s){
+                case "+" -> op = new Plus(params);
+                case "-" -> op = new Minus(params);
+                case "*" -> op = new Times(params);
+                case "/" -> op = new Divides(params);
+                default -> throw new IllegalArgumentException("Unknown operation!");
+            }
+        }catch (back.calculator.IllegalConstruction e){
+            throw new IllegalArgumentException("Illegal construction!");
         }
     }
 
@@ -189,6 +207,11 @@ public class CalculatorSteps {
         assertEquals(val, c.eval(op).toString());
     }
 
+    @Then("^the operation evaluates to (-?\\d+)(.)(\\d+)$")
+    public void thenTheOperationWithRealValueEvaluatesTo(int part1, char dot, int decimal){
+        assertEquals(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal))), c.eval(op));
+    }
+
     @Then("the (.*) with NaN member evaluates to (.*)$")
     public void thenTheOperationWithNaNMemberEvaluatesTo(String s, String val) {
         try {
@@ -228,9 +251,7 @@ public class CalculatorSteps {
     }
 
     @Then("its parsing is {string}")
-    public void thenItsParsingIs(String s) {
-        assertEquals(s, params.get(0).toString());
-    }
+    public void thenItsParsingIs(String s) {assertEquals(s, params.get(0).toString());}
 
 
 // ############################### When ###############################
@@ -243,6 +264,16 @@ public class CalculatorSteps {
             params.add(new MyNumber(val));
             op.addMoreParams(params);
         } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
+    }
+    @When("^I provide a (.*) real number (-?\\d+)(.)(\\d+)$")
+    public void whenIProvideARealNumber(String s, int part1, char dot, int decimal){
+        try{
+            params = new ArrayList<>();
+            params.add(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal))));
+            op.addMoreParams(params);
+        }catch (IllegalConstruction e){
             fail("Illegal construction!");
         }
     }
@@ -292,5 +323,4 @@ public class CalculatorSteps {
             fail("Illegal construction!");
         }
     }
-
 }
