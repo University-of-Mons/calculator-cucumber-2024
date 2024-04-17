@@ -26,6 +26,10 @@ public class RealValue extends AbstractValue{
             case REAL:
                 this.value = this.value.add(((RealValue) other).value);
                 break;
+
+            case RATIONAL:
+                //TODO waiting for Rational conversion to real.
+                break;
         }
         return this;
     }
