@@ -34,7 +34,8 @@ public final class Plus extends TimeOperation {
      * @return The result of the addition, or a new MyNotANumber if either input number is a MyNotANumber.
      */
     public MyTime op(MyTime l, MyTime r) {
-        if (l.getTime().isBefore(neutralTime) || r.getTime().isBefore(neutralTime))
+        if (l.getTime().isBefore(neutralTime) || r.getTime().isBefore(neutralTime) ||
+                l instanceof MyNotATime || r instanceof MyNotATime)
             return new MyNotATime();
         Duration duration = Duration.between(neutralTime, r.getTime());
         LocalDateTime result = l.getTime().plus(duration);

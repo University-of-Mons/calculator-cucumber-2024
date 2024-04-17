@@ -34,11 +34,15 @@ public final class Minus extends TimeOperation {
      * @return The result of the subtraction, or a new MyNotANumber if either input number is a MyNotANumber.
      */
     public MyTime op(MyTime l, MyTime r) {
-        if (l.getTime().isBefore(neutralTime) | r.getTime().isBefore(neutralTime))
+        if (l.getTime().isBefore(neutralTime) || r.getTime().isBefore(neutralTime) ||
+                l instanceof MyNotATime || r instanceof MyNotATime)
             return new MyNotATime();
         Duration duration = Duration.between(neutralTime, r.getTime());
         LocalDateTime result = l.getTime().minus(duration);
-        return new MyTime(result.getYear(), result.getMonthValue(), result.getDayOfMonth(),
+        if (result.isBefore(neutralTime))
+            return new MyNotATime();
+        else
+            return new MyTime(result.getYear(), result.getMonthValue(), result.getDayOfMonth(),
                 result.getHour(), result.getMinute(), result.getSecond());
     }
 }
