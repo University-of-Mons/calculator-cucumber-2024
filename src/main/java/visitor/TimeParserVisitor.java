@@ -1,8 +1,10 @@
 package visitor;
 
 import calculator.*;
-import calculator.numbers.*;
-import calculator.operators.*;
+import calculator.numbers.Expression;
+import calculator.numbers.MyNotATime;
+import calculator.numbers.MyTime;
+import calculator.operators.time.*;
 import parser.time.*;
 
 import java.util.*;
@@ -30,10 +32,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
-            time.adjustTimeZone(Integer.parseInt(ctx.NUMBER().get(6).getText()));
+            time.adjustTimeZone(Integer.parseInt(ctx.NUMBER().get(3).getText()));
         }
         else if (ctx.CETSUB() != null){
-            time.adjustTimeZone(-Integer.parseInt(ctx.NUMBER().get(6).getText()));
+            time.adjustTimeZone(-Integer.parseInt(ctx.NUMBER().get(3).getText()));
         }
         return time;
     }
@@ -71,8 +73,8 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
                 return visit(ctx.infix(0));
             }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
-                return c.eval(new Plus(params));
-            return c.eval(new Minus(params));
+                return c.timeEval(new Plus(params));
+            return c.timeEval(new Minus(params));
         }
         catch (IllegalConstruction e){
             return new MyNotATime();
@@ -95,10 +97,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
-            time.adjustTimeZone(Integer.parseInt(ctx.NUMBER().get(6).getText()));
+            time.adjustTimeZone(Integer.parseInt(ctx.NUMBER().get(3).getText()));
         }
         else if (ctx.CETSUB() != null){
-            time.adjustTimeZone(-Integer.parseInt(ctx.NUMBER().get(6).getText()));
+            time.adjustTimeZone(-Integer.parseInt(ctx.NUMBER().get(3).getText()));
         }
         return time;
     }
@@ -138,8 +140,8 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
                 return visit(ctx.prefix(0));
             }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
-                return c.eval(new Plus(params));
-            return c.eval(new Minus(params));
+                return c.timeEval(new Plus(params));
+            return c.timeEval(new Minus(params));
         }
         catch (IllegalConstruction e){
             return new MyNotATime();
@@ -162,10 +164,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
-            time.adjustTimeZone(Integer.parseInt(ctx.NUMBER().get(6).getText()));
+            time.adjustTimeZone(Integer.parseInt(ctx.NUMBER().get(3).getText()));
         }
         else if (ctx.CETSUB() != null){
-            time.adjustTimeZone(-Integer.parseInt(ctx.NUMBER().get(6).getText()));
+            time.adjustTimeZone(-Integer.parseInt(ctx.NUMBER().get(3).getText()));
         }
         return time;
     }
@@ -205,8 +207,8 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
                 return visit(ctx.postfix(0));
             }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
-                return c.eval(new Plus(params));
-            return c.eval(new Minus(params));
+                return c.timeEval(new Plus(params));
+            return c.timeEval(new Minus(params));
         }
         catch (IllegalConstruction e){
             return new MyNotATime();
