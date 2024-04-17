@@ -1,6 +1,8 @@
 package back.calculator.types;
 
 
+import java.math.BigDecimal;
+
 /**
  * Represents a rational number with a numerator and a denominator.
  */
@@ -88,11 +90,14 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public AbstractValue add(AbstractValue other) {
+        int newNum = this.num;
+        int newDen = this.den;
+
         switch (other.getType()) {
             case INT:
                 IntValue integer = (IntValue) other;
                 int intNum2 = integer.getValue() * this.den;
-                this.num += intNum2;
+                newNum += intNum2;
                 break;
             case RATIONAL:
                 RationalValue rational = (RationalValue) other;
@@ -100,24 +105,28 @@ public class RationalValue extends AbstractValue {
                 int ratDen2 = rational.getDen();
 
                 int oldDen = this.den;
-                this.den = this.den * ratDen2;
-                this.num = this.num * ratDen2 + oldDen * ratNum2;
+                newDen = this.den * ratDen2;
+                newNum = this.num * ratDen2 + oldDen * ratNum2;
 
         }
-        this.reduce();
-        if (this.den == 1) {
-            return new IntValue(this.num);
+        RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
+        result.reduce();
+        if (result.getDen() == 1) {
+            return new IntValue(result.getNum());
         }
-        return this;
+        return result;
     }
 
     @Override
     public AbstractValue sub(AbstractValue other) {
+        int newNum = this.num;
+        int newDen = this.den;
+
         switch (other.getType()) {
             case INT:
                 IntValue integer = (IntValue) other;
                 int intNum2 = integer.getValue() * this.den;
-                this.num -= intNum2;
+                newNum -= intNum2;
                 break;
             case RATIONAL:
                 RationalValue rational = (RationalValue) other;
@@ -125,34 +134,39 @@ public class RationalValue extends AbstractValue {
                 int ratDen2 = rational.getDen();
 
                 int oldDen = this.den;
-                this.den = this.den * ratDen2;
-                this.num = this.num * ratDen2 - oldDen * ratNum2;
+                newDen = this.den * ratDen2;
+                newNum = this.num * ratDen2 - oldDen * ratNum2;
         }
-        this.reduce();
-        if (this.den == 1) {
-            return new IntValue(this.num);
+        RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
+        result.reduce();
+        if (result.getDen() == 1) {
+            return new IntValue(result.getNum());
         }
-        return this;
+        return result;
     }
 
     @Override
     public AbstractValue mul(AbstractValue other) {
+        int newNum = this.num;
+        int newDen = this.den;
+
         switch (other.getType()) {
             case INT:
                 IntValue integer = (IntValue) other;
-                this.num *= integer.getValue();
+                newNum *= integer.getValue();
                 break;
             case RATIONAL:
                 RationalValue rational = (RationalValue) other;
 
-                this.num *= rational.getNum();
-                this.den *= rational.getDen();
+                newNum *= rational.getNum();
+                newDen *= rational.getDen();
         }
-        this.reduce();
-        if (this.den == 1) {
-            return new IntValue(this.num);
+        RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
+        result.reduce();
+        if (result.getDen() == 1) {
+            return new IntValue(result.getNum());
         }
-        return this;
+        return result;
     }
 
     @Override
@@ -167,6 +181,7 @@ public class RationalValue extends AbstractValue {
      * @return A RationalValue equivalent to the real number
      */
     public RationalValue convertReal(double number) {
+        // TODO : Useful ?
         String strNumber = Double.toString(number);
         int numberAfterComma = strNumber.length() - strNumber.indexOf('.') - 1;
         int newNum = (int) number * (10 ^ numberAfterComma);
@@ -174,43 +189,48 @@ public class RationalValue extends AbstractValue {
         return new RationalValue(new IntValue(newNum), new IntValue(newDen));
     }
 
-    @Override
-    public AbstractValue sqrt() throws IllegalArgumentException {
-        if (this.num < 0) {
-            throw new IllegalArgumentException("Cannot compute the square root of a negative number");
-        }
+    public RealValue convertToReal(){
+        BigDecimal num = new BigDecimal(this.num);
+        BigDecimal den = new BigDecimal(this.den);
+        RealValue result = new RealValue(num.divide(den));
+        // TODO : Change the App.RationalMode ?
+        return result;
+    }
 
-        // A square root of a rational number is a real number
-        // So this method leads to a loss of precision, but it is necessary to match other extensions features
-        // TODO : Change the double to RealNumber when it is implemented
-        RationalValue newNum = convertReal(Math.sqrt(this.num));
-        RationalValue newDen = convertReal(Math.sqrt(this.den));
-        return new RationalValue(newNum, newDen);
+    @Override
+    public AbstractValue sqrt() {
+        RealValue real = this.convertToReal();
+        return real.sqrt();
     }
 
     @Override
     public AbstractValue cos() {
-        return null;
+        RealValue real = this.convertToReal();
+        return real.cos();
     }
 
     @Override
     public AbstractValue sin() {
-        return null;
+        RealValue real = this.convertToReal();
+        return real.sin();
     }
 
     @Override
     public AbstractValue ln() {
-        return null;
+        RealValue real = this.convertToReal();
+        return real.ln();
     }
 
     @Override
     public AbstractValue exp() {
-        return null;
+        RealValue real = this.convertToReal();
+        return real.exp();
     }
 
     @Override
     public AbstractValue atan() {
-        return null;
+        RealValue real = this.convertToReal();
+        return real.atan();
     }
 
     public int getNum() {
