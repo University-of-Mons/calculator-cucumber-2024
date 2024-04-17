@@ -6,16 +6,18 @@ import calculator.numbers.Expression;
 import calculator.numbers.MyBool;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
+import calculator.operators.OperatorType;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public class Imply extends Operation {
 
     private final Map<String, Boolean> dictionary = new HashMap<>();
+    public static final OperatorType type = OperatorType.BINARY;
+
 
     /**
      * Class constructor specifying,
@@ -47,5 +49,10 @@ public class Imply extends Operation {
             logger.info(exception.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public OperatorType getType(){
+        return type;
     }
 }

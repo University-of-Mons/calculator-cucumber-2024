@@ -19,7 +19,9 @@ import java.util.List;
 public final class Times extends Operation
  {
 
-  /**
+     public final static OperatorType type = OperatorType.BINARY;
+
+     /**
    * Class constructor specifying a number of Expressions to multiply,
    * as well as the Notation used to represent the operation.
    *
@@ -47,4 +49,8 @@ public final class Times extends Operation
         return new MyNotANumber();
     return new MyNumber(l.getValue() * r.getValue());
   }
+     @Override
+     public OperatorType getType(){
+         return type;
+     }
  }

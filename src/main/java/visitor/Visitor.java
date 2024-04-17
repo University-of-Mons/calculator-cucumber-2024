@@ -24,4 +24,5 @@ public abstract class Visitor {
      *
      * @param o The operation being visited
      */   public abstract void visit(Operation o);
+
 }

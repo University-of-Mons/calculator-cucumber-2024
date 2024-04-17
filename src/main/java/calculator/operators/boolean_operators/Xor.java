@@ -6,6 +6,7 @@ import calculator.numbers.Expression;
 import calculator.numbers.MyBool;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
+import calculator.operators.OperatorType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.logging.Logger;
 public class Xor extends Operation {
 
     private final Map<String, Boolean> dictionary = new HashMap<>();
+    private final OperatorType type = OperatorType.BINARY;
+
 
     /**
      * Class constructor specifying,
@@ -48,4 +51,10 @@ public class Xor extends Operation {
             return null;
         }
     }
+
+    @Override
+    public OperatorType getType(){
+        return type;
+    }
+
 }

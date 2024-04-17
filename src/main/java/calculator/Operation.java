@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
+import calculator.operators.OperatorType;
 import visitor.Visitor;
 
 import java.util.ArrayList;
@@ -75,6 +76,17 @@ public abstract class Operation implements Expression
 	 */
    public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
+
+	public abstract OperatorType getType();
+
+	/**
+	 * Method representing the actual unary arithmetic operation to compute
+	 * @param l	an argument of the binary operation
+	 * @return	result of computing the unary operation
+	 */
+	public MyNumber op(MyNumber l) {
+		return l;
+	}
 
 	/** Add more parameters to the existing list of parameters
 	 *

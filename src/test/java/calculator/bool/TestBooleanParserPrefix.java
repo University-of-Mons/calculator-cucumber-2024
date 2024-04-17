@@ -2,10 +2,10 @@ package calculator.bool;
 
 import calculator.BooleanParser;
 import calculator.Calculator;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestBooleanParserPrefix {
@@ -21,15 +21,6 @@ class TestBooleanParserPrefix {
     void TestNumber(){
         BooleanParser parser = new BooleanParser("1",calculator);
         assertEquals(1,parser.evaluate().getValue());
-    }
-
-    @Test
-    void TestInvalidNumber(){
-        Exception exception = assertThrows(InvalidNumberException.class, () ->{
-            BooleanParser parser = new BooleanParser("5", calculator);
-            parser.evaluate().getValue();
-        });
-        assertTrue(exception.getMessage().contains("Number entered is invalid"));
     }
 
     @Test

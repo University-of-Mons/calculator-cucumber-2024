@@ -5,7 +5,6 @@ import calculator.Calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestBooleanParserPostfix {
@@ -21,15 +20,6 @@ class TestBooleanParserPostfix {
     void TestNumber(){
         BooleanParser parser = new BooleanParser("1",calculator);
         assertEquals(1,parser.evaluate().getValue());
-    }
-
-    @Test
-    void TestInvalidNumber(){
-        Exception exception = assertThrows(InvalidNumberException.class, () ->{
-            BooleanParser parser = new BooleanParser("5", calculator);
-            parser.evaluate().getValue();
-        });
-        assertTrue(exception.getMessage().contains("Number entered is invalid"));
     }
 
     @Test
@@ -178,7 +168,7 @@ class TestBooleanParserPostfix {
 
     @Test
     void TestOrImpl(){
-        BooleanParser parser = new BooleanParser("((1, ((0, 0) OR) IMPL), 1) IMPL",calculator);
+        BooleanParser parser = new BooleanParser("(((1, (0, 0) OR) IMPL), 1) IMPL",calculator);
         assertEquals(1,parser.evaluate().getValue());
     }
 

@@ -18,8 +18,10 @@ import java.util.List;
  */
 public final class Plus extends Operation
  {
+     public static final OperatorType type = OperatorType.BINARY;
 
-  /**
+
+     /**
    * Class constructor specifying a number of Expressions to add,
    * as well as the Notation used to represent the operation.
    *
@@ -47,4 +49,8 @@ public final class Plus extends Operation
         return new MyNotANumber();
     return new MyNumber(l.getValue() + r.getValue());
   }
+     @Override
+     public OperatorType getType(){
+         return type;
+     }
 }

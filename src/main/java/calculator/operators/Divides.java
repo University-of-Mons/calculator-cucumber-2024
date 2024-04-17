@@ -17,6 +17,8 @@ import java.util.List;
  */
 public final class Divides extends Operation {
 
+    private final OperatorType type = OperatorType.BINARY;
+
     /**
      * Class constructor specifying a number of Expressions to divide,
      * as well as the notation used to represent the operation.
@@ -45,4 +47,9 @@ public final class Divides extends Operation {
           return new MyNotANumber();
       return new MyNumber(l.getValue() / r.getValue());
   }
+
+    @Override
+    public OperatorType getType(){
+        return type;
+    }
 }

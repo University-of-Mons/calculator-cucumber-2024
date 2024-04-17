@@ -2,10 +2,7 @@ package calculator.bool;
 
 import calculator.IllegalConstruction;
 import calculator.numbers.MyBool;
-import calculator.numbers.MyNumber;
-import calculator.operators.Times;
 import calculator.operators.boolean_operators.And;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

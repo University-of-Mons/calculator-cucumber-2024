@@ -6,6 +6,7 @@ import calculator.numbers.Expression;
 import calculator.numbers.MyBool;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
+import calculator.operators.OperatorType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
 public class Or extends Operation {
 
     private final Map<String, Boolean> dictionary = new HashMap<>();
+    private final OperatorType type = OperatorType.BINARY;
+
 
 
     /**
@@ -46,6 +49,12 @@ public class Or extends Operation {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.info(exception.getMessage());
             return null;
-        }    }
+        }
+    }
+
+    @Override
+    public OperatorType getType(){
+        return type;
+    }
 
 }
