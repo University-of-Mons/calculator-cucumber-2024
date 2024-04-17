@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -19,7 +20,6 @@ public class Controller {
     private Label currentExpression;
     @FXML
     private Label history;
-
     @FXML
     private Button operatorEquals;
     @FXML
@@ -32,30 +32,27 @@ public class Controller {
     private Button operatorDivide;
     @FXML
     private Button digitZero;
-
     @FXML
     private Button optionUndo;
     @FXML
     private Button optionAnswer;
-
     @FXML
     private GridPane mainPane;
 
     @FXML
     private void handleKeyboard(KeyEvent event) {
-        String typedCharacter = event.getText();
+        log.trace("Key pressed: {}", event.getCode());
         if (event.getCode() == KeyCode.BACK_SPACE && !currentExpression.getText().isEmpty()) {
             removeCharacter();
         } else if (event.getCode() == KeyCode.ENTER) {
             evaluate();
         } else {
-            addCharacter(typedCharacter);
+            addCharacter(event.getText());
         }
     }
 
     @FXML
     private void initialize() {
-
         for (int i = 0; i < 9; i++) {
             final String s = String.valueOf(i + 1);
             Button b = new Button(s);
@@ -76,10 +73,12 @@ public class Controller {
     }
 
     private void addCharacter(String character) {
+        currentExpression.setTextFill(Color.WHITE);
         currentExpression.setText(currentExpression.getText() + character);
     }
 
     private void removeCharacter() {
+        currentExpression.setTextFill(Color.WHITE);
         if (!currentExpression.getText().isEmpty()) {
             String temp = currentExpression.getText().substring(0, currentExpression.getText().length() - 1);
             currentExpression.setText(temp);
@@ -92,8 +91,8 @@ public class Controller {
         try {
             e = p.parse(currentExpression.getText(), Parser::stringToInteger);
         } catch (IllegalExpression i) {
-            log.warn("Supplied expression is not correct : {}",currentExpression.getText());
-            // todo: signal to user
+            log.warn("Supplied expression is not correct : {}", currentExpression.getText());
+            currentExpression.setTextFill(Color.RED);
             return;
         }
         Calculator<Integer> c = new Calculator<>();
