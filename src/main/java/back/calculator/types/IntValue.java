@@ -109,27 +109,32 @@ public class IntValue extends AbstractValue {
 
     @Override
     public AbstractValue cos() {
-        return null;
+        // TODO: Check for precision here
+        return new RealValue(new BigDecimal(Double.toString(Math.cos(this.value)), new MathContext(5)));
     }
 
     @Override
     public AbstractValue sin() {
-        return null;
+        // TODO: Check for precision here
+        return new RealValue(new BigDecimal(Double.toString(Math.sin(this.value)), new MathContext(5)));
     }
 
     @Override
     public AbstractValue ln() {
-        return null;
+        // TODO: Check for precision here
+        return new RealValue(new BigDecimal(Double.toString(Math.log(this.value)), new MathContext(5)));
     }
 
     @Override
     public AbstractValue exp() {
-        return null;
+        // TODO: Check for precision here
+        return new RealValue(new BigDecimal(Double.toString(Math.exp(this.value)), new MathContext(5)));
     }
 
     @Override
     public AbstractValue atan() {
-        return null;
+        // TODO: Check for precision here
+        return new RealValue(new BigDecimal(Double.toString(Math.atan(this.value)), new MathContext(5)));
     }
 
     @Override
