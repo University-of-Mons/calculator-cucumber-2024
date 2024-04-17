@@ -2,6 +2,7 @@ package calculator.controller.components;
 
 import calculator.Calculator;
 import calculator.TimeParser;
+import calculator.numbers.MyTime;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,11 +20,12 @@ public class TimeModeController implements Initializable, ModeController {
     @FXML
     private Button btnOpenParenthesis, btnCloseParenthesis, btnClear, btnRetrieve, btnDelete; // unused
     @FXML
-    private Button btnTimeZone, btnSplitTime, btnAM, btnPM; // unused
+    private Button btnTimeZone, btnComma, btnColon, btnAM, btnPM, btnUnitFull, btnUnitDay, btnUnitHour, btnUnitMin; // unused
     @FXML
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9; // unused
 
     private boolean resetDisplay = false;
+    private MyTime time;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
@@ -43,13 +45,20 @@ public class TimeModeController implements Initializable, ModeController {
         appendToDisplay("+");
     }
 
+    public void onComma(){
+        appendToDisplay(",");
+    }
+
     public void onEquals() {
+        //TODO implement correct display of time
         if (!resetDisplay && !display.getText().equals("0")) {
             expression.setText(display.getText()+" = ");
             Calculator calculator = new Calculator();
             try{
                 TimeParser parser = new TimeParser(display.getText(), calculator);
-                display.setText(parser.evaluate().toString());}
+                time = parser.evaluate();
+                display.setText(
+                        time.toString());}
             catch (Exception e){
                 display.setText("Error");
             }
@@ -61,7 +70,7 @@ public class TimeModeController implements Initializable, ModeController {
         appendToDisplay("CET");
     }
 
-    public void onSplitTime() {
+    public void onColon() {
         appendToDisplay(":");
     }
 
@@ -71,6 +80,26 @@ public class TimeModeController implements Initializable, ModeController {
 
     public void onPM() {
         appendToDisplay("PM");
+    }
+
+    public void onUnitFull() {
+        //TODO
+        //appendToDisplay("+");
+    }
+
+    public void onUnitDay() {
+        //TODO
+        //appendToDisplay("-");
+    }
+
+    public void onUnitHour() {
+        //TODO
+        //appendToDisplay("*");
+    }
+
+    public void onUnitMin() {
+        //TODO
+        //appendToDisplay("/");
     }
 
     public void onOpenParenthesis() {

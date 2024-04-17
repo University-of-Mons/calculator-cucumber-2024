@@ -56,7 +56,16 @@ public class MyTime implements Expression{
      */
     @Override
     public String toString() {
-        return time.toString();
+        String year = "" + time.getYear();
+        String month = time.getMonthValue() < 10 ? "0" + time.getMonthValue() : "" + time.getMonthValue();
+        String day = time.getDayOfMonth() < 10 ? "0" + time.getDayOfMonth() : "" + time.getDayOfMonth();
+        String hour = time.getHour() < 10 ? "0" + time.getHour() : "" + time.getHour();
+        String minute = time.getMinute() < 10 ? "0" + time.getMinute() : "" + time.getMinute();
+        String second = time.getSecond() < 10 ? "0" + time.getSecond() : "" + time.getSecond();
+        if(time.getYear() == 0 && time.getMonthValue() == 1 && time.getDayOfMonth() == 1)
+            return hour + ":" + minute + ":" + second;
+        else
+            return year + ":" + month + ":" + day + ":" + hour + ":" + minute + ":" + second;
     }
 
     /** Two MyNumber expressions are equal if the values they contain are equal

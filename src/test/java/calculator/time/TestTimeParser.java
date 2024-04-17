@@ -157,9 +157,91 @@ public class TestTimeParser {
         assertEquals(new MyTime(2024,4,17,23,0,0),timeParser.evaluate());
     }
 
+    //Basic prefix tests
+    @Test
+    void testTimePrefix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("+ (05:00:00, 03:00:00)",calculator);
+        assertEquals(new MyTime(8,0,0),timeParser.evaluate());
+    }
 
-    //TODO Basic prefix tests
+    @Test
+    void testDatePrefix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("+ (2024:04:17:05:00:00, 0010:02:09:00:00:00)",calculator);
+        assertEquals(new MyTime(2034,5,27,5,0,0),timeParser.evaluate());
+    }
 
-    //TODO Basic postfix tests
+    @Test
+    void testDateTimePrefix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("+ (2024:04:17:05:00:00, 05:00:00)",calculator);
+        assertEquals(new MyTime(2024,4,17,10,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testFullDateTimePrefix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("+ (2024:04:17:05:00:00 PM CET-3, 05:00:00 AM CET+4)",calculator);
+        assertEquals(new MyTime(2024,4,17,23,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testNestedTimePrefix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("+ (05:00:00, - (03:00:00, 01:00:00))",calculator);
+        assertEquals(new MyTime(7,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testNestedFullDateTimePrefix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("+ (2024:04:17:05:00:00 PM CET-3, - (06:00:00 AM CET+4, 01:00:00))",calculator);
+        assertEquals(new MyTime(2024,4,17,23,0,0),timeParser.evaluate());
+    }
+
+    //Basic postfix tests
+
+    @Test
+    void testTimePostfix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("(05:00:00, 03:00:00)+",calculator);
+        assertEquals(new MyTime(8,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testDatePostfix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("(2024:04:17:05:00:00, 0010:02:09:00:00:00)+",calculator);
+        assertEquals(new MyTime(2034,5,27,5,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testDateTimePostfix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("(2024:04:17:05:00:00, 05:00:00)+",calculator);
+        assertEquals(new MyTime(2024,4,17,10,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testFullDateTimePostfix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("(2024:04:17:05:00:00 PM CET-3, 05:00:00 AM CET+4)+",calculator);
+        assertEquals(new MyTime(2024,4,17,23,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testNestedTimePostfix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("(05:00:00, (03:00:00, 01:00:00)-)+",calculator);
+        assertEquals(new MyTime(7,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testNestedFullDateTimePostfix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("(2024:04:17:05:00:00 PM CET-3, (06:00:00 AM CET+4, 01:00:00)-)+",calculator);
+        assertEquals(new MyTime(2024,4,17,23,0,0),timeParser.evaluate());
+    }
 
 }
