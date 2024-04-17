@@ -25,14 +25,14 @@ public class ComplexModeController implements Initializable, ModeController {
     @FXML
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9; // unused
     @FXML
-    private Button btnExtension1, btnExtension2, btnExtension3, btnExtension4, btnExtension5; // unused
-
+    private Button btnI, btnSqrt, btnModulus, btnCossin, btnSin,btnE, btPi; // unused
     private boolean resetDisplay = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
 
     // Button click event handlers
+
     @FXML
     public void onNumber(ActionEvent event) {
         Button button = (Button) event.getSource();
@@ -120,7 +120,7 @@ public class ComplexModeController implements Initializable, ModeController {
 
     @Override
     public float getPreferredWidth() {
-        return 600;
+        return 900;
     }
 
     @Override

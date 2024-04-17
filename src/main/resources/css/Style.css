@@ -10,10 +10,10 @@
     -fx-color: #FF6347; /* Rouge tomate */
 }
 
-#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction {
+#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction,#btnModulus,#btnSqrt, #btnCossin,#btnSin,#btnE {
     -fx-color: #FFA500;
 }
 
-#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btnEquals, #btnDelete {
+#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btnEquals, #btnDelete, #btnI{
     -fx-color: #ecf0f1; /* Gris très clair */
 }

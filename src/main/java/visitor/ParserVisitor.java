@@ -75,7 +75,7 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitSqrtInfix(CalculatorExprParser.SqrtInfixContext ctx){
-        Expression number = new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+        Expression number = visit(ctx.infix());
         List<Expression> params = new ArrayList<>();
         params.add(number);
         try {

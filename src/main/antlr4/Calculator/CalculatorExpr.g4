@@ -15,7 +15,7 @@ exp : infix
 // infix expression
 
 infix : complex                       # complexInfix
-      | 'sqrt' '(' SUB? NUMBER ')'         # sqrtInfix
+      | 'sqrt' '(' infix ')'         # sqrtInfix
       | infix op=('*' | '/') infix    # MulDivInfix
       | infix op=('+' | '-') infix    # AddSubInfix
       | SUB? NUMBER                   # intInfix
