@@ -88,6 +88,109 @@ public class TestTimeGui {
     }
 
     @Test
+    void testTimeToDays(FxRobot fxRobot){
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btnUnitDay");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("365.0 days", display.getText());
+    }
+
+    @Test
+    void testTimeToHours(FxRobot fxRobot){
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btnUnitHour");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("36.0 hours", display.getText());
+    }
+
+    @Test
+    void testTimeToMinutes(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btnUnitMin");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("720.0 minutes", display.getText());
+    }
+
+    @Test
+    void testTimeToFull(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btnUnitMin");
+        fxRobot.clickOn("#btnUnitFull");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("12:00:00", display.getText());
+    }
+
+    @Test
+    void testTimeToDecimal(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btnUnitDay");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("0.5 days", display.getText());
+    }
+
+    @Test
     void testTimeSum(FxRobot fxRobot){
         fxRobot.clickOn("#btn0");
         fxRobot.clickOn("#btn5");

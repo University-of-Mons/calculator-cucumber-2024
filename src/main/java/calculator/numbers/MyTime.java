@@ -34,8 +34,11 @@ public class MyTime implements Expression{
     }
 
     public void adjustTimeFormat(String format) {
-        if (format.equals("PM")) {
+        if (format.equals("PM") && time.getHour() < 12) {
             time = time.plusHours(12);
+        }
+        else if (format.equals("AM") && time.getHour() >= 12) {
+            time = time.minusHours(12);
         }
     }
 

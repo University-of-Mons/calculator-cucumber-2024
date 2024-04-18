@@ -28,7 +28,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         MyTime time = new MyTime( Integer.parseInt(ctx.NUMBER().get(0).getText()),
                 Integer.parseInt(ctx.NUMBER().get(1).getText()),
                 Integer.parseInt(ctx.NUMBER().get(2).getText()));
-        if (ctx.PM() != null){
+        if (ctx.AM() != null){
+            time.adjustTimeFormat("AM");
+        }
+        else if (ctx.PM() != null){
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
@@ -48,7 +51,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
                 Integer.parseInt(ctx.NUMBER().get(3).getText()),
                 Integer.parseInt(ctx.NUMBER().get(4).getText()),
                 Integer.parseInt(ctx.NUMBER().get(5).getText()));
-        if (ctx.PM() != null){
+        if (ctx.AM() != null){
+            time.adjustTimeFormat("AM");
+        }
+        else if (ctx.PM() != null){
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
@@ -93,7 +99,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         MyTime time = new MyTime( Integer.parseInt(ctx.NUMBER().get(0).getText()),
                 Integer.parseInt(ctx.NUMBER().get(1).getText()),
                 Integer.parseInt(ctx.NUMBER().get(2).getText()));
-        if (ctx.PM() != null){
+        if (ctx.AM() != null){
+            time.adjustTimeFormat("AM");
+        }
+        else if (ctx.PM() != null){
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
@@ -113,7 +122,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
                 Integer.parseInt(ctx.NUMBER().get(3).getText()),
                 Integer.parseInt(ctx.NUMBER().get(4).getText()),
                 Integer.parseInt(ctx.NUMBER().get(5).getText()));
-        if (ctx.PM() != null){
+        if (ctx.AM() != null){
+            time.adjustTimeFormat("AM");
+        }
+        else if (ctx.PM() != null){
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
@@ -160,7 +172,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         MyTime time = new MyTime( Integer.parseInt(ctx.NUMBER().get(0).getText()),
                 Integer.parseInt(ctx.NUMBER().get(1).getText()),
                 Integer.parseInt(ctx.NUMBER().get(2).getText()));
-        if (ctx.PM() != null){
+        if (ctx.AM() != null){
+            time.adjustTimeFormat("AM");
+        }
+        else if (ctx.PM() != null){
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){
@@ -180,7 +195,10 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
                 Integer.parseInt(ctx.NUMBER().get(3).getText()),
                 Integer.parseInt(ctx.NUMBER().get(4).getText()),
                 Integer.parseInt(ctx.NUMBER().get(5).getText()));
-        if (ctx.PM() != null){
+        if (ctx.AM() != null){
+            time.adjustTimeFormat("AM");
+        }
+        else if (ctx.PM() != null){
             time.adjustTimeFormat("PM");
         }
         if (ctx.CETADD() != null ){

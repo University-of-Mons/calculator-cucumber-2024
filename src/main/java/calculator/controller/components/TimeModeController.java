@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class TimeModeController implements Initializable, ModeController {
@@ -50,7 +52,6 @@ public class TimeModeController implements Initializable, ModeController {
     }
 
     public void onEquals() {
-        //TODO implement correct display of time
         if (!resetDisplay && !display.getText().equals("0")) {
             expression.setText(display.getText()+" = ");
             Calculator calculator = new Calculator();
@@ -83,23 +84,29 @@ public class TimeModeController implements Initializable, ModeController {
     }
 
     public void onUnitFull() {
-        //TODO
-        //appendToDisplay("+");
+        display.clear();
+        appendToDisplay(time.toString());
     }
 
     public void onUnitDay() {
-        //TODO
-        //appendToDisplay("-");
+        Duration duration = Duration.between(LocalDateTime.of(0,1,1,0,0,0),
+                time.getTime());
+        double days = duration.toDays();
+        appendToDisplay( days + " days");
     }
 
     public void onUnitHour() {
-        //TODO
-        //appendToDisplay("*");
+        Duration duration = Duration.between(LocalDateTime.of(0,1,1,0,0,0),
+                time.getTime());
+        double hours = duration.toHours();
+        appendToDisplay(hours + " hours");
     }
 
     public void onUnitMin() {
-        //TODO
-        //appendToDisplay("/");
+        Duration duration = Duration.between(LocalDateTime.of(0,1,1,0,0,0),
+                time.getTime());
+        double minutes = duration.toMinutes();
+        appendToDisplay(minutes + " minutes");
     }
 
     public void onOpenParenthesis() {
