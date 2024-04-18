@@ -86,7 +86,6 @@ public class IntValue extends AbstractValue {
                 return new RationalValue(new IntValue(this.value), new IntValue(1)).div(other);
         }
 
-        // Check for the type but atm there is only one type
         if (this.value == ((IntValue) other).getValue()) {
             return new IntValue(1);
         }
@@ -96,11 +95,7 @@ public class IntValue extends AbstractValue {
         if (this.value % ((IntValue) other).getValue() == 0) {
             return new IntValue(this.value / ((IntValue) other).getValue());
         }
-        if (App.isRationalMode()){
-            return new RationalValue(this, other);
-        }
-
-        return new IntValue(this.value / ((IntValue) other).getValue());
+        return new RationalValue(this, other);
     }
 
     @Override

@@ -101,7 +101,7 @@ public class MyNumber implements Expression {
         } else{
             if (real.getType() == Type.RATIONAL){
                 RationalValue number = (RationalValue) real;
-                newReal = new RealValue(new BigDecimal(number.getNum()).divide(new BigDecimal(number.getDen())));
+                newReal = number.convertToReal();
             } else{
                 if (real.getType() == Type.REAL) {
                     newReal = real;
@@ -116,7 +116,7 @@ public class MyNumber implements Expression {
         } else{
             if (imaginary.getType() == Type.RATIONAL){
                 RationalValue number = (RationalValue) imaginary;
-                newImaginary = new RealValue(new BigDecimal(number.getNum()).divide(new BigDecimal(number.getDen())));
+                newImaginary = number.convertToReal();
             } else{
                 if (real.getType() == Type.REAL) {
                     newImaginary = imaginary;

@@ -2,6 +2,7 @@ package back.calculator.types;
 
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * Represents a rational number with a numerator and a denominator.
@@ -190,10 +191,10 @@ public class RationalValue extends AbstractValue {
     }
 
     public RealValue convertToReal(){
-        BigDecimal num = new BigDecimal(this.num);
-        BigDecimal den = new BigDecimal(this.den);
-        RealValue result = new RealValue(num.divide(den));
-        // TODO : Change the App.RationalMode ?
+        // TODO : Change precision
+        RealValue num = new RealValue(new BigDecimal(this.num, new MathContext(5)));
+        RealValue den = new RealValue(new BigDecimal(this.den, new MathContext(5)));
+        RealValue result = (RealValue) num.div(den);
         return result;
     }
 

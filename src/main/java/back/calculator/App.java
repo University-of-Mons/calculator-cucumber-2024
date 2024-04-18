@@ -30,8 +30,6 @@ public class App extends Application {
 
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
-    private static boolean isRationalMode = true; // TODO : Turn this on
-
     private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
@@ -74,9 +72,6 @@ public class App extends Application {
         return logger;
     }
 
-    public static boolean isRationalMode() {
-        return isRationalMode;
-    }
 
     public static MyNumber convert(float value, Units.Unit from, Units.Unit to) {
         return Converter.convert(value, from, to);
