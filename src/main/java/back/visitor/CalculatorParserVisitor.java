@@ -148,6 +148,17 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return visit(ctx.infix());
     }
 
+    @Override
+    public Expression visitLnInfix(calculatorParser.LnInfixContext ctx){
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Logarithm(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
     // ================================= PREFIX =============================================
 
     @Override
@@ -187,6 +198,17 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return visit(ctx.prefix());
     }
 
+    @Override
+    public Expression visitLnPrefix(calculatorParser.LnPrefixContext ctx){
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Logarithm(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
     // ================================= POSTFIX =============================================
 
     @Override
@@ -224,6 +246,17 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     public Expression visitParensPostfix(calculatorParser.ParensPostfixContext ctx) {
         // Postfix '(' Postfix ')'
         return visit(ctx.postfix());
+    }
+
+    @Override
+    public Expression visitLnPostfix(calculatorParser.LnPostfixContext ctx){
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Logarithm(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
     }
 
     // ================================= ATOMS =============================================
