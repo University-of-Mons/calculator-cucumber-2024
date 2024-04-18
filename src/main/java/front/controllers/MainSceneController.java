@@ -2,6 +2,7 @@ package front.controllers;
 
 import back.calculator.App;
 import back.calculator.Expression;
+import back.calculator.types.MyNumber;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -137,6 +138,24 @@ public class MainSceneController implements Initializable {
 
         // Set the answer in the textField
         outputField.setText(result.toString());
+
+        // Set the cursor at the end of the text
+        outputField.positionCaret(outputField.getText().length());
+    }
+
+    @FXML
+    private void realButtonClicked(MouseEvent event){
+        App.setUserInput(outputField.getText());
+        Expression result = App.evalUserInput();
+        MyNumber resultNumber = (MyNumber) result;
+
+        MyNumber realNumber = resultNumber.convertToReal();
+
+        // Log the new result on the GUI
+        switchHistory(App.getUserInput(), realNumber.toString());
+
+        // Set the answer in the textField
+        outputField.setText(realNumber.toString());
 
         // Set the cursor at the end of the text
         outputField.positionCaret(outputField.getText().length());

@@ -10,22 +10,18 @@ public class TestRational {
 
     @Test
     void testConstructor() {
-        // Test the constructor with two integers
         RationalValue r = new RationalValue(new IntValue(1), new IntValue(2));
         assertEquals(1, r.getNum());
         assertEquals(2, r.getDen());
 
-        // Test the constructor with a rational and an integer
         RationalValue r2 = new RationalValue(r, new IntValue(3));
         assertEquals(1, r2.getNum());
         assertEquals(6, r2.getDen());
 
-        // Test the constructor with an integer and a rational
         RationalValue r3 = new RationalValue(new IntValue(3), r);
         assertEquals(6, r3.getNum());
         assertEquals(1, r3.getDen());
 
-        // Test the constructor with two rationals
         RationalValue r4 = new RationalValue(r, r2);
         assertEquals(3, r4.getNum());
         assertEquals(1, r4.getDen());
@@ -53,7 +49,6 @@ public class TestRational {
 
     @Test
     void testAdd() {
-        // Make a test similar than above but with an integer
         RationalValue r = new RationalValue(new IntValue(1), new IntValue(2));
         IntValue i = new IntValue(1);
         RationalValue r2 = (RationalValue) r.add(i);

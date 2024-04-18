@@ -89,6 +89,44 @@ public class MyNumber implements Expression {
         return !imaginary.isEqualsZero();
     }
 
+
+    public MyNumber convertToReal(){
+        AbstractValue newReal = this.real;
+        AbstractValue newImaginary = this.imaginary;
+
+        // Real part
+        if (real.getType() == Type.INT){
+            IntValue number = (IntValue) real;
+            newReal = new RealValue(new BigDecimal(number.getValue()));
+        } else{
+            if (real.getType() == Type.RATIONAL){
+                RationalValue number = (RationalValue) real;
+                newReal = new RealValue(new BigDecimal(number.getNum()).divide(new BigDecimal(number.getDen())));
+            } else{
+                if (real.getType() == Type.REAL) {
+                    newReal = real;
+                }
+            }
+        }
+
+        // Imaginary part
+        if (imaginary.getType() == Type.INT){
+            IntValue number = (IntValue) imaginary;
+            newImaginary = new RealValue(new BigDecimal(number.getValue()));
+        } else{
+            if (imaginary.getType() == Type.RATIONAL){
+                RationalValue number = (RationalValue) imaginary;
+                newImaginary = new RealValue(new BigDecimal(number.getNum()).divide(new BigDecimal(number.getDen())));
+            } else{
+                if (real.getType() == Type.REAL) {
+                    newImaginary = imaginary;
+                }
+            }
+        }
+
+        return new MyNumber(newReal, newImaginary);
+    }
+
     /**
      * Method to check if the number is represented in polar, cartesian or exponential form
      * @see ComplexRepresentation
