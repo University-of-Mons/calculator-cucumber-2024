@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -28,6 +29,8 @@ public class TimeModeController implements Initializable, ModeController {
 
     private boolean resetDisplay = false;
     private MyTime time;
+    private String pattern = "##.00";
+    private LocalDateTime origin = LocalDateTime.of(0,1,1,0,0,0);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
@@ -89,24 +92,24 @@ public class TimeModeController implements Initializable, ModeController {
     }
 
     public void onUnitDay() {
-        Duration duration = Duration.between(LocalDateTime.of(0,1,1,0,0,0),
-                time.getTime());
-        double days = duration.toDays();
-        appendToDisplay( days + " days");
+        display.clear();
+        Duration duration = Duration.between(origin, time.getTime());
+        double days = (double) duration.getSeconds() / (24 * 60 * 60);
+        appendToDisplay( new DecimalFormat(pattern).format(days) + " days");
     }
 
     public void onUnitHour() {
-        Duration duration = Duration.between(LocalDateTime.of(0,1,1,0,0,0),
-                time.getTime());
-        double hours = duration.toHours();
-        appendToDisplay(hours + " hours");
+        display.clear();
+        Duration duration = Duration.between(origin, time.getTime());
+        double hours = (double) duration.getSeconds() / ( 60 * 60);
+        appendToDisplay(new DecimalFormat(pattern).format(hours) + " hours");
     }
 
     public void onUnitMin() {
-        Duration duration = Duration.between(LocalDateTime.of(0,1,1,0,0,0),
-                time.getTime());
-        double minutes = duration.toMinutes();
-        appendToDisplay(minutes + " minutes");
+        display.clear();
+        Duration duration = Duration.between(origin, time.getTime());
+        double minutes = (double) duration.getSeconds() / 60;
+        appendToDisplay(new DecimalFormat(pattern).format(minutes) + " minutes");
     }
 
     public void onOpenParenthesis() {

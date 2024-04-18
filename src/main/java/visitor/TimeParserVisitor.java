@@ -7,6 +7,7 @@ import calculator.numbers.MyTime;
 import calculator.operators.time.*;
 import parser.time.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression> {
@@ -76,7 +77,6 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         try {
             if(ctx.infix().size() == 1){
                 //TODO Cas ou on compare avec l'heure actuelle
-                return visit(ctx.infix(0));
             }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
                 return c.timeEval(new Plus(params));
@@ -149,7 +149,7 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         }
         try {
             if(ctx.prefix().size() == 1){
-                return visit(ctx.prefix(0));
+                //TODO Cas ou on compare avec l'heure actuelle
             }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
                 return c.timeEval(new Plus(params));
@@ -222,7 +222,7 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         }
         try {
             if(ctx.postfix().size() == 1){
-                return visit(ctx.postfix(0));
+                //TODO Cas ou on compare avec l'heure actuelle
             }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
                 return c.timeEval(new Plus(params));
