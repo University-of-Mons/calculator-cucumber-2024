@@ -1,6 +1,6 @@
 grammar calculator;
 
-// Add "package parser;" to the generated files.
+// Add "package back.parser;" to the generated files.
 @header {
 package back.parser;
 }
@@ -11,15 +11,20 @@ expression: infix
     | postfix
     | prefix;
 
+imNumber: cartesian | polar | exponential;
+
+cartesian: real=atom op=('+' | '-') im=atom? I;
+polar: r=atom '*'? '(' COS '(' theta=atom ')' '+' I SIN '(' theta=atom ')' ')';
+exponential: r=atom '*'? EXP '(' theta=atom I ')';
+
 // With ANTLR, precedence is determined by the order of the rules
 infix: ((MODULUS infix MODULUS) | ('modulus' '(' infix ')')) # ModulusInfix
+    | imNumber                    # ImaginaryInfix
     | infix op=('*'| '/') infix   # MulDivInfix
-    | imaginaryAndReal            # ImaginaryInfix
-    | realNumber                  # RealInfix
-    | eNotation                   # ENotationInfix
     | infix op=('+' | '-') infix  # AddSubInfix
     | '(' infix ')'               # ParensInfix
-    | atom                        # AtomInfix
+    | imAtom                      # AtomImInfix
+    | reAtom                      # AtomReInfix
     ;
 
 
@@ -29,25 +34,28 @@ prefix: ((MODULUS prefix MODULUS) | ('modulus' '(' prefix ')'))      # ModulusPr
     | op=('*' | '/') '(' prefix ( (',' prefix)+  | (prefix)+ ) ')'   # MulDivPrefix
     | op=('+' | '-') '(' prefix ( (',' prefix)+  | (prefix)+) ')'    # AddSubPrefix
     | '(' prefix ')'                                                 # ParensPrefix
-    | imaginaryAndReal                                               # ImaginaryPrefix
-    | realNumber                                                     # RealPrefix
-    | eNotation                                                      # ENotationPrefix
-    | atom                                                           # AtomPrefix
+    | imNumber                                                       # ImaginaryPrefix
+    | imAtom                                                         # AtomImPrefix
+    | reAtom                                                         # AtomRePrefix
     ;
 
-postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')')) # ModulusPostfix
-    | '(' postfix ( (',' postfix)+  | (postfix)+ ) ')' op=('*' | '/') # MulDivPostfix
+postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')'))       # ModulusPostfix
+    | '(' postfix ( (',' postfix)+  | (postfix)+ ) ')' op=('*' | '/')     # MulDivPostfix
     | '(' postfix ( (',' postfix)+  | (postfix)+) ')' op=('+' | '-')      # AddSubPostfix
     | '(' postfix ')'                                                     # ParensPostfix
-    | imaginaryAndReal                                                   # ImaginaryPostfix
-    | realNumber                                                        # RealPostfix
-    | eNotation                                                         # ENotationPostfix
-    | atom                                                              # AtomPostfix
+    | imNumber                                                            # ImaginaryPostfix
+    | imAtom                                                              # AtomImPostfix
+    | reAtom                                                              # AtomRePostfix
     ;
 
-imaginaryAndReal: SUB? real=NUMBER op=('+' | '-') im=NUMBER? I;
-realNumber: SUB? val=FLOAT;
-eNotation: SUB? val=FLOAT E SUB? NUMBER;
+// Atoms are only real numbers
+atom:  SUB? val=FLOAT E SUB? NUMBER # ENotationAtom
+    |  SUB? val=FLOAT               # FloatAtom
+    |  SUB? NUMBER                  # IntAtom
+    ;
+
+imAtom: atom? I;
+reAtom: atom;
 
 // Defined to reference as constants in the Java code
 ADD: '+';
@@ -57,14 +65,11 @@ DIV: '/';
 COMMA: ',';
 MODULUS: '|';
 DECIMAL: '.';
-
-// Can have real or imaginary numbers
-atom: SUB? NUMBER? I # ImaginaryAtom
-    |  SUB? NUMBER   # RealAtom
-    ;
-
 I: 'i';
 E: 'E';
+COS: 'cos';
+SIN: 'sin';
+EXP: 'exp';
 NUMBER:[0-9]+;
 FLOAT: [0-9]+ '.' [0-9]+;
 WS: [ \t\r\n]+ -> skip; // skip tabs, newlines

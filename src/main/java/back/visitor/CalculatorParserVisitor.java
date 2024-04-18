@@ -2,10 +2,7 @@ package back.visitor;
 
 import back.calculator.*;
 import back.calculator.operators.*;
-import back.calculator.types.IntValue;
-import back.calculator.types.MyNumber;
-import back.calculator.types.NotANumber;
-import back.calculator.types.RealValue;
+import back.calculator.types.*;
 import org.antlr.v4.runtime.Token;
 import back.parser.calculatorBaseVisitor;
 import back.parser.calculatorParser;
@@ -62,6 +59,52 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return params;
     }
 
+    private AbstractValue getValueFromAtom(calculatorParser.AtomContext ctx) {
+        // Since this visitor can only return Expression object,
+        // We have to return MyNumber for atom with their value as real part.
+        MyNumber val = (MyNumber) visit(ctx);
+        return val.getReal();
+    }
+
+    @Override
+    public Expression visitCartesian(calculatorParser.CartesianContext ctx) {
+        AbstractValue real = getValueFromAtom(ctx.real);
+        AbstractValue imaginary;
+        if (ctx.im != null) {
+            imaginary = getValueFromAtom(ctx.im);
+        } else {
+            imaginary = new IntValue(1);
+        }
+        if (ctx.op.getType() == SUB) {
+            imaginary = imaginary.mul(new IntValue(-1));
+        }
+        return new MyNumber(real, imaginary);
+    }
+
+    @Override
+    public Expression visitPolar(calculatorParser.PolarContext ctx) {
+        // TODO: test how it works with 2 theta !=
+        AbstractValue modulus = getValueFromAtom(ctx.r);
+        AbstractValue argument = getValueFromAtom(ctx.theta);
+        System.out.println("modulus: " + modulus);
+        System.out.println("argument: " + argument);
+        MyNumber res = new MyNumber(modulus.mul(argument.cos()), modulus.mul(argument.sin()));
+        res.setRepresentation(ComplexRepresentation.POLAR);
+        return res;
+    }
+
+    @Override
+    public Expression visitExponential(calculatorParser.ExponentialContext ctx) {
+        // Same as polar in this case
+        // TODO: test how it works with 2 theta !=
+        AbstractValue modulus = getValueFromAtom(ctx.r);
+        AbstractValue argument = getValueFromAtom(ctx.theta);
+        MyNumber res = new MyNumber(modulus.mul(argument.cos()), modulus.mul(argument.sin()));
+        res.setRepresentation(ComplexRepresentation.EXPONENTIAL);
+        return res;
+    }
+
+    // ================================= INFIX =============================================
     @Override
     public Expression visitModulusInfix(calculatorParser.ModulusInfixContext ctx) {
         // '|' Infix '|'
@@ -99,46 +142,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return visit(ctx.infix());
     }
 
-    @Override
-    public Expression visitImaginaryInfix(calculatorParser.ImaginaryInfixContext ctx) {
-        return visit(ctx.imaginaryAndReal());
-    }
-    @Override
-    public Expression visitRealInfix(calculatorParser.RealInfixContext ctx) {
-        return visit(ctx.realNumber());
-    }
-
-    @Override
-    public Expression visitENotationInfix(calculatorParser.ENotationInfixContext ctx) {
-        return visit(ctx.eNotation());
-    }
-
-    @Override
-    public Expression visitAtomInfix(calculatorParser.AtomInfixContext ctx) {
-        return visit(ctx.atom());
-    }
-
-    @Override
-    public Expression visitRealAtom(calculatorParser.RealAtomContext ctx) {
-        if (ctx.SUB() != null)
-            // '-' Infix
-            return new MyNumber(new IntValue(-Integer.parseInt(ctx.NUMBER().getText())));
-        // NUMBER
-        return new MyNumber(new IntValue(Integer.parseInt(ctx.NUMBER().getText())));
-    }
-
-    @Override
-    public Expression visitImaginaryAtom(calculatorParser.ImaginaryAtomContext ctx) {
-        int value = 1;
-        if (ctx.NUMBER() != null)
-            value = Integer.parseInt(ctx.NUMBER().getText());
-        if (ctx.SUB() != null)
-
-            // '-' Atom
-            return new MyNumber(0,-value);
-        // Atom
-        return new MyNumber(0,value);
-    }
+    // ================================= PREFIX =============================================
 
     @Override
     public Expression visitModulusPrefix(calculatorParser.ModulusPrefixContext ctx) {
@@ -177,10 +181,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return visit(ctx.prefix());
     }
 
-    @Override
-    public Expression visitAtomPrefix(calculatorParser.AtomPrefixContext ctx) {
-        return visit(ctx.atom());
-    }
+    // ================================= POSTFIX =============================================
 
     @Override
     public Expression visitModulusPostfix(calculatorParser.ModulusPostfixContext ctx) {
@@ -219,30 +220,20 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return visit(ctx.postfix());
     }
 
-    @Override
-    public Expression visitAtomPostfix(calculatorParser.AtomPostfixContext ctx) {
-        return visit(ctx.atom());
-    }
+    // ================================= ATOMS =============================================
 
-
+    /**
+     * Visit a FloatAtom and return a MyNumber object with the value of the float as its real part.
+     *
+     * <p>
+     *     This method returns a MyNumber object and not an AbstractValue object because the parser
+     *     can only return Expression objects in this configuration.
+     * </p>
+     * @param ctx A FloatAtomContext object that represents a float number in the parse tree.
+     * @return A MyNumber object with the value of the float as its real part.
+     */
     @Override
-    public Expression visitImaginaryAndReal(calculatorParser.ImaginaryAndRealContext ctx) {
-        int real = Integer.parseInt(ctx.real.getText());
-        int imaginary = 1;
-        if (ctx.getChild(0) == ctx.SUB()) {
-            real *= -1;
-        }
-        if (ctx.im != null) {
-            imaginary = Integer.parseInt(ctx.im.getText());
-        }
-        if (ctx.op.getType() == SUB) {
-            imaginary *= -1;
-        }
-        return new MyNumber(real, imaginary);
-    }
-
-    @Override
-    public Expression visitRealNumber(calculatorParser.RealNumberContext ctx) {
+    public Expression visitFloatAtom(calculatorParser.FloatAtomContext ctx) {
         BigDecimal real = new BigDecimal(ctx.FLOAT().getText(), new MathContext(5));
         if (ctx.getChild(0) == ctx.SUB()){
             real = real.negate();
@@ -252,10 +243,57 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return new MyNumber(realValue);
     }
 
+    /**
+     * Visit a ENotationAtom and return a MyNumber object with the value of the float as its real part.
+     *
+     * <p>
+     *     This method returns a MyNumber object and not an AbstractValue object because the parser
+     *     can only return Expression objects in this configuration.
+     * </p>
+     * @param ctx A ENotationAtomContext object that represents an ENotation number in the parse tree.
+     * @return A MyNumber object with the value of the float as its real part.
+     */
     @Override
-    public Expression visitENotation(calculatorParser.ENotationContext ctx){
+    public Expression visitENotationAtom(calculatorParser.ENotationAtomContext ctx){
         BigDecimal real = new BigDecimal(ctx.getText());
         RealValue realValue = new RealValue(real);
         return new MyNumber(realValue);
+    }
+
+    /**
+     * Visit a IntAtom and return a MyNumber object with the value of the int as its real part.
+     *
+     * <p>
+     *     This method returns a MyNumber object and not an AbstractValue object because the parser
+     *     can only return Expression objects in this configuration.
+     * </p>
+     * @param ctx A IntAtomContext object that represents an int number in the parse tree.
+     * @return A MyNumber object with the value of the int as its real part.
+     */
+    @Override
+    public Expression visitIntAtom(calculatorParser.IntAtomContext ctx) {
+        int real = Integer.parseInt(ctx.NUMBER().getText());
+        IntValue res;
+        if (ctx.SUB() != null) {
+            res = new IntValue(-real);
+        } else {
+            res = new IntValue(real);
+        }
+        return new MyNumber(res);
+    }
+
+    @Override
+    public Expression visitImAtom(calculatorParser.ImAtomContext ctx) {
+        if (ctx.atom() == null) {
+            // Only 'i'
+            return new MyNumber(new IntValue(0), new IntValue(1));
+        }
+        AbstractValue imaginary = getValueFromAtom(ctx.atom());
+        return new MyNumber(new IntValue(0), imaginary);
+    }
+
+    @Override
+    public Expression visitReAtom(calculatorParser.ReAtomContext ctx) {
+        return new MyNumber(getValueFromAtom(ctx.atom()));
     }
 }
