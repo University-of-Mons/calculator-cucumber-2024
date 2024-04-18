@@ -133,7 +133,7 @@ public class RealValue extends AbstractValue{
 
     @Override
     public AbstractValue atan() {
-        BigDecimal atanValue = new BigDecimal(Math.atan(this.value.longValueExact()), this.precision);
+        BigDecimal atanValue = new BigDecimal(Math.atan(this.value.doubleValue()), this.precision);
         return new RealValue(atanValue);
     }
 
