@@ -11,9 +11,6 @@ package calculator;
 public class Main {
 
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
-        BooleanParser parser = new BooleanParser("NOT 0", calculator);
-        System.out.println("Answer :" + parser.evaluate().getValue());
-        //AppStarter.main(args);
+        AppStarter.main(args);
     }
 }
