@@ -80,6 +80,16 @@ Feature: Complex arithmetic expressions
     When I provide a first number -4
     Then the operation evaluates to '2i'
 
+  Scenario: Compute the logarithm of a complex number
+    Given a complex operation 'ln'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to '1.6095+0.92728i'
+
+  Scenario: Compute the logarithm of a negative number
+    Given a complex operation 'ln'
+    When I provide a first number -4
+    Then the operation evaluates to '1.3863+3.1416i'
+
   ################################### Complex representation ##################################
 
   Scenario: Printing a complex number
@@ -177,4 +187,6 @@ Feature: Complex arithmetic expressions
   Scenario: Parsing a polar with different angle
     Given the following expression '5.6569(cos(0.7854)+isin(2))'
     Then its parsing is 'NaN'
+
+
 

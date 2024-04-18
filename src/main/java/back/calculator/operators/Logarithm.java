@@ -1,12 +1,9 @@
 package back.calculator.operators;
 
-import back.calculator.Expression;
-import back.calculator.IllegalConstruction;
-import back.calculator.Notation;
-import back.calculator.Operation;
-import back.calculator.types.MyNumber;
-import back.calculator.types.NotANumber;
+import back.calculator.*;
+import back.calculator.types.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Logarithm extends Operation {
@@ -32,10 +29,22 @@ public class Logarithm extends Operation {
     public MyNumber op(MyNumber l){
         if (l instanceof NotANumber)
             return new NotANumber();
+        if (l.getReal().isEqualsZero()) {
+            return new NotANumber();
+        }
         if (!l.getReal().isPositive())
-            return new NotANumber();
-        if (l.isImaginary())
-            return new NotANumber();
+            // = ln(|a|) + i arg(a) // Since a is negative, arg(a) = pi
+            return new MyNumber(l.getReal().mul(new IntValue(-1)).ln(), new RealValue(new BigDecimal(Math.PI, App.getPrecision())));
+        if (l.isImaginary()) {
+            // ln(a + bi) = 1/2 ln(a^2 + b^2) + i atan(b/a)
+            AbstractValue a = l.getReal();
+            AbstractValue b = l.getImaginary();
+
+            AbstractValue real = a.mul(a).add(b.mul(b)).ln().div(new IntValue(2));
+            AbstractValue im = b.div(a).atan();
+
+            return new MyNumber(real, im);
+        }
         return new MyNumber(l.getReal().ln());
     }
 

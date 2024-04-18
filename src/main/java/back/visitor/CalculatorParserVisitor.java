@@ -25,6 +25,8 @@ import static back.parser.calculatorLexer.*;
  */
 public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
+    private final Logger logger = org.slf4j.LoggerFactory.getLogger(CalculatorParserVisitor.class);
+
     private final MathContext precision = App.getPrecision();
 
     private Expression getExpression(List<Expression> params, Token op, Notation notation) {
@@ -90,7 +92,6 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         AbstractValue arg1 = getValueFromAtom(ctx.theta1);
         AbstractValue arg2 = getValueFromAtom(ctx.theta2);
         if (!arg1.equals(arg2)) {
-            Logger logger = org.slf4j.LoggerFactory.getLogger(CalculatorParserVisitor.class);
             logger.warn("The two angles are different. Please check the input. {} != {}", arg1, arg2);
             return new NotANumber();
         }
@@ -159,6 +160,58 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         }
     }
 
+    @Override
+    public Expression visitSqrtInfix(calculatorParser.SqrtInfixContext ctx) {
+        // 'sqrt' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Sqrt(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitExpInfix(calculatorParser.ExpInfixContext ctx) {
+        // 'exp' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Exponential(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitCosInfix(calculatorParser.CosInfixContext ctx) {
+        // 'cos' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Cosine(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSinInfix(calculatorParser.SinInfixContext ctx) {
+        // 'sin' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Sinus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
     // ================================= PREFIX =============================================
 
     @Override
@@ -209,15 +262,70 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         }
     }
 
+    @Override
+    public Expression visitSqrtPrefix(calculatorParser.SqrtPrefixContext ctx) {
+        // 'sqrt' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Sqrt(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitExpPrefix(calculatorParser.ExpPrefixContext ctx) {
+        // 'exp' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Exponential(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitCosPrefix(calculatorParser.CosPrefixContext ctx) {
+        // 'cos' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Cosine(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSinPrefix(calculatorParser.SinPrefixContext ctx) {
+        // 'sin' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Sinus(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+
+
+
     // ================================= POSTFIX =============================================
 
     @Override
     public Expression visitModulusPostfix(calculatorParser.ModulusPostfixContext ctx) {
-        // '|' Infix '|'
+        // '|' Postfix '|'
         List<Expression> params = new ArrayList<>();
         params.add(visit(ctx.postfix()));
         try {
-            return new Modulus(params, Notation.INFIX);
+            return new Modulus(params, Notation.POSTFIX);
         } catch (IllegalConstruction e) {
             // Shouldn't happen since it would be detected by the parser as a syntax error before.
             return new NotANumber();
@@ -258,6 +366,55 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
             return new NotANumber();
         }
     }
+
+    @Override
+    public Expression visitSqrtPostfix(calculatorParser.SqrtPostfixContext ctx) {
+        // 'sqrt' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Sqrt(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitExpPostfix(calculatorParser.ExpPostfixContext ctx) {
+        // 'exp' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Exponential(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitCosPostfix(calculatorParser.CosPostfixContext ctx) {
+        // 'cos' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Cosine(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSinPostfix(calculatorParser.SinPostfixContext ctx) {
+        // 'sin' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Sinus(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
 
     // ================================= ATOMS =============================================
 

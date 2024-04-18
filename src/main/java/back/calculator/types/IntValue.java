@@ -132,6 +132,6 @@ public class IntValue extends AbstractValue {
 
     @Override
     public boolean isPositive(){
-        return this.value > 0;
+        return this.value >= 0;
     }
 }

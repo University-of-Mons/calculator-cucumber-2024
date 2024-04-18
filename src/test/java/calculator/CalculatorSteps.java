@@ -68,6 +68,9 @@ public class CalculatorSteps {
                 case "/" -> op = new Divides(params);
                 case "sqrt" -> op = new Sqrt(params);
                 case "ln" -> op = new Logarithm(params);
+                case "exp" -> op = new Exponential(params);
+                case "sin" -> op = new Sinus(params);
+                case "cos" -> op = new Cosine(params);
                 default -> throw new IllegalArgumentException("Unknown operation!");
             }
         } catch (back.calculator.IllegalConstruction e) {
@@ -106,6 +109,7 @@ public class CalculatorSteps {
                 case "cos" -> op = new Cosine(params);
                 case "exp" -> op = new Exponential(params);
                 case "sqrt" -> op = new Sqrt(params);
+                case "ln" -> op = new Logarithm(params);
                 default -> throw new IllegalArgumentException("Unknown operation!");
             }
         } catch (back.calculator.IllegalConstruction e) {

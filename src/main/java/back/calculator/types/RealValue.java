@@ -147,7 +147,7 @@ public class RealValue extends AbstractValue{
 
     @Override
     public boolean isPositive() {
-        return this.value.compareTo(BigDecimal.ZERO) > 0;
+        return this.value.compareTo(BigDecimal.ZERO) >= 0;
     }
 
     @Override
