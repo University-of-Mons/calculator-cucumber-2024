@@ -114,3 +114,35 @@ Feature: Real numbers arithmetic operations
   Scenario: Parsing a small real number and getting scientific representation
     Given the following expression '0.000000000314'
     Then its parsing is '3.14E-10'
+
+  Scenario: Parsing a ln function
+    Given the following expression 'ln(3.14)'
+    Then its parsing is 'ln(3.14)'
+
+  Scenario: Parsing empty ln function
+    Given the following expression 'ln()'
+    Then its parsing is "NaN"
+
+  Scenario: Parsing ln function with two arguments
+    Given the following expression 'ln(3.14, 2.71)'
+    Then its parsing is "NaN"
+
+  Scenario: Parsing ln of a postfix expression
+    Given the following expression 'ln((5,2)+)'
+    Then its parsing is "ln((5, 2) +)"
+
+  Scenario: Parsing ln of a prefix expression
+    Given the following expression 'ln(+ (5, 2))'
+    Then its parsing is 'ln(+ (5, 2))'
+
+  Scenario: Parsing wrong ln prefix expression
+    Given the following expression 'ln(+ (5, )'
+    Then its parsing is "NaN"
+
+  Scenario: Parsing wrong ln postfix expression
+    Given the following expression 'ln((5,  +)'
+    Then its parsing is "NaN"
+
+  Scenario: Parsing wrong ln infix expression
+    Given the following expression 'ln(5 + '
+    Then its parsing is "NaN"
