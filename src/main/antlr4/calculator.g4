@@ -25,6 +25,10 @@ infix: ((MODULUS infix MODULUS) | ('modulus' '(' infix ')')) # ModulusInfix
     | '(' infix ')'               # ParensInfix
     | imAtom                      # AtomImInfix
     | reAtom                      # AtomReInfix
+    | SQRT '(' infix ')'          # SqrtInfix
+    | EXP '(' infix ')'           # ExpInfix
+    | COS '(' infix ')'           # CosInfix
+    | SIN '(' infix ')'           # SinInfix
     ;
 
 
@@ -37,6 +41,10 @@ prefix: ((MODULUS prefix MODULUS) | ('modulus' '(' prefix ')'))      # ModulusPr
     | imNumber                                                       # ImaginaryPrefix
     | imAtom                                                         # AtomImPrefix
     | reAtom                                                         # AtomRePrefix
+    | SQRT '(' prefix ')'                                            # SqrtPrefix
+    | EXP '(' prefix ')'                                             # ExpPrefix
+    | COS '(' prefix ')'                                             # CosPrefix
+    | SIN '(' prefix ')'                                             # SinPrefix
     ;
 
 postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')'))       # ModulusPostfix
@@ -46,6 +54,10 @@ postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')'))       # Modu
     | imNumber                                                            # ImaginaryPostfix
     | imAtom                                                              # AtomImPostfix
     | reAtom                                                              # AtomRePostfix
+    | SQRT '(' postfix ')'                                                # SqrtPostfix
+    | EXP '(' postfix ')'                                                 # ExpPostfix
+    | COS '(' postfix ')'                                                 # CosPostfix
+    | SIN '(' postfix ')'                                                 # SinPostfix
     ;
 
 // Atoms are only real numbers
@@ -69,6 +81,7 @@ DECIMAL: '.';
 I: 'i';
 E: 'E';
 COS: 'cos';
+SQRT: 'sqrt';
 SIN: 'sin';
 EXP: 'exp';
 PI: 'pi';

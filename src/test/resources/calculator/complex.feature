@@ -55,6 +55,31 @@ Feature: Complex arithmetic expressions
     When I provide a NaN number
     Then the operation evaluates to 'NaN'
 
+  Scenario: Compute the sinus of a complex number
+    Given a complex operation 'sin'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to 'NaN'
+
+  Scenario: Compute the cosinus of a complex number
+    Given a complex operation 'cos'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to 'NaN'
+
+  Scenario: Compute the exponential of a complex number
+    Given a complex operation 'exp'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to '-13.129-15.201i'
+
+  Scenario: Compute the square root of a complex number
+    Given a complex operation 'sqrt'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to '2+1i'
+
+  Scenario: Compute the square root of a negative number
+    Given a complex operation 'sqrt'
+    When I provide a first number -4
+    Then the operation evaluates to '2i'
+
   ################################### Complex representation ##################################
 
   Scenario: Printing a complex number

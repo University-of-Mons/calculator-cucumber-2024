@@ -3,6 +3,9 @@ package back.visitor;
 import back.calculator.Expression;
 import back.calculator.types.MyNumber;
 import back.calculator.Operation;
+import back.calculator.types.NotANumber;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
@@ -53,9 +56,17 @@ public class Evaluator extends Visitor {
         MyNumber temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         if (max == 1) {
-            // unary operation
-            computedValue = o.op(temp);
-            return;
+            try {
+                // unary operation
+                computedValue = o.op(temp);
+                return;
+            } catch (UnsupportedOperationException e) {
+                // unary operation not supported
+                Logger logger = LoggerFactory.getLogger(Evaluator.class);
+                logger.error(e.getMessage() + " " + o);
+                computedValue = new NotANumber();
+                return;
+            }
         }
         for (int counter = 1; counter < max; counter++) {
             temp = o.op(temp, evaluatedArgs.get(counter));

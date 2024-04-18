@@ -49,12 +49,33 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExponential(calculatorParser.ExponentialContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ExpInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpInfix(calculatorParser.ExpInfixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ModulusInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitModulusInfix(calculatorParser.ModulusInfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SqrtInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqrtInfix(calculatorParser.SqrtInfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SinInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSinInfix(calculatorParser.SinInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDivInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
@@ -90,6 +111,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAddSubInfix(calculatorParser.AddSubInfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CosInfix}
+	 * labeled alternative in {@link calculatorParser#infix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCosInfix(calculatorParser.CosInfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AtomImInfix}
 	 * labeled alternative in {@link calculatorParser#infix}.
@@ -147,6 +175,34 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAtomRePrefix(calculatorParser.AtomRePrefixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code SqrtPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqrtPrefix(calculatorParser.SqrtPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpPrefix(calculatorParser.ExpPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CosPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCosPrefix(calculatorParser.CosPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SinPrefix}
+	 * labeled alternative in {@link calculatorParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSinPrefix(calculatorParser.SinPrefixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ModulusPostfix}
 	 * labeled alternative in {@link calculatorParser#postfix}.
 	 * @param ctx the parse tree
@@ -195,6 +251,34 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAtomRePostfix(calculatorParser.AtomRePostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SqrtPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqrtPostfix(calculatorParser.SqrtPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpPostfix(calculatorParser.ExpPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CosPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCosPostfix(calculatorParser.CosPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SinPostfix}
+	 * labeled alternative in {@link calculatorParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSinPostfix(calculatorParser.SinPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ENotationAtom}
 	 * labeled alternative in {@link calculatorParser#atom}.

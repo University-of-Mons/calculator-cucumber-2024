@@ -100,6 +100,10 @@ public class CalculatorSteps {
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
                 case "|" -> op = new Modulus(params);
+                case "sin" -> op = new Sinus(params);
+                case "cos" -> op = new Cosine(params);
+                case "exp" -> op = new Exponential(params);
+                case "sqrt" -> op = new Sqrt(params);
                 default -> throw new IllegalArgumentException("Unknown operation!");
             }
         } catch (back.calculator.IllegalConstruction e) {
@@ -270,7 +274,7 @@ public class CalculatorSteps {
 
 // ############################### When ###############################
 
-    @When("^I provide a (.*) number (\\d+)$")
+    @When("^I provide a (.*) number (-?\\d+)$")
     public void whenIProvideANumber(String s, int val) {
         try {
             //add extra parameter to the operation
