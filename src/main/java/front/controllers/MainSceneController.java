@@ -73,6 +73,10 @@ public class MainSceneController implements Initializable {
     Button cos;
     @FXML
     Button real;
+    @FXML
+    Button pi;
+    @FXML
+    Button exp;
 
     @FXML
     MenuButton formSelector;
@@ -222,12 +226,18 @@ public class MainSceneController implements Initializable {
         Button button = (Button) event.getSource();
         String buttonText = button.getText();
 
+        if (buttonText.equals("π")) {
+            buttonText = "pi";
+        } else if (buttonText.equals("e")) {
+            buttonText = "exp";
+        }
+
         int cursorPosition = outputField.getCaretPosition();
         outputField.insertText(cursorPosition, buttonText);
         App.setUserInput(outputField.getText());
 
         // Move the cursor to the right of the new character
-        outputField.positionCaret(cursorPosition + 1);
+        outputField.positionCaret(outputField.getText().length());
     }
 
     private void clearOutputField() {

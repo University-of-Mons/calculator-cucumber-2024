@@ -42,9 +42,9 @@
                   </MenuButton>
                         <MenuButton fx:id="formSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Form" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="2">
                             <items>
-                                <MenuItem fx:id="cartesian"  onAction="#formSelected"  mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="cartesian" />
-                                <MenuItem fx:id="polar"  onAction="#formSelected"  mnemonicParsing="false" style="-fx-text-fill: white;" text="polar" />
-                                <MenuItem fx:id="exponential"  onAction="#formSelected"  mnemonicParsing="false" style="-fx-text-fill: white;" text="exponential" />
+                                <MenuItem fx:id="cartesian" mnemonicParsing="false" onAction="#formSelected" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="cartesian" />
+                                <MenuItem fx:id="polar" mnemonicParsing="false" onAction="#formSelected" style="-fx-text-fill: white;" text="polar" />
+                                <MenuItem fx:id="exponential" mnemonicParsing="false" onAction="#formSelected" style="-fx-text-fill: white;" text="exponential" />
                             </items>
                             <font>
                                 <Font size="20.0" />
@@ -193,7 +193,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="clear21" layoutX="438.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                  <Button fx:id="exp" layoutX="438.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="e" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -203,7 +203,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="clear3" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <Button fx:id="pi" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="π" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

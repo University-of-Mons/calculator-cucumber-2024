@@ -23,7 +23,7 @@ public class Sqrt extends Operation {
         if (elist.size() > 1)
             // Modulus is a unary operator
             throw new IllegalConstruction();
-        symbol = "exp";
+        symbol = "sqrt";
         neutral = 1;
     }
 

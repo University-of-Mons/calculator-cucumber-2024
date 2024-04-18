@@ -38,6 +38,11 @@ Feature: Complex arithmetic expressions
     And I provide a second complex number 2-1i
     Then the operation evaluates to '5+10i'
 
+  Scenario: Negation of a complex number
+    Given a complex operation '-'
+    When I provide a first complex number 5+2i
+    Then the operation evaluates to '-5-2i'
+
 
   Scenario: Dividing two complex numbers with floating point results (floored)
     Given a complex operation '/'
