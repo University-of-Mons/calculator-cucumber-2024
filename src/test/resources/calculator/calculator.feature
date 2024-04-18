@@ -63,6 +63,19 @@ Feature: Integer Arithmetic Expressions
     When I provide a first number 7
     Then the operation evaluates to 7
 
+  Scenario Outline: Operations between integer and rational numbers
+    Given an integer operation <op>
+    When I provide a first number <int>
+    And I provide a second rational number <rat>
+    Then the operation evaluates to <res>
+
+    Examples:
+        | op  | int | rat | res |
+        | '+' | 1   | 1/2 | "3/2" |
+        | '-' | 1   | 1/2 | "1/2" |
+        | '*' | 1   | 1/2 | "1/2" |
+        | '/' | 1   | 1/2 | "2"   |
+
       # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.
   # The scenario will be executed with each of the provided inputs.

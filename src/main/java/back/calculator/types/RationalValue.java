@@ -253,6 +253,9 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public String toString() {
+        if (this.den == 1) {
+            return Integer.toString(this.num);
+        }
         return this.num + "/" + this.den;
     }
 

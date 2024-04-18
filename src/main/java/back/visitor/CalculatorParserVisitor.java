@@ -6,6 +6,7 @@ import back.calculator.types.*;
 import org.antlr.v4.runtime.Token;
 import back.parser.calculatorBaseVisitor;
 import back.parser.calculatorParser;
+import org.slf4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -83,12 +84,18 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitPolar(calculatorParser.PolarContext ctx) {
-        // TODO: test how it works with 2 theta !=
         AbstractValue modulus = getValueFromAtom(ctx.r);
-        AbstractValue argument = getValueFromAtom(ctx.theta);
+        AbstractValue arg1 = getValueFromAtom(ctx.theta1);
+        AbstractValue arg2 = getValueFromAtom(ctx.theta2);
+        if (!arg1.equals(arg2)) {
+            Logger logger = org.slf4j.LoggerFactory.getLogger(CalculatorParserVisitor.class);
+            logger.warn("The two angles are different. Please check the input. {} != {}", arg1, arg2);
+            return new NotANumber();
+        }
+
         System.out.println("modulus: " + modulus);
-        System.out.println("argument: " + argument);
-        MyNumber res = new MyNumber(modulus.mul(argument.cos()), modulus.mul(argument.sin()));
+        System.out.println("argument: " + arg1);
+        MyNumber res = new MyNumber(modulus.mul(arg1.cos()), modulus.mul(arg1.sin()));
         res.setRepresentation(ComplexRepresentation.POLAR);
         return res;
     }
@@ -96,7 +103,6 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     @Override
     public Expression visitExponential(calculatorParser.ExponentialContext ctx) {
         // Same as polar in this case
-        // TODO: test how it works with 2 theta !=
         AbstractValue modulus = getValueFromAtom(ctx.r);
         AbstractValue argument = getValueFromAtom(ctx.theta);
         MyNumber res = new MyNumber(modulus.mul(argument.cos()), modulus.mul(argument.sin()));

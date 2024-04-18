@@ -316,7 +316,8 @@ public class calculatorParser extends Parser {
 
 	public static class PolarContext extends ParserRuleContext {
 		public AtomContext r;
-		public AtomContext theta;
+		public AtomContext theta1;
+		public AtomContext theta2;
 		public TerminalNode COS() { return getToken(calculatorParser.COS, 0); }
 		public TerminalNode I() { return getToken(calculatorParser.I, 0); }
 		public TerminalNode SIN() { return getToken(calculatorParser.SIN, 0); }
@@ -363,7 +364,7 @@ public class calculatorParser extends Parser {
 			setState(49);
 			match(T__0);
 			setState(50);
-			((PolarContext)_localctx).theta = atom();
+			((PolarContext)_localctx).theta1 = atom();
 			setState(51);
 			match(T__1);
 			setState(52);
@@ -375,7 +376,7 @@ public class calculatorParser extends Parser {
 			setState(55);
 			match(T__0);
 			setState(56);
-			((PolarContext)_localctx).theta = atom();
+			((PolarContext)_localctx).theta2 = atom();
 			setState(57);
 			match(T__1);
 			setState(58);

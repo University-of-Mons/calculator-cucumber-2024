@@ -14,7 +14,7 @@ expression: infix
 imNumber: cartesian | polar | exponential;
 
 cartesian: real=atom op=('+' | '-') im=atom? I;
-polar: r=atom '*'? '(' COS '(' theta=atom ')' '+' I SIN '(' theta=atom ')' ')';
+polar: r=atom '*'? '(' COS '(' theta1=atom ')' '+' I SIN '(' theta2=atom ')' ')';
 exponential: r=atom '*'? EXP '(' theta=atom I ')';
 
 // With ANTLR, precedence is determined by the order of the rules

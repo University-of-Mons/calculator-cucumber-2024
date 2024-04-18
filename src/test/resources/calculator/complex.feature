@@ -137,11 +137,19 @@ Feature: Complex arithmetic expressions
     Given the following expression '5+2i'
     Then its parsing is '5+2i'
 
-  # Scenario: Parsing a polar operation
-  #  Given the following expression '5.6569(cos(0.7854)+isin(0.7854))'
-  #   Then its parsing is '5.6569(cos(0.7854)+isin(0.7854))'
+  Scenario: Parsing a cartesian with float
+    Given the following expression '5.6569+2.6569i'
+    Then its parsing is '5.6569+2.6569i'
 
-  # Scenario: Parsing a exponential operation
-  #  Given the following expression '5.6569exp(0.7854i)'
-  #  Then its parsing is '5.6569exp(0.7854i)'
+  Scenario: Parsing a polar operation
+    Given the following expression '5.6569(cos(0.7854)+isin(0.7854))'
+    Then its parsing is '5.657(cos(0.7854)+isin(0.7854))'
+
+  Scenario: Parsing a exponential operation
+   Given the following expression '5.6569exp(0.7854i)'
+   Then its parsing is '5.657exp(0.7854i)'
+
+  Scenario: Parsing a polar with different angle
+    Given the following expression '5.6569(cos(0.7854)+isin(2))'
+    Then its parsing is 'NaN'
 

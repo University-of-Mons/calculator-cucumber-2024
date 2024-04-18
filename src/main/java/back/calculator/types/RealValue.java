@@ -2,7 +2,6 @@ package back.calculator.types;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 
 public class RealValue extends AbstractValue{
 
@@ -106,14 +105,14 @@ public class RealValue extends AbstractValue{
 
     @Override
     public AbstractValue cos() {
-        long longValue = this.value.longValueExact();
+        double longValue = this.value.doubleValue();
         BigDecimal cos = new BigDecimal(Math.cos(longValue), this.precision);
         return new RealValue(cos);
     }
 
     @Override
     public AbstractValue sin() {
-       long longValue = this.value.longValueExact();
+       double longValue = this.value.doubleValue();
        BigDecimal sin = new BigDecimal(Math.sin(longValue), this.precision);
        return new RealValue(sin);
     }

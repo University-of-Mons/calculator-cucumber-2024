@@ -34,6 +34,7 @@ public class IntValue extends AbstractValue {
             return false;
         }
         return switch (abstractValue.getType()) {
+            // TODO: change precision
             case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).equals(abstractValue);
             case RATIONAL -> new RationalValue(this, new IntValue(1)).equals(abstractValue);
             default -> value == ((IntValue) abstractValue).getValue();
@@ -48,6 +49,7 @@ public class IntValue extends AbstractValue {
     @Override
     public AbstractValue add(AbstractValue other) {
         return switch (other.getType()) {
+            // TODO: change précision
             case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).add((other));
             case RATIONAL -> new RationalValue(new IntValue(this.value), new IntValue(1)).add(other);
             default -> new IntValue(this.value + ((IntValue) other).getValue());
