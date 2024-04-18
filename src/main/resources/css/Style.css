@@ -10,10 +10,20 @@
     -fx-color: #FF6347; /* Rouge tomate */
 }
 
-#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction,#btnModulus,#btnSqrt, #btnCossin,#btnSin,#btnE {
+#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction{
     -fx-color: #FFA500;
 }
 
-#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btnEquals, #btnDelete, #btnI{
+#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btnEquals, #btnDelete{
     -fx-color: #ecf0f1; /* Gris très clair */
+}
+
+#btnSqrt,#btnE,#btnPI {
+    -fx-color: #bdc3c7; /* Gris clair */
+
+}
+
+#btnI,#btnModulus ,#btnCartesianForm, #btnPolarForm, #btnEForm, #btnCis {
+    -fx-color: #bdc3c7; /* Gris clair */
+
 }

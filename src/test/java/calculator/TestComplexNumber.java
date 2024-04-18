@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.numbers.ComplexForm;
 import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class TestComplexNumber {
 
-    private  float real1 , imaginary1, real2,imaginary2;
+    private  double real1 , imaginary1, real2,imaginary2;
     ComplexNumber complexNumber1, complexNumber2;
     private Calculator calc;
 
@@ -132,5 +133,169 @@ class TestComplexNumber {
             fail();
         }
     }
+
+    @Test
+    void testCis() throws IllegalConstruction {
+        MyNumber number1 = new MyNumber(2);
+        MyNumber number2 = new MyNumber( Math.PI/4);
+        List<Expression> para = Arrays.asList(number1, number2);
+        try {
+            Cis cis = new Cis(para);
+            ComplexNumber result = new ComplexNumber((number1.getReal() * Math.cos(number2.getReal())),  (number1.getReal() * Math.sin(number2.getReal())));
+            result.setForm(ComplexForm.POLAR);
+            assertEquals(result.getReal(), calc.eval(cis).getReal());
+            assertEquals(result.getImaginary(), calc.eval(cis).getImaginary());
+            assertEquals(result.toString(), calc.eval(cis).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testExponential_i() throws IllegalConstruction {
+        MyNumber number1 = new MyNumber(2);
+        MyNumber number2 = new MyNumber( Math.PI/4);
+        List<Expression> para = Arrays.asList(number1, number2);
+        try {
+            Exponential_i exponential_i = new Exponential_i(para);
+            ComplexNumber result = new ComplexNumber( (number1.getReal() * Math.cos(number2.getReal())), (number1.getReal() * Math.sin(number2.getReal())));
+            result.setForm(ComplexForm.EXPONENTIAL);
+            assertEquals(result.getReal(), calc.eval(exponential_i).getReal());
+            assertEquals(result.getImaginary(), calc.eval(exponential_i).getImaginary());
+            assertEquals(result.toString(), calc.eval(exponential_i).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringCartesianIntoCartesian() {
+        ComplexNumber complexNumber = new ComplexNumber( Math.sqrt(2), Math.sqrt(2));
+        List<Expression> para = Collections.singletonList(complexNumber);
+        try {
+            IntoCartesianFrom intoCartesianFrom = new IntoCartesianFrom(para);
+            assertEquals("1 + i", calc.eval(intoCartesianFrom).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+
+
+    @Test
+    void testStringCartesianIntoExponential() {
+        ComplexNumber complexNumber = new ComplexNumber( Math.sqrt(2),Math.sqrt(2));
+        List<Expression> para = Collections.singletonList(complexNumber);
+        try {
+            IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para);
+            assertEquals("2 * e^(i*0)", calc.eval(intoExponentialForm).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+    @Test
+    void testStringCartesianIntoPolar() {
+        ComplexNumber complexNumber = new ComplexNumber( Math.sqrt(2), Math.sqrt(2));
+        List<Expression> para = Collections.singletonList(complexNumber);
+        try {
+            IntoPolarForm intoPolarFrom = new IntoPolarForm(para);
+            assertEquals("2 * cis(0)", calc.eval(intoPolarFrom).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringPolarIntoPolar() {
+        List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber( Math.PI/4));
+        try {
+            Cis polar =new  Cis(para);
+            List<Expression> para2 = Collections.singletonList(polar);
+            IntoPolarForm intoPolarFrom = new IntoPolarForm(para2);
+            assertEquals("2 * cis(0)", calc.eval(intoPolarFrom).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringPolarIntoCartesian() {
+        List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber(Math.PI/4));
+        try {
+            Cis polar =new  Cis(para);
+            List<Expression> para2 = Collections.singletonList(polar);
+            IntoCartesianFrom intoCartesianFrom = new IntoCartesianFrom(para2);
+            assertEquals("1 + i", calc.eval(intoCartesianFrom).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringPolarIntoExponential() {
+        List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber( Math.PI/4));
+        try {
+            Cis polar =new  Cis(para);
+            List<Expression> para2 = Collections.singletonList(polar);
+            IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para2);
+            assertEquals("2 * e^(i*0)", calc.eval(intoExponentialForm).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+
+
+
+    @Test
+    void testStringExponentialIntoExponential() {
+        List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber( Math.PI/4));
+        try {
+            Exponential_i exponential_i = new Exponential_i(para);
+            List<Expression> para2 = Collections.singletonList(exponential_i);
+            IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para2);
+            assertEquals("2 * e^(i*0)", calc.eval(intoExponentialForm).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringExponentialIntoCartesian() {
+        List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber(Math.PI/4));
+        try {
+            Exponential_i exponential_i = new Exponential_i(para);
+            List<Expression> para2 = Collections.singletonList(exponential_i);
+            IntoCartesianFrom intoCartesianFrom = new IntoCartesianFrom(para2);
+            assertEquals("1 + i", calc.eval(intoCartesianFrom).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringExponentialIntoPolar() {
+        List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber( Math.PI/4));
+        try {
+            Exponential_i exponential_i = new Exponential_i(para);
+            List<Expression> para2 = Collections.singletonList(exponential_i);
+            IntoPolarForm intoPolarFrom = new IntoPolarForm(para2);
+            assertEquals("2 * cis(0)", calc.eval(intoPolarFrom).toString());
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
 }
 

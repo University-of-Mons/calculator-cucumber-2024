@@ -42,15 +42,15 @@ public final class Divides extends Operation {
       if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0)
           return new MyNotANumber();
       if (l instanceof ComplexNumber || r instanceof ComplexNumber) {
-          float denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
+          double denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
           if (denominator == 0)
               return new MyNotANumber();
           else {
-              float real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
-              float imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
+              double real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
+              double imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
               return new ComplexNumber(real, imaginary);
           }
       }
-      return new MyNumber((float) l.getValue() / r.getValue());
+      return new MyNumber((double) l.getValue() / r.getValue());
   }
 }

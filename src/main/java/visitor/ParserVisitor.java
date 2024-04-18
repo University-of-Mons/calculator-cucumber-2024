@@ -1,7 +1,6 @@
 package visitor;
 
 import calculator.*;
-import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
@@ -73,23 +72,6 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
         }
     }
 
-    @Override
-    public Expression visitSqrtInfix(CalculatorExprParser.SqrtInfixContext ctx){
-        Expression number = visit(ctx.infix());
-        List<Expression> params = new ArrayList<>();
-        params.add(number);
-        try {
-            return c.eval(new Sqrt(params));
-        }
-        catch (IllegalConstruction e){
-            return new MyNotANumber();
-        }
-    }
-
-    @Override
-    public Expression visitComplexInfix(CalculatorExprParser.ComplexInfixContext ctx){
-        return visit(ctx.complex());
-    }
 
 
     //-------------------- PREFIX ----------------------
@@ -210,90 +192,6 @@ public class ParserVisitor extends CalculatorExprBaseVisitor<Expression> {
             if(ctx.op.getType() == CalculatorExprParser.ADD)
                 return c.eval(new Plus(params));
             return c.eval(new Minus(params));
-        }
-        catch (IllegalConstruction e){
-            return new MyNotANumber();
-        }
-    }
-
-    // --------------------- Complex --------------------
-
-    @Override
-    public Expression visitComplexPlus(CalculatorExprParser.ComplexPlusContext ctx){
-        float number1 = Float.parseFloat(ctx.NUMBER(0).getText());
-        if (ctx.NUMBER(1) == null)
-            return new ComplexNumber(number1, 1);
-        float number2 = Float.parseFloat(ctx.NUMBER(1).getText());
-        return new ComplexNumber(number1, number2);
-    }
-
-    @Override
-    public Expression visitComplexMinus(CalculatorExprParser.ComplexMinusContext ctx){
-        float number1 = Float.parseFloat(ctx.NUMBER(0).getText());
-        if (ctx.NUMBER(1) == null)
-            return new ComplexNumber(number1, -1);
-        float number2 = - Float.parseFloat(ctx.NUMBER(1).getText());
-        return new ComplexNumber(number1, number2);
-    }
-
-    @Override
-    public Expression visitComplexI(CalculatorExprParser.ComplexIContext ctx){
-        float number1 = 0;
-        if (ctx.NUMBER() == null)
-            return new ComplexNumber(number1, 1);
-        float number2 = Float.parseFloat(ctx.NUMBER().getText());
-        return new ComplexNumber(number1, number2);
-    }
-
-    @Override
-    public Expression visitAddSubComplex(CalculatorExprParser.AddSubComplexContext ctx){
-        Expression number1 = visit(ctx.complex(0));
-        Expression number2 = visit(ctx.complex(1));
-        List<Expression> params = new ArrayList<>();
-        Collections.addAll(params, number1, number2);
-        try {
-            if(ctx.complex().size() == 1){
-                return visit(ctx.complex(0));
-            }
-            if(ctx.op.getType() == CalculatorExprParser.ADD)
-                return c.eval(new Plus(params));
-            return c.eval(new Minus(params));
-        }
-        catch (IllegalConstruction e){
-            return new MyNotANumber();
-        }
-    }
-
-    @Override
-    public Expression visitParensComplex(CalculatorExprParser.ParensComplexContext ctx){
-        return visit(ctx.complex());
-    }
-    @Override
-    public Expression visitMulDivComplex(CalculatorExprParser.MulDivComplexContext ctx){
-        Expression number1 = visit(ctx.complex(0));
-        Expression number2 = visit(ctx.complex(1));
-        List<Expression> params = new ArrayList<>();
-        Collections.addAll(params, number1, number2);
-        try {
-            if(ctx.complex().size() == 1){
-                return visit(ctx.complex(0));
-            }
-            if(ctx.op.getType() == CalculatorExprParser.MUL)
-                return c.eval(new Times(params));
-            return c.eval(new Divides(params));
-        }
-        catch (IllegalConstruction e){
-            return new MyNotANumber();
-        }
-    }
-
-    @Override
-    public Expression visitModulus(CalculatorExprParser.ModulusContext ctx){
-        Expression number = visit(ctx.complex());
-        List<Expression> params = new ArrayList<>();
-        params.add(number);
-        try {
-            return c.eval(new Modulus(params));
         }
         catch (IllegalConstruction e){
             return new MyNotANumber();

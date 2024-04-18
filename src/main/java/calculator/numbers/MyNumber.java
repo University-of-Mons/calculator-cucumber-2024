@@ -12,7 +12,7 @@ import visitor.Visitor;
  */
 public class MyNumber implements Expression
 {
-  private final float value;
+  private final double value;
 
     /** getter method to obtain the value contained in the object
      *
@@ -27,7 +27,7 @@ public class MyNumber implements Expression
      *
      * @param v The floating value to be contained in the object
      */
-    public /*constructor*/ MyNumber(float v) {
+    public /*constructor*/ MyNumber(double v) {
         value=v;
 	  }
 
@@ -47,7 +47,7 @@ public class MyNumber implements Expression
    *
    * @return The floating number that represents the real part of the complex number
    */
-  public float getReal() {
+  public double getReal() {
       return value;
   }
 
@@ -56,7 +56,7 @@ public class MyNumber implements Expression
    *
    * @return The floating number that represents the imaginary part of the complex number
    */
-  public float getImaginary() {
+  public double getImaginary() {
       return 0;
   }
 

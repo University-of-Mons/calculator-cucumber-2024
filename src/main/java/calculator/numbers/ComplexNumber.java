@@ -8,7 +8,9 @@ package calculator.numbers;
  *
  */
 public class ComplexNumber extends MyNumber{
-    private final float imaginary;
+
+    private final double imaginary;
+    private ComplexForm form = ComplexForm.CARTESIAN;
 
     /**
      * Constructor for the ComplexNumber class.
@@ -16,11 +18,14 @@ public class ComplexNumber extends MyNumber{
      * @param real The real part of the complex number
      * @param imaginary The imaginary part of the complex number
      */
-    public ComplexNumber(float real, float imaginary) {
+    public ComplexNumber(double real, double imaginary) {
         super(real);
         this.imaginary = imaginary;
     }
 
+    public void setForm(ComplexForm form) {
+        this.form = form;
+    }
 
     /**
      * Getter method to obtain the imaginary part of the complex number
@@ -28,39 +33,10 @@ public class ComplexNumber extends MyNumber{
      * @return The floating number that represents the imaginary part of the complex number
      */
     @Override
-    public float getImaginary() {
+    public double getImaginary() {
         return imaginary;
     }
 
-    /**
-     * Convert a complex number into a String to allow it to be printed.
-     *
-     * @return The String that is the result of the conversion.
-     */
-    @Override
-    public String toString() {
-        if ((int) this.getImaginary() ==0) {
-            return (int) this.getReal() + "";
-        }
-        if ((int) this.getReal() ==0) {
-            if ((int) this.getImaginary() == 1)
-                return "i";
-            else
-                return (int) this.getImaginary() + "i";
-        }
-        else
-            if ((int) this.getImaginary() < 0) {
-                if ((int) this.getImaginary() == -1)
-                    return (int) this.getReal() + " - i";
-                else
-                    return (int) this.getReal() + " - " + (int) -this.getImaginary() + "i";
-            }
-            else
-                if ((int) this.getImaginary()==1)
-                    return (int) this.getReal() + " + i";
-                else
-                    return (int) this.getReal() + " + " + (int) this.getImaginary()+ "i";
-    }
 
     /**
      * Method to compare two complex numbers.
@@ -93,5 +69,59 @@ public class ComplexNumber extends MyNumber{
     @Override
     public int hashCode() {
         return (int) (this.getReal() + this.imaginary);
+    }
+
+
+
+    @Override
+    public String toString() {
+        switch (form) {
+            case CARTESIAN:
+                return toStringCartesian();
+            case POLAR:
+                return toStringPolar();
+            case EXPONENTIAL:
+                return toStringExponential();
+            default:
+                return new MyNotANumber().toString();
+        }
+    }
+
+
+    public String toStringCartesian() {
+        if ((int) this.getImaginary() ==0) {
+            return (int) this.getReal() + "";
+        }
+        if ((int) this.getReal() ==0) {
+            if ((int) this.getImaginary() == 1)
+                return "i";
+            else
+                return (int) this.getImaginary() + "i";
+        }
+        else
+        if ((int) this.getImaginary() < 0) {
+            if ((int) this.getImaginary() == -1)
+                return (int) this.getReal() + " - i";
+            else
+                return (int) this.getReal() + " - " + (int) -this.getImaginary() + "i";
+        }
+        else
+        if ((int) this.getImaginary()==1)
+            return (int) this.getReal() + " + i";
+        else
+            return (int) this.getReal() + " + " + (int) this.getImaginary()+ "i";
+    }
+
+
+    private String toStringPolar() {
+        int r = (int) Math.sqrt(Math.pow(this.getReal(), 2) + Math.pow(this.getImaginary(), 2));
+        int theta = (int) Math.atan2(this.getImaginary(), this.getReal());
+        return r + " * cis(" + theta + ")";
+    }
+
+    private String toStringExponential() {
+        int r = (int) Math.sqrt(Math.pow(this.getReal(), 2) + Math.pow(this.getImaginary(), 2));
+        int theta = (int) Math.atan2(this.getImaginary(), this.getReal());
+        return r + " * e^(i*" + theta + ")";
     }
 }

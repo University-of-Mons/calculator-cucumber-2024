@@ -2,7 +2,9 @@ package calculator.operators;
 
 import calculator.IllegalConstruction;
 import calculator.Operation;
+import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
+import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
 
 import java.util.List;
@@ -50,6 +52,9 @@ public class Sqrt extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l) {
+        if (l instanceof MyNotANumber | l instanceof ComplexNumber){
+            return new MyNotANumber();
+        }
         int num = l.getValue();
         if (num<0){
             num=  -1 * num;

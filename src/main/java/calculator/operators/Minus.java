@@ -48,7 +48,7 @@ public final class Minus extends Operation
     if (l instanceof ComplexNumber || r instanceof ComplexNumber){
         return new ComplexNumber(l.getReal() - r.getReal(), l.getImaginary() - r.getImaginary());
     }
-    return new MyNumber( (float) l.getValue() - r.getValue());
+    return new MyNumber(  l.getValue() - r.getValue());
   }
 
   /**

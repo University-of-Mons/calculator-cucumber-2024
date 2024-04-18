@@ -49,6 +49,6 @@ public final class Times extends Operation
     if (l instanceof ComplexNumber || r instanceof ComplexNumber){
         return new ComplexNumber(l.getReal() * r.getReal() - l.getImaginary() * r.getImaginary(), l.getReal() * r.getImaginary() + l.getImaginary() * r.getReal());
     }
-    return new MyNumber((float) l.getValue() * r.getValue());
+    return new MyNumber( (double) l.getValue() * r.getValue());
   }
  }
