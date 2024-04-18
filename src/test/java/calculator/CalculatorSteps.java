@@ -244,7 +244,7 @@ public class CalculatorSteps {
             // Check if the number printed in the given notation is the same as the expected one
             if (params.get(0) instanceof MyNumber) {
                 MyNumber number = (MyNumber) params.get(0);
-                number.setRepresentation(ComplexRepresentation.valueOf(notation));
+                number.setRepresentation(ComplexForm.valueOf(notation));
                 assertEquals(s, number.toString());
             } else fail("The parameter is not a number! ");
         } else fail(notation + " is not a correct form! ");

@@ -210,6 +210,13 @@ public interface calculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFloatAtom(calculatorParser.FloatAtomContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code PiAtom}
+	 * labeled alternative in {@link calculatorParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPiAtom(calculatorParser.PiAtomContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code IntAtom}
 	 * labeled alternative in {@link calculatorParser#atom}.
 	 * @param ctx the parse tree

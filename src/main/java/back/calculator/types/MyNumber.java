@@ -1,6 +1,6 @@
 package back.calculator.types;
 
-import back.calculator.ComplexRepresentation;
+import back.calculator.ComplexForm;
 import back.calculator.Expression;
 import back.calculator.Operation;
 import back.visitor.Visitor;
@@ -23,7 +23,7 @@ public class MyNumber implements Expression {
     private final AbstractValue imaginary;
     // INT - REAL - RATIONAL
 
-    private ComplexRepresentation representation = ComplexRepresentation.CARTESIAN;
+    private ComplexForm representation = ComplexForm.CARTESIAN;
 
     /**
      * getter method to obtain the value contained in the object
@@ -129,19 +129,19 @@ public class MyNumber implements Expression {
 
     /**
      * Method to check if the number is represented in polar, cartesian or exponential form
-     * @see ComplexRepresentation
+     * @see ComplexForm
      * @return The representation of the number
      */
-    public ComplexRepresentation getRepresentation() {
+    public ComplexForm getRepresentation() {
         return representation;
     }
 
     /**
      * Method to set the representation of the number
-     * @see ComplexRepresentation
+     * @see ComplexForm
      * @param representation The representation to set
      */
-    public void setRepresentation(ComplexRepresentation representation) {
+    public void setRepresentation(ComplexForm representation) {
         this.representation = representation;
     }
 
@@ -205,6 +205,13 @@ public class MyNumber implements Expression {
 
 
     private String toStringPolar() {
+        if (!isImaginary()) {
+            if (real.isPositive()) {
+                return real + "(cos(0)+isin(0))";
+            } else {
+                return real + "(cos(pi)+isin(pi))";
+            }
+        }
         // = modulus cos(theta) + i sin(theta)
         AbstractValue modulus = real.mul(real).add(imaginary.mul(imaginary)).sqrt();
 
@@ -214,6 +221,13 @@ public class MyNumber implements Expression {
     }
 
     private String toStringExp() {
+        if (!isImaginary()) {
+            if (real.isPositive()) {
+                return real + "exp(0i)";
+            } else {
+                return real + "exp(pii)";
+            }
+        }
         // val = modulus exp(i theta)
         AbstractValue modulus = real.mul(real).add(imaginary.mul(imaginary)).sqrt();
 

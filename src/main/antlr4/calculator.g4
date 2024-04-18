@@ -51,6 +51,7 @@ postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')'))       # Modu
 // Atoms are only real numbers
 atom:  SUB? val=FLOAT E SUB? NUMBER # ENotationAtom
     |  SUB? val=FLOAT               # FloatAtom
+    |  SUB? PI                      # PiAtom
     |  SUB? NUMBER                  # IntAtom
     ;
 
@@ -70,6 +71,7 @@ E: 'E';
 COS: 'cos';
 SIN: 'sin';
 EXP: 'exp';
+PI: 'pi';
 NUMBER:[0-9]+;
 FLOAT: [0-9]+ '.' [0-9]+;
 WS: [ \t\r\n]+ -> skip; // skip tabs, newlines

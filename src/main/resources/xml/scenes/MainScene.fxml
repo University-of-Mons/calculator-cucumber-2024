@@ -40,6 +40,19 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </MenuButton>
+                        <MenuButton fx:id="formSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Form" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="2">
+                            <items>
+                                <MenuItem fx:id="cartesian"  onAction="#formSelected"  mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="cartesian" />
+                                <MenuItem fx:id="polar"  onAction="#formSelected"  mnemonicParsing="false" style="-fx-text-fill: white;" text="polar" />
+                                <MenuItem fx:id="exponential"  onAction="#formSelected"  mnemonicParsing="false" style="-fx-text-fill: white;" text="exponential" />
+                            </items>
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT" />
+                            </cursor>
+                        </MenuButton>
                         <Button fx:id="clear" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="C" textAlignment="CENTER">
                             <font>
                                 <Font name="System Bold" size="15.0" />
@@ -155,7 +168,7 @@
                                 <Font name="System Bold" size="15.0" />
                             </font>
                         </Button>
-                        <Button fx:id="sqrt" layoutX="426.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="sqrt" textAlignment="CENTER" GridPane.columnIndex="5">
+                        <Button fx:id="sqrt" layoutX="426.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="sqrt" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
                             <font>
                                 <Font name="System Bold" size="15.0" />
                             </font>
@@ -175,17 +188,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="clear1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#realButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="ℝ" textAlignment="CENTER" GridPane.columnIndex="6">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="clear11" layoutX="438.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="clear2" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                  <Button fx:id="real" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#realButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="ℝ" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

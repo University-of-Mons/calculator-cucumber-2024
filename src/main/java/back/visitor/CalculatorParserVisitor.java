@@ -93,10 +93,8 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
             return new NotANumber();
         }
 
-        System.out.println("modulus: " + modulus);
-        System.out.println("argument: " + arg1);
         MyNumber res = new MyNumber(modulus.mul(arg1.cos()), modulus.mul(arg1.sin()));
-        res.setRepresentation(ComplexRepresentation.POLAR);
+        res.setRepresentation(ComplexForm.POLAR);
         return res;
     }
 
@@ -106,7 +104,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         AbstractValue modulus = getValueFromAtom(ctx.r);
         AbstractValue argument = getValueFromAtom(ctx.theta);
         MyNumber res = new MyNumber(modulus.mul(argument.cos()), modulus.mul(argument.sin()));
-        res.setRepresentation(ComplexRepresentation.EXPONENTIAL);
+        res.setRepresentation(ComplexForm.EXPONENTIAL);
         return res;
     }
 
@@ -286,6 +284,12 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
             res = new IntValue(real);
         }
         return new MyNumber(res);
+    }
+
+    @Override
+    public Expression visitPiAtom(calculatorParser.PiAtomContext ctx) {
+        // TODO: change precision
+        return new MyNumber(new RealValue(new BigDecimal(Math.PI, new MathContext(5))));
     }
 
     @Override

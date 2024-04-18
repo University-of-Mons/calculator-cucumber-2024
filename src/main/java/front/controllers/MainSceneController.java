@@ -1,14 +1,14 @@
 package front.controllers;
 
 import back.calculator.App;
+import back.calculator.ComplexForm;
 import back.calculator.Expression;
 import back.calculator.types.MyNumber;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
@@ -71,6 +71,17 @@ public class MainSceneController implements Initializable {
     Button sin;
     @FXML
     Button cos;
+    @FXML
+    Button real;
+
+    @FXML
+    MenuButton formSelector;
+    @FXML
+    MenuItem cartesian;
+    @FXML
+    MenuItem polar;
+    @FXML
+    MenuItem exponential;
 
     @FXML
     Label lastExpression;
@@ -94,6 +105,7 @@ public class MainSceneController implements Initializable {
     Label lastResult4;
     @FXML
     TextField outputField;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -156,6 +168,29 @@ public class MainSceneController implements Initializable {
 
         // Set the answer in the textField
         outputField.setText(realNumber.toString());
+
+        // Set the cursor at the end of the text
+        outputField.positionCaret(outputField.getText().length());
+    }
+
+    @FXML
+    private void formSelected(ActionEvent event) {
+        // This method is called when the user selects a form
+
+        MenuItem source = (MenuItem) event.getSource();
+        String form = source.getText();
+
+        ComplexForm complexForm = ComplexForm.valueOf(form.toUpperCase());
+
+        App.setUserInput(outputField.getText());
+        Expression result = App.evalUserInput();
+        MyNumber resultNumber = (MyNumber) result;
+        resultNumber.setRepresentation(complexForm);
+
+        switchHistory(App.getUserInput(), resultNumber.toString());
+
+        // Set the answer in the textField
+        outputField.setText(resultNumber.toString());
 
         // Set the cursor at the end of the text
         outputField.positionCaret(outputField.getText().length());

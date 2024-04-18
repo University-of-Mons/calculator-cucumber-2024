@@ -1,6 +1,6 @@
 package back.calculator;
 
-public enum ComplexRepresentation {
+public enum ComplexForm {
 
     /**
      * sqrt(2) + sqrt(2)i
