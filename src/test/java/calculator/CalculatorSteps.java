@@ -2,9 +2,7 @@ package calculator;
 
 import back.calculator.*;
 import back.calculator.operators.*;
-import back.calculator.types.MyNumber;
-import back.calculator.types.NotANumber;
-import back.calculator.types.RealValue;
+import back.calculator.types.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -58,17 +56,17 @@ public class CalculatorSteps {
     }
 
     @Given("a real operation {string}")
-    public void givenARealOperation(String s){
+    public void givenARealOperation(String s) {
         params = new ArrayList<>();
-        try{
-            switch (s){
+        try {
+            switch (s) {
                 case "+" -> op = new Plus(params);
                 case "-" -> op = new Minus(params);
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
                 default -> throw new IllegalArgumentException("Unknown operation!");
             }
-        }catch (back.calculator.IllegalConstruction e){
+        } catch (back.calculator.IllegalConstruction e) {
             throw new IllegalArgumentException("Illegal construction!");
         }
     }
@@ -208,7 +206,7 @@ public class CalculatorSteps {
     }
 
     @Then("^the operation evaluates to (-?\\d+)(.)(\\d+)$")
-    public void thenTheOperationWithRealValueEvaluatesTo(int part1, char dot, int decimal){
+    public void thenTheOperationWithRealValueEvaluatesTo(int part1, char dot, int decimal) {
         assertEquals(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal))), c.eval(op));
     }
 
@@ -255,7 +253,7 @@ public class CalculatorSteps {
     // ########################### Parsing of the operation ###############################
 
     @Then("^its (.*) parsing is (.*)$")
-    public void additionParsing(String notation, String s){
+    public void additionParsing(String notation, String s) {
         if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
             c = new Calculator();
             assertEquals(s, c.format(c.read(op.toString()), Notation.valueOf(notation)));
@@ -263,7 +261,9 @@ public class CalculatorSteps {
     }
 
     @Then("its parsing is {string}")
-    public void thenItsParsingIs(String s) {assertEquals(s, params.get(0).toString());}
+    public void thenItsParsingIs(String s) {
+        assertEquals(s, params.get(0).toString());
+    }
 
 
 // ############################### When ###############################
@@ -279,13 +279,14 @@ public class CalculatorSteps {
             fail("Illegal construction!");
         }
     }
+
     @When("^I provide a (.*) real number (-?\\d+)(.)(\\d+)$")
-    public void whenIProvideARealNumber(String s, int part1, char dot, int decimal){
-        try{
+    public void whenIProvideARealNumber(String s, int part1, char dot, int decimal) {
+        try {
             params = new ArrayList<>();
             params.add(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal))));
             op.addMoreParams(params);
-        }catch (IllegalConstruction e){
+        } catch (IllegalConstruction e) {
             fail("Illegal construction!");
         }
     }
@@ -321,6 +322,16 @@ public class CalculatorSteps {
             params.add(new MyNumber(0, imaginary));
             op.addMoreParams(params);
         } catch (IllegalConstruction e) {
+            fail("Illegal construction!");
+        }
+    }
+    @When("I provide a (.*) rational number (-?\\d+)(/)(\\d+)$")
+    public void whenIProvideARationalNumber(String s, int num, char slash, int den){
+        try{
+            params = new ArrayList<>();
+            params.add(new MyNumber(new RationalValue(new IntValue(num), new IntValue(den))));
+            op.addMoreParams(params);
+        }catch (IllegalConstruction e){
             fail("Illegal construction!");
         }
     }

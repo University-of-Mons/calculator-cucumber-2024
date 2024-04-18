@@ -27,6 +27,11 @@ public class RealValue extends AbstractValue{
             case REAL:
                 result = new RealValue(this.value.add(((RealValue) other).value, this.precision));
                 break;
+
+            case RATIONAL:
+                BigDecimal otherValueRational = new BigDecimal(((RationalValue) other).getNum()).divide(new BigDecimal(((RationalValue) other).getDen()), this.precision);
+                result = new RealValue(this.value.add(otherValueRational, this.precision));
+                break;
         }
         return result;
     }
@@ -42,6 +47,11 @@ public class RealValue extends AbstractValue{
 
             case REAL:
                 result = new RealValue(this.value.subtract(((RealValue) other).value, this.precision));
+                break;
+
+            case RATIONAL:
+                BigDecimal otherValueRational = new BigDecimal(((RationalValue) other).getNum()).divide(new BigDecimal(((RationalValue) other).getDen()), this.precision);
+                result = new RealValue(this.value.subtract(otherValueRational, this.precision));
                 break;
         }
         return result;
@@ -59,6 +69,11 @@ public class RealValue extends AbstractValue{
             case REAL:
                 result = new RealValue(this.value.multiply(((RealValue) other).value,this.precision));
                 break;
+
+            case RATIONAL:
+                BigDecimal otherValueRational = new BigDecimal(((RationalValue) other).getNum()).divide(new BigDecimal(((RationalValue) other).getDen()), this.precision);
+                result = new RealValue(this.value.multiply(otherValueRational, this.precision));
+                break;
         }
         return result;
     }
@@ -75,41 +90,51 @@ public class RealValue extends AbstractValue{
             case REAL:
                 result = new RealValue(this.value.divide(((RealValue) other).value, this.precision));
                 break;
+
+            case RATIONAL:
+                BigDecimal otherValueRational = new BigDecimal(((RationalValue) other).getNum()).divide(new BigDecimal(((RationalValue) other).getDen()), this.precision);
+                result = new RealValue(this.value.divide(otherValueRational, this.precision));
+                break;
         }
         return result;
     }
 
     @Override
-    public AbstractValue sqrt() throws IllegalArgumentException {
-        if (this.value.compareTo(BigDecimal.ZERO) < 0){
-            throw new IllegalArgumentException("Cannot take the square root of a negative number");
-        }
+    public AbstractValue sqrt() {
         return new RealValue(this.value.sqrt(this.precision));
     }
 
     @Override
     public AbstractValue cos() {
-        return null;
+        long longValue = this.value.longValueExact();
+        BigDecimal cos = new BigDecimal(Math.cos(longValue), this.precision);
+        return new RealValue(cos);
     }
 
     @Override
     public AbstractValue sin() {
-        return null;
+       long longValue = this.value.longValueExact();
+       BigDecimal sin = new BigDecimal(Math.sin(longValue), this.precision);
+       return new RealValue(sin);
     }
 
     @Override
     public AbstractValue ln() {
-        return null;
+        BigDecimal lnValue = new BigDecimal(Math.log(this.value.longValueExact()), this.precision);
+        return new RealValue(lnValue);
     }
 
     @Override
     public AbstractValue exp() {
-        return null;
+        double e = Math.E;
+        BigDecimal eValue = new BigDecimal(BigDecimal.valueOf(e).pow(this.value.intValue()).longValueExact(), this.precision);
+        return new RealValue(eValue);
     }
 
     @Override
     public AbstractValue atan() {
-        return new RealValue(new BigDecimal(Math.atan(this.value.doubleValue()), this.precision));
+        BigDecimal atanValue = new BigDecimal(Math.atan(this.value.doubleValue()), this.precision);
+        return new RealValue(atanValue);
     }
 
 
