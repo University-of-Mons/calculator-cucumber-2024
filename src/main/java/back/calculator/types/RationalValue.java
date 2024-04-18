@@ -108,7 +108,10 @@ public class RationalValue extends AbstractValue {
                 int oldDen = this.den;
                 newDen = this.den * ratDen2;
                 newNum = this.num * ratDen2 + oldDen * ratNum2;
-
+                break;
+            case REAL:
+                RealValue real = this.convertToReal();
+                return real.add(other);
         }
         RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
         result.reduce();
@@ -137,6 +140,10 @@ public class RationalValue extends AbstractValue {
                 int oldDen = this.den;
                 newDen = this.den * ratDen2;
                 newNum = this.num * ratDen2 - oldDen * ratNum2;
+                break;
+            case REAL:
+                RealValue real = this.convertToReal();
+                return real.sub(other);
         }
         RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
         result.reduce();
@@ -161,6 +168,10 @@ public class RationalValue extends AbstractValue {
 
                 newNum *= rational.getNum();
                 newDen *= rational.getDen();
+                break;
+            case REAL:
+                RealValue real = this.convertToReal();
+                return real.mul(other);
         }
         RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
         result.reduce();
@@ -172,6 +183,10 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public AbstractValue div(AbstractValue other) {
+        if (other.getType() == Type.REAL){
+            RealValue real = (RealValue) other;
+            return real.div(this);
+        }
         return new RationalValue(this, other);
     }
 
