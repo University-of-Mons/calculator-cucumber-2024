@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class CalculatorSteps {
     private ArrayList<Expression> params;
     private Operation op;
     private Calculator c;
+    private MathContext precision = App.getPrecision();
 
     @Before
     public void resetMemoryBeforeEachScenario() {
@@ -207,7 +209,7 @@ public class CalculatorSteps {
 
     @Then("^the operation evaluates to (-?\\d+)(.)(\\d+)$")
     public void thenTheOperationWithRealValueEvaluatesTo(int part1, char dot, int decimal) {
-        assertEquals(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal))), c.eval(op));
+        assertEquals(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal, precision))), c.eval(op));
     }
 
     @Then("the (.*) with NaN member evaluates to (.*)$")
@@ -284,7 +286,7 @@ public class CalculatorSteps {
     public void whenIProvideARealNumber(String s, int part1, char dot, int decimal) {
         try {
             params = new ArrayList<>();
-            params.add(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal))));
+            params.add(new MyNumber(new RealValue(new BigDecimal(part1 + "." + decimal, precision))));
             op.addMoreParams(params);
         } catch (IllegalConstruction e) {
             fail("Illegal construction!");

@@ -4,6 +4,8 @@ import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 import back.visitor.*;
 
+import java.math.MathContext;
+
 
 /**
  * This class represents the core logic of a Calculator.
@@ -13,9 +15,11 @@ import back.visitor.*;
  */
 public class Calculator {
     private final ExpressionParser parser;
+    private final MathContext precision;
 
     public Calculator() {
         parser = new ExpressionParser();
+        precision = new MathContext(5);
     }
 
     /**

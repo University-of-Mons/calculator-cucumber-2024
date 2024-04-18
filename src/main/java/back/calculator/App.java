@@ -11,6 +11,9 @@ import front.scenes.Scenes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 
 /**
  * A very simple calculator in Java
@@ -29,6 +32,8 @@ public class App extends Application {
     private static String userInput = "";
 
     private static final Logger logger = LoggerFactory.getLogger(App.class);
+
+    private static MathContext precision = new MathContext(5);
 
     private static final Calculator calculator = new Calculator();
 
@@ -53,6 +58,14 @@ public class App extends Application {
      */
     public static void setScene(Scene scene) {
         stage.setScene(scene);
+    }
+
+    public static void setPrecision(int precision) {
+        App.precision = new MathContext(precision);
+    }
+
+    public static MathContext getPrecision() {
+        return App.precision;
     }
 
     public static Expression evalUserInput() {

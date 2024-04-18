@@ -1,5 +1,7 @@
 package back.calculator.types;
 
+import java.math.MathContext;
+
 public abstract class AbstractValue {
 
     protected Type type;

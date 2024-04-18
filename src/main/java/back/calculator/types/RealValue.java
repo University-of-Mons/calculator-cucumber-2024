@@ -1,5 +1,7 @@
 package back.calculator.types;
 
+import back.calculator.App;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -7,11 +9,12 @@ public class RealValue extends AbstractValue{
 
     private BigDecimal value;
 
-    private final MathContext precision = new MathContext(5);
+    private final MathContext precision;
 
     public RealValue(BigDecimal value) {
         this.value = value;
         type = Type.REAL;
+        this.precision = App.getPrecision();
     }
 
     @Override
@@ -154,10 +157,10 @@ public class RealValue extends AbstractValue{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this.value == o) return true;
         if (!(o instanceof RealValue)) return false;
         RealValue realValue = (RealValue) o;
-        return this.value.compareTo(realValue.value) == 0;
+        return (this.value).stripTrailingZeros().compareTo(realValue.value.stripTrailingZeros()) == 0;
     }
 
     @Override

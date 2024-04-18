@@ -1,6 +1,8 @@
 package back.calculator.types;
 
 
+import back.calculator.App;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -12,6 +14,8 @@ public class RationalValue extends AbstractValue {
     private int num;
 
     private int den;
+
+    private final MathContext precision = App.getPrecision();
 
     /**
      * Constructor for a rational number.
@@ -206,9 +210,8 @@ public class RationalValue extends AbstractValue {
     }
 
     public RealValue convertToReal(){
-        // TODO : Change precision
-        RealValue num = new RealValue(new BigDecimal(this.num, new MathContext(5)));
-        RealValue den = new RealValue(new BigDecimal(this.den, new MathContext(5)));
+        RealValue num = new RealValue(new BigDecimal(this.num, precision));
+        RealValue den = new RealValue(new BigDecimal(this.den, precision));
         RealValue result = (RealValue) num.div(den);
         return result;
     }

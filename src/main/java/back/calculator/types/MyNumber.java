@@ -1,11 +1,13 @@
 package back.calculator.types;
 
+import back.calculator.App;
 import back.calculator.ComplexForm;
 import back.calculator.Expression;
 import back.calculator.Operation;
 import back.visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
@@ -24,6 +26,8 @@ public class MyNumber implements Expression {
     // INT - REAL - RATIONAL
 
     private ComplexForm representation = ComplexForm.CARTESIAN;
+
+    private MathContext precision = App.getPrecision();
 
     /**
      * getter method to obtain the value contained in the object
@@ -97,7 +101,7 @@ public class MyNumber implements Expression {
         // Real part
         if (real.getType() == Type.INT){
             IntValue number = (IntValue) real;
-            newReal = new RealValue(new BigDecimal(number.getValue()));
+            newReal = new RealValue(new BigDecimal(number.getValue(), precision));
         } else{
             if (real.getType() == Type.RATIONAL){
                 RationalValue number = (RationalValue) real;
@@ -112,7 +116,7 @@ public class MyNumber implements Expression {
         // Imaginary part
         if (imaginary.getType() == Type.INT){
             IntValue number = (IntValue) imaginary;
-            newImaginary = new RealValue(new BigDecimal(number.getValue()));
+            newImaginary = new RealValue(new BigDecimal(number.getValue(), precision));
         } else{
             if (imaginary.getType() == Type.RATIONAL){
                 RationalValue number = (RationalValue) imaginary;

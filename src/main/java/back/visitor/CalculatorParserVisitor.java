@@ -25,6 +25,8 @@ import static back.parser.calculatorLexer.*;
  */
 public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
+    private final MathContext precision = App.getPrecision();
+
     private Expression getExpression(List<Expression> params, Token op, Notation notation) {
         try {
             return switch (op.getType()) {
@@ -238,7 +240,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
      */
     @Override
     public Expression visitFloatAtom(calculatorParser.FloatAtomContext ctx) {
-        BigDecimal real = new BigDecimal(ctx.FLOAT().getText(), new MathContext(5));
+        BigDecimal real = new BigDecimal(ctx.FLOAT().getText(), precision);
         if (ctx.getChild(0) == ctx.SUB()){
             real = real.negate();
 
@@ -259,7 +261,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
      */
     @Override
     public Expression visitENotationAtom(calculatorParser.ENotationAtomContext ctx){
-        BigDecimal real = new BigDecimal(ctx.getText());
+        BigDecimal real = new BigDecimal(ctx.getText(), precision);
         RealValue realValue = new RealValue(real);
         return new MyNumber(realValue);
     }
@@ -288,8 +290,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitPiAtom(calculatorParser.PiAtomContext ctx) {
-        // TODO: change precision
-        return new MyNumber(new RealValue(new BigDecimal(Math.PI, new MathContext(5))));
+        return new MyNumber(new RealValue(new BigDecimal(Math.PI, precision)));
     }
 
     @Override

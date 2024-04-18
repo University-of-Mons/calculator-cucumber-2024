@@ -9,6 +9,8 @@ public class IntValue extends AbstractValue {
 
     private int value;
 
+    private MathContext precision = App.getPrecision();
+
     public IntValue(int value) {
         this.setType(Type.INT);
         this.value = value;
@@ -34,8 +36,7 @@ public class IntValue extends AbstractValue {
             return false;
         }
         return switch (abstractValue.getType()) {
-            // TODO: change precision
-            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).equals(abstractValue);
+            case REAL -> new RealValue(new BigDecimal(this.value, precision)).equals(abstractValue);
             case RATIONAL -> new RationalValue(this, new IntValue(1)).equals(abstractValue);
             default -> value == ((IntValue) abstractValue).getValue();
         };
@@ -49,8 +50,7 @@ public class IntValue extends AbstractValue {
     @Override
     public AbstractValue add(AbstractValue other) {
         return switch (other.getType()) {
-            // TODO: change précision
-            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).add((other));
+            case REAL -> new RealValue(new BigDecimal(this.value, precision)).add((other));
             case RATIONAL -> new RationalValue(new IntValue(this.value), new IntValue(1)).add(other);
             default -> new IntValue(this.value + ((IntValue) other).getValue());
         };
@@ -59,8 +59,7 @@ public class IntValue extends AbstractValue {
     @Override
     public AbstractValue sub(AbstractValue other) {
         return switch (other.getType()) {
-            // TODO: change précision
-            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).sub((other));
+            case REAL -> new RealValue(new BigDecimal(this.value, precision)).sub((other));
             case RATIONAL -> new RationalValue(new IntValue(this.value), new IntValue(1)).sub(other);
             default -> new IntValue(this.value - ((IntValue) other).getValue());
         };
@@ -69,8 +68,7 @@ public class IntValue extends AbstractValue {
     @Override
     public AbstractValue mul(AbstractValue other) {
         return switch (other.getType()) {
-            // TODO: check precision
-            case REAL -> new RealValue(new BigDecimal(this.value, new MathContext(5))).mul((other));
+            case REAL -> new RealValue(new BigDecimal(this.value, precision)).mul((other));
             case RATIONAL -> new RationalValue(new IntValue(this.value), new IntValue(1)).mul(other);
             default -> new IntValue(this.value * ((IntValue) other).getValue());
         };
@@ -80,8 +78,7 @@ public class IntValue extends AbstractValue {
     public AbstractValue div(AbstractValue other) {
         switch (other.getType()) {
             case REAL:
-                // TODO: check precision
-                return new RealValue(new BigDecimal(this.value, new MathContext(5))).div((other));
+                return new RealValue(new BigDecimal(this.value, precision)).div((other));
             case RATIONAL:
                 return new RationalValue(new IntValue(this.value), new IntValue(1)).div(other);
         }
@@ -100,38 +97,32 @@ public class IntValue extends AbstractValue {
 
     @Override
     public AbstractValue sqrt() {
-        // TODO: Check for precision here
-        return new RealValue(new BigDecimal(Double.toString(Math.sqrt(this.value)), new MathContext(5)));
+        return new RealValue(new BigDecimal(Double.toString(Math.sqrt(this.value)), precision));
     }
 
     @Override
     public AbstractValue cos() {
-        // TODO: Check for precision here
-        return new RealValue(new BigDecimal(Double.toString(Math.cos(this.value)), new MathContext(5)));
+        return new RealValue(new BigDecimal(Double.toString(Math.cos(this.value)), precision));
     }
 
     @Override
     public AbstractValue sin() {
-        // TODO: Check for precision here
-        return new RealValue(new BigDecimal(Double.toString(Math.sin(this.value)), new MathContext(5)));
+        return new RealValue(new BigDecimal(Double.toString(Math.sin(this.value)), precision));
     }
 
     @Override
     public AbstractValue ln() {
-        // TODO: Check for precision here
-        return new RealValue(new BigDecimal(Double.toString(Math.log(this.value)), new MathContext(5)));
+        return new RealValue(new BigDecimal(Double.toString(Math.log(this.value)), precision));
     }
 
     @Override
     public AbstractValue exp() {
-        // TODO: Check for precision here
-        return new RealValue(new BigDecimal(Double.toString(Math.exp(this.value)), new MathContext(5)));
+        return new RealValue(new BigDecimal(Double.toString(Math.exp(this.value)), precision));
     }
 
     @Override
     public AbstractValue atan() {
-        // TODO: Check for precision here
-        return new RealValue(new BigDecimal(Double.toString(Math.atan(this.value)), new MathContext(5)));
+        return new RealValue(new BigDecimal(Double.toString(Math.atan(this.value)), precision));
     }
 
     @Override
