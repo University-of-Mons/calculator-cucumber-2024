@@ -29,8 +29,8 @@ public class TimeModeController implements Initializable, ModeController {
 
     private boolean resetDisplay = false;
     private MyTime time;
-    private String pattern = "##.00";
-    private LocalDateTime origin = LocalDateTime.of(0,1,1,0,0,0);
+    private final String pattern = "##.00";
+    private final LocalDateTime origin = LocalDateTime.of(0,1,1,0,0,0);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}

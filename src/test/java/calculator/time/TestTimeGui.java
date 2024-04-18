@@ -1,6 +1,7 @@
 package calculator.time;
 
 import calculator.AppStarter;
+import calculator.numbers.MyTime;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
@@ -10,6 +11,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.time.LocalDateTime;
 
 @ExtendWith(ApplicationExtension.class)
 //TODO add unit change tests
@@ -267,6 +270,29 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnEquals");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("02:00:00", display.getText());
+    }
+
+    @Test
+    void testCurrentTimePrefix(FxRobot fxRobot){
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime modifiedTime = currentTime.minusHours(10);
+        MyTime now = new MyTime(modifiedTime.getYear(), modifiedTime.getMonthValue(),
+                modifiedTime.getDayOfMonth(), modifiedTime.getHour(),
+                modifiedTime.getMinute(), modifiedTime.getSecond());
+        Assertions.assertEquals(now.toString(), display.getText());
     }
 
     @Test

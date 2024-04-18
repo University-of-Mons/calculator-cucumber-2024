@@ -5,6 +5,8 @@ import calculator.TimeParser;
 import calculator.numbers.MyTime;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestTimeParser {
@@ -166,6 +168,18 @@ public class TestTimeParser {
     }
 
     @Test
+    void testCurrentTimePrefix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("+ (05:00:00)",calculator);
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime modifiedTime = currentTime.plusHours(5);
+        MyTime now = new MyTime(modifiedTime.getYear(), modifiedTime.getMonthValue(),
+                modifiedTime.getDayOfMonth(), modifiedTime.getHour(),
+                modifiedTime.getMinute(), modifiedTime.getSecond());
+        assertEquals(now,timeParser.evaluate());
+    }
+
+    @Test
     void testDatePrefix(){
         Calculator calculator = new Calculator();
         TimeParser timeParser = new TimeParser("+ (2024:04:17:05:00:00, 0010:02:09:00:00:00)",calculator);
@@ -207,6 +221,18 @@ public class TestTimeParser {
         Calculator calculator = new Calculator();
         TimeParser timeParser = new TimeParser("(05:00:00, 03:00:00)+",calculator);
         assertEquals(new MyTime(8,0,0),timeParser.evaluate());
+    }
+
+    @Test
+    void testCurrentTimePostfix(){
+        Calculator calculator = new Calculator();
+        TimeParser timeParser = new TimeParser("(05:00:00)-",calculator);
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime modifiedTime = currentTime.minusHours(5);
+        MyTime now = new MyTime(modifiedTime.getYear(), modifiedTime.getMonthValue(),
+                modifiedTime.getDayOfMonth(), modifiedTime.getHour(),
+                modifiedTime.getMinute(), modifiedTime.getSecond());
+        assertEquals(now,timeParser.evaluate());
     }
 
     @Test

@@ -71,13 +71,11 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
     public Expression visitAddSubInfix(CalculatorExprTimeParser.AddSubInfixContext ctx){
         Expression time1 = visit(ctx.infix(0));
         Expression time2 = visit(ctx.infix(1));
+        // current time operation is managed by prefix notation
 
         List<Expression> params = new ArrayList<>();
         Collections.addAll(params, time1, time2);
         try {
-            if(ctx.infix().size() == 1){
-                //TODO Cas ou on compare avec l'heure actuelle
-            }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
                 return c.timeEval(new Plus(params));
             return c.timeEval(new Minus(params));
@@ -140,7 +138,16 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
     @Override
     public Expression visitAddSubPrefix(CalculatorExprTimeParser.AddSubPrefixContext ctx){
         Expression time1 = visit(ctx.prefix(0));
-        Expression time2 = visit(ctx.prefix(1));
+        Expression time2;
+        if(ctx.prefix().size() == 1){
+            LocalDateTime currentTime = LocalDateTime.now();
+            MyTime now = new MyTime(currentTime.getYear(), currentTime.getMonthValue(),
+                    currentTime.getDayOfMonth(), currentTime.getHour(),
+                    currentTime.getMinute(), currentTime.getSecond());
+            time2 = now;
+        }
+        else
+            time2 = visit(ctx.prefix(1));
         List<Expression> params = new ArrayList<>();
 
         Collections.addAll(params, time1, time2);
@@ -148,9 +155,6 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
             params.add(visit(ctx.prefix(i)));
         }
         try {
-            if(ctx.prefix().size() == 1){
-                //TODO Cas ou on compare avec l'heure actuelle
-            }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
                 return c.timeEval(new Plus(params));
             return c.timeEval(new Minus(params));
@@ -213,7 +217,16 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
     @Override
     public Expression visitAddSubPostfix(CalculatorExprTimeParser.AddSubPostfixContext ctx){
         Expression time1 = visit(ctx.postfix(0));
-        Expression time2 = visit(ctx.postfix(1));
+        Expression time2;
+        if(ctx.postfix().size() == 1){
+            LocalDateTime currentTime = LocalDateTime.now();
+            MyTime now = new MyTime(currentTime.getYear(), currentTime.getMonthValue(),
+                    currentTime.getDayOfMonth(), currentTime.getHour(),
+                    currentTime.getMinute(), currentTime.getSecond());
+            time2 = now;
+        }
+        else
+            time2 = visit(ctx.postfix(1));
         List<Expression> params = new ArrayList<>();
 
         Collections.addAll(params, time1, time2);
@@ -221,9 +234,6 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
             params.add(visit(ctx.postfix(i)));
         }
         try {
-            if(ctx.postfix().size() == 1){
-                //TODO Cas ou on compare avec l'heure actuelle
-            }
             if(ctx.op.getType() == CalculatorExprTimeParser.ADD)
                 return c.timeEval(new Plus(params));
             return c.timeEval(new Minus(params));

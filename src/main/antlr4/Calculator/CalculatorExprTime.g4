@@ -23,7 +23,7 @@ infix : infix op=('+' | '-') infix   # AddSubInfix
 
 // prefix expression
 
-prefix :  op=('+' | '-') '(' prefix ((',')? prefix)+ ')'   # AddSubPrefix
+prefix :  op=('+' | '-') '(' prefix? ((',')? prefix)+ ')'   # AddSubPrefix
         | NUMBER ':' NUMBER ':' NUMBER (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # timePrefix
         | NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER
           (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # datePrefix
@@ -31,7 +31,7 @@ prefix :  op=('+' | '-') '(' prefix ((',')? prefix)+ ')'   # AddSubPrefix
         ;
 
 // postfix expression
-postfix : '(' postfix ((',')? postfix)+ ')' op=('+' | '-')   # AddSubPostfix
+postfix : '(' postfix? ((',')? postfix)+ ')' op=('+' | '-')   # AddSubPostfix
         | NUMBER ':' NUMBER ':' NUMBER (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # timePostfix
         | NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER ':' NUMBER
           (op=('AM' | 'PM'))? (op=('CET+' | 'CET-') NUMBER+)?   # datePostfix
