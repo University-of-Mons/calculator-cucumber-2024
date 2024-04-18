@@ -66,6 +66,8 @@ public class CalculatorSteps {
                 case "-" -> op = new Minus(params);
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
+                case "sqrt" -> op = new Sqrt(params);
+                case "ln" -> op = new Logarithm(params);
                 default -> throw new IllegalArgumentException("Unknown operation!");
             }
         } catch (back.calculator.IllegalConstruction e) {

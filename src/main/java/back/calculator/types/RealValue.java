@@ -122,7 +122,7 @@ public class RealValue extends AbstractValue{
 
     @Override
     public AbstractValue ln() {
-        BigDecimal lnValue = new BigDecimal(Math.log(this.value.longValueExact()), this.precision);
+        BigDecimal lnValue = new BigDecimal(Math.log(this.value.doubleValue()), this.precision);
         return new RealValue(lnValue);
     }
 

@@ -29,6 +29,7 @@ infix: ((MODULUS infix MODULUS) | ('modulus' '(' infix ')')) # ModulusInfix
     | EXP '(' infix ')'           # ExpInfix
     | COS '(' infix ')'           # CosInfix
     | SIN '(' infix ')'           # SinInfix
+    | LN  '(' infix ')'            # LnInfix
     ;
 
 
@@ -45,6 +46,7 @@ prefix: ((MODULUS prefix MODULUS) | ('modulus' '(' prefix ')'))      # ModulusPr
     | EXP '(' prefix ')'                                             # ExpPrefix
     | COS '(' prefix ')'                                             # CosPrefix
     | SIN '(' prefix ')'                                             # SinPrefix
+    | LN  '(' prefix ')'                                              # LnPrefix
     ;
 
 postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')'))       # ModulusPostfix
@@ -58,6 +60,7 @@ postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')'))       # Modu
     | EXP '(' postfix ')'                                                 # ExpPostfix
     | COS '(' postfix ')'                                                 # CosPostfix
     | SIN '(' postfix ')'                                                 # SinPostfix
+    | LN  '(' postfix ')'                                                  # LnPostfix
     ;
 
 // Atoms are only real numbers
@@ -85,6 +88,7 @@ SQRT: 'sqrt';
 SIN: 'sin';
 EXP: 'exp';
 PI: 'pi';
+LN: 'ln';
 NUMBER:[0-9]+;
 FLOAT: [0-9]+ '.' [0-9]+;
 WS: [ \t\r\n]+ -> skip; // skip tabs, newlines

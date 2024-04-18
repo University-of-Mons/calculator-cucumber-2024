@@ -46,6 +46,36 @@ Feature: Real numbers arithmetic operations
         | '*'  | 3.14  | 1/2  | 1.57   |
         | '/'  | 3.14  | 1/2  | 6.28   |
 
+  Scenario: Compute the square root of a real number
+    Given a real operation 'sqrt'
+    When I provide a first real number 0.25
+    Then the operation evaluates to 0.5
+
+  Scenario: Compute the log of a real number
+    Given a real operation 'ln'
+    When I provide a first real number 2.71
+    Then the operation evaluates to 0.99695
+
+  Scenario: Compute the log of a real number
+    Given a real operation 'ln'
+    When I provide a first real number 1
+    Then the operation evaluates to 0
+
+  Scenario: Compute the log of 0
+    Given a real operation 'ln'
+    When I provide a first real number 0
+    Then the operation evaluates to "NaN"
+
+  Scenario: Compute the log of a negative number
+    Given a real operation 'ln'
+    When I provide a first real number -2.71
+    Then the operation evaluates to "NaN"
+
+  Scenario: Compute log of a complex number
+    Given a real operation 'ln'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to "NaN"
+
  ####################################  NaN test  ##################################
   Scenario: Dividing a real by zero
     Given a real operation '/'
