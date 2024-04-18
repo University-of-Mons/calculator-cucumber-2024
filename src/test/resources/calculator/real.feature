@@ -33,6 +33,19 @@ Feature: Real numbers arithmetic operations
         | '*'  | 3.14  | 2    | 6.28   |
         | '/'  | 3.14  | 2    | 1.57   |
 
+  Scenario Outline: Evaluating the operation between real and rational numbers
+    Given a real operation <op>
+    When I provide a first real number <real1>
+    And I provide a second rational number <rat2>
+    Then the operation evaluates to <res>
+
+    Examples:
+        | op | real1 | rat2 | res |
+        | '+'  | 3.14  | 1/2  | 3.64   |
+        | '-'  | 3.14  | 1/2  | 2.64   |
+        | '*'  | 3.14  | 1/2  | 1.57   |
+        | '/'  | 3.14  | 1/2  | 6.28   |
+
  ####################################  NaN test  ##################################
   Scenario: Dividing a real by zero
     Given a real operation '/'
