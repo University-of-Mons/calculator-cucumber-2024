@@ -169,6 +169,7 @@
                         <exclude>calculator/controller/ComplexModeController.class</exclude>
                         <exclude>calculator/controller/RationalModeController.class</exclude>
                         <exclude>parser/*</exclude>
+                        <exclude>parser/bool/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
