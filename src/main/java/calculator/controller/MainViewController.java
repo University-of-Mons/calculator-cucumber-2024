@@ -100,6 +100,9 @@ public class MainViewController implements Initializable {
     private void onTimeMode() {
         if (!currentMode.equals(TIME_MODE)) {
             updateMode(TIME_MODE);
+        }
+    }
+
     @FXML
     private void onBooleanMode() {
         if (!currentMode.equals(BOOLEAN_MODE)) {
