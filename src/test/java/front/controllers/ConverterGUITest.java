@@ -94,7 +94,7 @@ class ConverterGUITest extends ApplicationTest {
         clickOn("#dot");
         clickOn("#zero");
         clickOn("#zero");
-        clickOn("#zero");
+        type(KeyCode.NUMPAD0); // Increase branches coverage of inputField key pressed handler
         Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("123456789.000");
     }
 
@@ -149,7 +149,6 @@ class ConverterGUITest extends ApplicationTest {
                 .toList();
         checkAvailableUnits(robot, expectedItems, 4);
     }
-
      */
 
     /**
@@ -256,7 +255,6 @@ class ConverterGUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        // Trigger conversion with keyboard shortcut (variation from previous tests)
-        type(KeyCode.ENTER);
+        clickOn("#equals");
     }
 }

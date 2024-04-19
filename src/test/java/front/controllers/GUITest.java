@@ -70,7 +70,7 @@ class GUITest extends ApplicationTest {
         clickOn("#coma");
         clickOn("#zero");
         clickOn("#zero");
-        clickOn("#zero");
+        type(KeyCode.NUMPAD0); // Increase branches coverage of inputField key pressed handler
         Assertions.assertThat((TextField) lookup(outputField).query()).hasText("123456789.,000");
     }
 
@@ -105,14 +105,18 @@ class GUITest extends ApplicationTest {
         Assertions.assertThat((TextField) lookup(outputField).query()).hasText("ln");
     }
 
-
-
     @Test
     void checkEqualsButton(FxRobot robot) {
         clickOn("#one");
         clickOn("#add");
         clickOn("#four");
         clickOn("#equals");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("5");
+        clickOn("#clear");
+        clickOn("#one");
+        clickOn("#add");
+        clickOn("#four");
+        type(KeyCode.ENTER);
         Assertions.assertThat((TextField) lookup(outputField).query()).hasText("5");
     }
 }
