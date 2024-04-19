@@ -19,6 +19,12 @@ import java.util.List;
  * @see Minus
  * @see Times
  * @see Divides
+ * @see Exponential
+ * @see Sqrt
+ * @see Logarithm
+ * @see Sinus
+ * @see Cosine
+ * @see Modulus
  */
 public final class Plus extends Operation {
 

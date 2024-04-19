@@ -21,6 +21,10 @@ import java.math.MathContext;
  * Faculty of Sciences
  *
  * @author tommens
+ * @author LicorneRose7
+ * @author frix
+ * @author ThomasBernard28
+ * @author Nephty
  */
 public class App extends Application {
     /**
@@ -39,6 +43,7 @@ public class App extends Application {
     public static void main(String[] args) {
         LOGGER.info("Starting the application");
         launch(args);
+        LOGGER.info("Application stopped");
     }
 
     @Override
@@ -59,6 +64,7 @@ public class App extends Application {
         stage.setScene(scene);
     }
 
+    @SuppressWarnings("unused")
     public static void setPrecision(int precision) {
         App.precision = new MathContext(precision);
     }
@@ -71,7 +77,6 @@ public class App extends Application {
         return calculator.eval(calculator.read(App.userInput));
     }
 
-    @SuppressWarnings("unused")
     public static String getUserInput() {
         return userInput;
     }

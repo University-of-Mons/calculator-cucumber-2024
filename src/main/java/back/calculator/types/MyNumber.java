@@ -13,28 +13,31 @@ import java.math.MathContext;
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
  *
+ * <p>
+ *   A number is represented by a real part and an imaginary part which are both {@link AbstractValue}.
+ *   If the imaginary part is zero, the number is considered real.
+ * </p>
+ *
  * @see Expression
  * @see Operation
  */
 public class MyNumber implements Expression {
 
 
+    // The real part of the number
     private final AbstractValue real;
-    // INT - REAL - RATIONAL
-
+    // The imaginary part of the number
     private final AbstractValue imaginary;
-    // INT - REAL - RATIONAL
-
+    // The representation of the number. (Cartesian, Polar or Exponential)
     private ComplexForm representation = ComplexForm.CARTESIAN;
-
-    private MathContext precision = App.getPrecision();
+    // The precision of the object. (Use to create RealValue objects in the operations)
+    private final MathContext precision = App.getPrecision();
 
     /**
-     * getter method to obtain the value contained in the object
+     * getter method to obtain the real part of the object
      *
-     * @return The integer number contained in the object
+     * @return The real part of the object
      */
-
     public AbstractValue getReal() {
         return real;
     }
@@ -48,6 +51,10 @@ public class MyNumber implements Expression {
         return imaginary;
     }
 
+    /**
+     * Constructor method for real numbers
+     * @param v An AbstractValue object that represents the real number
+     */
     public MyNumber(AbstractValue v) {
         real = v;
         switch (v.getType()) {
@@ -63,6 +70,10 @@ public class MyNumber implements Expression {
         }
     }
 
+    /**
+     * Constructor method for real numbers with an integer value
+     * @param v The integer value of the real number
+     */
     public MyNumber(int v) {
         real = new IntValue(v);
         imaginary = new IntValue(0);
@@ -79,13 +90,18 @@ public class MyNumber implements Expression {
         this.imaginary = imaginary;
     }
 
+    /**
+     * Constructor method for complex numbers with integer values
+     * @param real The integer value of the real part
+     * @param imaginary The integer value of the imaginary part
+     */
     public MyNumber(int real, int imaginary) {
         this.real = new IntValue(real);
         this.imaginary = new IntValue(imaginary);
     }
 
     /**
-     * Method to check if the number is imaginary
+     * Method to check if the number is imaginary. A number is imaginary if the imaginary part is not zero.
      *
      * @return True if the number is imaginary, false otherwise.
      */
@@ -168,6 +184,13 @@ public class MyNumber implements Expression {
     /**
      * Convert a number into a String to allow it to be printed.
      *
+     * <p>
+     *     The number will be printed according to its representation. <br>
+     *     Cartesian: a + bi <br>
+     *     Polar: r(cos(theta) + i sin(theta)) <br>
+     *     Exponential: r exp(theta i)
+     * </p>
+     * @see ComplexForm
      * @return The String that is the result of the conversion.
      */
     @Override

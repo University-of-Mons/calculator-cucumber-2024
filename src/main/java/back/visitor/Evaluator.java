@@ -63,8 +63,8 @@ public class Evaluator extends Visitor {
             } catch (UnsupportedOperationException e) {
                 // unary operation not supported
                 Logger logger = LoggerFactory.getLogger(Evaluator.class);
-                if (logger.isWarnEnabled())
-                    logger.warn("{} {}", e.getMessage(), o);
+                if (logger.isErrorEnabled())
+                    logger.error("{}. The operation was {}", e.getMessage(), o);
                 computedValue = new NotANumber();
                 return;
             }

@@ -14,8 +14,10 @@ import java.util.List;
  * </p>
  */
 public class MySyntaxErrorListener extends BaseErrorListener {
+    // Flag to check if a syntax error has been detected
     private boolean hasError;
 
+    // Flag to store the error message
     private String message;
 
     /**

@@ -68,7 +68,7 @@ public class RationalValue extends AbstractValue {
                         break;
                 }
         }
-        this.setType(Type.RATIONAL);
+        this.type = Type.RATIONAL;
         this.reduce();
     }
 

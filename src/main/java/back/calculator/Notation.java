@@ -5,7 +5,7 @@ package back.calculator;
  */
 public enum Notation {
     /**
-     * Prefix notation, e.g. "+(1,2)" or "+ 1 2"
+     * Prefix notation, e.g. "+(1,2)" or "+ (1 2)"
      */
     PREFIX,
 
@@ -15,7 +15,7 @@ public enum Notation {
     INFIX,
 
     /**
-     * Postfix notation, e.g. "(1,2)+" or "1 2 +"
+     * Postfix notation, e.g. "(1,2)+" or "(1 2) +"
      */
     POSTFIX
 }

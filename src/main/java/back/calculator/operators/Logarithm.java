@@ -2,10 +2,27 @@ package back.calculator.operators;
 
 import back.calculator.*;
 import back.calculator.types.*;
+import org.slf4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * This class represents the arithmetic logarithm operation "ln".
+ * The class extends an abstract superclass Operation.
+ * Other subclasses of Operation represent other arithmetic operations.
+ *
+ * @see Operation
+ * @see Minus
+ * @see Times
+ * @see Plus
+ * @see Exponential
+ * @see Sqrt
+ * @see Divides
+ * @see Sinus
+ * @see Cosine
+ * @see Modulus
+ */
 public class Logarithm extends Operation {
 
     public Logarithm(List<Expression> elist) throws IllegalConstruction {
@@ -30,6 +47,9 @@ public class Logarithm extends Operation {
         if (l instanceof NotANumber)
             return new NotANumber();
         if (l.getReal().isEqualsZero()) {
+            Logger logger = Calculator.getLogger();
+            if (logger.isErrorEnabled())
+                logger.error("Logarithm of zero is undefined");
             return new NotANumber();
         }
         if (!l.getReal().isPositive())
