@@ -2,7 +2,7 @@
     -fx-color: white;
 }
 
-#btnOpenParenthesis, #btnCloseParenthesis, #btnComma, #btnExtension1, #btnExtension2, #btnExtension3, #btnExtension4, #btnExtension5 {
+#btnOpenParenthesis, #btnCloseParenthesis, #btnComma, #btnFraction, #btnExtension1, #btnExtension2, #btnExtension3, #btnExtension4, #btnExtension5 {
     -fx-color: #bdc3c7; /* Gris clair */
 }
 
@@ -10,7 +10,7 @@
     -fx-color: #FF6347; /* Rouge tomate */
 }
 
-#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction {
+#btnDivide, #btnMultiply, #btnMinus, #btnPlus {
     -fx-color: #FFA500;
 }
 
