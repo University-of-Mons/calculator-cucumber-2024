@@ -263,6 +263,41 @@ public class TestTimeGui {
     }
 
     @Test
+    void testTimeRetrieve(FxRobot fxRobot){
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#expression");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("09:00:00", display.getText());
+    }
+
+    @Test
     void testNotATime(FxRobot fxRobot){
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btn0");
