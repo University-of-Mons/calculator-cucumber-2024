@@ -22,18 +22,20 @@ public class MainViewController implements Initializable {
 
     // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
     //  à l'intérieur de la classe de contrôleur.
-    // TODO : Traduire en anglais si jamais il y a du français
 
     public static final String STANDARD_MODE = "Standard";
     public static final String RATIONAL_MODE = "Rational";
     public static final String COMPLEX_MODE = "Complex";
     public static final String CONVERSIONS_MODE = "Conversions";
+    public static final String TIME_MODE = "Time";
+    public static final String BOOLEAN_MODE = "Boolean";
+
     private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
 
     @FXML
     private BorderPane root;
     @FXML
-    private CheckMenuItem standardMode, rationalMode, complexMode, conversionsMode;
+    private CheckMenuItem standardMode, rationalMode, complexMode, booleanMode, timeMode, conversionsMode;
     @FXML
     private Menu modeMenu, zoomMenu; // unused
     @FXML
@@ -57,7 +59,7 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        modeMenuItems = List.of(standardMode, rationalMode, complexMode, conversionsMode);
+        modeMenuItems = List.of(standardMode, rationalMode, complexMode, timeMode, conversionsMode);
         updateMode(STANDARD_MODE);
     }
 
@@ -100,6 +102,18 @@ public class MainViewController implements Initializable {
     private void onConversionsMode() {
         if (!currentMode.equals(CONVERSIONS_MODE)) {
             updateMode(CONVERSIONS_MODE);
+    
+    @FXML
+    private void onTimeMode() {
+        if (!currentMode.equals(TIME_MODE)) {
+            updateMode(TIME_MODE);
+        }
+    }
+
+    @FXML
+    private void onBooleanMode() {
+        if (!currentMode.equals(BOOLEAN_MODE)) {
+            updateMode(BOOLEAN_MODE);
         }
     }
 

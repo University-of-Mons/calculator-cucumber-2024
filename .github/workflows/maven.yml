@@ -4,10 +4,10 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master, Conversions ]
+    branches: [ master, dev ]
   pull_request:
-    branches: [ master ]
-
+    branches: [ master, dev ]
+    
 jobs:
   build:
     name: building, testing and quality analysis
@@ -59,7 +59,6 @@ jobs:
       run: |
         git status 
         git log -1
-    
     - name: Commit and push the svg badges and the json coverage summary (if it changed)
       uses: EndBug/add-and-commit@v9
       with:
