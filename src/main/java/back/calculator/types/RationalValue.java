@@ -194,20 +194,6 @@ public class RationalValue extends AbstractValue {
         return new RationalValue(this, other);
     }
 
-//    /**
-//     * Convert a real number to a rational number
-//     *
-//     * @param number the real number (double) to convert
-//     * @return A RationalValue equivalent to the real number
-//     */
-//    public RationalValue convertReal(double number) {
-//        // TODO : Useful ?
-//        String strNumber = Double.toString(number);
-//        int numberAfterComma = strNumber.length() - strNumber.indexOf('.') - 1;
-//        int newNum = (int) number * (10 ^ numberAfterComma);
-//        int newDen = 10 ^ numberAfterComma;
-//        return new RationalValue(new IntValue(newNum), new IntValue(newDen));
-//    }
 
     public RealValue convertToReal(){
         RealValue num = new RealValue(new BigDecimal(this.num, precision));
