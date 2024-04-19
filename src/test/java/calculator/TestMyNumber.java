@@ -43,7 +43,7 @@ class TestMyNumber {
 
         // Case when other is not an instance of MyNumber or null
         assertNotEquals(new MyNumber(VALUE, VALUE), new Object());
-        assertNotEquals(new MyNumber(VALUE, VALUE), null);
+        assertNotEquals(null, new MyNumber(VALUE, VALUE));
     }
 
     @Test

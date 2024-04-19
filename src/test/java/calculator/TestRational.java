@@ -8,7 +8,7 @@ import java.math.MathContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestRational {
+class TestRational {
 
     @Test
     void testConstructor() {
@@ -149,26 +149,26 @@ public class TestRational {
     @Test
     void testEquals() {
         RationalValue r = new RationalValue(new IntValue(2), new IntValue(3));
-        assertTrue(r.equals(r));
+        assertEquals(true, r.equals(r));
 
         RationalValue r2 = new RationalValue(new IntValue(2), new IntValue(3));
-        assertFalse(r2.equals(new Object()));
+        assertEquals(false, r2.equals(new Object()));
 
         RationalValue r3 = new RationalValue(new IntValue(2), new IntValue(3));
         RationalValue r4 = new RationalValue(new IntValue(2), new IntValue(3));
-        assertTrue(r3.equals(r4));
+        assertEquals(true, r3.equals(r4));
 
         RationalValue r5 = new RationalValue(new IntValue(2), new IntValue(3));
         RationalValue r6 = new RationalValue(new IntValue(3), new IntValue(2));
-        assertFalse(r5.equals(r6));
+        assertEquals(false,r5.equals(r6));
 
         RationalValue r7 = new RationalValue(new IntValue(2), new IntValue(1));
         IntValue intValue = new IntValue(2);
-        assertTrue(r7.equals(intValue));
+        assertEquals(true, r7.equals(intValue));
 
         RationalValue r8 = new RationalValue(new IntValue(2), new IntValue(1));
         IntValue i = new IntValue(3);
-        assertFalse(r8.equals(i));
+        assertEquals(false,r8.equals(i));
     }
 
     @Test
