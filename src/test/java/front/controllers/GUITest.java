@@ -147,6 +147,15 @@ class GUITest extends ApplicationTest {
 
     }
 
+    @Test
+    void checkRealButton(FxRobot robot){
+        clickOn("#one");
+        clickOn("#divide");
+        clickOn("#two");
+        clickOn("#real");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("0.5");
+    }
+
 
     @Test
     void checkEqualsButton(FxRobot robot) {
