@@ -1,5 +1,11 @@
-package calculator;
+package calculator.operation;
 
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Notation;
+import calculator.Value;
+import calculator.operand.MyNumber;
+import lombok.Getter;
 import visitor.Printer;
 import visitor.Visitor;
 
@@ -13,25 +19,20 @@ import java.util.List;
  * @see Expression
  * @see MyNumber
  */
-public abstract class Operation implements Expression {
+public abstract class Operation<T> implements Expression<T> {
     /**
      * The list of expressions passed as an argument to the arithmetic operation
+     * -- GETTER --
+     * getter method to return the number of arguments of an arithmetic operation.
      */
-    public List<Expression> args;
+    @Getter
+    public List<Expression<T>> args;
 
     /**
      * The character used to represent the arithmetic operation (e.g. "+", "*")
      */
+    @Getter
     protected String symbol;
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    /**
-     * The neutral element of the operation (e.g. 1 for *, 0 for +)
-     */
-    protected int neutral;
 
     /**
      * To construct an operation with a list of expressions as arguments,
@@ -40,7 +41,7 @@ public abstract class Operation implements Expression {
      * @param elist The list of expressions passed as argument to the arithmetic operation
      * @throws IllegalConstruction Exception thrown if a null list of expressions is passed as argument
      */
-    protected /*constructor*/ Operation(List<Expression> elist)
+    protected /*constructor*/ Operation(List<Expression<T>> elist)
             throws IllegalConstruction {
         if (elist == null) {
             throw new IllegalConstruction();
@@ -50,22 +51,13 @@ public abstract class Operation implements Expression {
     }
 
     /**
-     * getter method to return the number of arguments of an arithmetic operation.
-     *
-     * @return The number of arguments of the arithmetic operation.
-     */
-    public List<Expression> getArgs() {
-        return args;
-    }
-
-    /**
      * Abstract method representing the actual binary arithmetic operation to compute
      *
      * @param l first argument of the binary operation
      * @param r second argument of the binary operation
      * @return result of computing the binary operation
      */
-    public abstract int op(int l, int r);
+    public abstract Value<T> op(Value<T> l, Value<T> r);
     // the operation itself is specified in the subclasses
 
     /**
@@ -73,7 +65,7 @@ public abstract class Operation implements Expression {
      *
      * @param params The list of parameters to be added
      */
-    public void addMoreParams(List<Expression> params) {
+    public void addMoreParams(List<Expression<T>> params) {
         args.addAll(params);
     }
 
@@ -84,44 +76,8 @@ public abstract class Operation implements Expression {
      *
      * @param v The visitor object
      */
-    public void accept(Visitor v) {
+    public void accept(Visitor<T> v) {
         v.visit(this);
-    }
-
-    /**
-     * Count the depth of an arithmetic expression recursively,
-     * using Java 8 functional programming capabilities (streams, maps, etc...)
-     *
-     * @return The depth of the arithmetic expression being traversed
-     */
-    public final int countDepth() {
-        // use of Java 8 functional programming capabilities
-        return 1 + args.stream()
-                .mapToInt(Expression::countDepth)
-                .max()
-                .getAsInt();
-    }
-
-    /**
-     * Count the number of operations contained in an arithmetic expression recursively,
-     * using Java 8 functional programming capabilities (streams, maps, etc...)
-     *
-     * @return The number of operations contained in an arithmetic expression being traversed
-     */
-    public final int countOps() {
-        // use of Java 8 functional programming capabilities
-        return 1 + args.stream()
-                .mapToInt(Expression::countOps)
-                .reduce(Integer::sum)
-                .getAsInt();
-    }
-
-    public final int countNbs() {
-        // use of Java 8 functional programming capabilities
-        return args.stream()
-                .mapToInt(Expression::countNbs)
-                .reduce(Integer::sum)
-                .getAsInt();
     }
 
     /**
@@ -143,7 +99,7 @@ public abstract class Operation implements Expression {
      * @return The String that is the result of the conversion.
      */
     public final String toString(Notation n) {
-        Printer p = new Printer(n);
+        Printer<T> p = new Printer<>(n);
         this.accept(p);
         return p.getResult();
     }
@@ -163,7 +119,7 @@ public abstract class Operation implements Expression {
         if (getClass() != o.getClass())
             return false; // getClass() instead of instanceof() because an addition is not the same as a multiplication
 
-        Operation other = (Operation) o;
+        Operation<T> other = (Operation<T>) o;
         return this.args.equals(other.getArgs());
     }
 
@@ -176,8 +132,8 @@ public abstract class Operation implements Expression {
      */
     @Override
     public int hashCode() {
-        int result = 5, prime = 31;
-        result = prime * result + neutral;
+        int result = 5;
+        int prime = 31;
         result = prime * result + symbol.hashCode();
         result = prime * result + args.hashCode();
         return result;

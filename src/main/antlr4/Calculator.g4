@@ -51,6 +51,7 @@ expression
 multiplyingExpression
     : powExpression
     | multiplyingExpression ((TIMES | DIV) powExpression)
+    | LPAREN expression RPAREN (LPAREN expression RPAREN)+
     ;
 
 powExpression
@@ -88,8 +89,8 @@ BOOLEAN: 'true' | 'false';
 
 // Atom
 signedAtom
-    : PLUS scientific
-    | MINUS scientific
+    : PLUS atom
+    | MINUS atom
     | func_
     | atom
     ;

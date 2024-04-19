@@ -1,13 +1,11 @@
 package calculator;
 
-public class MyNaN extends MyNumber {
-    // TODO : MyNaN should extend a common class with MyNumber
-
+public class MyNaN<T> extends Value<T> {
     /**
      * Constructor method
      */
     public MyNaN() {
-        super(0);
+        super(null);
     }
 
     @Override
@@ -21,6 +19,36 @@ public class MyNaN extends MyNumber {
         if (o == null) return false;
 
         // If the object is of another type then return false
-        return o instanceof MyNumber;
+        return o instanceof MyNaN;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    @Override
+    public Value<T> plus(Value<T> other) {
+        return new MyNaN<>();
+    }
+
+    @Override
+    public Value<T> minus(Value<T> other) {
+        return new MyNaN<>();
+    }
+
+    @Override
+    public Value<T> times(Value<T> other) {
+        return new MyNaN<>();
+    }
+
+    @Override
+    public Value<T> div(Value<T> other) {
+        return new MyNaN<>();
+    }
+
+    @Override
+    public Value<T> opposite() {
+        return null;
     }
 }

@@ -1,4 +1,8 @@
-package calculator;
+package calculator.operation;
+
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Value;
 
 import java.util.List;
 
@@ -12,7 +16,7 @@ import java.util.List;
  * @see Times
  * @see Divides
  */
-public final class Plus extends Operation {
+public final class Plus<T> extends Operation<T> {
 
     /**
      * Class constructor specifying a number of Expressions to add.
@@ -20,10 +24,9 @@ public final class Plus extends Operation {
      * @param elist The list of Expressions to add
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
      */
-    public /*constructor*/ Plus(List<Expression> elist) throws IllegalConstruction {
+    public /*constructor*/ Plus(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "+";
-        neutral = 0;
     }
 
     /**
@@ -33,7 +36,7 @@ public final class Plus extends Operation {
      * @param r The second integer that should be added to the first
      * @return The integer that is the result of the addition
      */
-    public int op(int l, int r) {
-        return (l + r);
+    public Value<T> op(Value<T> l, Value<T> r) {
+        return l.plus(r);
     }
 }

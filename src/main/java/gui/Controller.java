@@ -1,78 +1,119 @@
 package gui;
 
+import calculator.Calculator;
+import calculator.Expression;
+import calculator.IllegalExpression;
+import calculator.parser.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Controller {
 
-    private String currentExpressionText = "";
-
-    @FXML private Label currentExpression;
-
-    @FXML private Button digitZero;
-    @FXML private Button digitOne;
-    @FXML private Button digitTwo;
-    @FXML private Button digitThree;
-    @FXML private Button digitFour;
-    @FXML private Button digitFive;
-    @FXML private Button digitSix;
-    @FXML private Button digitSeven;
-    @FXML private Button digitEight;
-    @FXML private Button digitNine;
-
-    @FXML private Button operatorEquals;
-    @FXML private Button operatorPlus;
-    @FXML private Button operatorMinus;
-    @FXML private Button operatorTimes;
-    @FXML private Button operatorDivide;
-
-    @FXML private Button optionUndo;
-    @FXML private Button optionAnswer;
-
-    @FXML
-    private void handleKeyboard(KeyEvent event) {
-        String typedCharacter = event.getText();
-        if (event.getCode() == KeyCode.BACK_SPACE && !currentExpressionText.isEmpty()) {
-            currentExpressionText = currentExpressionText.substring(0, currentExpressionText.length() - 1);
-        } else {
-            currentExpressionText += typedCharacter;
-        }
-        currentExpression.setText(currentExpressionText);
+    private enum CalculatorType{
+        INTEGER, RATIONAL, REAL
     }
+    @FXML
+    private ChoiceBox<CalculatorType> typeBox;
+    @FXML
+    private Label currentExpression;
+    @FXML
+    private Label history;
+    @FXML
+    private Button operatorEquals;
+    @FXML
+    private Button operatorPlus;
+    @FXML
+    private Button operatorMinus;
+    @FXML
+    private Button operatorTimes;
+    @FXML
+    private Button operatorDivide;
+    @FXML
+    private Button digitZero;
+    @FXML
+    private Button optionUndo;
+    @FXML
+    private Button optionAnswer;
+    @FXML
+    private GridPane mainPane;
+
 
     @FXML
     private void initialize() {
+        typeBox.getItems().setAll(CalculatorType.values());
+        typeBox.setValue(CalculatorType.INTEGER);
+        for (int i = 0; i < 9; i++) {
+            final String s = String.valueOf(i + 1);
+            Button b = new Button(s);
+            b.setStyle("-fx-font: 32 system;");
+            b.getStyleClass().add("button-number");
+            b.setOnAction(actionEvent -> addCharacter(s));
+            mainPane.add(b, i % 3, i / 3 + 1);
+        }
+
         digitZero.setOnAction(event -> addCharacter("0"));
-        digitOne.setOnAction(event -> addCharacter("1"));
-        digitTwo.setOnAction(event -> addCharacter("2"));
-        digitThree.setOnAction(event -> addCharacter("3"));
-        digitFour.setOnAction(event -> addCharacter("4"));
-        digitFive.setOnAction(event -> addCharacter("5"));
-        digitSix.setOnAction(event -> addCharacter("6"));
-        digitSeven.setOnAction(event -> addCharacter("7"));
-        digitEight.setOnAction(event -> addCharacter("8"));
-        digitNine.setOnAction(event -> addCharacter("9"));
-        operatorEquals.setOnAction(event -> addCharacter("="));
         operatorPlus.setOnAction(event -> addCharacter("+"));
         operatorMinus.setOnAction(event -> addCharacter("-"));
         operatorTimes.setOnAction(event -> addCharacter("*"));
         operatorDivide.setOnAction(event -> addCharacter("/"));
         optionUndo.setOnAction(event -> removeCharacter());
+        operatorEquals.setOnAction(event -> evaluate());
         optionAnswer.setOnAction(event -> addCharacter("ans"));
     }
 
+    @FXML
+    private void handleKeyboard(KeyEvent event) {
+        log.trace("Key pressed: {}", event.getCode());
+        if (event.getCode() == KeyCode.BACK_SPACE && !currentExpression.getText().isEmpty()) {
+            removeCharacter();
+        } else if (event.getCode() == KeyCode.ENTER) {
+            evaluate();
+        } else {
+            addCharacter(event.getText());
+        }
+    }
     private void addCharacter(String character) {
-        currentExpressionText += character;
-        currentExpression.setText(currentExpressionText);
+        currentExpression.setTextFill(Color.WHITE);
+        currentExpression.setText(currentExpression.getText() + character);
     }
 
     private void removeCharacter() {
-        if (!currentExpressionText.isEmpty()) {
-            currentExpressionText = currentExpressionText.substring(0, currentExpressionText.length() - 1);
-            currentExpression.setText(currentExpressionText);
+        currentExpression.setTextFill(Color.WHITE);
+        if (!currentExpression.getText().isEmpty()) {
+            String temp = currentExpression.getText().substring(0, currentExpression.getText().length() - 1);
+            currentExpression.setText(temp);
+        }
+    }
+
+    private void evaluate(){
+        switch (typeBox.getValue()){
+            case INTEGER -> evaluateT(Parser::stringToInteger);
+            case RATIONAL -> {} //todo
+            case REAL -> {} //todo
+        }
+    }
+    private<T> void evaluateT(Parser.From<T> parser) {
+        Parser<T> p = new Parser<>();
+        Expression<T> e;
+        try {
+            e = p.parse(currentExpression.getText(), parser);
+        } catch (IllegalExpression i) {
+            log.warn("Supplied expression is not correct : {}", currentExpression.getText());
+            currentExpression.setTextFill(Color.RED);
+            return;
+        }
+        Calculator<T> c = new Calculator<>();
+        if (!currentExpression.getText().isEmpty()) {
+            history.setText(history.getText() + "\n" + c.eval(e).getVal().toString());
+            currentExpression.setText("");
         }
     }
 }

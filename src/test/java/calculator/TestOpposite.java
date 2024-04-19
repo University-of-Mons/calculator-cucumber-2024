@@ -3,29 +3,27 @@ package calculator;
 //Import Junit5 libraries for unit testing:
 
 import calculator.operand.MyNumber;
-import calculator.operation.Divides;
+import calculator.operation.Opposite;
 import calculator.operation.Times;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestDivides {
+class TestOpposite {
 
     private final int value1 = 8;
-    private final int value2 = 6;
-    private Divides<Integer> op;
+    private Opposite<Integer> op;
     private List<Expression<Integer>> params;
 
     @BeforeEach
     void setUp() {
-        params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        params = List.of(new MyNumber(value1));
         try {
-            op = new Divides<>(params);
+            op = new Opposite<>(params);
         } catch (IllegalConstruction e) {
             fail();
         }
@@ -34,13 +32,13 @@ class TestDivides {
     @Test
     void testConstructor1() {
         // It should not be possible to create an expression without null parameter list
-        assertThrows(IllegalConstruction.class, () -> op = new Divides<>(null));
+        assertThrows(IllegalConstruction.class, () -> op = new Opposite<>(null));
     }
 
     @SuppressWarnings("AssertBetweenInconvertibleTypes")
     @Test
     void testConstructor2() {
-        // A Times expression should not be the same as a Divides expression
+        // A Times expression should not be the same as a Opposite expression
         try {
             assertNotSame(op, new Times<>(new ArrayList<>()));
         } catch (IllegalConstruction e) {
@@ -51,9 +49,9 @@ class TestDivides {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        List<Expression<Integer>> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression<Integer>> p = List.of(new MyNumber(value1));
         try {
-            Divides<Integer> d = new Divides<>(p);
+            Opposite<Integer> d = new Opposite<>(p);
             assertEquals(op, d);
         } catch (IllegalConstruction e) {
             fail();
@@ -69,9 +67,9 @@ class TestDivides {
     @Test
     void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        List<Expression<Integer>> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression<Integer>> p = List.of(new MyNumber(value1));
         try {
-            Divides<Integer> e = new Divides<>(p);
+            Opposite<Integer> e = new Opposite<>(p);
             assertEquals(e.hashCode(), op.hashCode());
         } catch (IllegalConstruction e) {
             fail();
@@ -81,7 +79,12 @@ class TestDivides {
     @Test
     void testNullParamList() {
         params = null;
-        assertThrows(IllegalConstruction.class, () -> op = new Divides<>(params));
+        assertThrows(IllegalConstruction.class, () -> op = new Opposite<>(params));
+    }
+
+    @Test
+    void testMoreOneParam() {
+        assertThrows(IllegalConstruction.class, () -> new Opposite<>(List.of(new MyNumber(4), new MyNumber(5))));
     }
 
 }
