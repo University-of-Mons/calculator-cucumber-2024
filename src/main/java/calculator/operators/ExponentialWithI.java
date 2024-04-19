@@ -9,20 +9,20 @@ import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
 
 import java.util.List;
-
 /**
- * IntoExponentialForm is an operator that returns the complex number corresponding to the exponential form of a complex number.
+ * Exponential_i is an operator that returns the complex number corresponding to the exponential form of a complex number.
  */
-public class IntoExponentialForm extends Operation {
+public class ExponentialWithI extends Operation {
+
     /**
-     * Constructor for the IntoExponentialForm class.
+     * Constructor for the Exponential_i class.
      *
      * @param expressionList The list of expressions to be operated on
      * @throws IllegalConstruction If the construction is illegal
      */
-    public IntoExponentialForm(List<Expression> expressionList) throws IllegalConstruction {
+    public ExponentialWithI(List<Expression> expressionList) throws IllegalConstruction {
         super(expressionList);
-        symbol = "intoExpoentialForm";
+        symbol = "cis";
     }
 
     /**
@@ -30,25 +30,27 @@ public class IntoExponentialForm extends Operation {
      *
      * @param l The complex number to be converted to exponential form
      * @param r The complex number to be converted to exponential form
-     * @return MyNotANumber
+     * @return The complex number corresponding to the exponential form of a complex number
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        return new MyNotANumber();
+        if (l instanceof MyNotANumber || r instanceof MyNotANumber)
+            return new MyNotANumber() ;
+        else {
+            ComplexNumber complexNumber=  new ComplexNumber(l.getReal() * Math.cos(Math.toRadians(r.getReal())), l.getReal() * Math.sin(Math.toRadians(r.getReal())));
+            complexNumber.setForm(ComplexForm.EXPONENTIAL);
+            return complexNumber;
+        }
     }
 
     /**
      * Method to calculate the complex number corresponding to the exponential form of a complex number.
      *
      * @param l The complex number to be converted to exponential form
-     * @return The complex number corresponding to the exponential form of a complex number
+     * @return MyNotANumber
      */
     @Override
     public MyNumber op(MyNumber l) {
-        if (l instanceof ComplexNumber){
-            ((ComplexNumber) l).setForm(ComplexForm.EXPONENTIAL);
-            return l;
-        }
         return new MyNotANumber();
     }
 }

@@ -10,11 +10,20 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import parser.ComplexNumber.*;
 import visitor.ComplexParserVisitor;
 
+/**
+ * ComplexNumberParser is a class that parses a string and returns the corresponding complex number.
+ */
 public class ComplexNumberParser {
 
     public final Calculator c;
     private final ParseTree tree;
 
+    /**
+     * Constructor for the ComplexNumberParser class.
+     *
+     * @param expression The expression to be parsed
+     * @param c The calculator to be used
+     */
     public ComplexNumberParser(String expression, Calculator c){
         this.c = c;
         CharStream input = CharStreams.fromString(expression);
@@ -24,6 +33,11 @@ public class ComplexNumberParser {
         tree = parser.prog();
     }
 
+    /**
+     * Method to evaluate the expression and return the corresponding complex number.
+     *
+     * @return The complex number corresponding to the expression
+     */
     public MyNumber evaluate(){
         ComplexParserVisitor visitor = new ComplexParserVisitor(c);
         Expression e = visitor.visit(tree);

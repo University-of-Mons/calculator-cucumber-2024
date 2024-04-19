@@ -1,5 +1,7 @@
-package calculator;
+package calculator.ComplexNumber;
 
+import calculator.Calculator;
+import calculator.IllegalConstruction;
 import calculator.numbers.*;
 import calculator.operators.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -285,7 +287,7 @@ class TestComplexNumber {
         MyNumber number2 = new MyNumber( 45);
         List<Expression> para = Arrays.asList(number1, number2);
         try {
-            Exponential_i exponential_i = new Exponential_i(para);
+            ExponentialWithI exponential_i = new ExponentialWithI(para);
             ComplexNumber result = new ComplexNumber((number1.getReal() * Math.cos(Math.toRadians(number2.getReal()))), number1.getReal() * Math.sin(Math.toRadians(number2.getReal())));
             result.setForm(ComplexForm.EXPONENTIAL);
             assertEquals((int) result.getReal(), (int) calc.eval(exponential_i).getReal());
@@ -301,7 +303,7 @@ class TestComplexNumber {
     void testExponential_iWithOneNmber() {
         List<Expression> para = Arrays.asList(new MyNumber(2));
         try {
-            Exponential_i exponential_i = new Exponential_i(para);
+            ExponentialWithI exponential_i = new ExponentialWithI(para);
             assertInstanceOf(MyNotANumber.class, calc.eval(exponential_i));
         } catch (IllegalConstruction e) {
             fail();
@@ -315,7 +317,7 @@ class TestComplexNumber {
         MyNumber number2 = new MyNumber( Math.PI/4);
         List<Expression> para = Arrays.asList(number, number2);
         try {
-            Exponential_i exponential_i = new Exponential_i(para);
+            ExponentialWithI exponential_i = new ExponentialWithI(para);
             assertInstanceOf(MyNotANumber.class, calc.eval(exponential_i));
         } catch (IllegalConstruction e) {
             fail();
@@ -411,7 +413,7 @@ class TestComplexNumber {
     void testStringExponentialIntoExponential() {
         List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber( Math.PI/4));
         try {
-            Exponential_i exponential_i = new Exponential_i(para);
+            ExponentialWithI exponential_i = new ExponentialWithI(para);
             List<Expression> para2 = Collections.singletonList(exponential_i);
             IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para2);
             assertEquals("2 * e^(i*0)", calc.eval(intoExponentialForm).toString());
@@ -425,7 +427,7 @@ class TestComplexNumber {
     void testStringExponentialIntoCartesian() {
         List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber(45));
         try {
-            Exponential_i exponential_i = new Exponential_i(para);
+            ExponentialWithI exponential_i = new ExponentialWithI(para);
             List<Expression> para2 = Collections.singletonList(exponential_i);
             IntoCartesianFrom intoCartesianFrom = new IntoCartesianFrom(para2);
             assertEquals("1 + i", calc.eval(intoCartesianFrom).toString());
@@ -439,7 +441,7 @@ class TestComplexNumber {
     void testStringExponentialIntoPolar() {
         List<Expression> para = Arrays.asList(new MyNumber(2), new MyNumber( Math.PI/4));
         try {
-            Exponential_i exponential_i = new Exponential_i(para);
+            ExponentialWithI exponential_i = new ExponentialWithI(para);
             List<Expression> para2 = Collections.singletonList(exponential_i);
             IntoPolarForm intoPolarFrom = new IntoPolarForm(para2);
             assertEquals("2 * cis(0)", calc.eval(intoPolarFrom).toString());
@@ -536,7 +538,7 @@ class TestComplexNumber {
         assertEquals(complexNumber1, complexNumber1);
         assertNotEquals(complexNumber1, complexNumber2);
         assertNotEquals(complexNumber1, new MyNumber(3));
-        assertNotEquals(complexNumber1, null);
+        assertNotEquals(null, complexNumber1);
         assertNotEquals(complexNumber1, new ComplexNumber(real1,imaginary2));
         assertNotEquals(complexNumber1, new ComplexNumber(real2,imaginary1));
     }

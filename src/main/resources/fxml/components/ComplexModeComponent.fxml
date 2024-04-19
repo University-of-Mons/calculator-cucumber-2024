@@ -39,13 +39,7 @@
                 <Font name="Avenir Black" size="20.0" />
             </font>
         </Button>
-        <Button fx:id="btnModulus" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onModulus" prefHeight="81.0" prefWidth="240.0" text="|Z|" textAlignment="CENTER"   GridPane.rowIndex="3" >
-            <font>
-                <Font name="Avenir Black" size="36.0" />
-            </font>
-        </Button>
-
-        <Button fx:id="btnPI" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPi" prefHeight="81.0" prefWidth="120.0" text="pi" textAlignment="CENTER"  GridPane.columnIndex="2" GridPane.rowIndex="3">
+        <Button fx:id="btnModulus" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onModulus" prefHeight="81.0" prefWidth="360.0" text="|Z|" textAlignment="CENTER"   GridPane.rowIndex="3" >
             <font>
                 <Font name="Avenir Black" size="36.0" />
             </font>

@@ -73,6 +73,11 @@ public class ComplexNumber extends MyNumber{
 
 
 
+    /**
+     * Methode to convert a complex number to a string.
+     *
+     * @return The string representation of the complex number
+     */
     @Override
     public String toString() {
         return switch (form) {
@@ -82,7 +87,11 @@ public class ComplexNumber extends MyNumber{
         };
     }
 
-
+    /**
+     * Method to convert a complex number to a string in Cartesian form.
+     *
+     * @return The string representation of the complex number in Cartesian form
+     */
     public String toStringCartesian() {
         if ((int) this.getImaginary() ==0) {
             return (int) this.getReal() + "";
@@ -110,12 +119,22 @@ public class ComplexNumber extends MyNumber{
     }
 
 
+    /**
+     * Method to convert a complex number to a string in Polar form.
+     *
+     * @return The string representation of the complex number in Polar form
+     */
     private String toStringPolar() {
         int r = (int) Math.sqrt(Math.pow(this.getReal(), 2) + Math.pow(this.getImaginary(), 2));
         int theta = (int) Math.toDegrees(Math.atan2(this.getImaginary(), this.getReal()));
         return r + " * cis(" + theta + ")";
     }
 
+    /**
+     * Method to convert a complex number to a string in Exponential form.
+     *
+     * @return The string representation of the complex number in Exponential form
+     */
     private String toStringExponential() {
         int r = (int) Math.sqrt(Math.pow(this.getReal(), 2) + Math.pow(this.getImaginary(), 2));
         int theta = (int) Math.toDegrees(Math.atan2(this.getImaginary(), this.getReal()));

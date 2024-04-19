@@ -48,7 +48,7 @@ public class MyNumber implements Expression
    * @return The floating number that represents the real part of the complex number
    */
   public double getReal() {
-      return value;
+      return this.value;
   }
 
   /**
