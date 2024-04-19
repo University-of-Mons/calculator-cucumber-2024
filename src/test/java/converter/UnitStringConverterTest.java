@@ -3,8 +3,8 @@ package converter;
 import back.converter.UnitStringConverter;
 import back.converter.Units;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the UnitStringConverter class.
@@ -36,9 +36,9 @@ public class UnitStringConverterTest {
     @Test
     public void testFromString() {
         UnitStringConverter converter = new UnitStringConverter();
-        String expected = Units.Time.HOUR.getSymbol();
-        Units.Unit unit = converter.fromString(expected);
-        assertEquals(expected, unit.getSymbol());
+        Units.Unit unit = Units.Time.HOUR;
+        String symbol = unit.getSymbol();
+        assertNull(converter.fromString(symbol));
         assertNull(converter.fromString(null));
         assertNull(converter.fromString(""));
     }

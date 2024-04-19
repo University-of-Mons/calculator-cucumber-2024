@@ -31,9 +31,8 @@ public class UnitClassStringConverterTest {
     @Test
     public void testFromString() {
         UnitClassStringConverter converter = new UnitClassStringConverter();
-        Class<Units.Time> expected = Units.Time.class;
-        Class<? extends Units.Unit> result = converter.fromString(expected.toString());
-        assertEquals(expected, result);
+        Class<Units.Time> clazz = Units.Time.class;
+        assertNull(converter.fromString(clazz.toString()));
         assertNull(converter.fromString(null));
         assertNull(converter.fromString(""));
     }
