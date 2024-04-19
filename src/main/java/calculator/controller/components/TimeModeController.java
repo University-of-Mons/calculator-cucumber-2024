@@ -29,7 +29,7 @@ public class TimeModeController implements Initializable, ModeController {
 
     private boolean resetDisplay = false;
     private MyTime time;
-    private final String pattern = "##.00";
+    private final String pattern = "##0.00";
     private final LocalDateTime origin = LocalDateTime.of(0,1,1,0,0,0);
 
     @Override

@@ -23,7 +23,7 @@ public class TestMyTime {
 
     @Test
     public void testToString(){
-        assertEquals("2002-07-23T15:43", time.toString());
+        assertEquals("2002:07:23:15:43:00", time.toString());
     }
 
 }

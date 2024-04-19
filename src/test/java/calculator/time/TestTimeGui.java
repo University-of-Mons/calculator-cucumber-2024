@@ -131,7 +131,7 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnEquals");
         fxRobot.clickOn("#btnUnitDay");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
-        Assertions.assertEquals("365.0 days", display.getText());
+        Assertions.assertEquals("365,00 days", display.getText());
     }
 
     @Test
@@ -158,7 +158,7 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnEquals");
         fxRobot.clickOn("#btnUnitHour");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
-        Assertions.assertEquals("36.0 hours", display.getText());
+        Assertions.assertEquals("36,00 hours", display.getText());
     }
 
     @Test
@@ -174,7 +174,7 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnEquals");
         fxRobot.clickOn("#btnUnitMin");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
-        Assertions.assertEquals("720.0 minutes", display.getText());
+        Assertions.assertEquals("720,00 minutes", display.getText());
     }
 
     @Test
@@ -207,7 +207,7 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnEquals");
         fxRobot.clickOn("#btnUnitDay");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
-        Assertions.assertEquals("0.5 days", display.getText());
+        Assertions.assertEquals("0,50 days", display.getText());
     }
 
     @Test
@@ -327,8 +327,8 @@ public class TestTimeGui {
         fxRobot.clickOn("#btn0");
         fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnEquals");
-        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         LocalDateTime currentTime = LocalDateTime.now();
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         LocalDateTime modifiedTime = currentTime.minusHours(10);
         MyTime now = new MyTime(modifiedTime.getYear(), modifiedTime.getMonthValue(),
                 modifiedTime.getDayOfMonth(), modifiedTime.getHour(),
@@ -377,8 +377,8 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnMinus");
         fxRobot.clickOn("#btnEquals");
-        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         LocalDateTime currentTime = LocalDateTime.now();
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         LocalDateTime modifiedTime = currentTime.minusHours(10);
         MyTime now = new MyTime(modifiedTime.getYear(), modifiedTime.getMonthValue(),
                 modifiedTime.getDayOfMonth(), modifiedTime.getHour(),
