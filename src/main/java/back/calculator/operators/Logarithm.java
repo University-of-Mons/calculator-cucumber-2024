@@ -34,7 +34,7 @@ public class Logarithm extends Operation {
         }
         if (!l.getReal().isPositive())
             // = ln(|a|) + i arg(a) // Since a is negative, arg(a) = pi
-            return new MyNumber(l.getReal().mul(new IntValue(-1)).ln(), new RealValue(new BigDecimal(Math.PI, App.getPrecision())));
+            return new MyNumber(l.getReal().mul(new IntValue(-1)).ln(), new RealValue(new BigDecimal(Double.toString(Math.PI), App.getPrecision())));
         if (l.isImaginary()) {
             // ln(a + bi) = 1/2 ln(a^2 + b^2) + i atan(b/a)
             AbstractValue a = l.getReal();

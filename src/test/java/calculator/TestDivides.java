@@ -21,11 +21,10 @@ class TestDivides {
     private static final int value1 = 8;
     private static final int value2 = 6;
     private Divides op;
-    private List<Expression> params;
 
     @BeforeEach
     void setUp() {
-        params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
         try {
             op = new Divides(params);
             op.setNotation(Notation.INFIX); // reset the notation to infix (which is the default) before each test

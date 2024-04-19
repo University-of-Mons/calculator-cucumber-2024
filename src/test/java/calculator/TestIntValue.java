@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class TestIntValue {
+class TestIntValue {
 
     @Test
     void testConstructor() {
@@ -30,10 +29,10 @@ public class TestIntValue {
         assertNotEquals(i, new MyNumber(i));
 
         RationalValue r = new RationalValue(new IntValue(1), new IntValue(1));
-        assertEquals(i, r);
+        assertEquals(i, r); //NOSONAR
 
         RealValue re = new RealValue(new BigDecimal("1", App.getPrecision()));
-        assertEquals(i, re);
+        assertEquals(i, re); //NOSONAR
     }
 
     @Test

@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestSinus {
+class TestSinus {
 
     private static final int real = 3;
     private static final int imaginary = 4;
@@ -57,8 +57,11 @@ public class TestSinus {
 
     @Test
     void testOpWith2ParametersShouldThrow() {
+        MyNumber a = new MyNumber(1);
+        MyNumber b = new MyNumber(2);
+
         // It should not be possible to call op with 2 parameters
-        assertThrows(UnsupportedOperationException.class, () -> op.op(new MyNumber(1), new MyNumber(2)));
+        assertThrows(UnsupportedOperationException.class, () -> op.op(a, b));
     }
 
     @Test

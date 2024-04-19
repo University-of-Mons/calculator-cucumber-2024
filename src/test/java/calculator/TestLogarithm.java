@@ -4,7 +4,6 @@ import back.calculator.Expression;
 import back.calculator.IllegalConstruction;
 import back.calculator.Notation;
 import back.calculator.operators.Logarithm;
-import back.calculator.operators.Logarithm;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,13 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TestLogarithm {
+class TestLogarithm {
 
     private Logarithm op;
-    private int real = 1;
-    private int imaginary = 2;
+    private final int real = 1;
+    private final int imaginary = 2;
 
 
     @BeforeEach
@@ -79,8 +77,10 @@ public class TestLogarithm {
 
     @Test
     void testOpWith2ParametersShouldThrow() {
+        MyNumber a = new MyNumber(1);
+        MyNumber b = new MyNumber(2);
         // It should not be possible to call op with 2 parameters
-        assertThrows(UnsupportedOperationException.class, () -> op.op(new MyNumber(1), new MyNumber(2)));
+        assertThrows(UnsupportedOperationException.class, () -> op.op(a, b));
     }
 
     @Test

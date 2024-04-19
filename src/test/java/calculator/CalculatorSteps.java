@@ -260,8 +260,7 @@ public class CalculatorSteps {
     public void thenItsFormIs(String notation, String s) {
         if (notation.equals("CARTESIAN") || notation.equals("POLAR") || notation.equals("EXPONENTIAL")) {
             // Check if the number printed in the given notation is the same as the expected one
-            if (params.get(0) instanceof MyNumber) {
-                MyNumber number = (MyNumber) params.get(0);
+            if (params.get(0) instanceof MyNumber number) {
                 number.setForm(ComplexForm.valueOf(notation));
                 assertEquals(s, number.toString());
             } else fail("The parameter is not a number! ");

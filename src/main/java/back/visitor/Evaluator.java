@@ -52,7 +52,7 @@ public class Evaluator extends Visitor {
             a.accept(this);
             evaluatedArgs.add(computedValue);
         }
-        //second loop to accumulate all the evaluated subresults
+        //second loop to accumulate all the evaluated sub results
         MyNumber temp = evaluatedArgs.get(0);
         int max = evaluatedArgs.size();
         if (max == 1) {
@@ -63,7 +63,7 @@ public class Evaluator extends Visitor {
             } catch (UnsupportedOperationException e) {
                 // unary operation not supported
                 Logger logger = LoggerFactory.getLogger(Evaluator.class);
-                logger.error(e.getMessage() + " " + o);
+                logger.error("{} {}", e.getMessage(), o);
                 computedValue = new NotANumber();
                 return;
             }

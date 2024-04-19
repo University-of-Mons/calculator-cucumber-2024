@@ -7,9 +7,9 @@ import java.math.MathContext;
 
 public class IntValue extends AbstractValue {
 
-    private int value;
+    private final int value;
 
-    private MathContext precision = App.getPrecision();
+    private final MathContext precision = App.getPrecision();
 
     public IntValue(int value) {
         this.setType(Type.INT);
@@ -28,7 +28,7 @@ public class IntValue extends AbstractValue {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AbstractValue abstractValue)){
+        if (!(o instanceof AbstractValue abstractValue)) {
             return false;
         }
         return switch (abstractValue.getType()) {
@@ -77,6 +77,8 @@ public class IntValue extends AbstractValue {
                 return new RealValue(new BigDecimal(this.value, precision)).div((other));
             case RATIONAL:
                 return new RationalValue(new IntValue(this.value), new IntValue(1)).div(other);
+            default:
+                // INT
         }
 
         if (this.value == ((IntValue) other).getValue()) {
@@ -122,12 +124,12 @@ public class IntValue extends AbstractValue {
     }
 
     @Override
-    public boolean isEqualsZero(){
+    public boolean isEqualsZero() {
         return this.value == 0;
     }
 
     @Override
-    public boolean isPositive(){
+    public boolean isPositive() {
         return this.value >= 0;
     }
 }
