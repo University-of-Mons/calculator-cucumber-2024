@@ -3,7 +3,6 @@ package calculator.controller.components;
 
 import calculator.BooleanParser;
 import calculator.Calculator;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class BooleanModeController implements Initializable, ModeController{
@@ -24,11 +25,19 @@ public class BooleanModeController implements Initializable, ModeController{
     @FXML
     private Button btn0, btn1;
 
-
+    private final Map<String, String> dictionary = new HashMap<>();
     private boolean resetDisplay = false;
 
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        dictionary.put("¬", "NOT");
+        dictionary.put("∨", "OR");
+        dictionary.put("∧", "AND");
+        dictionary.put("⊕", "XOR");
+        dictionary.put("→", "IMPL");
+        dictionary.put("↔", "EQ");
+    }
 
     // Button click event handlers
     @FXML
@@ -38,27 +47,27 @@ public class BooleanModeController implements Initializable, ModeController{
     }
 
     public void onNot() {
-        appendToDisplay("NOT");
+        appendToDisplay(" ¬ ");
     }
 
     public void onOr() {
-        appendToDisplay("OR");
+        appendToDisplay(" ∨ ");
     }
 
     public void onAnd() {
-        appendToDisplay("AND");
+        appendToDisplay(" ∧ ");
     }
 
     public void onXor() {
-        appendToDisplay("XOR");
+        appendToDisplay(" ⊕ ");
     }
 
     public void onImply() {
-        appendToDisplay("IMPL");
+        appendToDisplay(" → ");
     }
 
     public void onEquiv() {
-        appendToDisplay("EQ");
+        appendToDisplay(" ↔ ");
     }
 
     public void onEquals() {
@@ -66,7 +75,8 @@ public class BooleanModeController implements Initializable, ModeController{
             expression.setText(display.getText()+" = ");
             Calculator calculator = new Calculator();
             try{
-                BooleanParser parser = new BooleanParser(display.getText(), calculator);
+
+                BooleanParser parser = new BooleanParser(handleSymbols(display.getText()), calculator);
                 display.setText(parser.evaluate().toString());}
             catch (Exception e){
                 display.setText("Error");
@@ -74,6 +84,20 @@ public class BooleanModeController implements Initializable, ModeController{
             resetDisplay = true;
         }
     }
+
+    private String handleSymbols(String text){
+        StringBuilder stringExpression = new StringBuilder();
+        for(String elem : text.split(" ")){
+            if(dictionary.containsKey(elem)){
+                stringExpression.append(dictionary.get(elem));
+            }
+            else {
+                stringExpression.append(elem);
+            }
+        }
+        return stringExpression.toString();
+    }
+
 
     public void onOpenParenthesis() {
         appendToDisplay("(");
