@@ -95,7 +95,10 @@ public class MyNumber implements Expression {
 
 
     public MyNumber convertToReal(){
-        // TODO: When the number si NaN, it returns -1
+        if (this instanceof NotANumber){
+            return new NotANumber();
+        }
+
         AbstractValue newReal = this.real;
         AbstractValue newImaginary = this.imaginary;
 
