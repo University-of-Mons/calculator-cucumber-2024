@@ -45,4 +45,5 @@ public final class Divides extends Operation {
           return new MyNotANumber();
       return new MyNumber(l.getValue() / r.getValue());
   }
+
 }

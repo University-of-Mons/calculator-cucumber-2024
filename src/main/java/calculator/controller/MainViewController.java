@@ -28,12 +28,13 @@ public class MainViewController implements Initializable {
     public static final String RATIONAL_MODE = "Rational";
     public static final String COMPLEX_MODE = "Complex";
     public static final String TIME_MODE = "Time";
+    public static final String BOOLEAN_MODE = "Boolean";
     private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
 
     @FXML
     private BorderPane root;
     @FXML
-    private CheckMenuItem standardMode, rationalMode, complexMode, timeMode;
+    private CheckMenuItem standardMode, rationalMode, complexMode, booleanMode, timeMode;
     @FXML
     private Menu modeMenu, zoomMenu; // unused
     @FXML
@@ -99,6 +100,10 @@ public class MainViewController implements Initializable {
     private void onTimeMode() {
         if (!currentMode.equals(TIME_MODE)) {
             updateMode(TIME_MODE);
+    @FXML
+    private void onBooleanMode() {
+        if (!currentMode.equals(BOOLEAN_MODE)) {
+            updateMode(BOOLEAN_MODE);
         }
     }
 
