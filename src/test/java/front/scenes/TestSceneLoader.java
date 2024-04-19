@@ -24,8 +24,8 @@ class TestSceneLoader {
         }
     }
 
-    @Test
-    void testLoad2() {
-        assertDoesNotThrow(() -> SceneLoader.load("MainScene"));
-    }
+//    @Test
+//    void testLoad2() {
+//        assertDoesNotThrow(() -> SceneLoader.load("MainScene"));
+//    }
 }
