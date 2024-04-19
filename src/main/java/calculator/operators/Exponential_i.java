@@ -22,7 +22,7 @@ public class Exponential_i extends Operation {
         if (l instanceof MyNotANumber || r instanceof MyNotANumber)
             return new MyNotANumber() ;
         else {
-            ComplexNumber complexNumber=  new ComplexNumber((l.getReal() * Math.cos(r.getReal())), (l.getReal() * Math.sin(r.getReal())));
+            ComplexNumber complexNumber=  new ComplexNumber(l.getReal() * Math.cos(Math.toRadians(r.getReal())), l.getReal() * Math.sin(Math.toRadians(r.getReal())));
             complexNumber.setForm(ComplexForm.EXPONENTIAL);
             return complexNumber;
         }

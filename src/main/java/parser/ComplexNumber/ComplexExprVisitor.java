@@ -128,26 +128,12 @@ public interface ComplexExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntoPolarInfix(ComplexExprParser.IntoPolarInfixContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code CompllexPrefix}
+	 * Visit a parse tree produced by the {@code SqrtComplexPrefix}
 	 * labeled alternative in {@link ComplexExprParser#prefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCompllexPrefix(ComplexExprParser.CompllexPrefixContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code intPrefix}
-	 * labeled alternative in {@link ComplexExprParser#prefix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntPrefix(ComplexExprParser.IntPrefixContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code iPrefix}
-	 * labeled alternative in {@link ComplexExprParser#prefix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIPrefix(ComplexExprParser.IPrefixContext ctx);
+	T visitSqrtComplexPrefix(ComplexExprParser.SqrtComplexPrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code sqrtPrefix}
 	 * labeled alternative in {@link ComplexExprParser#prefix}.
@@ -191,6 +177,34 @@ public interface ComplexExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitModulusPrefix(ComplexExprParser.ModulusPrefixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ComplexPlusPrefix}
+	 * labeled alternative in {@link ComplexExprParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexPlusPrefix(ComplexExprParser.ComplexPlusPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexMinusPrefix}
+	 * labeled alternative in {@link ComplexExprParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexMinusPrefix(ComplexExprParser.ComplexMinusPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexIPrefix}
+	 * labeled alternative in {@link ComplexExprParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexIPrefix(ComplexExprParser.ComplexIPrefixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code intPrefix}
+	 * labeled alternative in {@link ComplexExprParser#prefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntPrefix(ComplexExprParser.IntPrefixContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ParensComplexPrefix}
 	 * labeled alternative in {@link ComplexExprParser#prefix}.
 	 * @param ctx the parse tree
@@ -219,26 +233,12 @@ public interface ComplexExprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntoEPrefix(ComplexExprParser.IntoEPrefixContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ComplexPostfix}
+	 * Visit a parse tree produced by the {@code SqrtComplexPostfix}
 	 * labeled alternative in {@link ComplexExprParser#postfix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComplexPostfix(ComplexExprParser.ComplexPostfixContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code intPostfix}
-	 * labeled alternative in {@link ComplexExprParser#postfix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntPostfix(ComplexExprParser.IntPostfixContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code iPostfix}
-	 * labeled alternative in {@link ComplexExprParser#postfix}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIPostfix(ComplexExprParser.IPostfixContext ctx);
+	T visitSqrtComplexPostfix(ComplexExprParser.SqrtComplexPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code sqrtPostfix}
 	 * labeled alternative in {@link ComplexExprParser#postfix}.
@@ -281,6 +281,34 @@ public interface ComplexExprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitModulusPostfix(ComplexExprParser.ModulusPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexPlusPostfix}
+	 * labeled alternative in {@link ComplexExprParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexPlusPostfix(ComplexExprParser.ComplexPlusPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexMinusPostfix}
+	 * labeled alternative in {@link ComplexExprParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexMinusPostfix(ComplexExprParser.ComplexMinusPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComplexIPostfix}
+	 * labeled alternative in {@link ComplexExprParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComplexIPostfix(ComplexExprParser.ComplexIPostfixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code intPostfix}
+	 * labeled alternative in {@link ComplexExprParser#postfix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntPostfix(ComplexExprParser.IntPostfixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ParensComplexPostfix}
 	 * labeled alternative in {@link ComplexExprParser#postfix}.

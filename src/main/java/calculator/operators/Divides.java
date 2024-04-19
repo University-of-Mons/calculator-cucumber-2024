@@ -39,13 +39,14 @@ public final class Divides extends Operation {
    * @return The result of the division, or a new MyNotANumber if either input number is a MyNotANumber or the second number is zero.
    */
   public MyNumber op(MyNumber l, MyNumber r) {
-      if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0)
+      if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0 && r.getImaginary() == 0)
           return new MyNotANumber();
       if (l instanceof ComplexNumber || r instanceof ComplexNumber) {
           double denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
-           double real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
-           double imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
-           return new ComplexNumber(real, imaginary);
+          double real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
+          double imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
+          return new ComplexNumber(real, imaginary);
+
       }
       return new MyNumber((double) l.getValue() / r.getValue());
   }

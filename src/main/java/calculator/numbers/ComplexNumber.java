@@ -75,16 +75,11 @@ public class ComplexNumber extends MyNumber{
 
     @Override
     public String toString() {
-        switch (form) {
-            case CARTESIAN:
-                return toStringCartesian();
-            case POLAR:
-                return toStringPolar();
-            case EXPONENTIAL:
-                return toStringExponential();
-            default:
-                return new MyNotANumber().toString();
-        }
+        return switch (form) {
+            case CARTESIAN -> toStringCartesian();
+            case POLAR -> toStringPolar();
+            case EXPONENTIAL -> toStringExponential();
+        };
     }
 
 
@@ -95,6 +90,8 @@ public class ComplexNumber extends MyNumber{
         if ((int) this.getReal() ==0) {
             if ((int) this.getImaginary() == 1)
                 return "i";
+            if ((int) this.getImaginary() == -1)
+                return "-i";
             else
                 return (int) this.getImaginary() + "i";
         }
@@ -114,14 +111,16 @@ public class ComplexNumber extends MyNumber{
 
 
     private String toStringPolar() {
+        System.out.println("real: " + this.getReal() + " imaginary: " + this.getImaginary());
         int r = (int) Math.sqrt(Math.pow(this.getReal(), 2) + Math.pow(this.getImaginary(), 2));
-        int theta = (int) Math.atan2(this.getImaginary(), this.getReal());
+        System.out.println("r: " + r);
+        int theta = (int) Math.toDegrees(Math.atan2(this.getImaginary(), this.getReal()));
         return r + " * cis(" + theta + ")";
     }
 
     private String toStringExponential() {
         int r = (int) Math.sqrt(Math.pow(this.getReal(), 2) + Math.pow(this.getImaginary(), 2));
-        int theta = (int) Math.atan2(this.getImaginary(), this.getReal());
+        int theta = (int) Math.toDegrees(Math.atan2(this.getImaginary(), this.getReal()));
         return r + " * e^(i*" + theta + ")";
     }
 }

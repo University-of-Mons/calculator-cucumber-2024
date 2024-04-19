@@ -60,6 +60,7 @@ public class Sqrt extends Operation {
             num=  -1 * num;
             return new ComplexNumber(0, Math.sqrt(num));
         }
-        return new MyNumber((int) Math.sqrt(num));
+        System.out.println(num);
+        return new MyNumber(Math.sqrt(num));
     }
 }

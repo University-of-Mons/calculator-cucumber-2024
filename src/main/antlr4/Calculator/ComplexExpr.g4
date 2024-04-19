@@ -16,8 +16,8 @@ exp : infix
 
 infix : 'sqrt' '(' infix ')' '+' 'sqrt' '(' infix ')' I # SqrtComplexInfix
       | 'sqrt' '(' infix ')'                # SqrtInfix
-      | 'cis' '(' infix ')'                 # CisInfix
-      | 'e' '(' I '*' infix ')'             # ExpInfixComplex
+      | (NUMBER '*')? 'cis' '(' infix ')'                 # CisInfix
+      | (NUMBER '*')? 'e' '(' I '*' infix ')'             # ExpInfixComplex
       | infix op=('*' | '/') infix          # ComplexMulDivInfix
       | infix op=('+' | '-') infix       # ComplexAddSubInfix
       | '|' infix '|'                       # ModulusInfix
@@ -31,33 +31,36 @@ infix : 'sqrt' '(' infix ')' '+' 'sqrt' '(' infix ')' I # SqrtComplexInfix
       | 'intoE' '(' infix ')'                 # IntoExpoInfix
       ;
 
-prefix :  op=('*' | '/') NUMBER ','? NUMBER 'i' # CompllexPrefix
-        | Sub? NUMBER             # intPrefix
-        | NUMBER ? 'i'                     # iPrefix
-        | 'sqrt' '(' prefix ')'  'i'?       # sqrtPrefix
-        | 'cis' '(' prefix ')'              # cisPrefix
-        | 'e' '(' 'i' '*' prefix ')'        # expPrefixComplex
-        | op=('*' | '/') '(' prefix  ((',')? prefix)+ ')'   # MulDivPrefix
-        | op=('+' | '-') '(' prefix ((',')? prefix)+ ')'   # AddSubPrefix
-        | '|'  prefix '|'                   # ModulusPrefix
-        | '(' prefix ')'                    # ParensComplexPrefix
+prefix : 'sqrt' '(' prefix ')' '+' 'sqrt' '(' prefix ')' I # SqrtComplexPrefix
+        |'sqrt' '(' prefix ')'  # sqrtPrefix
+        | (NUMBER '*')?'cis' '(' prefix ')'              # cisPrefix
+        | (NUMBER '*')? 'e' '(' 'i' '*' prefix ')'        # expPrefixComplex
+        | op=('*' | '/')    '(' prefix ((',')? prefix)+ ')' # MulDivPrefix
+        | op=('+' | '-')    '(' prefix ((',')? prefix)+ ')'     # AddSubPrefix
+        | '|' prefix '|'                    # ModulusPrefix
+        | SUB? NUMBER ADD NUMBER? I    # ComplexPlusPrefix
+        | SUB? NUMBER SUB NUMBER? I    # ComplexMinusPrefix
+        | SUB? NUMBER?  I                    # ComplexIPrefix
+        | SUB? NUMBER                     # intPrefix
+        | '(' prefix ')'                        # ParensComplexPrefix
         | 'intoCartesian' '(' prefix ')'    # IntoCartesianPrefix
         | 'intoPolar' '(' prefix ')'        # IntoPolarPrefix
         | 'intoE' '(' prefix ')'            # IntoEPrefix
         ;
 
 
-
 // postfix expression
-postfix : NUMBER ','? NUMBER 'i' op=('+'|'-') # ComplexPostfix
-        | SUB? NUMBER                        # intPostfix
-        | (SUB? NUMBER)? 'i'                 # iPostfix
+postfix : 'sqrt' '(' postfix ')' '+' 'sqrt' '(' postfix ')' I # SqrtComplexPostfix
         | 'sqrt' '(' postfix ')'  'i'?       # sqrtPostfix
-        | 'cis' '(' postfix ')'              # cisPostfix
-        | 'e' '(' 'i' '*' postfix ')'        # expPostfixComplex
-        |'(' postfix ((',')? postfix)+ ')' op=('*' | '/')     # MulDivPostfix
-        | '(' postfix ((',')? postfix)+ ')' op=('+' | '-')     # AddSubPostfix
+        | (NUMBER '*')? 'cis' '(' postfix ')'              # cisPostfix
+        | (NUMBER '*')? 'e' '(' 'i' '*' postfix ')'        # expPostfixComplex
+        | op=('*' | '/')    '(' postfix ((',')? postfix)+ ')' # MulDivPostfix
+        | op=('+' | '-')    '(' postfix ((',')? postfix)+ ')'     # AddSubPostfix
         | '|' postfix '|'                    # ModulusPostfix
+        | SUB? NUMBER ADD NUMBER? I    # ComplexPlusPostfix
+        | SUB? NUMBER SUB NUMBER? I    # ComplexMinusPostfix
+        | SUB? NUMBER?  I                    # ComplexIPostfix
+        | SUB? NUMBER                     # intPostfix
         | '(' postfix ')'                        # ParensComplexPostfix
         | 'intoCartesian' '(' postfix ')'    # IntoCartesianPostfix
         | 'intoPolar' '(' postfix ')'        # IntoPolarPostfix

@@ -15,7 +15,6 @@ ADD=14
 SUB=15
 NUMBER=16
 WS=17
-Sub=18
 'sqrt'=1
 '('=2
 ')'=3

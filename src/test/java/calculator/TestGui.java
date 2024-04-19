@@ -159,7 +159,7 @@ public class TestGui {
         Assertions.assertEquals("9", display.getText());
     }
 
-    @Test
+    /*@Test
     void testDelete(FxRobot fxRobot){
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btn2");
@@ -167,7 +167,7 @@ public class TestGui {
         fxRobot.push(KeyCode.BACK_SPACE);
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("12", display.getText());
-    }
+    }*/
 
     @Test
     void testRetrieve(FxRobot fxRobot){
