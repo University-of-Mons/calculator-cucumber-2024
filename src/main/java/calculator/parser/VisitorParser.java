@@ -33,8 +33,6 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitExpression(CalculatorParser.ExpressionContext ctx) {
-        System.out.println("Visit expression : " + ctx.getText());
-
         if (ctx.children.size() == 1) {
             // multiplyingExpression
             return visit(ctx.multiplyingExpression());
@@ -47,14 +45,11 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
             String op = ctx.children.get(1).getText();
             return createOperation(op,insideExpression);
         }
-        System.out.println("Illegal expression");
         return null;
     }
 
     @Override
     public Expression visitMultiplyingExpression(CalculatorParser.MultiplyingExpressionContext ctx) {
-        System.out.println("Visit multiplying expression : " + ctx.getText());
-
         if (ctx.children.size() == 1) {
             // powExpression
             return visit(ctx.powExpression());
@@ -67,14 +62,11 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
             String op = ctx.children.get(1).getText();
             return createOperation(op,insideExpression);
         }
-        System.out.println("Illegal multiplyingExpression");
         return null;
     }
 
     @Override
     public Expression visitPowExpression(CalculatorParser.PowExpressionContext ctx) {
-        System.out.println("Visit pow expression : " + ctx.getText());
-
         if (ctx.children.size() == 1) {
             // signedAtom
             return visit(ctx.signedAtom());
@@ -84,13 +76,10 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
             System.out.println("Exponent not yet implemented");
             return null;
         }
-        System.out.println("Illegal powExpression");
         return null;
     }
 
     @Override public Expression visitPostfix_expression(CalculatorParser.Postfix_expressionContext ctx) {
-        System.out.println("Visit postfix expression : " + ctx.getText());
-
         if (ctx.children.size() == 1) {
             // postfix_multiplyingExpression
             return visit(ctx.signedAtom());
@@ -107,8 +96,6 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
     }
 
     @Override public Expression visitPrefix_expression(CalculatorParser.Prefix_expressionContext ctx) {
-        System.out.println("Visit prefix expression : " + ctx.getText());
-
         if (ctx.children.size() == 1) {
             // prefix_multiplyingExpression
             return visit(ctx.signedAtom());
@@ -128,17 +115,12 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
     @Override
     public Expression visitSignedAtom(CalculatorParser.SignedAtomContext ctx) {
         String text = ctx.getText();
-        System.out.println("Visit signed atom expression : " + text);
-
         if (ctx.func_() == null) {
             if (ctx.atom() != null && ctx.atom().LPAREN() != null) {
                 return visit(ctx.atom().expression());
             }
-            System.out.println("Visit atom expression : " + text);
             return new MyNumber(Integer.parseInt(text));
         }
-        // todo : add functions
-        System.out.println("Function not yet implemented");
         return null;
     }
 
@@ -154,7 +136,6 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
      */
     @Override
     public Expression visitBatom(CalculatorParser.BatomContext ctx) {
-        System.out.println("Visit batom expression : " + ctx.getText());
         if (ctx.boolean_expression() != null) {
             return visit(ctx.boolean_expression());
         }
@@ -163,8 +144,6 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitNotExpression(CalculatorParser.NotExpressionContext ctx) {
-        System.out.println("Visit not expression : " + ctx.getText());
-        System.out.println(ctx.children.size());
         if (ctx.children.size() == 1) {
             return visit(ctx.batom());
         }
@@ -173,7 +152,6 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitAndExpression(CalculatorParser.AndExpressionContext ctx) {
-        System.out.println("Visit and expression : " + ctx.getText());
         if (ctx.children.size() == 1) {
             return super.visitAndExpression(ctx);
         }
@@ -182,21 +160,18 @@ public class VisitorParser extends CalculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitXorExpression(CalculatorParser.XorExpressionContext ctx) {
-        System.out.println("Visit xor expression : " + ctx.getText());
         if (ctx.children.size() == 1) return super.visitXorExpression(ctx);
         return visitOperation(Xor.class, ctx.andExpression());
     }
 
     @Override
     public Expression visitOrExpression(CalculatorParser.OrExpressionContext ctx) {
-        System.out.println("Visit or expression : " + ctx.getText());
         if (ctx.children.size() == 1) return super.visitOrExpression(ctx);
         return visitOperation(Or.class, ctx.xorExpression());
     }
 
     @Override
     public Expression visitImplication(CalculatorParser.ImplicationContext ctx) {
-        System.out.println("Visit implication expression : " + ctx.getText());
         if (ctx.children.size() == 1) return super.visitImplication(ctx);
         return visitOperation(Implication.class, ctx.orExpression());
     }
