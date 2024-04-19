@@ -1,6 +1,5 @@
 package front.controllers;
 
-import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -85,7 +84,9 @@ class GUITest extends ApplicationTest {
         clickOn("#modulus");
         clickOn("#eNotation");
         clickOn("#i");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("+-*/()|Ei");
+        clickOn("#pi");
+        clickOn("#exp");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("+-*/()|Eipiexp");
     }
     @Test
     void checkSinButton(FxRobot robot) {
@@ -105,6 +106,46 @@ class GUITest extends ApplicationTest {
         Assertions.assertThat((TextField) lookup(outputField).query()).hasText("ln");
     }
 
+    @Test
+    void testFormButton(FxRobot robot) {
+        // create 4+4i
+        clickOn("#four");
+        clickOn("#add");
+        clickOn("#four");
+        clickOn("#i");
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("4+4i");
+
+        clickOn("#formSelector");
+        // Select cartesian
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("4+4i");
+
+        // Select polar
+        clickOn("#formSelector");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        // 4 sqrt(2) (cos(pi/4)+isin(pi/4))
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("5.6569(cos(0.7854)+isin(0.7854))");
+
+        clickOn("#clear");
+        // create 4+4i
+        clickOn("#four");
+        clickOn("#add");
+        clickOn("#four");
+        clickOn("#i");
+        clickOn("#formSelector");
+        // Select Exp
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        // 4 sqrt(2) e^(i pi/4)
+        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("5.6569exp(0.7854i)");
+
+
+    }
 
 
     @Test
