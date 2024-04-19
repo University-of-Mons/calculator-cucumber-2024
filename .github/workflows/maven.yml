@@ -6,7 +6,7 @@ on:
   push:
     branches: [ master, ComplexNumber ]
   pull_request:
-    branches: [ master, ComplexNumber
+    branches: [ master]
 
 jobs:
   build:
