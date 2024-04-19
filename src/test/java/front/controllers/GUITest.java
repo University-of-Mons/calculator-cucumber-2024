@@ -70,6 +70,7 @@ class GUITest extends ApplicationTest {
         clickOn("#coma");
         clickOn("#zero");
         clickOn("#zero");
+        clickOn("#zero");
         Assertions.assertThat((TextField) lookup(outputField).query()).hasText("123456789.,000");
     }
 
