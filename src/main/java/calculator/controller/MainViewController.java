@@ -22,7 +22,6 @@ public class MainViewController implements Initializable {
 
     // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
     //  à l'intérieur de la classe de contrôleur.
-    // TODO : Traduire en anglais si jamais il y a du français
 
     public static final String STANDARD_MODE = "Standard";
     public static final String RATIONAL_MODE = "Rational";
