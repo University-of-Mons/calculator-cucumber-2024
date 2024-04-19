@@ -50,6 +50,12 @@ public class CalculatorSteps {
                 case "-" -> op = new Minus(params);
                 case "*" -> op = new Times(params);
                 case "/" -> op = new Divides(params);
+                case "|" -> op = new Modulus(params);
+                case "sqrt" -> op = new Sqrt(params);
+                case "ln" -> op = new Logarithm(params);
+                case "exp" -> op = new Exponential(params);
+                case "sin" -> op = new Sinus(params);
+                case "cos" -> op = new Cosine(params);
                 default -> fail("Unknown operation!");
             }
         } catch (IllegalConstruction e) {
@@ -256,7 +262,7 @@ public class CalculatorSteps {
             // Check if the number printed in the given notation is the same as the expected one
             if (params.get(0) instanceof MyNumber) {
                 MyNumber number = (MyNumber) params.get(0);
-                number.setRepresentation(ComplexForm.valueOf(notation));
+                number.setForm(ComplexForm.valueOf(notation));
                 assertEquals(s, number.toString());
             } else fail("The parameter is not a number! ");
         } else fail(notation + " is not a correct form! ");

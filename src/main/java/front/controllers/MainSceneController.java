@@ -189,7 +189,7 @@ public class MainSceneController implements Initializable {
         App.setUserInput(outputField.getText());
         Expression result = App.evalUserInput();
         MyNumber resultNumber = (MyNumber) result;
-        resultNumber.setRepresentation(complexForm);
+        resultNumber.setForm(complexForm);
 
         switchHistory(App.getUserInput(), resultNumber.toString());
 

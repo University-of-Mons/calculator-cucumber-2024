@@ -20,10 +20,6 @@ public class IntValue extends AbstractValue {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     @Override
     public String toString() {
         return Integer.toString(value);

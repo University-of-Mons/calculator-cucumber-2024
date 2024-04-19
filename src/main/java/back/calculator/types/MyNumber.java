@@ -137,7 +137,7 @@ public class MyNumber implements Expression {
      * @see ComplexForm
      * @return The representation of the number
      */
-    public ComplexForm getRepresentation() {
+    public ComplexForm getForm() {
         return representation;
     }
 
@@ -146,7 +146,7 @@ public class MyNumber implements Expression {
      * @see ComplexForm
      * @param representation The representation to set
      */
-    public void setRepresentation(ComplexForm representation) {
+    public void setForm(ComplexForm representation) {
         this.representation = representation;
     }
 
@@ -228,7 +228,7 @@ public class MyNumber implements Expression {
     private String toStringExp() {
         if (!isImaginary()) {
             if (real.isPositive()) {
-                return real + "exp(0i)";
+                return real + "exp(0)";
             } else {
                 return real + "exp(pii)";
             }
