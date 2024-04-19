@@ -106,7 +106,7 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
         params.add(number1);
         params.add(number2);
         try {
-            return c.eval(new Exponential_i(params));
+            return c.eval(new ExponentialWithI(params));
         }
         catch (IllegalConstruction e){
             return new MyNotANumber();
@@ -261,7 +261,7 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
         params.add(number1);
         params.add(number2);
         try {
-            return c.eval(new Exponential_i(params));
+            return c.eval(new ExponentialWithI(params));
         }
         catch (IllegalConstruction e){
             return new MyNotANumber();
@@ -445,7 +445,7 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
         params.add(number1);
         params.add(number2);
         try {
-            return c.eval(new Exponential_i(params));
+            return c.eval(new ExponentialWithI(params));
         }
         catch (IllegalConstruction e){
             return new MyNotANumber();
