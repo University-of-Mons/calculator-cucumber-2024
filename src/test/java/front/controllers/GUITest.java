@@ -34,7 +34,7 @@ class GUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        //Scenes.setMainScene(SceneLoader.load("MainScene.fxml"));
+        type(KeyCode.A); // Increase branches coverage of inputField key pressed handler
         stage.setResizable(false);
         stage.setTitle("Please use gradle instead of maven");
         stage.setScene(Scenes.MAIN_SCENE);
@@ -70,7 +70,6 @@ class GUITest extends ApplicationTest {
         clickOn("#coma");
         clickOn("#zero");
         clickOn("#zero");
-        type(KeyCode.NUMPAD0); // Increase branches coverage of inputField key pressed handler
         Assertions.assertThat((TextField) lookup(outputField).query()).hasText("123456789.,000");
     }
 
