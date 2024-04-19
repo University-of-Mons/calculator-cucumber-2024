@@ -2,7 +2,7 @@ name: CodeQL security analysis for Java
 
 on:
   push:
-    branches: [ master, ComplexNumber ]
+    branches: [ master, CompexNumber ]
   pull_request:
     branches: [ master]
   schedule:
