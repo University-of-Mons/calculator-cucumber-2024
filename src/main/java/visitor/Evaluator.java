@@ -37,6 +37,7 @@ public class Evaluator extends Visitor {
         computedValue = n;
     }
 
+
     /** Use the visitor design pattern to visit an operation
      *
      * @param o The operation being visited
@@ -51,8 +52,13 @@ public class Evaluator extends Visitor {
         //second loop to accumulate all the evaluated sub results
         MyNumber temp = evaluatedArgs.getFirst();
         int max = evaluatedArgs.size();
-        for(int counter=1; counter<max; counter++) {
-            temp = o.op(temp,evaluatedArgs.get(counter));
+        if (max == 1) {
+            temp = o.op(temp);
+        }
+        else {
+            for(int counter=1; counter<max; counter++) {
+                temp = o.op(temp, evaluatedArgs.get(counter));
+            }
         }
         // store the accumulated result
         computedValue = temp;

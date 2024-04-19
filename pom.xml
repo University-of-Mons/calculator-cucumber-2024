@@ -166,9 +166,10 @@
                     <excludes>
                         <exclude>calculator/Main.class</exclude>
                         <exclude>calculator/AppStarter.class</exclude>
-                        <exclude>calculator/controller/ComplexModeController.class</exclude>
-                        <exclude>calculator/controller/RationalModeController.class</exclude>
+                        <exclude>calculator/controller/components/ComplexModeController.class</exclude>
+                        <exclude>calculator/controller/components/RationalModeController.class</exclude>
                         <exclude>parser/*</exclude>
+                        <exclude>parser/bool/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

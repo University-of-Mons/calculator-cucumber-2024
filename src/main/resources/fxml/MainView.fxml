@@ -20,6 +20,7 @@
                  <CheckMenuItem fx:id="standardMode" mnemonicParsing="false" onAction="#onStandardMode" selected="true" text="Standard" />
                   <CheckMenuItem fx:id="rationalMode" mnemonicParsing="false" text="Rational" /><!-- onAction="#onRationalMode" -->
                   <CheckMenuItem fx:id="complexMode" mnemonicParsing="false" onAction="#onComplexMode" text="Complex" />
+                   <CheckMenuItem fx:id="booleanMode" mnemonicParsing="false" onAction="#onBooleanMode" text="Boolean" />
                </items>
              </Menu>
               <Menu fx:id="zoomMenu" mnemonicParsing="false" text="Zoom">

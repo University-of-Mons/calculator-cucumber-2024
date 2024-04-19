@@ -76,6 +76,15 @@ public abstract class Operation implements Expression
    public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
 
+	/**
+	 * Method representing the actual unary arithmetic operation to compute
+	 * @param l	an argument of the binary operation
+	 * @return	result of computing the unary operation
+	 */
+	public MyNumber op(MyNumber l) {
+		return l;
+	}
+
 	/** Add more parameters to the existing list of parameters
 	 *
 	 * @param params	The list of parameters to be added
