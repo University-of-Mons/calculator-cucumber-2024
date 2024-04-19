@@ -43,13 +43,9 @@ public final class Divides extends Operation {
           return new MyNotANumber();
       if (l instanceof ComplexNumber || r instanceof ComplexNumber) {
           double denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
-          if (denominator == 0)
-              return new MyNotANumber();
-          else {
-              double real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
-              double imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
-              return new ComplexNumber(real, imaginary);
-          }
+           double real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
+           double imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
+           return new ComplexNumber(real, imaginary);
       }
       return new MyNumber((double) l.getValue() / r.getValue());
   }

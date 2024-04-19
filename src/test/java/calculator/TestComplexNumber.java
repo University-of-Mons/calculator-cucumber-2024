@@ -1,9 +1,6 @@
 package calculator;
 
-import calculator.numbers.ComplexForm;
-import calculator.numbers.ComplexNumber;
-import calculator.numbers.Expression;
-import calculator.numbers.MyNumber;
+import calculator.numbers.*;
 import calculator.operators.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestComplexNumber {
 
@@ -35,8 +31,37 @@ class TestComplexNumber {
     }
 
     @Test
+    void testPartImaginaryInNumber() {
+        MyNumber number = new MyNumber(3);
+        assertEquals(0, number.getImaginary());
+    }
+
+    @Test
     void testToString() {
         assertEquals((int)real1 + " + " + (int)imaginary1 + "i", complexNumber1.toString());
+    }
+
+    @Test
+    void testString2(){
+        ComplexNumber complexNumber = new ComplexNumber(0, 3);
+        assertEquals("3i", complexNumber.toString());
+    }
+
+    @Test
+    void testString3(){
+        ComplexNumber complexNumber = new ComplexNumber(0, -3);
+        assertEquals("-3i", complexNumber.toString());
+    }
+
+    @Test
+    void testString4(){
+        ComplexNumber complexNumber = new ComplexNumber(3, -1);
+        assertEquals("3 - i", complexNumber.toString());
+    }
+
+    @Test
+    void testHashCode() {
+        assertEquals((int) (real1+imaginary1), complexNumber1.hashCode());
     }
 
     @Test
@@ -60,6 +85,21 @@ class TestComplexNumber {
         try {
             Minus minus = new Minus(para);
             ComplexNumber result = new ComplexNumber(real1 - real2, imaginary1 - imaginary2);
+            MyNumber number = calc.eval(minus);
+            assertEquals(result.getReal(), number.getReal());
+            assertEquals(result.getImaginary(), number.getImaginary());
+            assertEquals(result.toString(), number.toString());
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testMinusAComplexNumber() {
+        List<Expression> para = Arrays.asList(complexNumber1);
+        try {
+            Minus minus = new Minus(para);
+            ComplexNumber result = new ComplexNumber(-real1 , -imaginary1);
             MyNumber number = calc.eval(minus);
             assertEquals(result.getReal(), number.getReal());
             assertEquals(result.getImaginary(), number.getImaginary());
@@ -99,17 +139,55 @@ class TestComplexNumber {
         }
     }
 
+
     @Test
     void testSqrtWithNumberMinus() {
         MyNumber number = new MyNumber(-1);
         List<Expression> para = List.of(number);
         try {
             Sqrt sqrt = new Sqrt(para);
-            assertEquals(1, calc.eval(sqrt).getValue());
+            assertEquals(1, calc.eval(sqrt).getImaginary());
         } catch (IllegalConstruction e) {
             fail();
         }
     }
+
+    @Test
+    void testSqrtWithNumber() {
+        MyNumber number = new MyNumber(9);
+        List<Expression> para = List.of(number);
+        try {
+            Sqrt sqrt = new Sqrt(para);
+            assertEquals(3, calc.eval(sqrt).getValue());
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testSqrtWithComplexNumber() {
+        List<Expression> para = List.of(complexNumber1);
+        try {
+            Sqrt sqrt = new Sqrt(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(sqrt));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testSqrtWith2Number() {
+        MyNumber number1 = new MyNumber(9);
+        MyNumber number2 = new MyNumber(4);
+        List<Expression> para = List.of(number1, number2);
+        try {
+            Sqrt sqrt = new Sqrt(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(sqrt));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
 
     @Test
     void testModulus(){
@@ -121,6 +199,30 @@ class TestComplexNumber {
             fail();
         }
     }
+
+    @Test
+    void testModulusWith2Complex(){
+        List<Expression> para = Arrays.asList(complexNumber1, complexNumber2);
+        try {
+            Modulus modulus = new Modulus(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(modulus));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testModulusWithNumber(){
+        MyNumber number = new MyNumber(3);
+        List<Expression> para = Collections.singletonList(number);
+        try {
+            Modulus modulus = new Modulus(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(modulus));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
 
     @Test
     void testDivides2(){
@@ -153,6 +255,31 @@ class TestComplexNumber {
     }
 
     @Test
+    void testCisWithOneNmber() {
+        List<Expression> para = Arrays.asList(new MyNumber(2));
+        try {
+            Cis cis = new Cis(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(cis));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+
+    @Test
+    void testCisComplexNyNotNumber() {
+        MyNumber number = new MyNotANumber();
+        MyNumber number2 = new MyNumber( Math.PI/4);
+        List<Expression> para = Arrays.asList(number, number2);
+        try {
+            Cis cis = new Cis(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(cis));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
     void testExponential_i() throws IllegalConstruction {
         MyNumber number1 = new MyNumber(2);
         MyNumber number2 = new MyNumber( Math.PI/4);
@@ -166,6 +293,31 @@ class TestComplexNumber {
             assertEquals(result.toString(), calc.eval(exponential_i).toString());
         }
         catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testExponential_iWithOneNmber() {
+        List<Expression> para = Arrays.asList(new MyNumber(2));
+        try {
+            Exponential_i exponential_i = new Exponential_i(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(exponential_i));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+
+    @Test
+    void testExponential_iWithNyNotNumber() {
+        MyNumber number = new MyNotANumber();
+        MyNumber number2 = new MyNumber( Math.PI/4);
+        List<Expression> para = Arrays.asList(number, number2);
+        try {
+            Exponential_i exponential_i = new Exponential_i(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(exponential_i));
+        } catch (IllegalConstruction e) {
             fail();
         }
     }
@@ -297,5 +449,86 @@ class TestComplexNumber {
         }
     }
 
+
+    @Test
+    void testStringIntoCartesianWith2Complex() {
+        ComplexNumber complexNumber = new ComplexNumber( 1, 1);
+        ComplexNumber complexNumber2 = new ComplexNumber( 1, 1);
+        List<Expression> para = Arrays.asList(complexNumber, complexNumber2);
+        try {
+            IntoCartesianFrom intoCartesianFrom = new IntoCartesianFrom(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(intoCartesianFrom));
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringIntoCartesianWithNyNotNumber() {
+        MyNumber number = new MyNotANumber();
+        List<Expression> para = Arrays.asList(number);
+        try {
+            IntoCartesianFrom intoCartesianFrom = new IntoCartesianFrom(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(intoCartesianFrom));
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringIntoPolarWith2Complex() {
+        ComplexNumber complexNumber = new ComplexNumber( 1, 1);
+        ComplexNumber complexNumber2 = new ComplexNumber( 1, 1);
+        List<Expression> para = Arrays.asList(complexNumber, complexNumber2);
+        try {
+            IntoPolarForm intoPolarFrom = new IntoPolarForm(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(intoPolarFrom));
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringIntoPolarWithNyNotNumber() {
+        MyNumber number = new MyNotANumber();
+    List<Expression> para = Arrays.asList(number);
+        try {
+            IntoPolarForm intoPolarFrom = new IntoPolarForm(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(intoPolarFrom));
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringIntoExponentialWith2Complex() {
+        ComplexNumber complexNumber = new ComplexNumber( 1, 1);
+        ComplexNumber complexNumber2 = new ComplexNumber( 1, 1);
+        List<Expression> para = Arrays.asList(complexNumber, complexNumber2);
+        try {
+            IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(intoExponentialForm));
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @Test
+    void testStringIntoExponentialWithNyNotNumber() {
+        MyNumber number = new MyNotANumber();
+        List<Expression> para = Arrays.asList(number);
+        try {
+            IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para);
+            assertInstanceOf(MyNotANumber.class, calc.eval(intoExponentialForm));
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        }
+    }
 }
 

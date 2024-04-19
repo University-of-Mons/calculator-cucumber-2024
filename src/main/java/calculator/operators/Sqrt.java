@@ -39,7 +39,7 @@ public class Sqrt extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        throw new UnsupportedOperationException("Cannot perform sqrt operation on two numbers");
+        return new MyNotANumber();
     }
 
 
@@ -52,12 +52,13 @@ public class Sqrt extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l) {
-        if (l instanceof MyNotANumber | l instanceof ComplexNumber){
+        if (l instanceof MyNotANumber || l instanceof ComplexNumber){
             return new MyNotANumber();
         }
         int num = l.getValue();
         if (num<0){
             num=  -1 * num;
+            return new ComplexNumber(0, Math.sqrt(num));
         }
         return new MyNumber((int) Math.sqrt(num));
     }
