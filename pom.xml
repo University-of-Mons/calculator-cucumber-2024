@@ -169,6 +169,7 @@
                         <exclude>calculator/controller/components/ComplexModeController.class</exclude>
                         <exclude>calculator/controller/components/RationalModeController.class</exclude>
                         <exclude>parser/*</exclude>
+                        <exclude>parser/time/*</exclude>
                         <exclude>parser/bool/*</exclude>
                     </excludes>
                 </configuration>
