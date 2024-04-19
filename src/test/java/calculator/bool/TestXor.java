@@ -2,15 +2,18 @@ package calculator.bool;
 
 import calculator.IllegalConstruction;
 import calculator.numbers.Expression;
+import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
 import calculator.operators.boolean_operators.Or;
 import calculator.operators.boolean_operators.Xor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -79,5 +82,42 @@ class TestXor {
     void testNullParamList() {
         params = null;
         assertThrows(IllegalConstruction.class, () -> op = new Xor(params));
+    }
+
+    @Test
+    void testInvalidNumber(){
+        try {
+            ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(4)));
+            Xor xor = new Xor(p);
+            Expression expression = xor.op(new MyNumber(value1), new MyNumber(4));
+            assertEquals(MyNotANumber.class, expression.getClass());
+        }
+        catch (IllegalConstruction e){
+            fail();
+        }
+    }
+
+    @Test
+    void testLogMessageIsSent() {
+        Logger logger = Logger.getLogger(Xor.class.getName());
+
+        Formatter formatter = new SimpleFormatter();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Handler handler = new StreamHandler(out, formatter);
+        logger.addHandler(handler);
+
+        try {
+            Xor instance = new Xor(new ArrayList<>());
+            instance.op(new MyNumber(4), new MyNumber(1));
+            handler.flush();
+            String logMsg = out.toString();
+            assertNotNull(logMsg);
+            assertTrue(logMsg.contains("Invalid number entered. Number should be either 0 or 1."));
+        }
+        catch (IllegalConstruction e) {
+            fail();
+        } finally {
+            logger.removeHandler(handler);
+        }
     }
 }

@@ -41,13 +41,16 @@ public class Equals extends Operation {
         if (l instanceof MyNotANumber || r instanceof MyNotANumber)
             return new MyNotANumber();
         try {
+            if (l.getValue() > 1 || r.getValue() > 1){
+                throw new MyBool.InvalidNumberException("Invalid number entered. Number should be either 0 or 1.");
+            }
             boolean value = Objects.equals(dictionary.get(l.toString()), dictionary.get(r.toString()));
             return new MyBool(value ? 0 : 1);
         }
         catch (MyBool.InvalidNumberException exception){
             Logger logger = Logger.getLogger(getClass().getName());
             logger.info(exception.getMessage());
-            return null;
+            return new MyNotANumber();
         }
     }
 

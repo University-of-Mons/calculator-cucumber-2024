@@ -40,6 +40,9 @@ public class Not extends Operation {
         if (l instanceof MyNotANumber)
             return new MyNotANumber();
         try {
+            if (l.getValue() > 1){
+                throw new MyBool.InvalidNumberException("Invalid number entered. Number should be either 0 or 1.");
+            }
             return new MyBool(dictionary.get(l.toString()) == Boolean.TRUE ? 1 : 0);
         }
         catch (MyBool.InvalidNumberException exception){
