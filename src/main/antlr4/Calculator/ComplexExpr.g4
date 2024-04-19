@@ -21,8 +21,6 @@ infix : 'sqrt' '(' infix ')' '+' 'sqrt' '(' infix ')' I # SqrtComplexInfix
       | infix op=('*' | '/') infix          # ComplexMulDivInfix
       | infix op=('+' | '-') infix       # ComplexAddSubInfix
       | '|' infix '|'                       # ModulusInfix
-      | SUB? NUMBER ADD NUMBER? I    # ComplexPlusInfix
-      | SUB? NUMBER SUB NUMBER? I    # ComplexMinusInfix
       | SUB? NUMBER?  I                    # ComplexIInfix
       | SUB? NUMBER                     # IntInfix
       | '(' infix ')'                         # ParensComplexInfix
@@ -38,8 +36,6 @@ prefix : 'sqrt' '(' prefix ')' '+' 'sqrt' '(' prefix ')' I # SqrtComplexPrefix
         | op=('*' | '/')    '(' prefix ((',')? prefix)+ ')' # MulDivPrefix
         | op=('+' | '-')    '(' prefix ((',')? prefix)+ ')'     # AddSubPrefix
         | '|' prefix '|'                    # ModulusPrefix
-        | SUB? NUMBER ADD NUMBER? I    # ComplexPlusPrefix
-        | SUB? NUMBER SUB NUMBER? I    # ComplexMinusPrefix
         | SUB? NUMBER?  I                    # ComplexIPrefix
         | SUB? NUMBER                     # intPrefix
         | '(' prefix ')'                        # ParensComplexPrefix
@@ -54,11 +50,9 @@ postfix : 'sqrt' '(' postfix ')' '+' 'sqrt' '(' postfix ')' I # SqrtComplexPostf
         | 'sqrt' '(' postfix ')'  'i'?       # sqrtPostfix
         | (NUMBER '*')? 'cis' '(' postfix ')'              # cisPostfix
         | (NUMBER '*')? 'e' '(' 'i' '*' postfix ')'        # expPostfixComplex
-        | op=('*' | '/')    '(' postfix ((',')? postfix)+ ')' # MulDivPostfix
-        | op=('+' | '-')    '(' postfix ((',')? postfix)+ ')'     # AddSubPostfix
+        |'(' postfix ((',')? postfix)+ ')' op=('*' | '/') # MulDivPostfix
+        |'(' postfix ((',')? postfix)+ ')'  op=('+' | '-')     # AddSubPostfix
         | '|' postfix '|'                    # ModulusPostfix
-        | SUB? NUMBER ADD NUMBER? I    # ComplexPlusPostfix
-        | SUB? NUMBER SUB NUMBER? I    # ComplexMinusPostfix
         | SUB? NUMBER?  I                    # ComplexIPostfix
         | SUB? NUMBER                     # intPostfix
         | '(' postfix ')'                        # ParensComplexPostfix
@@ -73,6 +67,6 @@ MUL : '*';
 DIV : '/';
 ADD : '+';
 SUB : '-';
-NUMBER : ([0-9]+| 'pi') ;
+NUMBER : [0-9]+ ;
 
 WS : [ \t\n\r]+ -> skip ;

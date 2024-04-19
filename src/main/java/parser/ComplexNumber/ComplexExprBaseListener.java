@@ -41,18 +41,6 @@ public class ComplexExprBaseListener implements ComplexExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComplexMinusInfix(ComplexExprParser.ComplexMinusInfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComplexMinusInfix(ComplexExprParser.ComplexMinusInfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterComplexAddSubInfix(ComplexExprParser.ComplexAddSubInfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -197,18 +185,6 @@ public class ComplexExprBaseListener implements ComplexExprListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComplexPlusInfix(ComplexExprParser.ComplexPlusInfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComplexPlusInfix(ComplexExprParser.ComplexPlusInfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterIntoPolarInfix(ComplexExprParser.IntoPolarInfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -300,30 +276,6 @@ public class ComplexExprBaseListener implements ComplexExprListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitModulusPrefix(ComplexExprParser.ModulusPrefixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterComplexPlusPrefix(ComplexExprParser.ComplexPlusPrefixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComplexPlusPrefix(ComplexExprParser.ComplexPlusPrefixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterComplexMinusPrefix(ComplexExprParser.ComplexMinusPrefixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComplexMinusPrefix(ComplexExprParser.ComplexMinusPrefixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -480,30 +432,6 @@ public class ComplexExprBaseListener implements ComplexExprListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitModulusPostfix(ComplexExprParser.ModulusPostfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterComplexPlusPostfix(ComplexExprParser.ComplexPlusPostfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComplexPlusPostfix(ComplexExprParser.ComplexPlusPostfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterComplexMinusPostfix(ComplexExprParser.ComplexMinusPostfixContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComplexMinusPostfix(ComplexExprParser.ComplexMinusPostfixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

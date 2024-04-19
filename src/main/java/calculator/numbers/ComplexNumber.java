@@ -111,9 +111,7 @@ public class ComplexNumber extends MyNumber{
 
 
     private String toStringPolar() {
-        System.out.println("real: " + this.getReal() + " imaginary: " + this.getImaginary());
         int r = (int) Math.sqrt(Math.pow(this.getReal(), 2) + Math.pow(this.getImaginary(), 2));
-        System.out.println("r: " + r);
         int theta = (int) Math.toDegrees(Math.atan2(this.getImaginary(), this.getReal()));
         return r + " * cis(" + theta + ")";
     }

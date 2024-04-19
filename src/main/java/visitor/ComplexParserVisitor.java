@@ -25,37 +25,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
     //-------------------- INFIX ----------------------
 
-
-    @Override
-    public Expression visitComplexMinusInfix(ComplexExprParser.ComplexMinusInfixContext ctx){
-        if (ctx.SUB().size() == 2){
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), -1);
-            return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), -Double.parseDouble(ctx.NUMBER(1).getText()));
-        }
-        else {
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), -1);
-            return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), -Double.parseDouble(ctx.NUMBER(1).getText()));
-
-        }
-    }
-
-    @Override
-    public Expression visitComplexPlusInfix(ComplexExprParser.ComplexPlusInfixContext ctx){
-        if (ctx.SUB() != null){
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), 1);
-            return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), Double.parseDouble(ctx.NUMBER(1).getText()));
-        }
-        else {
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), 1);
-            return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), Double.parseDouble(ctx.NUMBER(1).getText()));
-
-        }
-    }
-
     @Override
     public Expression visitIntInfix(ComplexExprParser.IntInfixContext ctx){
         if (ctx.SUB() != null){
@@ -67,9 +36,15 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
     @Override
     public Expression visitComplexIInfix(ComplexExprParser.ComplexIInfixContext ctx){
         if (ctx.SUB() != null){
-            return new ComplexNumber(0, -1);
+            if (ctx.NUMBER() == null)
+                return new ComplexNumber(0, -1);
+            return new ComplexNumber(0, -Double.parseDouble(ctx.NUMBER().getText()));
         }
-        return new ComplexNumber(0, 1);
+        else {
+            if (ctx.NUMBER() == null)
+                return new ComplexNumber(0, 1);
+            return new ComplexNumber(0, Double.parseDouble(ctx.NUMBER().getText()));
+        }
     }
 
 
@@ -160,7 +135,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
         Expression number1 = visit(ctx.infix(0));
         Expression number2 = visit(ctx.infix(1));
         List<Expression> params = new ArrayList<>();
-
         Collections.addAll(params, number1, number2);
         try {
             if(ctx.op.getType() == ComplexExprParser.ADD)
@@ -231,7 +205,7 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
     //-------------------- PREFIX ----------------------
 
-    @Override
+   @Override
     public Expression visitSqrtComplexPrefix(ComplexExprParser.SqrtComplexPrefixContext ctx){
         Expression number = visit(ctx.prefix(0));
         List<Expression> params1= new ArrayList<>();
@@ -262,9 +236,13 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitCisPrefix(ComplexExprParser.CisPrefixContext ctx){
-        Expression number = visit(ctx.prefix());
+        Expression number1 = new MyNumber(1.0);
+        if (ctx.NUMBER() != null)
+            number1 = new MyNumber(Double.parseDouble(ctx.NUMBER().getText()));
+        Expression number2 = visit(ctx.prefix());
         List<Expression> params = new ArrayList<>();
-        params.add(number);
+        params.add(number1);
+        params.add(number2);
         try {
             return c.eval(new Cis(params));
         }
@@ -275,9 +253,13 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitExpPrefixComplex(ComplexExprParser.ExpPrefixComplexContext ctx){
-        Expression number = visit(ctx.prefix());
+        Expression number1 = new MyNumber(1.0);
+        if (ctx.NUMBER() != null)
+            number1 = new MyNumber(Double.parseDouble(ctx.NUMBER().getText()));
+        Expression number2 = visit(ctx.prefix());
         List<Expression> params = new ArrayList<>();
-        params.add(number);
+        params.add(number1);
+        params.add(number2);
         try {
             return c.eval(new Exponential_i(params));
         }
@@ -340,36 +322,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitComplexPlusPrefix(ComplexExprParser.ComplexPlusPrefixContext ctx){
-        if (ctx.SUB() != null){
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), 1);
-            return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), Double.parseDouble(ctx.NUMBER(1).getText()));
-        }
-        else {
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), 1);
-            return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), Double.parseDouble(ctx.NUMBER(1).getText()));
-
-        }
-    }
-
-    @Override
-    public Expression visitComplexMinusPrefix(ComplexExprParser.ComplexMinusPrefixContext ctx){
-        if (ctx.SUB().size() == 2){
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), -1);
-            return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), -Double.parseDouble(ctx.NUMBER(1).getText()));
-        }
-        else {
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), -1);
-            return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), -Double.parseDouble(ctx.NUMBER(1).getText()));
-
-        }
-    }
-
-    @Override
     public Expression visitIntPrefix(ComplexExprParser.IntPrefixContext ctx){
         if (ctx.SUB() != null){
             return new MyNumber(-Double.parseDouble(ctx.NUMBER().getText()));
@@ -380,9 +332,15 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
     @Override
     public Expression visitComplexIPrefix(ComplexExprParser.ComplexIPrefixContext ctx){
         if (ctx.SUB() != null){
-            return new ComplexNumber(0, -1);
+            if (ctx.NUMBER() == null)
+                return new ComplexNumber(0, -1);
+            return new ComplexNumber(0, -Double.parseDouble(ctx.NUMBER().getText()));
         }
-        return new ComplexNumber(0, 1);
+        else {
+            if (ctx.NUMBER() == null)
+                return new ComplexNumber(0, 1);
+            return new ComplexNumber(0, Double.parseDouble(ctx.NUMBER().getText()));
+        }
     }
 
     @Override
@@ -462,9 +420,13 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitCisPostfix(ComplexExprParser.CisPostfixContext ctx){
-        Expression number = visit(ctx.postfix());
+        Expression number1 = new MyNumber(1.0);
+        if (ctx.NUMBER() != null)
+            number1 = new MyNumber(Double.parseDouble(ctx.NUMBER().getText()));
+        Expression number2 = visit(ctx.postfix());
         List<Expression> params = new ArrayList<>();
-        params.add(number);
+        params.add(number1);
+        params.add(number2);
         try {
             return c.eval(new Cis(params));
         }
@@ -475,9 +437,13 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
     @Override
     public Expression visitExpPostfixComplex(ComplexExprParser.ExpPostfixComplexContext ctx){
-        Expression number = visit(ctx.postfix());
+        Expression number1 = new MyNumber(1.0);
+        if (ctx.NUMBER() != null)
+            number1 = new MyNumber(Double.parseDouble(ctx.NUMBER().getText()));
+        Expression number2 = visit(ctx.postfix());
         List<Expression> params = new ArrayList<>();
-        params.add(number);
+        params.add(number1);
+        params.add(number2);
         try {
             return c.eval(new Exponential_i(params));
         }
@@ -494,9 +460,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
         Collections.addAll(params, number1, number2);
         try {
-            if(ctx.postfix().size() == 1){
-                return visit(ctx.postfix(0));
-            }
             if(ctx.op.getType() == ComplexExprParser.MUL)
                 return c.eval(new Times(params));
             return c.eval(new Divides(params));
@@ -514,9 +477,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
         Collections.addAll(params, number1, number2);
         try {
-            if(ctx.postfix().size() == 1){
-                return visit(ctx.postfix(0));
-            }
             if(ctx.op.getType() == ComplexExprParser.ADD)
                 return c.eval(new Plus(params));
             return c.eval(new Minus(params));
@@ -540,36 +500,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitComplexPlusPostfix(ComplexExprParser.ComplexPlusPostfixContext ctx){
-        if (ctx.SUB() != null){
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), 1);
-            return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), Double.parseDouble(ctx.NUMBER(1).getText()));
-        }
-        else {
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), 1);
-            return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), Double.parseDouble(ctx.NUMBER(1).getText()));
-
-        }
-    }
-
-    @Override
-    public Expression visitComplexMinusPostfix(ComplexExprParser.ComplexMinusPostfixContext ctx){
-        if (ctx.SUB().size() == 2){
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), -1);
-            return new ComplexNumber(-Double.parseDouble(ctx.NUMBER(0).getText()), -Double.parseDouble(ctx.NUMBER(1).getText()));
-        }
-        else {
-            if (ctx.NUMBER(1) == null)
-                return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), -1);
-            return new ComplexNumber(Double.parseDouble(ctx.NUMBER(0).getText()), -Double.parseDouble(ctx.NUMBER(1).getText()));
-
-        }
-    }
-
-    @Override
     public Expression visitIntPostfix(ComplexExprParser.IntPostfixContext ctx){
         if (ctx.SUB() != null){
             return new MyNumber(-Double.parseDouble(ctx.NUMBER().getText()));
@@ -580,9 +510,15 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
     @Override
     public Expression visitComplexIPostfix(ComplexExprParser.ComplexIPostfixContext ctx){
         if (ctx.SUB() != null){
-            return new ComplexNumber(0, -1);
+            if (ctx.NUMBER() == null)
+                return new ComplexNumber(0, -1);
+            return new ComplexNumber(0, -Double.parseDouble(ctx.NUMBER().getText()));
         }
-        return new ComplexNumber(0, 1);
+        else {
+            if (ctx.NUMBER() == null)
+                return new ComplexNumber(0, 1);
+            return new ComplexNumber(0, Double.parseDouble(ctx.NUMBER().getText()));
+        }
     }
 
     @Override

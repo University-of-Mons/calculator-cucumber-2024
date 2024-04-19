@@ -28,18 +28,6 @@ public interface ComplexExprListener extends ParseTreeListener {
 	 */
 	void exitExp(ComplexExprParser.ExpContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ComplexMinusInfix}
-	 * labeled alternative in {@link ComplexExprParser#infix}.
-	 * @param ctx the parse tree
-	 */
-	void enterComplexMinusInfix(ComplexExprParser.ComplexMinusInfixContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ComplexMinusInfix}
-	 * labeled alternative in {@link ComplexExprParser#infix}.
-	 * @param ctx the parse tree
-	 */
-	void exitComplexMinusInfix(ComplexExprParser.ComplexMinusInfixContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ComplexAddSubInfix}
 	 * labeled alternative in {@link ComplexExprParser#infix}.
 	 * @param ctx the parse tree
@@ -184,18 +172,6 @@ public interface ComplexExprListener extends ParseTreeListener {
 	 */
 	void exitIntoExpoInfix(ComplexExprParser.IntoExpoInfixContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ComplexPlusInfix}
-	 * labeled alternative in {@link ComplexExprParser#infix}.
-	 * @param ctx the parse tree
-	 */
-	void enterComplexPlusInfix(ComplexExprParser.ComplexPlusInfixContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ComplexPlusInfix}
-	 * labeled alternative in {@link ComplexExprParser#infix}.
-	 * @param ctx the parse tree
-	 */
-	void exitComplexPlusInfix(ComplexExprParser.ComplexPlusInfixContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code IntoPolarInfix}
 	 * labeled alternative in {@link ComplexExprParser#infix}.
 	 * @param ctx the parse tree
@@ -291,30 +267,6 @@ public interface ComplexExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModulusPrefix(ComplexExprParser.ModulusPrefixContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ComplexPlusPrefix}
-	 * labeled alternative in {@link ComplexExprParser#prefix}.
-	 * @param ctx the parse tree
-	 */
-	void enterComplexPlusPrefix(ComplexExprParser.ComplexPlusPrefixContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ComplexPlusPrefix}
-	 * labeled alternative in {@link ComplexExprParser#prefix}.
-	 * @param ctx the parse tree
-	 */
-	void exitComplexPlusPrefix(ComplexExprParser.ComplexPlusPrefixContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ComplexMinusPrefix}
-	 * labeled alternative in {@link ComplexExprParser#prefix}.
-	 * @param ctx the parse tree
-	 */
-	void enterComplexMinusPrefix(ComplexExprParser.ComplexMinusPrefixContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ComplexMinusPrefix}
-	 * labeled alternative in {@link ComplexExprParser#prefix}.
-	 * @param ctx the parse tree
-	 */
-	void exitComplexMinusPrefix(ComplexExprParser.ComplexMinusPrefixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ComplexIPrefix}
 	 * labeled alternative in {@link ComplexExprParser#prefix}.
@@ -471,30 +423,6 @@ public interface ComplexExprListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModulusPostfix(ComplexExprParser.ModulusPostfixContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ComplexPlusPostfix}
-	 * labeled alternative in {@link ComplexExprParser#postfix}.
-	 * @param ctx the parse tree
-	 */
-	void enterComplexPlusPostfix(ComplexExprParser.ComplexPlusPostfixContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ComplexPlusPostfix}
-	 * labeled alternative in {@link ComplexExprParser#postfix}.
-	 * @param ctx the parse tree
-	 */
-	void exitComplexPlusPostfix(ComplexExprParser.ComplexPlusPostfixContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ComplexMinusPostfix}
-	 * labeled alternative in {@link ComplexExprParser#postfix}.
-	 * @param ctx the parse tree
-	 */
-	void enterComplexMinusPostfix(ComplexExprParser.ComplexMinusPostfixContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ComplexMinusPostfix}
-	 * labeled alternative in {@link ComplexExprParser#postfix}.
-	 * @param ctx the parse tree
-	 */
-	void exitComplexMinusPostfix(ComplexExprParser.ComplexMinusPostfixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ComplexIPostfix}
 	 * labeled alternative in {@link ComplexExprParser#postfix}.
