@@ -10,7 +10,7 @@ public enum TimeUnit implements Unit {
     DECISECOND(10.0, -1, true),
     DECASECOND(0.1, 1, true),
     HECTOSECOND(0.01, 2, true),
-    KILOSECOND(0.001, 3, true),;
+    KILOSECOND(0.001, 3, true);
 
     private final double conversionFactor;
     private final boolean isPowerOfTen;

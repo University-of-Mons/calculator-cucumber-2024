@@ -11,7 +11,7 @@ public enum AreaUnit implements Unit {
     ACRE(0.000247105, 0, false),
     ARE(0.01, 2, true),
     SQUAREMILE(0.000000386102, 0, false),
-    SQUAREYARD(1.19599, 0, false),;
+    SQUAREYARD(1.19599, 0, false);
 
     private final double conversionFactor;
     private final boolean isPowerOfTen;

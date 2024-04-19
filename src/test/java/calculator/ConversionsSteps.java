@@ -53,6 +53,9 @@ public class ConversionsSteps {
             case CURRENCY:
                 convertor = new Convertor(inputValue, CurrencyUnit.valueOf(fromUnit), CurrencyUnit.valueOf(toUnit));
                 break;
+            case TEMPERATURE:
+                convertor = new Convertor(inputValue, TemperatureUnit.valueOf(fromUnit), TemperatureUnit.valueOf(toUnit));
+                break;
             default:
                 throw new IllegalArgumentException("Unsupported unit type: " + unitType);
         }

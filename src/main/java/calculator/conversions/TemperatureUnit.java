@@ -1,17 +1,22 @@
 package calculator.conversions;
 
-public enum TemperatureUnit {//TODO separate handling
-    KELVIN(1.0),
-    CELSIUS(273.15),
-    FAHRENHEIT(255.372);
+public enum TemperatureUnit implements Unit {
+    CELSIUS,
+    FAHRENHEIT,
+    KELVIN;
 
-    private final double conversionFactor;
-
-    TemperatureUnit(double conversionFactor) {
-        this.conversionFactor = conversionFactor;
+    @Override
+    public double getConversionFactor() {
+        return 0;
     }
 
-    public double getConversionFactor() {
-        return conversionFactor;
+    @Override
+    public boolean isPowerOfTen() {
+        return false;
+    }
+
+    @Override
+    public int getOffset() {
+        return 0;
     }
 }

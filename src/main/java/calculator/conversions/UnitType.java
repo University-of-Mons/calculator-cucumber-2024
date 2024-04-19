@@ -11,5 +11,5 @@ public enum UnitType {
     ENERGY,
     POWER,
     MASS,
-    TEMPERATURE;
+    TEMPERATURE
 }

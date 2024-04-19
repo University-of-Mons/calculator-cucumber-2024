@@ -7,7 +7,7 @@ public enum EnergyUnit implements Unit {
     KILOCALORIE(0.000239006, 0, false),
     WATTHOUR(0.000277778, 0, false),
     KILOWATTHOUR(0.000000277778, 0, false),
-    BRITISHTHERMALUNIT(0.000947817, 0, false),;
+    BRITISHTHERMALUNIT(0.000947817, 0, false);
 
     private final double conversionFactor;
     private final boolean isPowerOfTen;

@@ -1,6 +1,11 @@
 package calculator.controller.components;
 
 import calculator.AppStarter;
+import calculator.conversions.LengthUnit;
+import calculator.conversions.Unit;
+import calculator.conversions.UnitType;
+import calculator.conversions.VolumeUnit;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Assertions;
@@ -118,5 +123,52 @@ class ConversionsModeControllerTest {
         Assertions.assertEquals("1369", textFieldTo1.getText());
         TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
         Assertions.assertEquals("2", textFieldTo2.getText());
+    }
+
+    @Test
+    void testUnitChange(FxRobot fxRobot){
+        ComboBox comboBox = fxRobot.lookup("#unitTypeComboBox").queryAs(ComboBox.class);
+        Assertions.assertEquals(UnitType.LENGTH, comboBox.getValue());
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("TIME");
+        Assertions.assertEquals(UnitType.TIME, comboBox.getValue());
+    }
+
+    @Test
+    void testFromToUnitChange(FxRobot fxRobot){
+        ComboBox<Unit> comboBoxFromUnit = fxRobot.lookup("#comboBoxFromUnit").queryAs(ComboBox.class);
+        ComboBox<Unit> comboBoxToUnit = fxRobot.lookup("#comboBoxToUnit").queryAs(ComboBox.class);
+        Assertions.assertEquals(LengthUnit.METER, comboBoxFromUnit.getValue());
+        Assertions.assertEquals(LengthUnit.CENTIMETER, comboBoxToUnit.getValue());
+
+        fxRobot.clickOn("#comboBoxFromUnit");
+        fxRobot.clickOn("INCH");
+        fxRobot.clickOn("#comboBoxToUnit");
+        fxRobot.clickOn("FOOT");
+
+        Assertions.assertEquals(LengthUnit.INCH, comboBoxFromUnit.getValue());
+        Assertions.assertEquals(LengthUnit.FOOT, comboBoxToUnit.getValue());
+
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("VOLUME");
+
+        Assertions.assertEquals(VolumeUnit.CUBICMETER, comboBoxFromUnit.getValue());
+        Assertions.assertEquals(VolumeUnit.LITER, comboBoxToUnit.getValue());
+    }
+
+    @Test
+    void testConvertAfterUnitChange(FxRobot fxRobot){
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("PRESSURE");
+        fxRobot.clickOn("#btn6");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btn9");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnConvert");
+
+        TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
+        Assertions.assertEquals("6", textFieldTo1.getText());
+        TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
+        Assertions.assertEquals("39", textFieldTo2.getText());
     }
 }

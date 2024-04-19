@@ -14,7 +14,7 @@ public enum VolumeUnit implements Unit {
     DECILITER(10000.0, -4, true),
     DECALITER(100.0, -2, true),
     HECTOLITER(10.0, -1, true),
-    KILOLITER(1.0, 0, true),;
+    KILOLITER(1.0, 0, true);
 
     private final double conversionFactor;
     private final boolean isPowerOfTen;

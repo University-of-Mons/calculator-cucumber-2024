@@ -8,7 +8,7 @@ public enum PressureUnit implements Unit {
     MILLIBAR(0.01, 2, true),
     ATMOSPHERE(0.0000098692, 0, false),
     TORR(0.00750062, 0, false),
-    PSI(0.000145038, 0, false),;
+    PSI(0.000145038, 0, false);
 
     private final double conversionFactor;
     private final boolean isPowerOfTen;

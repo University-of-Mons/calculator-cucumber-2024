@@ -20,6 +20,31 @@ public class Convertor {
         }
     }
 
+    public Convertor(double value, TemperatureUnit fromUnit, TemperatureUnit toUnit) {
+        BigDecimal temp = BigDecimal.valueOf(value);
+        switch (fromUnit) {
+            case FAHRENHEIT:
+                temp = temp.subtract(BigDecimal.valueOf(32)).multiply(BigDecimal.valueOf(5)).divide(BigDecimal.valueOf(9), 10, RoundingMode.HALF_UP);
+                break;
+            case KELVIN:
+                temp = temp.subtract(BigDecimal.valueOf(273.15));
+                break;
+            default:
+                break;
+        }
+        switch (toUnit) {
+            case FAHRENHEIT:
+                result = temp.multiply(BigDecimal.valueOf(9)).divide(BigDecimal.valueOf(5), 10, RoundingMode.HALF_UP).add(BigDecimal.valueOf(32));
+                break;
+            case KELVIN:
+                result = temp.add(BigDecimal.valueOf(273.15));
+                break;
+            default:
+                result = temp;
+                break;
+        }
+    }
+
     private static String getString(double value, int powerDifference) {
         String valueStr = String.valueOf(value);
         while (powerDifference != 0){

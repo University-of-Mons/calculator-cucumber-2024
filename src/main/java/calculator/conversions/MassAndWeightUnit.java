@@ -7,7 +7,7 @@ public enum MassAndWeightUnit implements Unit {
     POUND(0.00220462, 0, false),
     OUNCE(0.035274, 0, false),
     NEWTON(0.00981, 0, false),
-    POUND_FORCE(0.0022053763, 0, false),;
+    POUND_FORCE(0.0022053763, 0, false);
 
     private final double conversionFactor;
     private final boolean isPowerOfTen;

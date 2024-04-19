@@ -1,11 +1,11 @@
 package calculator.controller.components;
 
-import calculator.conversions.Convertor;
-import calculator.conversions.LengthUnit;
+import calculator.conversions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -24,14 +24,75 @@ public class ConversionsModeController implements Initializable, ModeController 
     @FXML
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnConvert;
     @FXML
-    private TextField textFieldFrom1, textFieldFrom2, textFieldTo1, textFieldTo2;
+    private TextField textFieldFrom1;
+    @FXML
+    private TextField textFieldFrom2;
+    @FXML
+    private TextField textFieldTo1;
+    @FXML
+    private TextField textFieldTo2;
+    @FXML
+    private ComboBox<UnitType> unitTypeComboBox;
+    @FXML
+    public ComboBox<Unit> comboBoxFromUnit;
+    @FXML
+    public ComboBox<Unit> comboBoxToUnit;
 
     private boolean resetDisplay = false;
     private boolean focusOnFrom1 = true;
+    private boolean changedUnit = true;
     private TextField display, expression;
+    private UnitType unitType;
+    private Unit fromUnit;
+    private Unit toUnit;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        unitTypeComboBox.getItems().setAll(UnitType.values());
+        unitTypeComboBox.setValue(UnitType.LENGTH);
+        unitTypeComboBox.setOnAction(event -> setUnits());
+        setUnits();
+        comboBoxFromUnit.setOnAction(event -> {
+            fromUnit = comboBoxFromUnit.getValue();
+            changedUnit = true;
+        });
+        comboBoxToUnit.setOnAction(event -> {
+            toUnit = comboBoxToUnit.getValue();
+            changedUnit = true;
+        });
+        fromUnit = comboBoxFromUnit.getValue();
+        toUnit = comboBoxToUnit.getValue();
+    }
+
+    private void setUnits() {
+        if (unitType == null || !unitType.equals(unitTypeComboBox.getValue())) {
+            unitType = unitTypeComboBox.getValue();
+            Unit[] units = getEnumValues(unitType);
+            comboBoxFromUnit.getItems().setAll(units);
+            comboBoxFromUnit.setValue(units[0]);
+            fromUnit = units[0];
+            comboBoxToUnit.getItems().setAll(units);
+            comboBoxToUnit.setValue(units[1]);
+            toUnit = units[1];
+            changedUnit = true;
+        }
+    }
+
+    private Unit[] getEnumValues(UnitType unitType) {
+        return switch (unitType) {
+            case LENGTH -> LengthUnit.values();
+            case TIME -> TimeUnit.values();
+            case AREA -> AreaUnit.values();
+            case MASS -> MassAndWeightUnit.values();
+            case POWER -> PowerUnit.values();
+            case PRESSURE -> PressureUnit.values();
+            case VOLUME -> VolumeUnit.values();
+            case SPEED -> SpeedUnit.values();
+            case ENERGY -> EnergyUnit.values();
+            case CURRENCY -> CurrencyUnit.values();
+            case TEMPERATURE -> TemperatureUnit.values();
+        };
+    }
 
     public void appendToDisplay(String text) {
         if (resetDisplay) {
@@ -39,7 +100,6 @@ public class ConversionsModeController implements Initializable, ModeController 
             textFieldFrom2.clear();
             textFieldTo1.clear();
             textFieldTo2.clear();
-            focusOnFrom1 = true;
             resetDisplay = false;
         }
         if (focusOnFrom1) {
@@ -50,11 +110,18 @@ public class ConversionsModeController implements Initializable, ModeController 
     }
 
     public void onConvert() {
-        if (!resetDisplay && !(textFieldFrom1.getText().isEmpty() && textFieldFrom2.getText().isEmpty())) {
-            Convertor convertor = new Convertor(getExpressionDouble(), LengthUnit.METER, LengthUnit.CENTIMETER);
+        if ((!resetDisplay || changedUnit) && !(textFieldFrom1.getText().isEmpty() && textFieldFrom2.getText().isEmpty())
+                && !fromUnit.equals(toUnit)) {
+            Convertor convertor;
+            if (unitType == UnitType.TEMPERATURE) {
+                convertor = new Convertor(getExpressionDouble(), (TemperatureUnit) fromUnit, (TemperatureUnit) toUnit);
+            } else {
+                convertor = new Convertor(getExpressionDouble(), fromUnit, toUnit);
+            }
             textFieldTo1.setText(convertor.getIntegerPart());
             textFieldTo2.setText(convertor.getDecimalPart());
             resetDisplay = true;
+            changedUnit = false;
         }
     }
 

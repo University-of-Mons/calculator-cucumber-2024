@@ -2,8 +2,8 @@ package calculator.conversions;
 
 public enum LengthUnit implements Unit {
     METER(1.0, 0, true),
-    KILOMETER(0.001, 3, true),
     CENTIMETER(100.0, -2, true),
+    KILOMETER(0.001, 3, true),
     MILLIMETER(1000.0, -3, true),
     INCH(39.3701, 0, false),
     FOOT(3.28084, 0, false),

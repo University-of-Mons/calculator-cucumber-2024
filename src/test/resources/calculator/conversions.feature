@@ -135,20 +135,19 @@ Feature: Conversions Test
       | 2.1    | "FEET_PER_SECOND"  | "KNOT"            | "1"         | "2442130674"|
       | 6.3    | "KNOT"             | "METERS_PER_SECOND"| "3"        | "2410075"        |
 
-  #Scenario Outline: Test temperature conversions:TODO : correct scenarios
-  #  Given the number <number> and the type of unit "TEMPERATURE"
-  #  When I convert it from <fromUnit> to <toUnit>
-  #  Then I should get the correct number <integerPart>.<decimalPart>
+  Scenario Outline: Test temperature conversions:
+    Given the number <number> and the type of unit "TEMPERATURE"
+    When I convert it from <fromUnit> to <toUnit>
+    Then I should get the correct number <integerPart>.<decimalPart>
 
-  #  Examples:
-  #    | number | fromUnit   | toUnit     | integerPart | decimalPart |
-  #    | 101.7  | "CELSIUS"  | "FAHRENHEIT"| "215"      | "06"        |
-  #    | 299.4  | "FAHRENHEIT"| "KELVIN"  | "422"       | "47"        |
-  #    | 398.6  | "KELVIN"   | "CELSIUS"  | "125"       | "45"        |
-  #    | 202.3  | "CELSIUS"  | "KELVIN"   | "475"       | "45"        |
-  #    | 501.2  | "KELVIN"   | "FAHRENHEIT"| "442"      | "16"        |
-  #    | 349.1  | "FAHRENHEIT"| "CELSIUS" | "176"       | "17"        |
-  #    | 251.8  | "CELSIUS"  | "FAHRENHEIT"| "485"      | "24"        |
+    Examples:
+      | number | fromUnit   | toUnit     | integerPart | decimalPart |
+      | 101.7  | "CELSIUS"  | "FAHRENHEIT"| "215"      | "06"        |
+      | 299.4  | "FAHRENHEIT"| "KELVIN"  | "421"       | "7055555556"|
+      | 398.6  | "KELVIN"   | "CELSIUS"  | "125"       | "45"        |
+      | 202.3  | "CELSIUS"  | "KELVIN"   | "475"       | "45"        |
+      | 501.2  | "KELVIN"   | "FAHRENHEIT"| "442"      | "49"        |
+      | 349.1  | "FAHRENHEIT"| "CELSIUS" | "176"       | "1666666667"|
 
   Scenario Outline: Test time conversions:
     Given the number <number> and the type of unit "TIME"
