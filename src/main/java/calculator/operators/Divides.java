@@ -4,6 +4,7 @@ import calculator.*;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
+import calculator.numbers.MyRationalNumber;
 
 import java.util.List;
 
@@ -41,8 +42,16 @@ public final class Divides extends Operation {
    * @return The result of the division, or a new MyNotANumber if either input number is a MyNotANumber or the second number is zero.
    */
   public MyNumber op(MyNumber l, MyNumber r) {
-      if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0)
+      if (l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0
+              || (l instanceof MyRationalNumber rationalL && rationalL.getDenominator() == 0)
+              || (r instanceof MyRationalNumber rationalR &&
+                    (rationalR.getNumerator() == 0 || rationalR.getDenominator() == 0)) )
           return new MyNotANumber();
+    if (l instanceof MyRationalNumber rationalL && r instanceof MyRationalNumber rationalR) {
+        int numerator = rationalL.getNumerator() * rationalR.getDenominator();
+        int denominator = rationalL.getDenominator() * rationalR.getNumerator();
+        return new MyRationalNumber(numerator, denominator);
+    }
       return new MyNumber(l.getValue() / r.getValue());
   }
 }

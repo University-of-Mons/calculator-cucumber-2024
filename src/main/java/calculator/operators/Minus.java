@@ -4,6 +4,7 @@ import calculator.*;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
+import calculator.numbers.MyRationalNumber;
 
 import java.util.List;
 
@@ -44,6 +45,11 @@ public final class Minus extends Operation
   public MyNumber op(MyNumber l, MyNumber r) {
     if (l instanceof MyNotANumber || r instanceof MyNotANumber)
         return new MyNotANumber();
+    if (l instanceof MyRationalNumber rationalL && r instanceof MyRationalNumber rationalR) {
+        int numerator = rationalL.getNumerator() * rationalR.getDenominator() - rationalL.getDenominator() * rationalR.getNumerator();
+        int denominator = rationalL.getDenominator() * rationalR.getDenominator();
+        return new MyRationalNumber(numerator, denominator);
+    }
     return new MyNumber(l.getValue() - r.getValue());
   }
 }
