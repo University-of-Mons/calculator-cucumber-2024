@@ -2,6 +2,7 @@ package back.calculator.types;
 
 
 import back.calculator.App;
+import org.slf4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -43,6 +44,10 @@ public class RationalValue extends AbstractValue {
                         this.num = intNum.getValue() * rationalDen.getDen();
                         this.den = rationalDen.getNum();
                         break;
+                    default:
+                        Logger logger = App.getLogger();
+                        String errorMsg = "Invalid type for denominator : " + den.getClass();
+                        logger.error(errorMsg);
                 }
                 break;
 
@@ -66,7 +71,16 @@ public class RationalValue extends AbstractValue {
                         this.num = rationalNum.getNum() * rationalDen.getDen();
                         this.den = rationalDen.getNum() * rationalNum.getDen();
                         break;
-                }
+                    default:
+                        Logger logger = App.getLogger();
+                        String errorMsg = "Invalid type for denominator : " + den.getClass();
+                        logger.error(errorMsg);
+                }break;
+            default:
+                Logger logger = App.getLogger();
+                String errorMsg = "Invalid type for numerator : " + num.getClass();
+                logger.error(errorMsg);
+                break;
         }
         this.type = Type.RATIONAL;
         this.reduce();
@@ -196,10 +210,9 @@ public class RationalValue extends AbstractValue {
 
 
     public RealValue convertToReal(){
-        RealValue num = new RealValue(new BigDecimal(this.num, precision));
-        RealValue den = new RealValue(new BigDecimal(this.den, precision));
-        RealValue result = (RealValue) num.div(den);
-        return result;
+        RealValue newNum = new RealValue(new BigDecimal(this.num, precision));
+        RealValue newDen = new RealValue(new BigDecimal(this.den, precision));
+        return (RealValue) newNum.div(newDen);
     }
 
     @Override
