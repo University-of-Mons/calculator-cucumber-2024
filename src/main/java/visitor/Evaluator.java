@@ -3,7 +3,6 @@ package visitor;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
 import calculator.Operation;
-import calculator.operators.OperatorType;
 
 import java.util.ArrayList;
 
@@ -38,20 +37,12 @@ public class Evaluator extends Visitor {
         computedValue = n;
     }
 
+
     /** Use the visitor design pattern to visit an operation
      *
      * @param o The operation being visited
      */
     public void visit(Operation o) {
-        if(o.getType() == OperatorType.BINARY){
-            visitBinary(o);
-        }
-        else{
-            visitUnary(o);
-        }
-    }
-
-    private void visitBinary(Operation o){
         ArrayList<MyNumber> evaluatedArgs = new ArrayList<>();
         //first loop to recursively evaluate each subexpression
         for(Expression a:o.getArgs()) {
@@ -61,23 +52,16 @@ public class Evaluator extends Visitor {
         //second loop to accumulate all the evaluated sub results
         MyNumber temp = evaluatedArgs.getFirst();
         int max = evaluatedArgs.size();
-        for(int counter=1; counter<max; counter++) {
-            temp = o.op(temp,evaluatedArgs.get(counter));
+        if (max == 1) {
+            temp = o.op(temp);
+        }
+        else {
+            for(int counter=1; counter<max; counter++) {
+                temp = o.op(temp, evaluatedArgs.get(counter));
+            }
         }
         // store the accumulated result
         computedValue = temp;
     }
 
-    private void visitUnary(Operation o){
-        ArrayList<MyNumber> evaluatedArgs = new ArrayList<>();
-        //first loop to recursively evaluate each subexpression
-        for(Expression a:o.getArgs()) {
-            a.accept(this);
-            evaluatedArgs.add(computedValue);
-        }
-        //second loop to accumulate all the evaluated sub results
-        MyNumber temp = evaluatedArgs.getFirst();
-        // store the accumulated result
-        computedValue = o.op(temp);
-    }
 }

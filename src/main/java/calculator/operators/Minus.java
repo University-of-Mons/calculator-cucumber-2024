@@ -17,7 +17,7 @@ import java.util.List;
  */
 public final class Minus extends Operation
  {
-     public static final OperatorType type = OperatorType.BINARY;
+
 
   /**
    * Class constructor specifying a number of Expressions to subtract,
@@ -48,8 +48,4 @@ public final class Minus extends Operation
     return new MyNumber(l.getValue() - r.getValue());
   }
 
-     @Override
-     public OperatorType getType(){
-         return type;
-     }
 }

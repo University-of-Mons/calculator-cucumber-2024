@@ -6,7 +6,6 @@ import calculator.numbers.Expression;
 import calculator.numbers.MyBool;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
-import calculator.operators.OperatorType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +16,6 @@ public class And extends Operation {
 
 
     private final Map<String, Boolean> dictionary = new HashMap<>();
-    public static final OperatorType type = OperatorType.BINARY;
-
 
     /**
      * Class constructor specifying a number of Expressions to apply the AND operation on,
@@ -66,13 +63,4 @@ public class And extends Operation {
         }
     }
 
-    /**
-     *The type of the operator.
-     *
-     * @return the type (unary or binary) of the operator.
-     */
-    @Override
-    public OperatorType getType(){
-        return type;
-    }
 }

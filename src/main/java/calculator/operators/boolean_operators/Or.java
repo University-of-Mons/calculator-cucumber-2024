@@ -6,7 +6,6 @@ import calculator.numbers.Expression;
 import calculator.numbers.MyBool;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
-import calculator.operators.OperatorType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +15,6 @@ import java.util.logging.Logger;
 public class Or extends Operation {
 
     private final Map<String, Boolean> dictionary = new HashMap<>();
-    private final OperatorType type = OperatorType.BINARY;
-
 
     /**
      * Class constructor specifying a number of Expressions to apply the OR operation on,
@@ -63,16 +60,6 @@ public class Or extends Operation {
             logger.info("Invalid number entered. Number should be either 0 or 1.");
             return new MyNotANumber();
         }
-    }
-
-    /**
-     *The type of the operator.
-     *
-     * @return the type (unary or binary) of the operator.
-     */
-    @Override
-    public OperatorType getType(){
-        return type;
     }
 
 }
