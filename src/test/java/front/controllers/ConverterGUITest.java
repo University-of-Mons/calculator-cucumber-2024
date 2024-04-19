@@ -91,7 +91,7 @@ class ConverterGUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("123456789,000");
+        Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("123456789.000");
     }
 
     /**
