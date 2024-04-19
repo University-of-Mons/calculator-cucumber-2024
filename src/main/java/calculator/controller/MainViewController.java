@@ -102,6 +102,8 @@ public class MainViewController implements Initializable {
     private void onConversionsMode() {
         if (!currentMode.equals(CONVERSIONS_MODE)) {
             updateMode(CONVERSIONS_MODE);
+        }
+    }
     
     @FXML
     private void onTimeMode() {
