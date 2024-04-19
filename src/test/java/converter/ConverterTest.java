@@ -169,10 +169,10 @@ public class ConverterTest {
     }
 
     /**
-     * Test that verifies the constructor is private and throws an error if its accessibility is changed.
+     * Test that verifies the Converter constructor is private and throws an error if its accessibility is changed.
      */
     @Test
-    public void testPrivateConstructor() {
+    public void testPrivateConverterConstructor() {
         Constructor<Converter> constructor;
         try {
             constructor = Converter.class.getDeclaredConstructor();
@@ -180,7 +180,23 @@ public class ConverterTest {
             constructor.setAccessible(true); // Make it accessible
             assertThrows(InvocationTargetException.class, constructor::newInstance);
         } catch (NoSuchMethodException e) {
-            fail("No private constructor found");
+            fail("No private constructor found for Converter");
+        }
+    }
+
+    /**
+     * Test that verifies the Units is private and throws an error if its accessibility is changed.
+     */
+    @Test
+    public void testPrivateUnitsConstructor() {
+        Constructor<Units> constructor;
+        try {
+            constructor = Units.class.getDeclaredConstructor();
+            assertTrue((constructor.getModifiers() & java.lang.reflect.Modifier.PRIVATE) > 0);
+            constructor.setAccessible(true); // Make it accessible
+            assertThrows(InvocationTargetException.class, constructor::newInstance);
+        } catch (NoSuchMethodException e) {
+            fail("No private constructor found for Units");
         }
     }
 }

@@ -29,4 +29,17 @@ public class UnitStringConverterTest {
         assertEquals("h", converter.toString(Units.Time.HOUR));
         assertNull(converter.toString(null));
     }
+
+    /**
+     * Test the fromString method of the UnitStringConverter class.
+     */
+    @Test
+    public void testFromString() {
+        UnitStringConverter converter = new UnitStringConverter();
+        String expected = Units.Time.HOUR.getSymbol();
+        Units.Unit unit = converter.fromString(expected);
+        assertEquals(expected, unit.getSymbol());
+        assertNull(converter.fromString(null));
+        assertNull(converter.fromString(""));
+    }
 }
