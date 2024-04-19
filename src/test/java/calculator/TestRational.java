@@ -1,8 +1,6 @@
 package calculator;
 
-import back.calculator.types.IntValue;
-import back.calculator.types.RationalValue;
-import back.calculator.types.RealValue;
+import back.calculator.types.*;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -104,27 +102,20 @@ public class TestRational {
 
     @Test
     void testMul() {
-        RationalValue r1 = new RationalValue(new IntValue(2), new IntValue(3));
-        assertTrue(r1.equals(r1));
+        RationalValue r = new RationalValue(new IntValue(1), new IntValue(2));
+        RationalValue r2 = new RationalValue(new IntValue(1), new IntValue(3));
+        RationalValue r3 = (RationalValue) r.mul(r2);
+        assertEquals(1, r3.getNum());
 
-        RationalValue r2 = new RationalValue(new IntValue(2), new IntValue(3));
-        assertFalse(r2.equals(new Object()));
+        RationalValue r4 = new RationalValue(new IntValue(1), new IntValue(2));
+        IntValue i = new IntValue(2);
+        IntValue i2 = (IntValue) r4.mul(i);
+        assertEquals(1, i2.getValue());
 
-        RationalValue r3 = new RationalValue(new IntValue(2), new IntValue(3));
-        RationalValue r4 = new RationalValue(new IntValue(2), new IntValue(3));
-        assertTrue(r3.equals(r4));
-
-        RationalValue r5 = new RationalValue(new IntValue(2), new IntValue(3));
-        RationalValue r6 = new RationalValue(new IntValue(3), new IntValue(2));
-        assertFalse(r5.equals(r6));
-
-        RationalValue r7 = new RationalValue(new IntValue(2), new IntValue(1));
-        IntValue i1 = new IntValue(2);
-        assertTrue(r7.equals(i1));
-
-        RationalValue r8 = new RationalValue(new IntValue(2), new IntValue(1));
-        IntValue i2 = new IntValue(3);
-        assertFalse(r8.equals(i2));
+        RationalValue r8 = new RationalValue(new IntValue(1), new IntValue(2));
+        RealValue real = new RealValue(new BigDecimal(0.5,new MathContext(5)));
+        RealValue r9 = (RealValue) r8.mul(real);
+        assertEquals(new RealValue(new BigDecimal(0.25,new MathContext(5))), r9);
     }
 
     @Test
@@ -150,8 +141,7 @@ public class TestRational {
         assertEquals(real.sqrt(), rational.sqrt());
         assertEquals(real.cos(), rational.cos());
         assertEquals(real.sin(), rational.sin());
-        // TODO : Uncomment when implemented
-//        assertEquals(real.ln(), rational.ln());
+        assertEquals(real.ln(), rational.ln());
         assertEquals(real.exp(), rational.exp());
         assertEquals(real.atan(), rational.atan());
     }
@@ -194,6 +184,39 @@ public class TestRational {
 
         RationalValue r4 = new RationalValue(new IntValue(-1), new IntValue(-2));
         assertTrue(r4.isPositive());
+    }
+
+    @Test
+    void testConvertToReal(){
+        RationalValue r = new RationalValue(new IntValue(1), new IntValue(2));
+        RealValue real = new RealValue(new BigDecimal(0.5,new MathContext(5)));
+        assertEquals(real, r.convertToReal());
+    }
+
+    @Test
+    void myNumberToReal(){
+        MyNumber realNumber = new MyNumber(new RealValue(new BigDecimal(5)));
+        MyNumber result = realNumber.convertToReal();
+        assertEquals(realNumber, result);
+
+        MyNumber imaginaryNumber = new MyNumber(new IntValue(0), new IntValue(5));
+        MyNumber expected = new MyNumber(new RealValue(BigDecimal.ZERO), new RealValue(new BigDecimal(5)));
+        MyNumber result2 = imaginaryNumber.convertToReal();
+        assertEquals(expected, result2);
+
+        MyNumber complexNumber = new MyNumber(new IntValue(3), new IntValue(4));
+        MyNumber expected2 = new MyNumber(new RealValue(new BigDecimal(3)), new RealValue(new BigDecimal(4)));
+        MyNumber result3 = complexNumber.convertToReal();
+        assertEquals(expected2, result3);
+
+        MyNumber notANumber = new NotANumber();
+        MyNumber result4 = notANumber.convertToReal();
+        assertTrue(result4 instanceof NotANumber);
+
+        MyNumber rationalNumber = new MyNumber(new RationalValue(new IntValue(1), new IntValue(2)));
+        MyNumber expected3 = new MyNumber(new RealValue(new BigDecimal(0.5)));
+        MyNumber result5 = rationalNumber.convertToReal();
+        assertEquals(expected3, result5);
     }
 
 }

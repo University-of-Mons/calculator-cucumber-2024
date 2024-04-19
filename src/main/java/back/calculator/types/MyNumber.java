@@ -110,46 +110,42 @@ public class MyNumber implements Expression {
     }
 
 
+    /**
+     * Method to convert the MyNumber values to real
+     *
+     * @return A MyNumber object that represents the number in real form
+     */
     public MyNumber convertToReal(){
         if (this instanceof NotANumber){
             return new NotANumber();
         }
 
-        AbstractValue newReal = this.real;
-        AbstractValue newImaginary = this.imaginary;
-
-        // Real part
-        if (real.getType() == Type.INT){
-            IntValue number = (IntValue) real;
-            newReal = new RealValue(new BigDecimal(number.getValue(), precision));
-        } else{
-            if (real.getType() == Type.RATIONAL){
-                RationalValue number = (RationalValue) real;
-                newReal = number.convertToReal();
-            } else{
-                if (real.getType() == Type.REAL) {
-                    newReal = real;
-                }
-            }
-        }
-
-        // Imaginary part
-        if (imaginary.getType() == Type.INT){
-            IntValue number = (IntValue) imaginary;
-            newImaginary = new RealValue(new BigDecimal(number.getValue(), precision));
-        } else{
-            if (imaginary.getType() == Type.RATIONAL){
-                RationalValue number = (RationalValue) imaginary;
-                newImaginary = number.convertToReal();
-            } else{
-                if (real.getType() == Type.REAL) {
-                    newImaginary = imaginary;
-                }
-            }
-        }
+        AbstractValue newReal = convertValueToReal(this.real);
+        AbstractValue newImaginary = convertValueToReal(this.imaginary);
 
         return new MyNumber(newReal, newImaginary);
     }
+
+    /**
+     * Annex method to convert a value to real
+     * @param value AbstractValue to convert in real
+     * @return a new AbstractValue that represents the value in real
+     */
+    private AbstractValue convertValueToReal(AbstractValue value){
+        AbstractValue newValue = value;
+        if (value.getType() == Type.INT){
+            IntValue number = (IntValue) value;
+            newValue = new RealValue(new BigDecimal(number.getValue(), precision));
+        } else{
+            if (value.getType() == Type.RATIONAL){
+                RationalValue number = (RationalValue) value;
+                newValue = number.convertToReal();
+            }
+            // If REAL, newValue = value (no need to convert)
+        }
+        return newValue;
+    }
+
 
     /**
      * Method to check if the number is represented in polar, cartesian or exponential form
