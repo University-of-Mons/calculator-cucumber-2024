@@ -64,7 +64,7 @@ postfix : ((MODULUS postfix MODULUS) | ('modulus' '(' postfix ')'))       # Modu
     ;
 
 // Atoms are only real numbers
-atom:  SUB? val=FLOAT E SUB? NUMBER # ENotationAtom
+atom:  SUB? val=(FLOAT|NUMBER) E (SUB?|ADD?) NUMBER # ENotationAtom
     |  SUB? val=FLOAT               # FloatAtom
     |  SUB? PI                      # PiAtom
     |  SUB? NUMBER                  # IntAtom
