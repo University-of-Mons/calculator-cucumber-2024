@@ -11,18 +11,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calculator.controller.components.ConversionsModeController">
-   <VBox fx:id="conversionsVBox" prefHeight="365.5" prefWidth="480.0" spacing="20">
+   <VBox fx:id="conversionsVBox" prefHeight="365.5" prefWidth="480.0" spacing="8.15">
+      <Region prefHeight="20.0"/>
       <HBox>
-         <Region prefWidth="30.0"/>
+         <Region prefWidth="20.0"/>
          <Label prefWidth="85" prefHeight="50.0" text="Type">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </Label>
-         <Region prefWidth="10.0"/>
-         <ComboBox fx:id="unitTypeComboBox" prefWidth="150.0" prefHeight="40.0" />
+         <Region prefWidth="58.0"/>
+         <ComboBox fx:id="unitTypeComboBox" prefWidth="150.0" prefHeight="40.0"/>
       </HBox>
+      <Separator/>
       <HBox>
          <Region prefWidth="20.0"/>
          <Label prefWidth="85" prefHeight="50.0" text="From">
@@ -30,28 +33,29 @@
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </Label>
-         <Region prefWidth="30.0"/>
+         <Region prefWidth="58.0"/>
          <ComboBox fx:id="comboBoxFromUnit" prefWidth="150.0" prefHeight="40.0" />
       </HBox>
-      <HBox>
-         <Region prefWidth="20"/>
+      <HBox alignment="CENTER">
          <TextField fx:id="textFieldFrom1" editable="false" prefWidth="170.0" prefHeight="40.0" onMouseClicked="#clickOnFrom1">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </TextField>
-         <Region prefWidth="2"/>
-         <Label prefWidth="10" prefHeight="50" text=",">
+         <Region prefWidth="8"/>
+         <Label prefHeight="50" text=",">
             <font>
-               <Font name="Avenir Black" size="24.0"/>
+               <Font name="Avenir Black" size="32.0"/>
             </font>
          </Label>
+         <Region prefWidth="8"/>
          <TextField fx:id="textFieldFrom2" editable="false" prefWidth="170.0" prefHeight="40.0" onMouseClicked="#clickOnFrom2">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </TextField>
       </HBox>
+      <Separator/>
       <HBox>
          <Region prefWidth="20.0"/>
          <Label prefWidth="85" prefHeight="50.0" text="To">
@@ -59,28 +63,29 @@
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </Label>
-         <Region prefWidth="30.0"/>
+         <Region prefWidth="58.0"/>
          <ComboBox fx:id="comboBoxToUnit" prefWidth="150.0" prefHeight="40.0" />
       </HBox>
-      <HBox>
-         <Region prefWidth="20"/>
+      <HBox alignment="CENTER">
          <TextField fx:id="textFieldTo1" editable="false" prefWidth="170.0" prefHeight="40.0">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </TextField>
-         <Region prefWidth="2"/>
-         <Label prefWidth="10" prefHeight="50" text=",">
+         <Region prefWidth="8"/>
+         <Label prefHeight="50" text=",">
             <font>
-               <Font name="Avenir Black" size="24.0"/>
+               <Font name="Avenir Black" size="32.0"/>
             </font>
          </Label>
+         <Region prefWidth="8"/>
          <TextField fx:id="textFieldTo2" editable="false" prefWidth="170.0" prefHeight="40.0">
             <font>
                <Font name="Avenir Black" size="24.0"/>
             </font>
          </TextField>
       </HBox>
+      <Separator/>
       <HBox alignment="CENTER">
          <Button fx:id="btnConvert" onAction="#onConvert" prefHeight="50.0" prefWidth="160.0" text="Convert">
             <font>

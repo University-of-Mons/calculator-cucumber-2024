@@ -86,7 +86,7 @@ Feature: Conversions Test
       | 3.5    | "GRAM"         | "KILOGRAM"     | "0"         | "0035"      |
       | 5.2    | "KILOGRAM"     | "MILLIGRAM"    | "5200000"   | "0"         |
       | 4.6    | "MILLIGRAM"    | "POUND"        | "0"         | "0000101413" |
-      | 2.1    | "POUND"        | "OUNCE"        | "33"        | "6000762036" |
+      | 2.1    | "POUND"        | "OUNCE"        | "33"        | "6" |
       | 6.3    | "OUNCE"        | "NEWTON"       | "1"         | "7520836877"   |
       | 7.2    | "NEWTON"       | "POUND_FORCE"  | "1"         | "6186248073" |
       | 6.5    | "POUND_FORCE"  | "GRAM"         | "2947"      | "3428185476" |

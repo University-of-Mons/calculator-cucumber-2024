@@ -1,14 +1,10 @@
 package calculator.controller.components;
 
 import calculator.AppStarter;
-import calculator.conversions.LengthUnit;
-import calculator.conversions.Unit;
-import calculator.conversions.UnitType;
-import calculator.conversions.VolumeUnit;
+import calculator.conversions.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +12,13 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * The ConversionsModeControllerTest class is responsible for testing the GUI of the Conversions Mode.
+ * It includes tests for button clicks, input deletion, input clearing, unit conversion, unit change, and more.
+ * This class uses the TestFX library for JavaFX UI testing.
+ */
 @ExtendWith(ApplicationExtension.class)
 class ConversionsModeControllerTest {
     private final AppStarter guiStarter = new AppStarter();
@@ -34,7 +37,7 @@ class ConversionsModeControllerTest {
     void testClick(FxRobot fxRobot){
         fxRobot.clickOn("#btn1");
         TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
-        Assertions.assertEquals("1", textFieldFrom1.getText());
+        assertEquals("1", textFieldFrom1.getText());
     }
 
     @Test
@@ -42,7 +45,7 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#textFieldFrom2");
         fxRobot.clickOn("#btn6");
         TextField textFieldFrom2 = fxRobot.lookup("#textFieldFrom2").queryAs(TextField.class);
-        Assertions.assertEquals("6", textFieldFrom2.getText());
+        assertEquals("6", textFieldFrom2.getText());
     }
 
     @Test
@@ -52,7 +55,7 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#textFieldFrom1");
         fxRobot.clickOn("#btn2");
         TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
-        Assertions.assertEquals("2", textFieldFrom1.getText());
+        assertEquals("2", textFieldFrom1.getText());
     }
 
     @Test
@@ -61,13 +64,13 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btnDelete");
         TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
-        Assertions.assertEquals("3", textFieldFrom1.getText());
+        assertEquals("3", textFieldFrom1.getText());
         fxRobot.clickOn("#textFieldFrom2");
         fxRobot.clickOn("#btn4");
         fxRobot.clickOn("#btn7");
         fxRobot.clickOn("#btnDelete");
         TextField textFieldFrom2 = fxRobot.lookup("#textFieldFrom2").queryAs(TextField.class);
-        Assertions.assertEquals("4", textFieldFrom2.getText());
+        assertEquals("4", textFieldFrom2.getText());
     }
 
     @Test
@@ -76,13 +79,13 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnClear");
         TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
-        Assertions.assertEquals("", textFieldFrom1.getText());
+        assertEquals("", textFieldFrom1.getText());
         fxRobot.clickOn("#textFieldFrom2");
         fxRobot.clickOn("#btn5");
         fxRobot.clickOn("#btn7");
         fxRobot.clickOn("#btnDelete");
         TextField textFieldFrom2 = fxRobot.lookup("#textFieldFrom2").queryAs(TextField.class);
-        Assertions.assertEquals("5", textFieldFrom2.getText());
+        assertEquals("5", textFieldFrom2.getText());
     }
 
     @Test
@@ -91,9 +94,9 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btn6");
         fxRobot.clickOn("#btnConvert");
         TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
-        Assertions.assertEquals("2600", textFieldTo1.getText());
+        assertEquals("2600", textFieldTo1.getText());
         TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
-        Assertions.assertEquals("0", textFieldTo2.getText());
+        assertEquals("0", textFieldTo2.getText());
     }
 
     @Test
@@ -102,16 +105,16 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btn8");
         fxRobot.clickOn("#btnConvert");
         TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
-        Assertions.assertEquals("80", textFieldTo1.getText());
+        assertEquals("80", textFieldTo1.getText());
         TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
-        Assertions.assertEquals("0", textFieldTo2.getText());
+        assertEquals("0", textFieldTo2.getText());
     }
 
     @Test
     void testConvert(FxRobot fxRobot){
         fxRobot.clickOn("#btnConvert");
         TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
-        Assertions.assertEquals("", textFieldTo1.getText());
+        assertEquals("", textFieldTo1.getText());
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btn3");
         fxRobot.clickOn("#textFieldFrom2");
@@ -120,46 +123,46 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnConvert");
         textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
-        Assertions.assertEquals("1369", textFieldTo1.getText());
+        assertEquals("1369", textFieldTo1.getText());
         TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
-        Assertions.assertEquals("2", textFieldTo2.getText());
+        assertEquals("2", textFieldTo2.getText());
     }
 
     @Test
     void testUnitChange(FxRobot fxRobot){
         ComboBox comboBox = fxRobot.lookup("#unitTypeComboBox").queryAs(ComboBox.class);
-        Assertions.assertEquals(UnitType.LENGTH, comboBox.getValue());
+        assertEquals(UnitType.LENGTH, comboBox.getValue());
         fxRobot.clickOn("#unitTypeComboBox");
-        fxRobot.clickOn("TIME");
-        Assertions.assertEquals(UnitType.TIME, comboBox.getValue());
+        fxRobot.clickOn("Time");
+        assertEquals(UnitType.TIME, comboBox.getValue());
     }
 
     @Test
     void testFromToUnitChange(FxRobot fxRobot){
         ComboBox<Unit> comboBoxFromUnit = fxRobot.lookup("#comboBoxFromUnit").queryAs(ComboBox.class);
         ComboBox<Unit> comboBoxToUnit = fxRobot.lookup("#comboBoxToUnit").queryAs(ComboBox.class);
-        Assertions.assertEquals(LengthUnit.METER, comboBoxFromUnit.getValue());
-        Assertions.assertEquals(LengthUnit.CENTIMETER, comboBoxToUnit.getValue());
+        assertEquals(LengthUnit.METER, comboBoxFromUnit.getValue());
+        assertEquals(LengthUnit.CENTIMETER, comboBoxToUnit.getValue());
 
         fxRobot.clickOn("#comboBoxFromUnit");
-        fxRobot.clickOn("INCH");
+        fxRobot.clickOn("Inch");
         fxRobot.clickOn("#comboBoxToUnit");
-        fxRobot.clickOn("FOOT");
+        fxRobot.clickOn("Foot");
 
-        Assertions.assertEquals(LengthUnit.INCH, comboBoxFromUnit.getValue());
-        Assertions.assertEquals(LengthUnit.FOOT, comboBoxToUnit.getValue());
+        assertEquals(LengthUnit.INCH, comboBoxFromUnit.getValue());
+        assertEquals(LengthUnit.FOOT, comboBoxToUnit.getValue());
 
         fxRobot.clickOn("#unitTypeComboBox");
-        fxRobot.clickOn("VOLUME");
+        fxRobot.clickOn("Volume");
 
-        Assertions.assertEquals(VolumeUnit.CUBICMETER, comboBoxFromUnit.getValue());
-        Assertions.assertEquals(VolumeUnit.LITER, comboBoxToUnit.getValue());
+        assertEquals(VolumeUnit.CUBICMETER, comboBoxFromUnit.getValue());
+        assertEquals(VolumeUnit.LITER, comboBoxToUnit.getValue());
     }
 
     @Test
     void testConvertAfterUnitChange(FxRobot fxRobot){
         fxRobot.clickOn("#unitTypeComboBox");
-        fxRobot.clickOn("PRESSURE");
+        fxRobot.clickOn("Pressure");
         fxRobot.clickOn("#btn6");
         fxRobot.clickOn("#btn3");
         fxRobot.clickOn("#btn9");
@@ -167,8 +170,59 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btnConvert");
 
         TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
-        Assertions.assertEquals("6", textFieldTo1.getText());
+        assertEquals("6", textFieldTo1.getText());
         TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
-        Assertions.assertEquals("39", textFieldTo2.getText());
+        assertEquals("39", textFieldTo2.getText());
+    }
+
+    @Test
+    void testMoreThanTenCharacters(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btn4");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btn6");
+        fxRobot.clickOn("#btn7");
+        fxRobot.clickOn("#btn8");
+        fxRobot.clickOn("#btn9");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn1");
+        TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
+        assertEquals("1234567890", textFieldFrom1.getText());
+        fxRobot.clickOn("#textFieldFrom2");
+        fxRobot.clickOn("#btn9");
+        fxRobot.clickOn("#btn8");
+        fxRobot.clickOn("#btn7");
+        fxRobot.clickOn("#btn6");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btn4");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        TextField textFieldFrom2 = fxRobot.lookup("#textFieldFrom2").queryAs(TextField.class);
+        assertEquals("9876543210", textFieldFrom2.getText());
+    }
+
+    @Test
+    void testClickOnUnitTypes(FxRobot fxRobot) {
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Mass and Weight");
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Currency");
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Power");
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Temperature");
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Speed");
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Area");
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Energy");
+        ComboBox comboBoxFromUnit = fxRobot.lookup("#comboBoxFromUnit").queryAs(ComboBox.class);
+        assertEquals(EnergyUnit.JOULE, comboBoxFromUnit.getValue());
     }
 }

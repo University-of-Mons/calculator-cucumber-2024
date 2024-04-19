@@ -3,10 +3,28 @@ package calculator.conversions;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * The Convertor class is responsible for converting values between different units of measurement.
+ * It handles both temperature conversions, which require a different formula, and other unit conversions.
+ */
 public class Convertor {
+    /**
+     * The result of the conversion, stored as a BigDecimal for precision.
+     */
     private final BigDecimal result;
 
+    /**
+     * Constructs a Convertor for units of measurement other than temperature.
+     * The conversion is done either by multiplying the input value by the ratio of the conversion factors of the two
+     * units or, if both units have power of ten conversion factors, by shifting the decimal point of the input value.
+     *
+     * @param value The value to be converted.
+     * @param fromUnit The unit of the input value.
+     * @param toUnit The unit to which the value is to be converted.
+     */
     public Convertor(double value, Unit fromUnit, Unit toUnit) {
         BigDecimal inputValue = BigDecimal.valueOf(value);
 
@@ -20,6 +38,14 @@ public class Convertor {
         }
     }
 
+    /**
+     * Constructs a Convertor for temperature units.
+     * The conversion is done using the formulas for converting between Celsius, Fahrenheit, and Kelvin.
+     *
+     * @param value The temperature value to be converted.
+     * @param fromUnit The unit of the input temperature value.
+     * @param toUnit The unit to which the temperature value is to be converted.
+     */
     public Convertor(double value, TemperatureUnit fromUnit, TemperatureUnit toUnit) {
         BigDecimal temp = BigDecimal.valueOf(value);
         switch (fromUnit) {
@@ -45,8 +71,18 @@ public class Convertor {
         }
     }
 
+    /**
+     * Adjusts the decimal point of the input value based on the difference in powers of ten between the two units.
+     * If the power difference is positive, the decimal point is moved to the right.
+     * If the power difference is negative, the decimal point is moved to the left.
+     *
+     * @param value The value to be adjusted.
+     * @param powerDifference The difference in powers of ten between the two units.
+     * @return The adjusted value as a string.
+     */
     private static String getString(double value, int powerDifference) {
         String valueStr = String.valueOf(value);
+
         while (powerDifference != 0){
             int decimalIndex = valueStr.indexOf(".");
             if (powerDifference > 0) {
@@ -66,10 +102,22 @@ public class Convertor {
         return valueStr;
     }
 
+    /**
+     * Returns the integer part of the result of the conversion.
+     *
+     * @return The integer part of the result as a string.
+     */
     public String getIntegerPart() {
         return result.toBigInteger().toString();
     }
 
+    /**
+     * Returns the decimal part of the result of the conversion.
+     * The decimal part is rounded up if a digit after the first two decimal digits is 9 and
+     * rounded down if there are at least three zeros after a non-zero digit.
+     *
+     * @return The decimal part of the result as a string.
+     */
     public String getDecimalPart() {
         BigInteger integerPart = result.toBigInteger();
         BigDecimal decimalPart = result.subtract(new BigDecimal(integerPart)).setScale(10, RoundingMode.HALF_UP);
@@ -81,6 +129,14 @@ public class Convertor {
         if (indexOfNine != -3) {
             decimalPart = decimalPart.setScale(indexOfNine + 2, RoundingMode.UP);
         }
-        return decimalPart.stripTrailingZeros().toPlainString().substring(2);
+
+        decimalPartStr = decimalPart.stripTrailingZeros().toPlainString().substring(2);
+        Pattern pattern = Pattern.compile("(\\d*?[1-9]\\d*?000).*");
+        Matcher matcher = pattern.matcher(decimalPartStr);
+        if (matcher.find()) {
+            decimalPartStr = matcher.group(1);
+            decimalPartStr = decimalPartStr.substring(0, decimalPartStr.length() - 3);
+        }
+        return decimalPartStr;
     }
 }

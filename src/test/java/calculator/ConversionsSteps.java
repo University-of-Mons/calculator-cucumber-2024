@@ -6,6 +6,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
+/**
+ * The ConversionsSteps class is responsible for defining the steps of the conversion process.
+ * It uses the Cucumber testing framework to define the steps in a behavior-driven development (BDD) style.
+ * The steps include setting the input value and unit type, performing the conversion, and verifying the result.
+ */
 public class ConversionsSteps {
     private double inputValue;
     private UnitType unitType;
@@ -38,9 +43,6 @@ public class ConversionsSteps {
             case PRESSURE:
                 convertor = new Convertor(inputValue, PressureUnit.valueOf(fromUnit), PressureUnit.valueOf(toUnit));
                 break;
-            /*case TEMPERATURE:TODO
-                convertor = new Convertor(inputValue, TemperatureUnit.valueOf(fromUnit), TemperatureUnit.valueOf(toUnit));
-                break;*/
             case VOLUME:
                 convertor = new Convertor(inputValue, VolumeUnit.valueOf(fromUnit), VolumeUnit.valueOf(toUnit));
                 break;
