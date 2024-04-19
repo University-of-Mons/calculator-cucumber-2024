@@ -41,6 +41,10 @@ public class Converter {
         initializeTimeConversionFactors();
     }
 
+    private Converter() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * Defines the conversion factors for all speed units.
      */

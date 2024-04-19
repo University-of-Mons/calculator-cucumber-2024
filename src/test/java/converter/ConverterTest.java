@@ -7,9 +7,11 @@ import back.converter.Converter;
 import back.converter.Units;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the Converter class.
@@ -164,6 +166,22 @@ public class ConverterTest {
                 new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Time.HOUR,
                 Units.Distance.KILOMETER));
+    }
+
+    /**
+     * Test that verifies the constructor is private and throws an error if its accessibility is changed.
+     */
+    @Test
+    public void testPrivateConstructor() {
+        Constructor<Converter> constructor;
+        try {
+            constructor = Converter.class.getDeclaredConstructor();
+            assertTrue((constructor.getModifiers() & java.lang.reflect.Modifier.PRIVATE) > 0);
+            constructor.setAccessible(true); // Make it accessible
+            assertThrows(InvocationTargetException.class, constructor::newInstance);
+        } catch (NoSuchMethodException e) {
+            fail("No private constructor found");
+        }
     }
 }
 
