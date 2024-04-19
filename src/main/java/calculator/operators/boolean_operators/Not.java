@@ -19,7 +19,7 @@ public class Not extends Operation {
     private final OperatorType type = OperatorType.UNARY;
 
     /**
-     * Class constructor specifying,
+     * Class constructor specifying a number of Expressions to apply the NOT operation on,
      * as well as the notation used to represent the operation.
      *
      * @param expressionList The list of Expressions to divide
@@ -35,6 +35,16 @@ public class Not extends Operation {
         neutral = 0;
     }
 
+    /**
+     * The actual computation of the (unary) boolean NOT operation.
+     * If the number is a MyNotANumber instance, the method returns a new MyNotANumber instance.
+     * If the number is different from 0 or 1, the method throws and catch an InvalidNumberException and returns a new
+     * MyNotANumber instance.
+     *
+     * @param l The number.
+     * @return The result of the NOT operation, or a new MyNotANumber if the input number is a MyNotANumber or the
+     * number is greater than 1.
+     */
     @Override
     public MyNumber op(MyNumber l){
         if (l instanceof MyNotANumber)
@@ -59,6 +69,11 @@ public class Not extends Operation {
         return op(l);
     }
 
+    /**
+     *The type of the operator.
+     *
+     * @return the type (unary or binary) of the operator.
+     */
     @Override
     public OperatorType getType(){
         return type;

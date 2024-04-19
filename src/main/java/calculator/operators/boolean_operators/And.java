@@ -21,10 +21,10 @@ public class And extends Operation {
 
 
     /**
-     * Class constructor specifying,
+     * Class constructor specifying a number of Expressions to apply the AND operation on,
      * as well as the notation used to represent the operation.
      *
-     * @param expressionList The list of Expressions to divide
+     * @param expressionList The list of Expressions
      * @throws IllegalConstruction  If an empty list of expressions if passed as parameter
      * @see #And(List)
      * @see Operation#Operation(List)
@@ -37,6 +37,17 @@ public class And extends Operation {
         neutral = 0;
     }
 
+    /**
+     * The actual computation of the (binary) boolean AND operation of two boolean.
+     * If either of the numbers is a MyNotANumber instance, the method returns a new MyNotANumber instance.
+     * If either of the numbers is different from 0 or 1, the method throws and catch an InvalidNumberException and returns a new
+     * MyNotANumber instance.
+     *
+     * @param l The first number.
+     * @param r The second number.
+     * @return The result of the AND operation, or a new MyNotANumber if either input number is a MyNotANumber or either
+     * number is greater than 1.
+     */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
         if (l instanceof MyNotANumber || r instanceof MyNotANumber)
@@ -55,6 +66,11 @@ public class And extends Operation {
         }
     }
 
+    /**
+     *The type of the operator.
+     *
+     * @return the type (unary or binary) of the operator.
+     */
     @Override
     public OperatorType getType(){
         return type;

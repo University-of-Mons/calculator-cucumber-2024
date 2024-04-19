@@ -1,7 +1,5 @@
 package calculator.numbers;
 
-import visitor.Visitor;
-
 public class MyBool extends MyNumber{
 
     private final int value;
@@ -32,7 +30,7 @@ public class MyBool extends MyNumber{
         return Integer.toString(value);
     }
 
-    /** Two MyNumber expressions are equal if the values they contain are equal
+    /** Two MyBool expressions are equal if the values they contain are equal
      *
      * @param o The object to compare to
      * @return  A boolean representing the result of the equality test

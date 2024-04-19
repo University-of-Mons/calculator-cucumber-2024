@@ -85,6 +85,11 @@ public class BooleanModeController implements Initializable, ModeController{
         }
     }
 
+    /**
+     * Handle boolean symbols to convert them into their counterpart which uses letters.
+     *
+     * @return The converted string.
+     * **/
     private String handleSymbols(String text){
         StringBuilder stringExpression = new StringBuilder();
         for(String elem : text.split(" ")){
