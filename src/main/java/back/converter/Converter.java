@@ -285,7 +285,6 @@ public class Converter {
      * @return The converted value
      */
     public static MyNumber convert(RealValue value, Units.Unit from, Units.Unit to) {
-        // TODO Use real numbers from issue #7
         if (from instanceof Units.Speed && to instanceof Units.Speed) {
             AbstractValue result = convertSpeed(value, (Units.Speed) from, (Units.Speed) to);
             return new MyNumber(result);

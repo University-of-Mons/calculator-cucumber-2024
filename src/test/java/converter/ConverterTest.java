@@ -16,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for the Converter class.
  */
-public class ConverterTest {
+class ConverterTest {
 
     /**
      * Test valid speed unit conversions.
      */
     @Test
-    public void testValidSpeedConversions() {
+    void testValidSpeedConversions() {
         assertEquals(new MyNumber(360), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Speed.METERS_PER_SECOND,
@@ -54,7 +54,7 @@ public class ConverterTest {
      * Test invalid speed unit conversions.
      */
     @Test
-    public void testInvalidSpeedConversions() {
+    void testInvalidSpeedConversions() {
         assertEquals(new NotANumber(), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Speed.METERS_PER_SECOND,
@@ -69,7 +69,7 @@ public class ConverterTest {
      * Test valid weight unit conversions.
      */
     @Test
-    public void testValidWeightConversions() {
+    void testValidWeightConversions() {
         assertEquals(new MyNumber(5), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Weight.GRAM,
@@ -88,7 +88,7 @@ public class ConverterTest {
      * Test invalid weight unit conversions.
      */
     @Test
-    public void testInvalidWeightConversions() {
+    void testInvalidWeightConversions() {
         assertEquals(new NotANumber(), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Weight.GRAM,
@@ -103,7 +103,7 @@ public class ConverterTest {
      * Test valid distance unit conversions.
      */
     @Test
-    public void testValidDistanceConversions() {
+    void testValidDistanceConversions() {
         assertEquals(new MyNumber(5), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Distance.METER,
@@ -122,7 +122,7 @@ public class ConverterTest {
      * Test invalid distance unit conversions.
      */
     @Test
-    public void testInvalidDistanceConversions() {
+    void testInvalidDistanceConversions() {
         assertEquals(new NotANumber(), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Distance.METER,
@@ -137,7 +137,7 @@ public class ConverterTest {
      * Test valid time unit conversions.
      */
     @Test
-    public void testValidTimeConversions() {
+    void testValidTimeConversions() {
         assertEquals(new MyNumber(7200), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(2), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Time.HOUR,
@@ -157,7 +157,7 @@ public class ConverterTest {
      * Test invalid time unit conversions.
      */
     @Test
-    public void testInvalidTimeConversions() {
+    void testInvalidTimeConversions() {
         assertEquals(new NotANumber(), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
                 Units.Time.SECOND,
@@ -172,7 +172,7 @@ public class ConverterTest {
      * Test that verifies the Converter constructor is private and throws an error if its accessibility is changed.
      */
     @Test
-    public void testPrivateConverterConstructor() {
+    void testPrivateConverterConstructor() {
         Constructor<Converter> constructor;
         try {
             constructor = Converter.class.getDeclaredConstructor();
@@ -188,7 +188,7 @@ public class ConverterTest {
      * Test that verifies the Units is private and throws an error if its accessibility is changed.
      */
     @Test
-    public void testPrivateUnitsConstructor() {
+    void testPrivateUnitsConstructor() {
         Constructor<Units> constructor;
         try {
             constructor = Units.class.getDeclaredConstructor();

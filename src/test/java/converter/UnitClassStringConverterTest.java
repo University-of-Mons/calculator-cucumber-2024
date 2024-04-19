@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Tests for the UnitClassStringConverter class.
  */
-public class UnitClassStringConverterTest {
+class UnitClassStringConverterTest {
 
     /**
      * Test the toString method of the UnitClassStringConverter class.
@@ -29,7 +29,7 @@ public class UnitClassStringConverterTest {
      * Test the fromString method of the UnitClassStringConverter class.
      */
     @Test
-    public void testFromString() {
+    void testFromString() {
         UnitClassStringConverter converter = new UnitClassStringConverter();
         Class<Units.Time> clazz = Units.Time.class;
         assertNull(converter.fromString(clazz.toString()));

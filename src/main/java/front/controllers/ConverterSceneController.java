@@ -17,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,7 +112,7 @@ public class ConverterSceneController implements Initializable {
         // Set the equals button event
         inputField.setOnKeyPressed(event -> {
             if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
-                equalsButtonClicked(null);
+                equalsButtonClicked();
             }
         });
 
@@ -171,15 +170,15 @@ public class ConverterSceneController implements Initializable {
     public void characterButtonClicked(MouseEvent event) {
         Button source = (Button) event.getSource();
 
-        if (source.equals(equals)) equalsButtonClicked(event);
-        else if (source.equals(clear)) clearButtonClicked(event);
+        if (source.equals(equals)) equalsButtonClicked();
+        else if (source.equals(clear)) clearButtonClicked();
         else regularButtonClicked(event);
     }
 
     /**
      * Handles the behavior that the app should have when the equals button is clicked.
      */
-    private void equalsButtonClicked(MouseEvent event) {
+    private void equalsButtonClicked() {
         Units.Unit firstUnit = firstUnitSelector.getValue();
         Units.Unit secondUnit = secondUnitSelector.getValue();
         MyNumber result = App.convert(new RealValue(new BigDecimal(inputField.getText(), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)), firstUnit, secondUnit);
@@ -208,7 +207,7 @@ public class ConverterSceneController implements Initializable {
     /**
      * Handles the behavior that the app should have when the clear button is clicked.
      */
-    private void clearButtonClicked(MouseEvent event) {
+    private void clearButtonClicked() {
         clearInputField();
     }
 

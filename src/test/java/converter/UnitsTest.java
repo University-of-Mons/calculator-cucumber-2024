@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test for the Units class.
  */
-public class UnitsTest {
+class UnitsTest {
     /**
      * Tests the getUnitClasses method of the Units class.
      */

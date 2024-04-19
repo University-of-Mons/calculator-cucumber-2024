@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for the UnitStringConverter class.
  */
-public class UnitStringConverterTest {
+class UnitStringConverterTest {
 
     /**
      * Test the toString method of the UnitStringConverter class.
@@ -34,7 +34,7 @@ public class UnitStringConverterTest {
      * Test the fromString method of the UnitStringConverter class.
      */
     @Test
-    public void testFromString() {
+    void testFromString() {
         UnitStringConverter converter = new UnitStringConverter();
         Units.Unit unit = Units.Time.HOUR;
         String symbol = unit.getSymbol();
