@@ -4,7 +4,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, feature-boolean_algebra ]
   pull_request:
     branches: [ master ]
 
