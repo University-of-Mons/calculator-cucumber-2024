@@ -131,3 +131,25 @@ Feature: Integer Arithmetic Expressions
     Then its INFIX notation is (8 / 6)
     And its PREFIX notation is /(8, 6)
     And its POSTFIX notation is (8, 6)/
+
+  Scenario Outline: Evaluating boolean expressions
+    Given I initialise a calculator
+    When I provide an expression <expr>
+    Then the expression evaluates to <result>
+
+    Examples:
+      | expr                            | result |
+      | !true                           | 0      |
+      | !false                          | 1      |
+      | true & false                    | 0      |
+      | true \| false                   | 1      |
+      | true ^ false                    | 1      |
+      | true & true                     | 1      |
+      | false \| false                  | 0      |
+      | false ^ false                   | 0      |
+      | true ^ false ^ false            | 1      |
+      | true ^ true ^ false             | 0      |
+      | true ^ true ^ true              | 1      |
+      | !(true & false) ^ true => false | 1      |
+      | (true & false) \| true => true  | 1      |
+      | true & false \| true ^ true     | 0      |

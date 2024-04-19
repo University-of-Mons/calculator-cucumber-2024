@@ -17,6 +17,7 @@ public class CalculatorSteps {
 	private ArrayList<Expression> params;
 	private Operation op;
 	private Calculator c;
+	private Expression e;
 
 	@Before
     public void resetMemoryBeforeEachScenario() {
@@ -137,15 +138,6 @@ public class CalculatorSteps {
 		catch(IllegalConstruction e) { fail(); }
 	}
 
-//	@Given("^the not of a number (\\d+)$")
-//	public void givenTheNot(int n1) {
-//		try {
-//			params = new ArrayList<>();
-//		    params.add(new MyNumber(n1));
-//		    op = new Not(params);}
-//		catch(IllegalConstruction e) { fail(); }
-//	}
-
 	@Then("^its (.*) notation is (.*)$")
 	public void thenItsNotationIs(String notation, String s) {
 		if (notation.equals("PREFIX")||notation.equals("POSTFIX")||notation.equals("INFIX")) {
@@ -188,4 +180,14 @@ public class CalculatorSteps {
 		assertEquals(new MyNaN(), c.eval(op));
 	}
 
+
+	@Then("the expression evaluates to {}")
+	public void theExpressionEvaluatesTo(String result) {
+		assertEquals(new MyNumber(Integer.parseInt(result)), c.eval(e));
+	}
+
+	@When("I provide an expression {}")
+	public void iProvideAnExpression(String s) {
+		e = c.read(s);
+	}
 }
