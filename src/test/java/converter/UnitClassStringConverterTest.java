@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * Tests for the UnitClassStringConverter class.
  */
-public class UnitClassStringConverterTest {
+class UnitClassStringConverterTest {
 
     /**
      * Test the toString method of the UnitClassStringConverter class.
@@ -21,6 +21,7 @@ public class UnitClassStringConverterTest {
         assertEquals("Weight", converter.toString(Units.Weight.class));
         assertEquals("Distance", converter.toString(Units.Distance.class));
         assertEquals("Time", converter.toString(Units.Time.class));
+        assertEquals("Angles", converter.toString(Units.Angles.class));
         assertNull(converter.toString(null));
     }
 }

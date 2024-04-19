@@ -36,6 +36,9 @@ public class App extends Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
+    /**
+     * Static variable holding the precision of the calculator used for RealValue construction using BigDecimal.
+     */
     private static MathContext precision = new MathContext(5);
 
     private static final Calculator calculator = new Calculator();

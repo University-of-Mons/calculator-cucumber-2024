@@ -208,9 +208,9 @@ public class MainSceneController implements Initializable {
         Label[] resultHistory = new Label[5];
         resultHistory[0] = lastResult; resultHistory[1] = lastResult1; resultHistory[2] = lastResult2; resultHistory[3] = lastResult3; resultHistory[4] = lastResult4;
 
-        for(int i = 4; i > 0; i--){
-            expressionHistory[i].setText(expressionHistory[i-1].getText());
-            resultHistory[i].setText(resultHistory[i-1].getText());
+        for(int j = 4; j > 0; j--){
+            expressionHistory[j].setText(expressionHistory[j-1].getText());
+            resultHistory[j].setText(resultHistory[j-1].getText());
         }
         expressionHistory[0].setText(newExpression);
         resultHistory[0].setText(newResult);

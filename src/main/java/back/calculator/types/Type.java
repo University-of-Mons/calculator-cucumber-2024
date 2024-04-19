@@ -5,5 +5,16 @@ package back.calculator.types;
 
  */
 public enum Type {
-    INT, REAL, RATIONAL
+    /**
+     * Integer value. Example: 1
+     */
+    INT,
+    /**
+     * Real value. Example: 1.0
+     */
+    REAL,
+    /**
+     * Rational value. Example: 1/2
+     */
+    RATIONAL
 }

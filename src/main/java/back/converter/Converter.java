@@ -1,10 +1,14 @@
 package back.converter;
 
+import back.calculator.App;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
+import back.calculator.types.RealValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,11 +33,22 @@ public class Converter {
      */
     private static final Map<Units.Time, Map<Units.Time, Float>> timeConversionFactors = new HashMap<>();
 
+    /**
+     * Holds the conversion factors from all angles units to all angles units.
+     */
+    private static final Map<Units.Angles, Map<Units.Angles, Float>> anglesConversionFactors = new HashMap<>();
+
+    /**
+     * The precision of the calculator used for RealValue construction using BigDecimal.
+     */
+    private static final MathContext precision = App.getPrecision();
+
     static {
         initializeSpeedConversionFactors();
         initializeWeightConversionFactors();
         initializeDistanceConversionFactors();
         initializeTimeConversionFactors();
+        initializeAnglesConversionFactors();
     }
 
     /**
@@ -179,6 +194,33 @@ public class Converter {
     }
 
     /**
+     * Defines the conversion factors for all angles units.
+     */
+    private static void initializeAnglesConversionFactors() {
+        initializeAnglesConversionFactorsDegree();
+        initializeAnglesConversionFactorsRadian();
+    }
+
+    /**
+     * Initializes the conversion factors for degree.
+     */
+    private static void initializeAnglesConversionFactorsDegree() {
+        Map<Units.Angles, Float> factors = new HashMap<>();
+        factors.put(Units.Angles.DEGREE, 1f);
+        factors.put(Units.Angles.RADIAN, (float) Math.PI / 180);
+        anglesConversionFactors.put(Units.Angles.DEGREE, factors);
+    }
+    /**
+     * Initializes the conversion factors for radian.
+     */
+    private static void initializeAnglesConversionFactorsRadian() {
+        Map<Units.Angles, Float> factors = new HashMap<>();
+        factors.put(Units.Angles.DEGREE, 180f / (float) Math.PI);
+        factors.put(Units.Angles.RADIAN, 1f);
+        anglesConversionFactors.put(Units.Angles.RADIAN, factors);
+    }
+
+    /**
      * Retrieve the conversion factor when converting from the first given unit to the second given unit.
      * @param from The unit of the value
      * @param to The unit of the result
@@ -216,6 +258,16 @@ public class Converter {
      */
     private static float getTimeFactor(Units.Time from, Units.Time to) {
         return timeConversionFactors.get(from).get(to);
+    }
+
+    /**
+     * Retrieve the conversion factor when converting from the first given unit to the second given unit.
+     * @param from The unit of the value
+     * @param to The unit of the result
+     * @return The conversion factor
+     */
+    private static float getAngleFactor(Units.Angles from, Units.Angles to) {
+        return anglesConversionFactors.get(from).get(to);
     }
 
     /**
@@ -262,6 +314,10 @@ public class Converter {
         return value * getTimeFactor(from, to);
     }
 
+    private static float convertAngle(float value, Units.Angles from, Units.Angles to) {
+        return value * getAngleFactor(from, to);
+    }
+
     /**
      * Converts the given value from the first given unit to the second given units.
      * This method performs the necessary checks and returns NotANumber if the units cannot be converted one to another.
@@ -287,6 +343,11 @@ public class Converter {
         if (from instanceof Units.Time && to instanceof Units.Time) {
             float result = convertTime(value, (Units.Time) from, (Units.Time) to);
             return new MyNumber((int) result);
+        }
+
+        if (from instanceof Units.Angles && to instanceof Units.Angles) {
+            float result = convertAngle(value, (Units.Angles) from, (Units.Angles) to);
+            return new MyNumber(new RealValue(new BigDecimal(Float.toString(result), precision)));
         }
 
         return new NotANumber();
