@@ -2,7 +2,7 @@ name: CodeQL security analysis for Java
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, feature-boolean_algebra ]
   pull_request:
     branches: [ master ]
   schedule:
