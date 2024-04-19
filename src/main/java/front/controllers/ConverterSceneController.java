@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +27,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ConverterSceneController implements Initializable {
+    @FXML
+    ComboBox<String> calculatorModeSelector;
     @FXML
     ComboBox<Units.Unit> firstUnitSelector;
     @FXML
@@ -115,25 +118,29 @@ public class ConverterSceneController implements Initializable {
         });
 
         // Prepare combo boxes
+        prepareCalculatorModeComboBox();
         prepareConversionModeComboBox();
         prepareComboBoxConverters();
 
         // Set listener for selection changes
         conversionModeSelector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals(Units.Speed.class)) {
-                handleSpeedConversionSelected(null);
-            } else if (newValue.equals(Units.Weight.class)) {
-                handleWeightConversionSelected(null);
-            } else if (newValue.equals(Units.Distance.class)) {
-                handleDistanceConversionSelected(null);
-            } else if (newValue.equals(Units.Time.class)) {
-                handleTimeConversionSelected(null);
-            } else if (newValue.equals(Units.Angles.class)) {
-                logger.error("Angles conversion not implemented yet.");
-            } else {
-                handleSpeedConversionSelected(null);
-                logger.error("Invalid unit type selected. Defaulted to speed.");
-            }
+            if (newValue.equals(Units.Speed.class)) handleSpeedConversionSelected(null);
+            else if (newValue.equals(Units.Weight.class)) handleWeightConversionSelected(null);
+            else if (newValue.equals(Units.Distance.class)) handleDistanceConversionSelected(null);
+            else if (newValue.equals(Units.Time.class)) handleTimeConversionSelected(null);
+            else if (newValue.equals(Units.Angles.class)) logger.error("Angles conversion not implemented yet.");
+        });
+    }
+
+    /**
+     * Prepares the calculator mode combo box by giving it values (basic, conversion) and setting a
+     * default value.
+     */
+    private void prepareCalculatorModeComboBox() {
+        calculatorModeSelector.getItems().addAll("Basic", "Conversion");
+        calculatorModeSelector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("Basic")) handleBasicModeSelected(null);
+            else if (newValue.equals("Conversion")) handleConversionModeSelected(null);
         });
     }
 
@@ -242,6 +249,7 @@ public class ConverterSceneController implements Initializable {
 
     /**
      * Switches to the basic view.
+     * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
      */
     @FXML
     private void handleBasicModeSelected(ActionEvent actionEvent) {
@@ -249,11 +257,12 @@ public class ConverterSceneController implements Initializable {
     }
 
     /**
-     * Switches to the advanced view.
+     * Stays on the converter view.
+     * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
      */
     @FXML
-    private void handleAdvancedModeSelected(ActionEvent actionEvent) {
-        App.setScene(Scenes.MAIN_SCENE);
+    private void handleConversionModeSelected(ActionEvent actionEvent) {
+        App.setScene(Scenes.CONVERTER_SCENE);
     }
 
     /**

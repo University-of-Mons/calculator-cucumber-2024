@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -28,6 +27,7 @@
                         <RowConstraints />
                     </rowConstraints>
                     <children>
+                        <!--
                         <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="167.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Mode" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="2">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#handleBasicModeSelected" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="Basic" />
@@ -40,6 +40,9 @@
                                 <Cursor fx:constant="DEFAULT" />
                             </cursor>
                         </MenuButton>
+                        -->
+                        <ComboBox fx:id="calculatorModeSelector" prefHeight="47.0" prefWidth="167.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3">
+                        </ComboBox>
                         <!--
                         <MenuButton fx:id="conversionModeSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
                                     prefWidth="160.0"
