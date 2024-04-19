@@ -42,6 +42,30 @@ Feature: Integer Arithmetic Expressions
       | 'cos'  | 0  | 1      |
       | 'sin'  | 0  | 0      |
 
+  Scenario Outline: Unary operations with NaN
+    Given an integer operation <op>
+    When I provide a NaN number
+    Then the operation evaluates to "NaN"
+
+    Examples:
+      | op     |
+      | 'sqrt' |
+      | 'exp'  |
+      | 'ln'   |
+      | 'cos'  |
+      | 'sin'  |
+
+
+  Scenario: Adding an integer number
+    Given an integer operation '+'
+    When I provide a first number 7
+    Then the operation evaluates to 7
+
+  Scenario: Adding an integer number with a NaN
+    Given an integer operation '+'
+    When I provide a NaN number
+    And I provide a second number 7
+    Then the operation evaluates to "NaN"
 
   Scenario: Subtracting an integer number
     Given an integer operation '-'
@@ -52,6 +76,12 @@ Feature: Integer Arithmetic Expressions
     Given an integer operation '-'
     When I provide a NaN number
     Then the operation evaluates to "NaN"
+
+  Scenario: Multiplying an integer number
+    Given an integer operation '*'
+    When I provide a first number 7
+    Then the operation evaluates to 7
+
 
   Scenario: Dividing an integer number
     Given an integer operation '/'

@@ -480,7 +480,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
     @Override
     public Expression visitPiAtom(calculatorParser.PiAtomContext ctx) {
-        return new MyNumber(new RealValue(new BigDecimal(Math.PI, precision)));
+        return new MyNumber(new RealValue(new BigDecimal(Double.toString(Math.PI), precision)));
     }
 
     @Override
