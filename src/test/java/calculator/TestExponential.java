@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestExponential {
 
-    private static final int real = 3;
-    private static final int imaginary = 4;
+    private static final int REAL = 3;
+    private static final int IMAGINARY = 4;
     private Exponential op;
 
     @BeforeEach
     void setUp() {
-        List<Expression> params = List.of(new MyNumber(real, imaginary));
+        List<Expression> params = List.of(new MyNumber(REAL, IMAGINARY));
         try {
             op = new Exponential(params);
         } catch (IllegalConstruction e) {
@@ -44,12 +44,12 @@ class TestExponential {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(real, imaginary)));
+        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(REAL, IMAGINARY)));
         try {
             Exponential e = new Exponential(p, Notation.INFIX);
             assertEquals(op, e);
             assertEquals(e, e);
-            assertNotEquals(e, new Exponential(new ArrayList<>(List.of(new MyNumber(imaginary, real))), Notation.INFIX));
+            assertNotEquals(e, new Exponential(new ArrayList<>(List.of(new MyNumber(IMAGINARY, REAL))), Notation.INFIX));
         } catch (IllegalConstruction e) {
             fail("Error during Exponential creation in test");
         }

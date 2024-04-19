@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestPlus {
 
-    private static final int value1 = 8;
-    private static final int value2 = 6;
+    private static final int VALUE_1 = 8;
+    private static final int VALUE_2 = 6;
     private Plus op;
     private List<Expression> params;
 
     @BeforeEach
     void setUp() {
-        params = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        params = new ArrayList<>(Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2)));
         try {
             op = new Plus(params);
         } catch (IllegalConstruction e) {
@@ -52,7 +52,7 @@ class TestPlus {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2)));
         try {
             Plus e = new Plus(p, Notation.INFIX);
             assertEquals(op, e);
@@ -71,7 +71,7 @@ class TestPlus {
     @Test
     void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(value1), new MyNumber(value2)));
+        ArrayList<Expression> p = new ArrayList<>(Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2)));
         try {
             Plus e = new Plus(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());

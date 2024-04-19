@@ -59,7 +59,7 @@ public class MyNumber implements Expression {
                 break;
             default:
                 imaginary = new IntValue(0);
-
+                break;
         }
     }
 

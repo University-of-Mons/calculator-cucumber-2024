@@ -11,7 +11,6 @@ import front.scenes.Scenes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
 import java.math.MathContext;
 
 
@@ -31,14 +30,14 @@ public class App extends Application {
 
     private static String userInput = "";
 
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
     private static MathContext precision = new MathContext(5);
 
     private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
-        logger.info("Starting the application");
+        LOGGER.info("Starting the application");
         launch(args);
     }
 
@@ -82,7 +81,7 @@ public class App extends Application {
     }
 
     public static Logger getLogger() {
-        return logger;
+        return LOGGER;
     }
 
 

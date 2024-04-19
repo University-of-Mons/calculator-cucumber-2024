@@ -15,31 +15,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestMyNumber {
 
-    private static final int value = 8;
+    private static final int VALUE = 8;
     private MyNumber number;
 
     @BeforeEach
     void setUp() {
-        number = new MyNumber(value);
+        number = new MyNumber(VALUE);
     }
 
     @Test
     void testEquals() {
         // Two distinct MyNumber, constructed separately (using a different constructor) but containing the same value should be equal
-        assertEquals(new MyNumber(value), number);
+        assertEquals(new MyNumber(VALUE), number);
 
         // Two MyNumbers containing a distinct value should not be equal:
         int otherValue = 7;
         assertNotEquals(new MyNumber(otherValue), number);
         assertEquals(number, number); // Identity check (for coverage, as this should always be true)
-        assertNotEquals(value, number); // number is of type MyNumber, while value is of type int, so not equal
+        assertNotEquals(VALUE, number); // number is of type MyNumber, while value is of type int, so not equal
         try {
             assertNotEquals(new Times(new ArrayList<>()), number);
         } catch (IllegalConstruction e) {
             fail();
         }
 
-        assertNotEquals(new MyNumber(value, value), new MyNumber(value, value-1));
+        assertNotEquals(new MyNumber(VALUE, VALUE), new MyNumber(VALUE, VALUE -1));
     }
 
     @Test
@@ -58,37 +58,37 @@ class TestMyNumber {
 
     @Test
     void testToStringOnlyReal() {
-        assertEquals(Integer.toString(value), number.toString());
+        assertEquals(Integer.toString(VALUE), number.toString());
         assertEquals("0", new MyNumber(0).toString());
     }
 
     @Test
     void testToStringOnlyImaginary() {
-        MyNumber imaginaryNumber = new MyNumber(0, value);
-        assertEquals(value + "i", imaginaryNumber.toString());
+        MyNumber imaginaryNumber = new MyNumber(0, VALUE);
+        assertEquals(VALUE + "i", imaginaryNumber.toString());
         MyNumber imaginaryNumber2 = new MyNumber(0, 1);
         assertEquals("i", imaginaryNumber2.toString());
     }
 
     @Test
     void testToStringRealAndImaginary() {
-        MyNumber complexNumber = new MyNumber(value, value);
-        assertEquals(value + "+" + value + "i", complexNumber.toString());
+        MyNumber complexNumber = new MyNumber(VALUE, VALUE);
+        assertEquals(VALUE + "+" + VALUE + "i", complexNumber.toString());
 
-        MyNumber complexNumber2 = new MyNumber(value, 1);
-        assertEquals(value + "+i", complexNumber2.toString());
+        MyNumber complexNumber2 = new MyNumber(VALUE, 1);
+        assertEquals(VALUE + "+i", complexNumber2.toString());
     }
 
     @Test
     void testToStringNegativeImaginary() {
-        MyNumber negativeImaginaryNumber = new MyNumber(0, -value);
-        assertEquals("-" + value + "i", negativeImaginaryNumber.toString());
+        MyNumber negativeImaginaryNumber = new MyNumber(0, -VALUE);
+        assertEquals("-" + VALUE + "i", negativeImaginaryNumber.toString());
     }
 
     @Test
     void testToStringRealAndNegativeImaginary() {
-        MyNumber complexNumber = new MyNumber(value, -value);
-        assertEquals(value + "-" + value + "i", complexNumber.toString());
+        MyNumber complexNumber = new MyNumber(VALUE, -VALUE);
+        assertEquals(VALUE + "-" + VALUE + "i", complexNumber.toString());
     }
 
     @Test

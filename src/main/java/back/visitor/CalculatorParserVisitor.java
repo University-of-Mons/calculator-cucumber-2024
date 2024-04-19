@@ -25,7 +25,7 @@ import static back.parser.calculatorLexer.*;
  */
 public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
 
-    private final Logger logger = org.slf4j.LoggerFactory.getLogger(CalculatorParserVisitor.class);
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(CalculatorParserVisitor.class);
 
     private final MathContext precision = App.getPrecision();
 
@@ -92,7 +92,7 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         AbstractValue arg1 = getValueFromAtom(ctx.theta1);
         AbstractValue arg2 = getValueFromAtom(ctx.theta2);
         if (!arg1.equals(arg2)) {
-            logger.warn("The two angles are different. Please check the input. {} != {}", arg1, arg2);
+            LOGGER.warn("The two angles are different. Please check the input. {} != {}", arg1, arg2);
             return new NotANumber();
         }
 

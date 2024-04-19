@@ -40,7 +40,7 @@ class ConverterGUITest extends ApplicationTest {
      */
     private static final String inputFieldId = "#inputField";
 
-    private Logger logger = LoggerFactory.getLogger(ConverterGUITest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConverterGUITest.class);
 
     /**
      * Will be called with {@code @Before} semantics, i.e. before each test method.

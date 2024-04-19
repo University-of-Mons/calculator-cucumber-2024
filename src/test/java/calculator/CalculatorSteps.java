@@ -96,7 +96,7 @@ public class CalculatorSteps {
             params.add(new MyNumber(n2));
             op = new Plus(params);
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Error in construction of the operation!");
         }
     }
 
@@ -147,7 +147,7 @@ public class CalculatorSteps {
         try {
             op = new Plus(params);
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Error in construction of the sum");
         }
     }
 
@@ -158,7 +158,7 @@ public class CalculatorSteps {
         try {
             op = new Minus(params);
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Error in construction of the difference");
         }
     }
 
@@ -169,7 +169,7 @@ public class CalculatorSteps {
         try {
             op = new Times(params);
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Error in construction of the product");
         }
     }
 
@@ -180,7 +180,7 @@ public class CalculatorSteps {
         try {
             op = new Divides(params);
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Error in construction of the quotient");
         }
     }
 
@@ -205,11 +205,11 @@ public class CalculatorSteps {
                 case "product" -> op = new Times(params);
                 case "quotient" -> op = new Divides(params);
                 case "difference" -> op = new Minus(params);
-                default -> fail();
+                default -> fail("Unknown operation!");
             }
             assertEquals(new MyNumber(val), c.eval(op));
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Error in construction of the operation");
         }
     }
 
@@ -238,11 +238,11 @@ public class CalculatorSteps {
                 case "product" -> op = new Times(params);
                 case "quotient" -> op = new Divides(params);
                 case "difference" -> op = new Minus(params);
-                default -> fail();
+                default -> fail("Unknown operation!");
             }
             assertEquals(val, c.eval(op).toString());
         } catch (IllegalConstruction e) {
-            fail();
+            fail("Error in construction of the operation");
         }
     }
 
@@ -354,7 +354,7 @@ public class CalculatorSteps {
     }
 
     @When("I provide the following expression {string}")
-    public void WhenIProvideAnExpression(String s) {
+    public void whenIProvideAnExpression(String s) {
         try {
             params = new ArrayList<>();
             params.add(c.read(s));

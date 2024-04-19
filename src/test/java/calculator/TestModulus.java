@@ -16,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestModulus {
 
-    private static final int real = 3;
-    private static final int imaginary = 4;
+    private static final int REAL = 3;
+    private static final int IMAGINARY = 4;
     private Modulus op;
 
     @BeforeEach
     void setUp() {
-        List<Expression> params = List.of(new MyNumber(real, imaginary));
+        List<Expression> params = List.of(new MyNumber(REAL, IMAGINARY));
         try {
             op = new Modulus(params);
         } catch (IllegalConstruction e) {
@@ -45,12 +45,12 @@ class TestModulus {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(real, imaginary)));
+        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(REAL, IMAGINARY)));
         try {
             Modulus e = new Modulus(p, Notation.INFIX);
             assertEquals(op, e);
             assertEquals(e, e);
-            assertNotEquals(e, new Modulus(new ArrayList<>(List.of(new MyNumber(imaginary, real))), Notation.INFIX));
+            assertNotEquals(e, new Modulus(new ArrayList<>(List.of(new MyNumber(IMAGINARY, REAL))), Notation.INFIX));
         } catch (IllegalConstruction e) {
             fail("Error during Modulus creation in test");
         }
@@ -65,7 +65,7 @@ class TestModulus {
     @Test
     void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(real, imaginary)));
+        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(REAL, IMAGINARY)));
         try {
             Modulus e = new Modulus(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());

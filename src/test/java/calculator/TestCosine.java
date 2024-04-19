@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestCosine {
 
-    private static final int real = 3;
-    private static final int imaginary = 4;
+    private static final int REAL = 3;
+    private static final int IMAGINARY = 4;
     private Cosine op;
 
     @BeforeEach
     void setUp() {
-        List<Expression> params = List.of(new MyNumber(real, imaginary));
+        List<Expression> params = List.of(new MyNumber(REAL, IMAGINARY));
         try {
             op = new Cosine(params);
         } catch (IllegalConstruction e) {
@@ -44,12 +44,12 @@ class TestCosine {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(real, imaginary)));
+        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(REAL, IMAGINARY)));
         try {
             Cosine e = new Cosine(p, Notation.INFIX);
             assertEquals(op, e);
             assertEquals(e, e);
-            assertNotEquals(e, new Cosine(new ArrayList<>(List.of(new MyNumber(imaginary, real))), Notation.INFIX));
+            assertNotEquals(e, new Cosine(new ArrayList<>(List.of(new MyNumber(IMAGINARY, REAL))), Notation.INFIX));
         } catch (IllegalConstruction e) {
             fail("Error during Cosine creation in test");
         }

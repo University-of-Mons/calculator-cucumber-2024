@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestSinus {
 
-    private static final int real = 3;
-    private static final int imaginary = 4;
+    private static final int REAL = 3;
+    private static final int IMAGINARY = 4;
     private Sinus op;
 
     @BeforeEach
     void setUp() {
-        List<Expression> params = List.of(new MyNumber(real, imaginary));
+        List<Expression> params = List.of(new MyNumber(REAL, IMAGINARY));
         try {
             op = new Sinus(params);
         } catch (IllegalConstruction e) {
@@ -44,12 +44,12 @@ class TestSinus {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(real, imaginary)));
+        ArrayList<Expression> p = new ArrayList<>(List.of(new MyNumber(REAL, IMAGINARY)));
         try {
             Sinus e = new Sinus(p, Notation.INFIX);
             assertEquals(op, e);
             assertEquals(e, e);
-            assertNotEquals(e, new Sinus(new ArrayList<>(List.of(new MyNumber(imaginary, real))), Notation.INFIX));
+            assertNotEquals(e, new Sinus(new ArrayList<>(List.of(new MyNumber(IMAGINARY, REAL))), Notation.INFIX));
         } catch (IllegalConstruction e) {
             fail("Error during Sinus creation in test");
         }
