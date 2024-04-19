@@ -2,6 +2,8 @@ package front.controllers;
 
 import back.calculator.App;
 import back.calculator.types.MyNumber;
+import back.calculator.types.RealValue;
+import back.converter.Converter;
 import back.converter.UnitClassStringConverter;
 import back.converter.UnitStringConverter;
 import back.converter.Units;
@@ -18,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -172,7 +175,7 @@ public class ConverterSceneController implements Initializable {
     private void equalsButtonClicked(MouseEvent event) {
         Units.Unit firstUnit = firstUnitSelector.getValue();
         Units.Unit secondUnit = secondUnitSelector.getValue();
-        MyNumber result = App.convert(Float.parseFloat(inputField.getText()), firstUnit, secondUnit);
+        MyNumber result = App.convert(new RealValue(new BigDecimal(inputField.getText(), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)), firstUnit, secondUnit);
         String resultString = result.toString();
         switchHistory(inputField.getText() + firstUnit.getSymbol(), resultString + secondUnit.getSymbol());
         inputField.setText(resultString);

@@ -1,6 +1,8 @@
 package back.calculator;
 
+import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
+import back.calculator.types.RealValue;
 import back.converter.Converter;
 import back.converter.Units;
 import javafx.application.Application;
@@ -78,7 +80,7 @@ public class App extends Application {
         return isRationalMode;
     }
 
-    public static MyNumber convert(float value, Units.Unit from, Units.Unit to) {
+    public static MyNumber convert(RealValue value, Units.Unit from, Units.Unit to) {
         return Converter.convert(value, from, to);
     }
 }
