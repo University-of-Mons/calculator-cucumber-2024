@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -93,22 +94,37 @@ public class TimeModeController implements Initializable, ModeController {
     public void onUnitDay() {
         display.clear();
         Duration duration = Duration.between(origin, time.getTime());
-        double days = (double) duration.getSeconds() / (24 * 60 * 60);
-        appendToDisplay( new DecimalFormat(pattern).format(days) + " days");
+        double days = (double) duration.getSeconds() / ( 24* 60 * 60);
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        DecimalFormat format = new DecimalFormat("##0.00", symbols);
+
+        appendToDisplay(format.format(days) + " days");
     }
 
     public void onUnitHour() {
         display.clear();
         Duration duration = Duration.between(origin, time.getTime());
         double hours = (double) duration.getSeconds() / ( 60 * 60);
-        appendToDisplay(new DecimalFormat(pattern).format(hours) + " hours");
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        DecimalFormat format = new DecimalFormat("##0.00", symbols);
+
+        appendToDisplay(format.format(hours) + " hours");
     }
 
     public void onUnitMin() {
         display.clear();
         Duration duration = Duration.between(origin, time.getTime());
         double minutes = (double) duration.getSeconds() / 60;
-        appendToDisplay(new DecimalFormat(pattern).format(minutes) + " minutes");
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        DecimalFormat format = new DecimalFormat("##0.00", symbols);
+
+        appendToDisplay(format.format(minutes) + " minutes");
     }
 
     public void onOpenParenthesis() {
