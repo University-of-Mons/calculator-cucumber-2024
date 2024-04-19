@@ -36,6 +36,6 @@ public abstract class Visitor {
     /**
      * The Visitor can traverse a time operation (a subtype of Expression)
      *
-     * @param o The operation being visited
+     * @param o The time operation being visited
      */   public abstract void visit(TimeOperation o);
 }

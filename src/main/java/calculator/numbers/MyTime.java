@@ -9,23 +9,40 @@ public class MyTime implements Expression{
 
     /** getter method to obtain the value contained in the object
      *
-     * @return The integer number contained in the object
+     * @return The LocalDateTime contained in the object
      */
     public LocalDateTime getTime() { return time; }
 
     /**
-     * Constructor method
+     * Constructor method for a full date and time
      *
-     * @param v The integer value to be contained in the object
+     * @param year The integer value to be the year in the object
+     * @param month The integer value to be the month in the object
+     * @param day The integer value to be the day in the object
+     * @param hour The integer value to be the hour in the object
+     * @param minute The integer value to be the minute in the object
+     * @param second The integer value to be the second in the object
      */
-    public /*constructor*/ MyTime(int year, int month, int day, int hour, int minute, int second) {
+    public MyTime(int year, int month, int day, int hour, int minute, int second) {
         time = LocalDateTime.of(year, month, day, hour, minute, second);
     }
 
+    /**
+     * Constructor method for a time only
+     *
+     * @param hour The integer value to be the hour in the object
+     * @param minute The integer value to be the minute in the object
+     * @param second The integer value to be the second in the object
+     */
     public MyTime(int hour, int minute, int second) {
         time = LocalDateTime.of(0, 1, 1, hour, minute, second);
     }
 
+    /**
+     * Method to adjust the time zone of the object
+     *
+     * @param hours The integer value to be added or subtracted from the hour value
+     */
     public void adjustTimeZone(int hours) {
         if (hours > 0)
             time = time.plusHours(hours);
@@ -33,6 +50,11 @@ public class MyTime implements Expression{
             time = time.minusHours(-hours);
     }
 
+    /**
+     * Method to adjust the time format of the object
+     *
+     * @param format The string value of the format to be adjusted to
+     */
     public void adjustTimeFormat(String format) {
         if (format.equals("PM") && time.getHour() < 12) {
             time = time.plusHours(12);
@@ -44,7 +66,7 @@ public class MyTime implements Expression{
 
     /**
      * accept method to implement the visitor design pattern to traverse arithmetic expressions.
-     * Each number will pass itself to the visitor object to get processed by the visitor.
+     * Each time will pass itself to the visitor object to get processed by the visitor.
      *
      * @param v	The visitor object
      */
@@ -53,7 +75,7 @@ public class MyTime implements Expression{
     }
 
     /**
-     * Convert a number into a String to allow it to be printed.
+     * Convert a time into a String to allow it to be printed.
      *
      * @return	The String that is the result of the conversion.
      */
@@ -71,7 +93,7 @@ public class MyTime implements Expression{
             return year + ":" + month + ":" + day + ":" + hour + ":" + minute + ":" + second;
     }
 
-    /** Two MyNumber expressions are equal if the values they contain are equal
+    /** Two MyTime expressions are equal if the values they contain are equal
      *
      * @param o The object to compare to
      * @return  A boolean representing the result of the equality test

@@ -8,14 +8,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TimeOperation is an abstract class that represents time operations,
+ * which are a special kind of Expressions, just like times are.
+ *
+ * @see Expression
+ * @see MyTime
+ */
 public abstract class TimeOperation implements Expression {
     /**
-     * The list of expressions passed as an argument to the arithmetic operation
+     * The list of expressions passed as an argument to the time operation
      */
     private final List<Expression> args;
 
     /**
-     * The character used to represent the arithmetic operation (e.g. "+", "*")
+     * The character used to represent the time operation (e.g. "+", "*")
      */
     protected String symbol;
 
@@ -26,7 +33,7 @@ public abstract class TimeOperation implements Expression {
 
     String errorMessage = "Error in counting times";
 
-    /** It is not allowed to construct an operation with a null list of expressions.
+    /** It is not allowed to construct a TimeOperation with a null list of expressions.
      * Note that it is allowed to have an EMPTY list of arguments.
      *
      * @param expressionList	The list of expressions passed as argument to the arithmetic operation
@@ -43,18 +50,18 @@ public abstract class TimeOperation implements Expression {
     }
 
     /**
-     * Getter method to return the number of arguments of an arithmetic operation.
+     * Getter method to return the number of arguments of a time operation.
      *
-     * @return	The number of arguments of the arithmetic operation.
+     * @return	The number of arguments of the time operation.
      */
     public List<Expression> getArgs() {
         return args;
     }
 
     /**
-     * Getter method to return the symbol of an arithmetic operation.
+     * Getter method to return the symbol of a time operation.
      *
-     * @return The symbol of the arithmetic operation.
+     * @return The symbol of the time operation.
      */
     public String getSymbol(){
         return symbol;
@@ -78,7 +85,7 @@ public abstract class TimeOperation implements Expression {
     }
 
     /**
-     * Accept method to implement the visitor design pattern to traverse arithmetic expressions.
+     * Accept method to implement the visitor design pattern to traverse time expressions.
      * Each operation will delegate the visitor to each of its arguments expressions,
      * and will then pass itself to the visitor object to get processed by the visitor object.
      *

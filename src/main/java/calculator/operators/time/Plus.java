@@ -5,7 +5,6 @@ import calculator.TimeOperation;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNotATime;
 import calculator.numbers.MyTime;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,12 +25,12 @@ public final class Plus extends TimeOperation {
     }
 
     /**
-     * The actual computation of the (time) arithmetic addition of two integers.
-     * If either of the numbers is a MyNotANumber instance, the method returns a new MyNotANumber instance.
+     * The actual computation of the time addition of two times.
+     * If either of the times is a MyNotATime instance, the method returns a new MyNotATime instance.
      *
-     * @param l The first number.
-     * @param r The second number that should be added to the first.
-     * @return The result of the addition, or a new MyNotANumber if either input number is a MyNotANumber.
+     * @param l The first time.
+     * @param r The second time that should be added to the first.
+     * @return The result of the addition, or a new MyNotATime if either input number is a MyNotATime.
      */
     public MyTime op(MyTime l, MyTime r) {
         if (l.getTime().isBefore(neutralTime) || r.getTime().isBefore(neutralTime) ||

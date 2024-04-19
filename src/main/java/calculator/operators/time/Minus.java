@@ -26,12 +26,14 @@ public final class Minus extends TimeOperation {
     }
 
     /**
-     * The actual computation of the (binary) arithmetic subtraction of two integers.
-     * If either of the numbers is a MyNotANumber instance, the method returns a new MyNotANumber instance.
+     * The actual computation of the time subtraction of two times.
+     * If either of the numbers is a MyNotATime instance or if the result is a negative time
+     * , the method returns a new MyNotATime instance.
      *
-     * @param l The first number.
-     * @param r The second number that should be subtracted from the first.
-     * @return The result of the subtraction, or a new MyNotANumber if either input number is a MyNotANumber.
+     * @param l The first time.
+     * @param r The second time that should be subtracted from the first.
+     * @return The result of the subtraction, or a new MyNotATime if either input number is a MyNotATime or if
+     * the result is a negative time.
      */
     public MyTime op(MyTime l, MyTime r) {
         if (l.getTime().isBefore(neutralTime) || r.getTime().isBefore(neutralTime) ||

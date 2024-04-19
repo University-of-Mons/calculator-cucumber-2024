@@ -51,6 +51,10 @@ public class ExpressionVisitor extends Visitor {
         expression = n.toString();
     }
 
+    /** Use the visitor design pattern to visit a time.
+     *
+     * @param t The time being visited
+     */
     public void visit(MyTime t) {
         expression = t.toString();
     }
@@ -95,6 +99,10 @@ public class ExpressionVisitor extends Visitor {
         }
     }
 
+    /** Use the visitor design pattern to visit a TimeOperation
+     *
+     * @param o The TimeOperation being visited
+     */
     public void visit(TimeOperation o){
         ArrayList<String> s = new ArrayList<>();
         for(Expression a:o.getArgs()) {

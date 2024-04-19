@@ -10,6 +10,10 @@ import parser.time.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * This class is a visitor that will parse the input string and create the corresponding expression tree.
+ * It will also evaluate the expression tree and return the result.
+ */
 public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression> {
     private final Calculator c;
 
@@ -19,11 +23,23 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
 
     //-------------------- INFIX ----------------------
 
+    /**
+     * Visit the infix expression inside the parenthesis.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated expression inside the parenthesis.
+     */
     @Override
     public Expression visitParensInfix(CalculatorExprTimeParser.ParensInfixContext ctx){
         return visit(ctx.infix());
     }
 
+    /**
+     * Visit the infix time expression.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated time expression.
+     */
     @Override
     public Expression visitTimeInfix(CalculatorExprTimeParser.TimeInfixContext ctx){
         MyTime time = new MyTime( Integer.parseInt(ctx.NUMBER().get(0).getText()),
@@ -44,6 +60,12 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         return time;
     }
 
+    /**
+     * Visit the infix date expression.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated date expression.
+     */
     @Override
     public Expression visitDateInfix(CalculatorExprTimeParser.DateInfixContext ctx){
         MyTime time = new MyTime(Integer.parseInt(ctx.NUMBER().get(0).getText()),
@@ -67,6 +89,12 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         return time;
     }
 
+    /**
+     * Visit the infix time expression with addition or subtraction.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated time expression with addition or subtraction.
+     */
     @Override
     public Expression visitAddSubInfix(CalculatorExprTimeParser.AddSubInfixContext ctx){
         Expression time1 = visit(ctx.infix(0));
@@ -87,11 +115,23 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
 
     //-------------------- PREFIX ----------------------
 
+    /**
+     * Visit the prefix expression inside the parenthesis.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated expression inside the parenthesis.
+     */
     @Override
     public Expression visitParensPrefix(CalculatorExprTimeParser.ParensPrefixContext ctx){
         return visit(ctx.prefix());
     }
 
+    /**
+     * Visit the prefix time expression.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated time expression.
+     */
     @Override
     public Expression visitTimePrefix(CalculatorExprTimeParser.TimePrefixContext ctx){
         MyTime time = new MyTime( Integer.parseInt(ctx.NUMBER().get(0).getText()),
@@ -112,6 +152,12 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         return time;
     }
 
+    /**
+     * Visit the prefix date expression.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated date expression.
+     */
     @Override
     public Expression visitDatePrefix(CalculatorExprTimeParser.DatePrefixContext ctx){
         MyTime time = new MyTime(Integer.parseInt(ctx.NUMBER().get(0).getText()),
@@ -135,6 +181,12 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         return time;
     }
 
+    /**
+     * Visit the prefix time expression with addition or subtraction.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated time expression with addition or subtraction.
+     */
     @Override
     public Expression visitAddSubPrefix(CalculatorExprTimeParser.AddSubPrefixContext ctx){
         Expression time1 = visit(ctx.prefix(0));
@@ -144,7 +196,8 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
             MyTime now = new MyTime(currentTime.getYear(), currentTime.getMonthValue(),
                     currentTime.getDayOfMonth(), currentTime.getHour(),
                     currentTime.getMinute(), currentTime.getSecond());
-            time2 = now;
+            time2 = time1;
+            time1 = now;
         }
         else
             time2 = visit(ctx.prefix(1));
@@ -166,11 +219,23 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
 
     //-------------------- POSTFIX ----------------------
 
+    /**
+     * Visit the postfix expression inside the parenthesis.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated expression inside the parenthesis.
+     */
     @Override
     public Expression visitParensPostfix(CalculatorExprTimeParser.ParensPostfixContext ctx) {
         return visit(ctx.postfix());
     }
 
+    /**
+     * Visit the postfix time expression.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated time expression.
+     */
     @Override
     public Expression visitTimePostfix(CalculatorExprTimeParser.TimePostfixContext ctx) {
         MyTime time = new MyTime( Integer.parseInt(ctx.NUMBER().get(0).getText()),
@@ -191,6 +256,12 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         return time;
     }
 
+    /**
+     * Visit the postfix date expression.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated date expression.
+     */
     @Override
     public Expression visitDatePostfix(CalculatorExprTimeParser.DatePostfixContext ctx) {
         MyTime time = new MyTime(Integer.parseInt(ctx.NUMBER().get(0).getText()),
@@ -214,6 +285,12 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
         return time;
     }
 
+    /**
+     * Visit the postfix time expression with addition or subtraction.
+     *
+     * @param ctx the parse tree
+     * @return the evaluated time expression with addition or subtraction.
+     */
     @Override
     public Expression visitAddSubPostfix(CalculatorExprTimeParser.AddSubPostfixContext ctx){
         Expression time1 = visit(ctx.postfix(0));
@@ -223,7 +300,8 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
             MyTime now = new MyTime(currentTime.getYear(), currentTime.getMonthValue(),
                     currentTime.getDayOfMonth(), currentTime.getHour(),
                     currentTime.getMinute(), currentTime.getSecond());
-            time2 = now;
+            time2 = time1;
+            time1 = now;
         }
         else
             time2 = visit(ctx.postfix(1));

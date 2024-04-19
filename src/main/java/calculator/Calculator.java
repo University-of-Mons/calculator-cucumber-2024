@@ -46,6 +46,11 @@ public class Calculator {
         return v.getResult();
     }
 
+    /**
+     * Evaluates a time expression and returns its result
+     * @param e the time Expression to be evaluated
+     * @return The result of the evaluation
+     */
     public MyTime timeEval(Expression e){
         Evaluator v = new Evaluator();
         e.accept(v);

@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import java.time.LocalDateTime;
 
 @ExtendWith(ApplicationExtension.class)
-//TODO add unit change tests
 public class TestTimeGui {
     private final AppStarter guiStarter = new AppStarter();
     @Start
@@ -62,6 +61,24 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnEquals");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("16:34:25", display.getText());
+    }
+
+    @Test
+    void testError(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btn4");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnPM");
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btn6");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("Error", display.getText());
     }
 
     @Test
@@ -246,6 +263,30 @@ public class TestTimeGui {
     }
 
     @Test
+    void testNotATime(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btn4");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btn4");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("NaT", display.getText());
+    }
+
+    @Test
     void testPrefix(FxRobot fxRobot){
         fxRobot.clickOn("#btnMinus");
         fxRobot.clickOn("#btnOpenParenthesis");
@@ -320,5 +361,28 @@ public class TestTimeGui {
         fxRobot.clickOn("#btnEquals");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("02:00:00", display.getText());
+    }
+
+    @Test
+    void testCurrentTimePostfix(FxRobot fxRobot){
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnColon");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime modifiedTime = currentTime.minusHours(10);
+        MyTime now = new MyTime(modifiedTime.getYear(), modifiedTime.getMonthValue(),
+                modifiedTime.getDayOfMonth(), modifiedTime.getHour(),
+                modifiedTime.getMinute(), modifiedTime.getSecond());
+        Assertions.assertEquals(now.toString(), display.getText());
     }
 }

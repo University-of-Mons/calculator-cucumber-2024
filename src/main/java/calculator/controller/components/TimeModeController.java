@@ -61,8 +61,7 @@ public class TimeModeController implements Initializable, ModeController {
             try{
                 TimeParser parser = new TimeParser(display.getText(), calculator);
                 time = parser.evaluate();
-                display.setText(
-                        time.toString());}
+                display.setText(time.toString());}
             catch (Exception e){
                 display.setText("Error");
             }
@@ -148,6 +147,7 @@ public class TimeModeController implements Initializable, ModeController {
         this.expression = expression;
     }
 
+    // Getters
     @Override
     public float getPreferredWidth() {
         return 480;

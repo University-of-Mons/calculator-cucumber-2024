@@ -60,18 +60,18 @@ public class Evaluator extends Visitor {
         computedValue = temp;
     }
 
-    /** The result of the evaluation will be stored in this private variable */
+    /** The result of the time evaluation will be stored in this private variable */
     private MyTime computedTimeValue;
 
-    /** getter method to obtain the result of the evaluation
+    /** getter method to obtain the result of the time evaluation
      *
-     * @return an Integer object containing the result of the evaluation
+     * @return a MyTime object containing the result of the evaluation
      */
     public MyTime getTimeResult() {
         return computedTimeValue;
     }
 
-    /** Use the visitor design pattern to visit a number.
+    /** Use the visitor design pattern to visit a time.
      *
      * @param t The time being visited
      */
@@ -79,9 +79,9 @@ public class Evaluator extends Visitor {
         computedTimeValue = t;
     }
 
-    /** Use the visitor design pattern to visit an operation
+    /** Use the visitor design pattern to visit a TimeOperation
      *
-     * @param o The operation being visited
+     * @param o The TimeOperation being visited
      */
     public void visit(TimeOperation o) {
         ArrayList<MyTime> evaluatedArgs = new ArrayList<>();

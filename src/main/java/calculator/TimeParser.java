@@ -10,6 +10,10 @@ import parser.time.CalculatorExprTimeLexer;
 import parser.time.CalculatorExprTimeParser;
 import visitor.TimeParserVisitor;
 
+/**
+ * TimeParser is a  class that is used to parse an expression
+ * formed with time operations.
+ */
 public class TimeParser {
     public final Calculator c;
     private final ParseTree tree;
