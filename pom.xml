@@ -171,6 +171,7 @@
                         <exclude>parser/*</exclude>
                         <exclude>parser/time/*</exclude>
                         <exclude>parser/bool/*</exclude>
+                        <exclude>parser/ComplexNumber/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

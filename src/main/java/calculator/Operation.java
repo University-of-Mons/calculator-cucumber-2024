@@ -138,4 +138,13 @@ public abstract class Operation implements Expression
 		result = prime * result + args.hashCode();
 		return result;
 	}
+
+	/**
+	 * Abstract method representing the actual unary arithmetic operation to compute
+	 * @param l	 a argument of the binary operation
+	 * @return	result of computing the unary operation
+	 */
+	public MyNumber op(MyNumber l) {
+		return l;
+	}
 }

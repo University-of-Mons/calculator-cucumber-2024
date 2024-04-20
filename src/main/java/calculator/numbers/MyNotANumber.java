@@ -1,14 +1,13 @@
 package calculator.numbers;
 
-import calculator.numbers.MyNumber;
-
 /**
  * MyNotANumber is a class that extends MyNumber.
  * It represents a non-numeric value (NaN) in the context of the calculator.
  *
  * @see MyNumber
+ *
  */
-public class MyNotANumber extends MyNumber {
+public class MyNotANumber extends MyNumber{
 
     /**
      * Default constructor.
