@@ -13,7 +13,7 @@ import calculator.operators.Times;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import visitor.CountingVisitor;
+import visitor.CountingVisior;
 
 import java.util.Arrays;
 import java.util.List;
