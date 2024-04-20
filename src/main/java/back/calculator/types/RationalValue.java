@@ -86,6 +86,12 @@ public class RationalValue extends AbstractValue {
         this.reduce();
     }
 
+    /**
+     * Computes the greatest common divisor of two integers (used for simplification)
+     * @param num The numerator
+     * @param den The denominator
+     * @return The greatest common divisor of num and den
+     */
     private static int pgcd(int num, int den) {
         if (den == 0) {
             return num;
@@ -107,6 +113,11 @@ public class RationalValue extends AbstractValue {
         }
     }
 
+    /**
+     * Add a value to the rational number
+     * @param other The value to add to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue add(AbstractValue other) {
         int newNum = this.num;
@@ -139,6 +150,11 @@ public class RationalValue extends AbstractValue {
         return result;
     }
 
+    /**
+     * Subtract a value to the rational number
+     * @param other The value to subtract to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue sub(AbstractValue other) {
         int newNum = this.num;
@@ -171,6 +187,11 @@ public class RationalValue extends AbstractValue {
         return result;
     }
 
+    /**
+     * Multiple a value to the rational number
+     * @param other The value to multiple to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue mul(AbstractValue other) {
         int newNum = this.num;
@@ -199,6 +220,11 @@ public class RationalValue extends AbstractValue {
         return result;
     }
 
+    /**
+     * Divide a value to the rational number
+     * @param other The value to divide to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue div(AbstractValue other) {
         if (other.getType() == Type.REAL){
@@ -208,43 +234,70 @@ public class RationalValue extends AbstractValue {
         return new RationalValue(this, other);
     }
 
-
+    /**
+     * Convert the rational number to a real number
+     * @return A new RealValue of the rational number
+     */
     public RealValue convertToReal(){
         RealValue newNum = new RealValue(new BigDecimal(this.num, precision));
         RealValue newDen = new RealValue(new BigDecimal(this.den, precision));
         return (RealValue) newNum.div(newDen);
     }
 
+    /**
+     * Compute the square root of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue sqrt() {
         RealValue real = this.convertToReal();
         return real.sqrt();
     }
 
+    /**
+     * Compute the cosinus of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue cos() {
         RealValue real = this.convertToReal();
         return real.cos();
     }
 
+    /**
+     * Compute the sinus of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue sin() {
         RealValue real = this.convertToReal();
         return real.sin();
     }
 
+    /**
+     * Compute the logarithm of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue ln() {
         RealValue real = this.convertToReal();
         return real.ln();
     }
 
+    /**
+     * Compute the exponential of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue exp() {
         RealValue real = this.convertToReal();
         return real.exp();
     }
 
+    /**
+     * Compute the arctangent of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue atan() {
         RealValue real = this.convertToReal();
