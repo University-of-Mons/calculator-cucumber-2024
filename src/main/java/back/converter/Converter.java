@@ -8,7 +8,7 @@ import back.calculator.types.RealValue;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 /**
@@ -20,19 +20,19 @@ public class Converter {
     /**
      * Holds the conversion factors from all speed units to all speed units.
      */
-    private static final Map<Units.Speed, Map<Units.Speed, RealValue>> speedConversionFactors = new HashMap<>();
+    private static final Map<Units.Speed, Map<Units.Speed, RealValue>> speedConversionFactors = new EnumMap<>(Units.Speed.class);
     /**
      * Holds the conversion factors from all weight units to all speed units.
      */
-    private static final Map<Units.Weight, Map<Units.Weight, RealValue>> weightConversionFactors = new HashMap<>();
+    private static final Map<Units.Weight, Map<Units.Weight, RealValue>> weightConversionFactors = new EnumMap<>(Units.Weight.class);
     /**
      * Holds the conversion factors from all distance units to all speed units.
      */
-    private static final Map<Units.Distance, Map<Units.Distance, RealValue>> distanceConversionFactors = new HashMap<>();
+    private static final Map<Units.Distance, Map<Units.Distance, RealValue>> distanceConversionFactors = new EnumMap<>(Units.Distance.class);
     /**
      * Holds the conversion factors from all time units to all speed units.
      */
-    private static final Map<Units.Time, Map<Units.Time, RealValue>> timeConversionFactors = new HashMap<>();
+    private static final Map<Units.Time, Map<Units.Time, RealValue>> timeConversionFactors = new EnumMap<>(Units.Time.class);
 
     static {
         initializeSpeedConversionFactors();
@@ -59,7 +59,7 @@ public class Converter {
      * Initializes the conversion factors for meters per second.
      */
     private static void initializeSpeedConversionFactorsMetersPerSecond() {
-        Map<Units.Speed, RealValue> factors = new HashMap<>();
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
         factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(3600f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/1000), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
@@ -71,7 +71,7 @@ public class Converter {
      * Initializes the conversion factors for meters per hour.
      */
     private static void initializeSpeedConversionFactorsMetersPerHour() {
-        Map<Units.Speed, RealValue> factors = new HashMap<>();
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
         factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3600), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3600000), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
@@ -83,7 +83,7 @@ public class Converter {
      * Initializes the conversion factors for meters per second.
      */
     private static void initializeSpeedConversionFactorsKilometersPerSecond() {
-        Map<Units.Speed, RealValue> factors = new HashMap<>();
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
         factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1000f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(3600000f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
@@ -95,7 +95,7 @@ public class Converter {
      * Initializes the conversion factors for meters per hour.
      */
     private static void initializeSpeedConversionFactorsKilometersPerHour() {
-        Map<Units.Speed, RealValue> factors = new HashMap<>();
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
         factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3.6f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(1000f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3600f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
@@ -115,7 +115,7 @@ public class Converter {
      * Initializes the conversion factors for gram.
      */
     private static void initializeWeightConversionFactorsGram() {
-        Map<Units.Weight, RealValue> factors = new HashMap<>();
+        Map<Units.Weight, RealValue> factors = new EnumMap<>(Units.Weight.class);
         factors.put(Units.Weight.GRAM, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Weight.KILOGRAM, new RealValue(new BigDecimal(Float.toString(1f/1000), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         weightConversionFactors.put(Units.Weight.GRAM, factors);
@@ -125,7 +125,7 @@ public class Converter {
      * Initializes the conversion factors for kilogram.
      */
     private static void initializeWeightConversionFactorsKilogram() {
-        Map<Units.Weight, RealValue> factors = new HashMap<>();
+        Map<Units.Weight, RealValue> factors = new EnumMap<>(Units.Weight.class);
         factors.put(Units.Weight.GRAM, new RealValue(new BigDecimal(Float.toString(1000f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Weight.KILOGRAM, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         weightConversionFactors.put(Units.Weight.KILOGRAM, factors);
@@ -143,7 +143,7 @@ public class Converter {
      * Initializes the conversion factors for meter.
      */
     private static void initializeDistanceConversionFactorsMeter() {
-        Map<Units.Distance, RealValue> factors = new HashMap<>();
+        Map<Units.Distance, RealValue> factors = new EnumMap<>(Units.Distance.class);
         factors.put(Units.Distance.METER, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Distance.KILOMETER, new RealValue(new BigDecimal(Float.toString(1f/1000), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         distanceConversionFactors.put(Units.Distance.METER, factors);
@@ -153,7 +153,7 @@ public class Converter {
      * Initializes the conversion factors for kilometer.
      */
     private static void initializeDistanceConversionFactorsKilometer() {
-        Map<Units.Distance, RealValue> factors = new HashMap<>();
+        Map<Units.Distance, RealValue> factors = new EnumMap<>(Units.Distance.class);
         factors.put(Units.Distance.METER, new RealValue(new BigDecimal(Float.toString(1000f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Distance.KILOMETER, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         distanceConversionFactors.put(Units.Distance.KILOMETER, factors);
@@ -171,7 +171,7 @@ public class Converter {
      * Initializes the conversion factors for second.
      */
     private static void initializeTimeConversionFactorsSecond() {
-        Map<Units.Time, RealValue> factors = new HashMap<>();
+        Map<Units.Time, RealValue> factors = new EnumMap<>(Units.Time.class);
         factors.put(Units.Time.SECOND, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Time.HOUR, new RealValue(new BigDecimal(Float.toString(1f/3600), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         timeConversionFactors.put(Units.Time.SECOND, factors);
@@ -181,7 +181,7 @@ public class Converter {
      * Initializes the conversion factors for hour.
      */
     private static void initializeTimeConversionFactorsHour() {
-        Map<Units.Time, RealValue> factors = new HashMap<>();
+        Map<Units.Time, RealValue> factors = new EnumMap<>(Units.Time.class);
         factors.put(Units.Time.SECOND, new RealValue(new BigDecimal(Float.toString(3600f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         factors.put(Units.Time.HOUR, new RealValue(new BigDecimal(Float.toString(1f), TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)));
         timeConversionFactors.put(Units.Time.HOUR, factors);
@@ -285,20 +285,20 @@ public class Converter {
      * @return The converted value
      */
     public static MyNumber convert(RealValue value, Units.Unit from, Units.Unit to) {
-        if (from instanceof Units.Speed && to instanceof Units.Speed) {
-            AbstractValue result = convertSpeed(value, (Units.Speed) from, (Units.Speed) to);
+        if (from instanceof Units.Speed fromSpeed && to instanceof Units.Speed toSpeed) {
+            AbstractValue result = convertSpeed(value, fromSpeed, toSpeed);
             return new MyNumber(result);
         }
-        if (from instanceof Units.Weight && to instanceof Units.Weight) {
-            AbstractValue result = convertWeight(value, (Units.Weight) from, (Units.Weight) to);
+        if (from instanceof Units.Weight fromWeight && to instanceof Units.Weight toWeight) {
+            AbstractValue result = convertWeight(value, fromWeight, toWeight);
             return new MyNumber(result);
         }
-        if (from instanceof Units.Distance && to instanceof Units.Distance) {
-            AbstractValue result = convertDistance(value, (Units.Distance) from, (Units.Distance) to);
+        if (from instanceof Units.Distance fromDistance && to instanceof Units.Distance toDistance) {
+            AbstractValue result = convertDistance(value, fromDistance, toDistance);
             return new MyNumber(result);
         }
-        if (from instanceof Units.Time && to instanceof Units.Time) {
-            AbstractValue result = convertTime(value, (Units.Time) from, (Units.Time) to);
+        if (from instanceof Units.Time fromTime && to instanceof Units.Time toTime) {
+            AbstractValue result = convertTime(value, fromTime, toTime);
             return new MyNumber(result);
         }
         return new NotANumber();
