@@ -52,8 +52,8 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage _stage) {
-        stage = _stage;
+    public void start(Stage s) {
+        stage = s;
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
         setScene(Scenes.MAIN_SCENE);
