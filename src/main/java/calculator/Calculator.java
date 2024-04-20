@@ -2,6 +2,7 @@ package calculator;
 
 import calculator.parser.CalculatorLexer;
 import calculator.parser.CalculatorParser;
+import calculator.parser.Parser;
 import calculator.parser.VisitorParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -26,10 +27,9 @@ public class Calculator<T> {
      * @param s the string to parse
      * @return a new Expression
      */
-    public Expression read(String s) {
-        CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString(s));
-        CalculatorParser parser = new CalculatorParser(new CommonTokenStream(lexer));
-        return parser.init().accept(new VisitorParser());
+    public Expression<Integer> read(String s) throws IllegalExpression {
+        Parser<Integer> p = new Parser<>();
+        return p.parse(s, Parser::stringToInteger);
     }
 
     /**

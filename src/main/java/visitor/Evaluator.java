@@ -61,17 +61,4 @@ public class Evaluator<T> extends Visitor<T> {
         computedValue = temp;
     }
 
-    /** Use the visitor design pattern to visit a Not operation
-     *
-     * @param not The Not operation being visited
-     */
-    public void visit(Not not) {
-        not.arg.accept(this);
-        if (computedValue == 0) {
-            computedValue = 1;
-        } else {
-            computedValue = 0;
-        }
-    }
-
 }

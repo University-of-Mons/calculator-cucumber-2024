@@ -1,4 +1,6 @@
-package calculator;
+package calculator.operation;
+
+import calculator.*;
 
 import java.util.List;
 
@@ -11,21 +13,20 @@ import java.util.List;
  * @see Not
  * @see Xor
  */
-public class Implication extends Operation {
+public class Implication<T> extends Operation<T> {
     /**
      * Class constructor specifying a number of Expressions to IMPLICATION.
      *
      * @param elist The list of Expressions to IMPLICATION
      * @throws IllegalConstruction    If an empty list of expressions is passed as parameter
      */
-    public Implication(List<Expression> elist) throws IllegalConstruction {
+    public Implication(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "=>";
-        neutral = 1;
     }
 
     @Override
-    public int op(int l, int r) {
-        return (l == 1 && r == 0) ? 0 : 1;
+    public Value<T> op(Value<T> l, Value<T> r) {
+        return l.implies(r);
     }
 }

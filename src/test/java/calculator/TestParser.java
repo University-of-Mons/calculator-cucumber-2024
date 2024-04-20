@@ -88,32 +88,31 @@ class TestParser {
         }
     }
 
-
-    /**
-     * The read expression calls the parser utilities to construct the Expression instance.
-     * We can then test the parser by checking the result of the read method.
-     */
     @Test
     public void testParser() {
-        Calculator c = new Calculator();
+        Calculator<Integer> c = new Calculator<>();
 
-        Expression e = c.read("true & false & true");
-        assertEquals(0, c.eval(e).getValue());
+        try {
+            Expression<Integer> e = c.read("true & false & true");
+            assertEquals(new MyNumber(0), c.eval(e));
 
-        e = c.read("true | false | true");
-        assertEquals(1, c.eval(e).getValue());
+            e = c.read("true | false | true");
+            assertEquals(new MyNumber(1), c.eval(e));
 
-        e = c.read("true & false | true");
-        assertEquals(1, c.eval(e).getValue());
+            e = c.read("true & false | true");
+            assertEquals(new MyNumber(1), c.eval(e));
 
-        e = c.read("true | false & true");
-        assertEquals(1, c.eval(e).getValue());
+            e = c.read("true | false & true");
+            assertEquals(new MyNumber(1), c.eval(e));
 
-        e = c.read("true | false => false");
-        assertEquals(0, c.eval(e).getValue());
+            e = c.read("true | false => false");
+            assertEquals(new MyNumber(0), c.eval(e));
 
-        e = c.read("true ^ true ^ true");
-        assertEquals(1, c.eval(e).getValue());
+            e = c.read("true ^ true ^ true");
+            assertEquals(new MyNumber(1), c.eval(e));
+        } catch (IllegalExpression e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

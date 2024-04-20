@@ -74,15 +74,4 @@ public class Printer<T> extends Visitor<T> {
         }
 
     }
-
-    /**
-     * Use the visitor design pattern to visit a Not operation
-     *
-     * @param n The Not operation being visited
-     */
-    public void visit(Not n) {
-        result.append("!");
-        n.arg.accept(this);
-    }
-
 }

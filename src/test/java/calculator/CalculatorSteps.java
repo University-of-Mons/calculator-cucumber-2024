@@ -20,6 +20,7 @@ public class CalculatorSteps {
     private ArrayList<Expression<Integer>> params;
     private Operation<Integer> op;
     private Calculator<Integer> c;
+    private Expression<Integer> e;
 
     @Before
     public void resetMemoryBeforeEachScenario() {
@@ -38,13 +39,13 @@ public class CalculatorSteps {
 		params = new ArrayList<>(); // create an empty set of parameters to be filled in
 		try {
 			switch (s) {
-				case "+"	->	op = new Plus(params);
-				case "-"	->	op = new Minus(params);
-				case "*"	->	op = new Times(params);
-				case "/"	->	op = new Divides(params);
-				case "&"	->	op = new And(params);
-				case "|"	->	op = new Or(params);
-				case "^"	->	op = new Xor(params);
+				case "+"	->	op = new Plus<>(params);
+				case "-"	->	op = new Minus<>(params);
+				case "*"	->	op = new Times<>(params);
+				case "/"	->	op = new Divides<>(params);
+				case "&"	->	op = new And<>(params);
+				case "|"	->	op = new Or<>(params);
+				case "^"	->	op = new Xor<>(params);
 				default		->	fail();
 			}
 		} catch (IllegalConstruction e) {
@@ -118,6 +119,20 @@ public class CalculatorSteps {
         }
     }
 
+    @Given("^the negation of a number (\\d+)$")
+    public void givenTheNegation(int n) {
+        try {
+            params = new ArrayList<>();
+            params.add(new MyNumber(n));
+            op = new Not<>(params);
+            System.out.println(op.op(new MyNumber(1), new MyNumber(1)));
+            System.out.println("Op args = " + params);
+            System.out.println("Negation of " + n + " is " + c.eval(op));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
     @Then("^its (.*) notation is (.*)$")
     public void thenItsNotationIs(String notation, String s) {
         if (notation.equals("PREFIX") || notation.equals("POSTFIX") || notation.equals("INFIX")) {
@@ -167,8 +182,12 @@ public class CalculatorSteps {
 
 	@When("I provide an expression {}")
 	public void iProvideAnExpression(String s) {
-		e = c.read(s);
-	}
+        try {
+            e = c.read(s);
+        } catch (IllegalExpression e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Given("^the and of two numbers (\\d+) and (\\d+)$")
     public void givenTheAnd(int n1, int n2) {
@@ -176,7 +195,7 @@ public class CalculatorSteps {
             params = new ArrayList<>();
             params.add(new MyNumber(n1));
             params.add(new MyNumber(n2));
-            op = new And(params);}
+            op = new And<>(params);}
         catch(IllegalConstruction e) { fail(); }
     }
 
@@ -186,7 +205,7 @@ public class CalculatorSteps {
             params = new ArrayList<>();
             params.add(new MyNumber(n1));
             params.add(new MyNumber(n2));
-            op = new Or(params);}
+            op = new Or<>(params);}
         catch(IllegalConstruction e) { fail(); }
     }
 
@@ -196,7 +215,7 @@ public class CalculatorSteps {
             params = new ArrayList<>();
             params.add(new MyNumber(n1));
             params.add(new MyNumber(n2));
-            op = new Xor(params);}
+            op = new Xor<>(params);}
         catch(IllegalConstruction e) { fail(); }
     }
 }

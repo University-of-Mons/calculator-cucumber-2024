@@ -132,6 +132,10 @@ Feature: Integer Arithmetic Expressions
     And its PREFIX notation is /(8, 6)
     And its POSTFIX notation is (8, 6)/
 
+  Scenario: Printing the NOT of an integer number
+    Given the negation of a number 0
+    Then the operation evaluates to 1
+
   Scenario Outline: Evaluating boolean expressions
     Given I initialise a calculator
     When I provide an expression <expr>

@@ -1,4 +1,6 @@
-package calculator;
+package calculator.operation;
+
+import calculator.*;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * @see Not
  * @see Xor
  */
-public final class And extends Operation {
+public final class And<T> extends Operation<T> {
 
     /**
      * Class constructor specifying a number of Expressions to AND.
@@ -18,14 +20,13 @@ public final class And extends Operation {
      * @param elist The list of Expressions to AND
      * @throws IllegalConstruction    If an empty list of expressions is passed as parameter
      */
-    public And(List<Expression> elist) throws IllegalConstruction {
+    public And(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "&";
-        neutral = 1;
     }
 
     @Override
-    public int op(int l, int r) {
-        return l & r;
+    public Value<T> op(Value<T> l, Value<T> r) {
+        return l.and(r);
     }
 }

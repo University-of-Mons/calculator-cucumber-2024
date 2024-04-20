@@ -1,4 +1,8 @@
-package calculator;
+package calculator.operation;
+
+import calculator.Expression;
+import calculator.IllegalConstruction;
+import calculator.Value;
 
 import java.util.List;
 
@@ -10,7 +14,7 @@ import java.util.List;
  * @see Not
  * @see Or
  */
-public class Xor extends Operation {
+public class Xor<T> extends Operation<T> {
 
     /**
      * Class constructor specifying a number of Expressions to XOR.
@@ -18,14 +22,13 @@ public class Xor extends Operation {
      * @param elist The list of Expressions to XOR
      * @throws IllegalConstruction    If an empty list of expressions is passed as parameter
      */
-    public Xor(List<Expression> elist) throws IllegalConstruction {
+    public Xor(List<Expression<T>> elist) throws IllegalConstruction {
         super(elist);
         symbol = "^";
-        neutral = 0;
     }
 
     @Override
-    public int op(int l, int r) {
-        return l ^ r;
+    public Value<T> op(Value<T> l, Value<T> r) {
+        return l.xor(r);
     }
 }
