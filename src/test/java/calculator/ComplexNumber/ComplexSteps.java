@@ -1,7 +1,10 @@
-package calculator;
+package calculator.ComplexNumber;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import calculator.Calculator;
+import calculator.IllegalConstruction;
+import calculator.Operation;
 import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNotANumber;
@@ -11,10 +14,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import visitor.ExpressionVisitor;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class ComplexSteps {
 
@@ -33,7 +35,7 @@ public class ComplexSteps {
         c = new Calculator();
     }
 
-    @Given("A complex operator {string}")
+    @Given("A operator {string}")
     public void givenAnIntegerOperation(String s) {
         // Write code here that turns the phrase above into concrete actions
         params = new ArrayList<>(); // create an empty set of parameters to be filled in
@@ -45,6 +47,9 @@ public class ComplexSteps {
                 case "/" -> op = new Divides(params);
                 case "||" -> op = new Modulus(params);
                 case "sqrt" -> op = new Sqrt(params);
+                case "intoCartesian" -> op = new IntoCartesianFrom(params);
+                case "intoPolar" -> op = new IntoPolarForm(params);
+                case "intoExponential" -> op = new IntoExponentialForm(params);
                 default -> fail();
             }
         } catch (IllegalConstruction e) {
@@ -65,7 +70,7 @@ public class ComplexSteps {
     public void whenIAddTheFollowingComplexNumbersSub(int real, int imaginary) {
         //add extra parameter to the operation
         params = new ArrayList<>();
-        params.add(new ComplexNumber(real, imaginary));
+        params.add(new ComplexNumber(real, -imaginary));
         op.addMoreParams(params);
     }
 
@@ -74,6 +79,30 @@ public class ComplexSteps {
         params = new ArrayList<>();
         params.add(new MyNumber(number));
         op.addMoreParams(params);
+    }
+
+    @When("I have a complex number in polar form with r = {int} and theta = {int}")
+    public void whenIAddTheFollowingComplexNumbersPolar(int r,int theta) {
+        //add extra parameter to the operation
+        params = new ArrayList<>();
+        try {
+            params.add(new Cis(Arrays.asList(new MyNumber(r), new MyNumber(theta))));
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
+    @When("I have a complex number in exponential form with r = {int} and theta = {int}")
+    public void whenIAddTheFollowingComplexNumbersExponential(int r,int theta) {
+        //add extra parameter to the operation
+        params = new ArrayList<>();
+        try {
+            params.add(new ExponentialWithI(Arrays.asList(new MyNumber(r), new MyNumber(theta))));
+            op.addMoreParams(params);
+        } catch (IllegalConstruction e) {
+            fail();
+        }
     }
 
     @Then("I should get this complex number {int} + {int}i")
@@ -93,5 +122,22 @@ public class ComplexSteps {
     @Then("I should get this number {int}")
     public void thenTheResultIs(int result) {
         assertEquals(result, c.eval(op).getValue());
+    }
+
+    @Then("I should get a MyNotANumber")
+    public void thenTheResultIs() {
+        assertInstanceOf(MyNotANumber.class, c.eval(op));
+    }
+
+    @Then("I should get this complex number polar form r = {int} and theta = {int}")
+    public void thenTheResultIsPolar(int r, int theta) {
+        ComplexNumber result = (ComplexNumber) c.eval(op);
+        assertEquals(r+" * cis("+theta+")", result.toString());
+    }
+
+    @Then("I should get this complex number exponential form with r = {int} and theta = {int}")
+    public void iShouldGetThisComplexNumberExponentialFormEI(int r, int theta) {
+        ComplexNumber result = (ComplexNumber) c.eval(op);
+        assertEquals(r+" * e^(i*"+theta+")", result.toString());
     }
 }
