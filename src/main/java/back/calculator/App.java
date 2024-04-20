@@ -1,6 +1,5 @@
 package back.calculator;
 
-import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.RealValue;
 import back.converter.Converter;

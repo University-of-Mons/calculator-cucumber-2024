@@ -3,7 +3,6 @@ package front.controllers;
 import back.calculator.App;
 import back.calculator.types.MyNumber;
 import back.calculator.types.RealValue;
-import back.converter.Converter;
 import back.converter.UnitClassStringConverter;
 import back.converter.UnitStringConverter;
 import back.converter.Units;
@@ -90,12 +89,6 @@ public class ConverterSceneController implements Initializable {
      * Contains all available unit types (Speed, Weight...) as classes.
      */
     private ObservableList<Class<? extends Units.Unit>> conversionModes = FXCollections.observableArrayList();
-
-    private static Logger logger;
-
-    static {
-        logger = LoggerFactory.getLogger(ConverterSceneController.class);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
