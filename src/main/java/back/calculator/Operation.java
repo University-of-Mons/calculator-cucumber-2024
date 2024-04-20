@@ -105,11 +105,20 @@ public abstract class Operation implements Expression {
     // the operation itself is specified in the subclasses
 
     /**
+     * Abstract method representing the actual unary arithmetic operation to compute
+     *
+     * @param l The argument of the unary operation
+     * @return The result of computing the unary operation
+     */
+    public abstract MyNumber op(MyNumber l);
+
+    /**
      * Add more parameters to the existing list of parameters
      *
      * @param params The list of parameters to be added
+     * @throws IllegalConstruction Exception thrown if the resulting list of parameters is not valid for the operation
      */
-    public void addMoreParams(List<Expression> params) {
+    public void addMoreParams(List<Expression> params) throws IllegalConstruction {
         args.addAll(params);
     }
 
@@ -133,6 +142,10 @@ public abstract class Operation implements Expression {
      */
     @Override
     public final String toString() {
+        if (args.size() == 1) {
+            // Unary operation : symbol(val). Ex: modulus(1+2i)
+            return symbol + "(" + args.get(0) + ")";
+        }
         return toString(notation);
     }
 
@@ -151,7 +164,8 @@ public abstract class Operation implements Expression {
                 if (val.isPresent()) {
                     yield "( " + val.get() + " )";
                 } else {
-                    yield symbol; // Should never happen
+                    // There is no argument, return the symbol itself
+                    yield symbol;
                 }
             }
             case PREFIX -> {
@@ -159,6 +173,7 @@ public abstract class Operation implements Expression {
                 if (val.isPresent()) {
                     yield symbol + " (" + val.get() + ")";
                 } else {
+                    // There is no argument, return the symbol itself
                     yield symbol;
                 }
             }
@@ -167,6 +182,7 @@ public abstract class Operation implements Expression {
                 if (val.isPresent()) {
                     yield "(" + val.get() + ") " + symbol;
                 } else {
+                    // There is no argument, return the symbol itself
                     yield symbol;
                 }
             }
@@ -174,7 +190,7 @@ public abstract class Operation implements Expression {
     }
 
     /**
-     * Two operation objects are equal if their list of arguments is equal and they correspond to the same operation.
+     * Two operation objects are equal if their list of arguments is equal, and they correspond to the same operation.
      *
      * @param o The object to compare with
      * @return The result of the equality comparison

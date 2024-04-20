@@ -1,6 +1,20 @@
 package back.calculator.types;
 
-public enum Type {
+/**
+ * Enumeration of the types of values that can be used in the calculator.
 
-    INT
+ */
+public enum Type {
+    /**
+     * Integer value. Example: 1
+     */
+    INT,
+    /**
+     * Real value. Example: 1.0
+     */
+    REAL,
+    /**
+     * Rational value. Example: 1/2
+     */
+    RATIONAL
 }

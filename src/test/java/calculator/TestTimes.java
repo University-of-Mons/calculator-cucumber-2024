@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestTimes {
 
-    private static final int value1 = 8;
-    private static final int value2 = 6;
+    private static final int VALUE_1 = 8;
+    private static final int VALUE_2 = 6;
     private Times op;
     private List<Expression> params;
 
     @BeforeEach
     void setUp() {
-        params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        params = Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2));
         try {
             op = new Times(params);
         } catch (IllegalConstruction e) {
@@ -51,7 +51,7 @@ class TestTimes {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should not be equal
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2));
         try {
             Times e = new Times(p, Notation.INFIX);
             assertEquals(op, e);
@@ -68,7 +68,7 @@ class TestTimes {
     @Test
     void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2));
         try {
             Times e = new Times(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());

@@ -1,8 +1,10 @@
 package back.calculator.operators;
 
 import back.calculator.*;
+import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
+import org.slf4j.Logger;
 
 import java.util.List;
 
@@ -15,6 +17,12 @@ import java.util.List;
  * @see Minus
  * @see Times
  * @see Plus
+ * @see Exponential
+ * @see Sqrt
+ * @see Logarithm
+ * @see Sinus
+ * @see Cosine
+ * @see Modulus
  */
 public final class Divides extends Operation {
 
@@ -23,9 +31,9 @@ public final class Divides extends Operation {
      *
      * @param elist The list of Expressions to divide
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Divides(List< Expression >, Notation )
+     * @see #Divides
      */
-    public /*constructor*/ Divides(List<Expression> elist) throws IllegalConstruction {
+    public Divides(List<Expression> elist) throws IllegalConstruction {
         this(elist, null);
     }
 
@@ -36,8 +44,8 @@ public final class Divides extends Operation {
      * @param elist The list of Expressions to divide
      * @param n     The Notation to be used to represent the operation
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Divides(List<Expression>)
-     * @see Operation#Operation(List<Expression>,Notation)
+     * @see #Divides
+     * @see Operation#Operation
      */
     public Divides(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
@@ -46,16 +54,45 @@ public final class Divides extends Operation {
     }
 
     /**
-     * The actual computation of the (binary) arithmetic division of two integers
+     * The actual computation of the (binary) arithmetic division of two numbers
      *
-     * @param l The first integer
-     * @param r The second integer that should divide the first
-     * @return The integer that is the result of the division
+     * @param l The first number
+     * @param r The second number that should divide the first
+     * @return The number that is the result of the division
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if (r.getValue().isEqualsZero() || l instanceof NotANumber || r instanceof NotANumber)
+        if ((r.getReal().isEqualsZero() && r.getImaginary().isEqualsZero())) {
+            Logger logger = Calculator.getLogger();
+            if (logger.isErrorEnabled())
+                logger.error("Division by zero is not allowed");
             return new NotANumber();
-        return new MyNumber(l.getValue().div(r.getValue()));
+        }
+        if (l instanceof NotANumber || r instanceof NotANumber)
+            return new NotANumber();
+        if (l.isImaginary() || r.isImaginary()) {
+            // (a + bi) / (c + di) = (ac + bd) + (bc - ad)i / (c^2 + d^2)
+            AbstractValue a = l.getReal();
+            AbstractValue b = l.getImaginary();
+            AbstractValue c = r.getReal();
+            AbstractValue d = r.getImaginary();
+            AbstractValue denom = c.mul(c).add(d.mul(d)); // c^2 + d^2
+            AbstractValue real = (a.mul(c).add(b.mul(d))).div(denom);
+            AbstractValue imaginary = (b.mul(c).sub(a.mul(d)).div(denom));
+            return new MyNumber(real, imaginary);
+        }
+        return new MyNumber(l.getReal().div(r.getReal()));
+    }
+
+
+    /**
+     * The actual computation of the (unary) arithmetic division of a number.
+     *
+     * @param l The argument of the unary operation
+     * @return The result of the unary operation. (The argument itself)
+     */
+    @Override
+    public MyNumber op(MyNumber l) {
+        return l;
     }
 }
