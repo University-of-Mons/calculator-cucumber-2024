@@ -1,19 +1,20 @@
 package calculator.time;
 
-import calculator.Counting;
 import calculator.TimeOperation;
 import calculator.numbers.Expression;
 import calculator.numbers.MyTime;
 import calculator.operators.time.Plus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import visitor.CountingVisitor;
+import visitor.CountingNumbersVisitor;
+import visitor.CountingOperationsVisitor;
+import visitor.DepthVisitor;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestTimeOperation {
+class TestTimeOperation {
 
     private TimeOperation o;
     private TimeOperation o2;
@@ -34,24 +35,21 @@ public class TestTimeOperation {
 
     @Test
     void testCountDepth() {
-        CountingVisitor cv = new CountingVisitor();
-        cv.setMode(Counting.DEPTH);
+        DepthVisitor cv = new DepthVisitor();
         o.accept(cv);
         assertEquals(2, cv.getValue());
     }
 
     @Test
     void testCountOps() {
-        CountingVisitor cv = new CountingVisitor();
-        cv.setMode(Counting.COUNT_OPS);
+        CountingOperationsVisitor cv = new CountingOperationsVisitor();
         o.accept(cv);
         assertEquals(3, cv.getValue());
     }
 
     @Test
     void testCountNbs() {
-        CountingVisitor cv = new CountingVisitor();
-        cv.setMode(Counting.COUNT_NBS);
+        CountingNumbersVisitor cv = new CountingNumbersVisitor();
         o.accept(cv);
         assertEquals(Integer.valueOf(5), cv.getValue());
     }
