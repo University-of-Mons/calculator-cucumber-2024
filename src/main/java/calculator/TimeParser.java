@@ -19,8 +19,9 @@ public class TimeParser {
     private final ParseTree tree;
 
     /**
-     * This is the constructor of the class
-     * @param expression a string who represent the expression
+     * This constructor creates a parser for the time expression
+     * @param expression the expression to parse
+     * @param c the calculator used to evaluate the expression
      */
     public TimeParser(String expression, Calculator c){
         this.c = c;
@@ -32,9 +33,10 @@ public class TimeParser {
     }
 
     /**
-     * This method evaluate the expression
-     * @return the result of the expression
-     */
+        * This method evaluates the expression using the visitor design pattern
+        * and returns its result
+        * @return the result of the expression
+        */
     public MyTime evaluate(){
         TimeParserVisitor visitor = new TimeParserVisitor(c);
         Expression e = visitor.visit(tree);

@@ -7,7 +7,7 @@ import visitor.Evaluator;
 
 /**
  * This class represents the core logic of a Calculator.
- * It can be used to print and evaluate arithmetic expressions.
+ * It can be used to print and evaluate expressions.
  *
  * @author tommens
  */
@@ -20,15 +20,6 @@ public class Calculator {
     public Calculator() {
         // Nothing to be done
     }
-
-    /*
-     For the moment the calculator only contains a print method and an eval method
-     It would be useful to complete this with a read method, so that we would be able
-     to implement a full REPL cycle (Read-Eval-Print loop) such as in Scheme, Python, R and other languages.
-     To do so would require to implement a method with the following signature, converting an input string
-     into an arithmetic expression:
-     public Expression read(String s)
-    */
 
     /**
      * Evaluates an arithmetic expression and returns its result
@@ -54,11 +45,4 @@ public class Calculator {
         e.accept(v);
         return v.getTimeResult();
     }
-
-    /*
-     We could also have other methods, e.g. to verify whether an expression is syntactically correct
-     public Boolean validate(Expression e)
-     or to simplify some expression
-     public Expression simplify(Expression e)
-    */
 }
