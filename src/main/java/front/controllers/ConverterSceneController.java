@@ -134,7 +134,6 @@ public class ConverterSceneController implements Initializable {
             if (newValue.equals(App.BASIC_MODE)) handleBasicModeSelected();
             else if (newValue.equals(App.CONVERSION_MODE)) handleConversionModeSelected();
         });
-        calculatorModeSelector.setValue(App.CONVERSION_MODE);
         calculatorModeSelector.setOnShowing(event -> calculatorModeSelector.setValue(App.CONVERSION_MODE));
     }
 

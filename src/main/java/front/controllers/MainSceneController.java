@@ -148,7 +148,6 @@ public class MainSceneController implements Initializable {
             if (newValue.equals(App.BASIC_MODE)) handleBasicModeSelected();
             else if (newValue.equals(App.CONVERSION_MODE)) handleConversionModeSelected();
         });
-        calculatorModeSelector.setValue(App.BASIC_MODE);
         calculatorModeSelector.setOnShowing(event -> calculatorModeSelector.setValue(App.BASIC_MODE));
     }
 
