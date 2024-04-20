@@ -125,9 +125,6 @@ public class CalculatorSteps {
             params = new ArrayList<>();
             params.add(new MyNumber(n));
             op = new Not<>(params);
-            System.out.println(op.op(new MyNumber(1), new MyNumber(1)));
-            System.out.println("Op args = " + params);
-            System.out.println("Negation of " + n + " is " + c.eval(op));
         } catch (IllegalConstruction e) {
             fail();
         }
