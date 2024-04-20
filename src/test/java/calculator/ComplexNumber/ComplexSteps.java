@@ -138,6 +138,13 @@ public class ComplexSteps {
     @Then("I should get this complex number exponential form with r = {int} and theta = {int}")
     public void iShouldGetThisComplexNumberExponentialFormEI(int r, int theta) {
         ComplexNumber result = (ComplexNumber) c.eval(op);
-        assertEquals(r+" * e^(i*"+theta+")", result.toString());
+        assertEquals(r+" * e(i*"+theta+")", result.toString());
+    }
+
+    @When("I have a MyNotANumber")
+    public void iHaveAMyNotANumber() {
+        params = new ArrayList<>();
+        params.add(new MyNotANumber());
+        op.addMoreParams(params);
     }
 }

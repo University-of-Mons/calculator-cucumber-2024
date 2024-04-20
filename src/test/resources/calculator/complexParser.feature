@@ -65,9 +65,9 @@ Feature: Complex parser test
 
       Examples:
         | polar | exponential |
-        | intoE(2 * cis(40 + 5)))| 2 * e^(i*45) |
-        | intoE(2 * cis(+(40 5))) | 2 * e^(i*45) |
-        | intoE(2 * cis((40 5)+)) | 2 * e^(i*45) |
+        | intoE(2 * cis(40 + 5)))| 2 * e(i*45) |
+        | intoE(2 * cis(+(40 5))) | 2 * e(i*45) |
+        | intoE(2 * cis((40 5)+)) | 2 * e(i*45) |
 
     Scenario Outline: test converting a complex number exponential to complex number cartesian
         Given I have a complex number '<exponential>'
@@ -75,9 +75,9 @@ Feature: Complex parser test
 
       Examples:
         | exponential | cartesian |
-        | intoCartesian(2 * e^(i * 45)) | 1 + i |
-        | intoCartesian(2 * e^(i * +(45 0))) | 1 + i |
-        | intoCartesian(2 * e^(i * (45 0)+)) | 1 + i |
+        | intoCartesian(2 * e(i * 45)) | 1 + i |
+        | intoCartesian(2 * e(i * +(45 0))) | 1 + i |
+        | intoCartesian(2 * e(i * (45 0)+)) | 1 + i |
 
 
 

@@ -68,7 +68,7 @@ Feature: Complex Numbers Example
 
   Scenario: Modulus of a  number
     Given A operator '||'
-    When I have a number 3
+    When I have a MyNotANumber
     Then I should get a MyNotANumber
 
 

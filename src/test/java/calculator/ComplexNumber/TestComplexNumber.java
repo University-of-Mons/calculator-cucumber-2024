@@ -214,8 +214,8 @@ class TestComplexNumber {
     }
 
     @Test
-    void testModulusWithNumber(){
-        MyNumber number = new MyNumber(3);
+    void testModulusWithNotANumber(){
+        MyNumber number = new MyNotANumber();
         List<Expression> para = Collections.singletonList(number);
         try {
             Modulus modulus = new Modulus(para);
@@ -345,7 +345,7 @@ class TestComplexNumber {
         List<Expression> para = Collections.singletonList(complexNumber);
         try {
             IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para);
-            assertEquals("2 * e^(i*45)", calc.eval(intoExponentialForm).toString());
+            assertEquals("2 * e(i*45)", calc.eval(intoExponentialForm).toString());
         }
         catch (IllegalConstruction e) {
             fail();
@@ -399,7 +399,7 @@ class TestComplexNumber {
             Cis polar =new  Cis(para);
             List<Expression> para2 = Collections.singletonList(polar);
             IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para2);
-            assertEquals("2 * e^(i*0)", calc.eval(intoExponentialForm).toString());
+            assertEquals("2 * e(i*0)", calc.eval(intoExponentialForm).toString());
         }
         catch (IllegalConstruction e) {
             fail();
@@ -416,7 +416,7 @@ class TestComplexNumber {
             ExponentialWithI exponential_i = new ExponentialWithI(para);
             List<Expression> para2 = Collections.singletonList(exponential_i);
             IntoExponentialForm intoExponentialForm = new IntoExponentialForm(para2);
-            assertEquals("2 * e^(i*0)", calc.eval(intoExponentialForm).toString());
+            assertEquals("2 * e(i*0)", calc.eval(intoExponentialForm).toString());
         }
         catch (IllegalConstruction e) {
             fail();

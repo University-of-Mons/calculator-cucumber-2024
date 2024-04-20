@@ -136,7 +136,7 @@ class TestComplexNumberParser {
     void testComplexNumberIntoExponential(String par){
         Calculator calculator = new Calculator();
         ComplexNumberParser parser = new ComplexNumberParser(par,calculator);
-        assertEquals("2 * e^(i*45)", parser.evaluate().toString());
+        assertEquals("2 * e(i*45)", parser.evaluate().toString());
     }
 
 

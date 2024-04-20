@@ -159,7 +159,7 @@ class TestComplexGui {
         fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnEquals");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
-        Assertions.assertEquals("2 * e^(i*45)", display.getText());
+        Assertions.assertEquals("2 * e(i*45)", display.getText());
     }
 
     @Test
@@ -190,9 +190,19 @@ class TestComplexGui {
 
     @Test
     void testErrorComplex(FxRobot fxRobot){
-        fxRobot.clickOn("#btnModulus");
+        fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn7");
-        fxRobot.clickOn("#btnModulus");
+        fxRobot.clickOn("#btnPlus");
+        fxRobot.clickOn("#btn3");
+        fxRobot.clickOn("#btnI");
+        fxRobot.clickOn("#btnCloseParenthesis");
+        fxRobot.clickOn("#btnDivide");
+        fxRobot.clickOn("#btnOpenParenthesis");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnMinus");
+        fxRobot.clickOn("#btn0");
+        fxRobot.clickOn("#btnI");
+        fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnEquals");
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("NaN", display.getText());

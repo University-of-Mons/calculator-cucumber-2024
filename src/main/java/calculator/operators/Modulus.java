@@ -2,7 +2,6 @@ package calculator.operators;
 
 import calculator.IllegalConstruction;
 import calculator.Operation;
-import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
@@ -53,11 +52,11 @@ public class Modulus extends Operation{
      */
     @Override
     public MyNumber op(MyNumber l) {
-        if (l instanceof ComplexNumber){
-            return new MyNumber((int) Math.sqrt(l.getReal()*l.getReal() +  l.getImaginary()*l.getImaginary()));
-        }
-        else {
+        if (l instanceof MyNotANumber){
             return new MyNotANumber();
+        }
+        else{
+            return new MyNumber(Math.sqrt(l.getReal()*l.getReal() +  l.getImaginary()*l.getImaginary()));
         }
     }
 }
