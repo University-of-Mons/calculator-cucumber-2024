@@ -1,5 +1,6 @@
 package converter;
 
+import back.calculator.App;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 import back.calculator.types.RealValue;
@@ -12,40 +13,43 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for the Converter class.
  */
 class ConverterTest {
-
     /**
      * Test valid speed unit conversions.
      */
     @Test
     void testValidSpeedConversions() {
         assertEquals(new MyNumber(360), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
                 Units.Speed.KILOMETER_PER_HOUR));
         assertEquals(new MyNumber(360000), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
                 Units.Speed.METERS_PER_HOUR));
         assertEquals(new MyNumber(1), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(1000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(1000), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
                 Units.Speed.KILOMETER_PER_SECOND));
         assertEquals(new MyNumber(100), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
                 Units.Speed.METERS_PER_SECOND));
-        assertEquals(new MyNumber(new RealValue(new BigDecimal(Float.toString(3.6f), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD))),
+        assertEquals(new MyNumber(new RealValue(new BigDecimal(Float.toString(3.6f), App.getPrecision()))),
                 Converter.convert(
-                        new RealValue(new BigDecimal(Integer.toString(1), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                        new RealValue(new BigDecimal(Integer.toString(1), App.getPrecision())),
                         Units.Speed.METERS_PER_SECOND,
                         Units.Speed.KILOMETER_PER_HOUR));
         assertEquals(new MyNumber(1), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(1000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(1000), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
                 Units.Speed.KILOMETER_PER_SECOND));
     }
@@ -56,11 +60,11 @@ class ConverterTest {
     @Test
     void testInvalidSpeedConversions() {
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
                 Units.Weight.GRAM));
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
                 Units.Distance.METER));
     }
@@ -71,15 +75,15 @@ class ConverterTest {
     @Test
     void testValidWeightConversions() {
         assertEquals(new MyNumber(5), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(5000), App.getPrecision())),
                 Units.Weight.GRAM,
                 Units.Weight.KILOGRAM));
         assertEquals(new MyNumber(5000), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(5), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(5), App.getPrecision())),
                 Units.Weight.KILOGRAM,
                 Units.Weight.GRAM));
         assertEquals(new MyNumber(1), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(1000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(1000), App.getPrecision())),
                 Units.Weight.GRAM,
                 Units.Weight.KILOGRAM));
     }
@@ -90,11 +94,11 @@ class ConverterTest {
     @Test
     void testInvalidWeightConversions() {
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(5000), App.getPrecision())),
                 Units.Weight.GRAM,
                 Units.Speed.METERS_PER_SECOND));
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Weight.GRAM,
                 Units.Distance.KILOMETER));
     }
@@ -105,15 +109,15 @@ class ConverterTest {
     @Test
     void testValidDistanceConversions() {
         assertEquals(new MyNumber(5), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(5000), App.getPrecision())),
                 Units.Distance.METER,
                 Units.Distance.KILOMETER));
         assertEquals(new MyNumber(5000), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(5), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(5), App.getPrecision())),
                 Units.Distance.KILOMETER,
                 Units.Distance.METER));
         assertEquals(new MyNumber(1000), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(1), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(1), App.getPrecision())),
                 Units.Distance.KILOMETER,
                 Units.Distance.METER));
     }
@@ -124,11 +128,11 @@ class ConverterTest {
     @Test
     void testInvalidDistanceConversions() {
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(5000), App.getPrecision())),
                 Units.Distance.METER,
                 Units.Time.SECOND));
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Distance.KILOMETER,
                 Units.Weight.GRAM));
     }
@@ -139,16 +143,16 @@ class ConverterTest {
     @Test
     void testValidTimeConversions() {
         assertEquals(new MyNumber(7200), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(2), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(2), App.getPrecision())),
                 Units.Time.HOUR,
                 Units.Time.SECOND));
         assertEquals(new MyNumber(5), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(18000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(18000), App.getPrecision())),
                 Units.Time.SECOND,
                 Units.Time.HOUR));
-        assertEquals(new MyNumber(new RealValue(new BigDecimal(Float.toString(0.000277778f), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD))),
+        assertEquals(new MyNumber(new RealValue(new BigDecimal(Float.toString(0.000277778f), App.getPrecision()))),
                 Converter.convert(
-                        new RealValue(new BigDecimal(Integer.toString(1), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                        new RealValue(new BigDecimal(Integer.toString(1), App.getPrecision())),
                         Units.Time.SECOND,
                         Units.Time.HOUR));
     }
@@ -159,11 +163,11 @@ class ConverterTest {
     @Test
     void testInvalidTimeConversions() {
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(5000), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(5000), App.getPrecision())),
                 Units.Time.SECOND,
                 Units.Speed.METERS_PER_SECOND));
         assertEquals(new NotANumber(), Converter.convert(
-                new RealValue(new BigDecimal(Integer.toString(100), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)),
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Time.HOUR,
                 Units.Distance.KILOMETER));
     }
@@ -199,9 +203,34 @@ class ConverterTest {
             fail("No private constructor found for Units");
         }
     }
+
+    /**
+     * Test valid angle conversions.
+     */
+    @Test
+    void testValidAngleConversions() {
+        assertEquals(new MyNumber(180), Converter.convert(
+                new RealValue(new BigDecimal(Double.toString(Math.PI), App.getPrecision())),
+                Units.Angles.RADIAN,
+                Units.Angles.DEGREE));
+        assertEquals(new MyNumber(new RealValue(new BigDecimal("3.1415", App.getPrecision()))), Converter.convert(
+                new RealValue(new BigDecimal(Integer.toString(180), App.getPrecision())),
+                Units.Angles.DEGREE,
+                Units.Angles.RADIAN));
+    }
+
+    /**
+     * Test invalid angle conversions.
+     */
+    @Test
+    void testInvalidAngleConversions() {
+        assertEquals(new NotANumber(), Converter.convert(
+                new RealValue(new BigDecimal(Integer.toString(5000), App.getPrecision())),
+                Units.Angles.DEGREE,
+                Units.Speed.METERS_PER_SECOND));
+        assertEquals(new NotANumber(), Converter.convert(
+                new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
+                Units.Angles.RADIAN,
+                Units.Distance.KILOMETER));
+    }
 }
-
-
-
-
-

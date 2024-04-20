@@ -1,7 +1,11 @@
 package back.calculator.types;
 
 
+import back.calculator.App;
+import org.slf4j.Logger;
+
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * Represents a rational number with a numerator and a denominator.
@@ -11,6 +15,8 @@ public class RationalValue extends AbstractValue {
     private int num;
 
     private int den;
+
+    private final MathContext precision = App.getPrecision();
 
     /**
      * Constructor for a rational number.
@@ -38,6 +44,10 @@ public class RationalValue extends AbstractValue {
                         this.num = intNum.getValue() * rationalDen.getDen();
                         this.den = rationalDen.getNum();
                         break;
+                    default:
+                        Logger logger = App.getLogger();
+                        String errorMsg = "Invalid type for denominator : " + den.getClass();
+                        logger.error(errorMsg);
                 }
                 break;
 
@@ -61,12 +71,27 @@ public class RationalValue extends AbstractValue {
                         this.num = rationalNum.getNum() * rationalDen.getDen();
                         this.den = rationalDen.getNum() * rationalNum.getDen();
                         break;
-                }
+                    default:
+                        Logger logger = App.getLogger();
+                        String errorMsg = "Invalid type for denominator : " + den.getClass();
+                        logger.error(errorMsg);
+                }break;
+            default:
+                Logger logger = App.getLogger();
+                String errorMsg = "Invalid type for numerator : " + num.getClass();
+                logger.error(errorMsg);
+                break;
         }
-        this.setType(Type.RATIONAL);
+        this.type = Type.RATIONAL;
         this.reduce();
     }
 
+    /**
+     * Computes the greatest common divisor of two integers (used for simplification)
+     * @param num The numerator
+     * @param den The denominator
+     * @return The greatest common divisor of num and den
+     */
     private static int pgcd(int num, int den) {
         if (den == 0) {
             return num;
@@ -88,6 +113,11 @@ public class RationalValue extends AbstractValue {
         }
     }
 
+    /**
+     * Add a value to the rational number
+     * @param other The value to add to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue add(AbstractValue other) {
         int newNum = this.num;
@@ -107,7 +137,10 @@ public class RationalValue extends AbstractValue {
                 int oldDen = this.den;
                 newDen = this.den * ratDen2;
                 newNum = this.num * ratDen2 + oldDen * ratNum2;
-
+                break;
+            case REAL:
+                RealValue real = this.convertToReal();
+                return real.add(other);
         }
         RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
         result.reduce();
@@ -117,6 +150,11 @@ public class RationalValue extends AbstractValue {
         return result;
     }
 
+    /**
+     * Subtract a value to the rational number
+     * @param other The value to subtract to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue sub(AbstractValue other) {
         int newNum = this.num;
@@ -136,6 +174,10 @@ public class RationalValue extends AbstractValue {
                 int oldDen = this.den;
                 newDen = this.den * ratDen2;
                 newNum = this.num * ratDen2 - oldDen * ratNum2;
+                break;
+            case REAL:
+                RealValue real = this.convertToReal();
+                return real.sub(other);
         }
         RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
         result.reduce();
@@ -145,6 +187,11 @@ public class RationalValue extends AbstractValue {
         return result;
     }
 
+    /**
+     * Multiple a value to the rational number
+     * @param other The value to multiple to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue mul(AbstractValue other) {
         int newNum = this.num;
@@ -160,6 +207,10 @@ public class RationalValue extends AbstractValue {
 
                 newNum *= rational.getNum();
                 newDen *= rational.getDen();
+                break;
+            case REAL:
+                RealValue real = this.convertToReal();
+                return real.mul(other);
         }
         RationalValue result = new RationalValue(new IntValue(newNum), new IntValue(newDen));
         result.reduce();
@@ -169,64 +220,84 @@ public class RationalValue extends AbstractValue {
         return result;
     }
 
+    /**
+     * Divide a value to the rational number
+     * @param other The value to divide to the rational number
+     * @return A new AbstractValue of the result
+     */
     @Override
     public AbstractValue div(AbstractValue other) {
+        if (other.getType() == Type.REAL){
+            RealValue real = (RealValue) other;
+            return real.div(this);
+        }
         return new RationalValue(this, other);
     }
 
     /**
-     * Convert a real number to a rational number
-     *
-     * @param number the real number (double) to convert
-     * @return A RationalValue equivalent to the real number
+     * Convert the rational number to a real number
+     * @return A new RealValue of the rational number
      */
-    public RationalValue convertReal(double number) {
-        // TODO : Useful ?
-        String strNumber = Double.toString(number);
-        int numberAfterComma = strNumber.length() - strNumber.indexOf('.') - 1;
-        int newNum = (int) number * (10 ^ numberAfterComma);
-        int newDen = 10 ^ numberAfterComma;
-        return new RationalValue(new IntValue(newNum), new IntValue(newDen));
-    }
-
     public RealValue convertToReal(){
-        BigDecimal num = new BigDecimal(this.num);
-        BigDecimal den = new BigDecimal(this.den);
-        RealValue result = new RealValue(num.divide(den));
-        // TODO : Change the App.RationalMode ?
-        return result;
+        RealValue newNum = new RealValue(new BigDecimal(this.num, precision));
+        RealValue newDen = new RealValue(new BigDecimal(this.den, precision));
+        return (RealValue) newNum.div(newDen);
     }
 
+    /**
+     * Compute the square root of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue sqrt() {
         RealValue real = this.convertToReal();
         return real.sqrt();
     }
 
+    /**
+     * Compute the cosinus of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue cos() {
         RealValue real = this.convertToReal();
         return real.cos();
     }
 
+    /**
+     * Compute the sinus of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue sin() {
         RealValue real = this.convertToReal();
         return real.sin();
     }
 
+    /**
+     * Compute the logarithm of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue ln() {
         RealValue real = this.convertToReal();
         return real.ln();
     }
 
+    /**
+     * Compute the exponential of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue exp() {
         RealValue real = this.convertToReal();
         return real.exp();
     }
 
+    /**
+     * Compute the arctangent of the rational number
+     * @return A new RealValue of the result
+     */
     @Override
     public AbstractValue atan() {
         RealValue real = this.convertToReal();
@@ -253,6 +324,9 @@ public class RationalValue extends AbstractValue {
 
     @Override
     public String toString() {
+        if (this.den == 1) {
+            return Integer.toString(this.num);
+        }
         return this.num + "/" + this.den;
     }
 

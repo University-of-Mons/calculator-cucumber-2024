@@ -18,14 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestDivides {
 
-    private static final int value1 = 8;
-    private static final int value2 = 6;
+    private static final int VALUE_1 = 8;
+    private static final int VALUE_2 = 6;
     private Divides op;
-    private List<Expression> params;
 
     @BeforeEach
     void setUp() {
-        params = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> params = Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2));
         try {
             op = new Divides(params);
             op.setNotation(Notation.INFIX); // reset the notation to infix (which is the default) before each test
@@ -54,7 +53,7 @@ class TestDivides {
     @Test
     void testEquals() {
         // Two similar expressions, constructed separately (and using different constructors) should be equal
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2));
         try {
             Divides d = new Divides(p, Notation.INFIX);
             assertEquals(op, d);
@@ -72,7 +71,7 @@ class TestDivides {
     @Test
     void testHashCode() {
         // Two similar expressions, constructed separately (and using different constructors) should have the same hashcode
-        List<Expression> p = Arrays.asList(new MyNumber(value1), new MyNumber(value2));
+        List<Expression> p = Arrays.asList(new MyNumber(VALUE_1), new MyNumber(VALUE_2));
         try {
             Divides e = new Divides(p, Notation.INFIX);
             assertEquals(e.hashCode(), op.hashCode());

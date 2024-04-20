@@ -60,4 +60,14 @@ class UnitsTest {
         assertEquals("s", Units.Time.SECOND.getSymbol());
         assertEquals("h", Units.Time.HOUR.getSymbol());
     }
+
+    /**
+     * Tests the getSymbol method of the Angles enum.
+
+     */
+    @Test
+    void testAnglesSymbols() {
+        assertEquals("deg", Units.Angles.DEGREE.getSymbol());
+        assertEquals("rad", Units.Angles.RADIAN.getSymbol());
+    }
 }

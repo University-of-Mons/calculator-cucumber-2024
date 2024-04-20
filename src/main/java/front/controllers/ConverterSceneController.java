@@ -127,7 +127,7 @@ public class ConverterSceneController implements Initializable {
             else if (newValue.equals(Units.Weight.class)) handleWeightConversionSelected(null);
             else if (newValue.equals(Units.Distance.class)) handleDistanceConversionSelected(null);
             else if (newValue.equals(Units.Time.class)) handleTimeConversionSelected(null);
-            else if (newValue.equals(Units.Angles.class)) logger.error("Angles conversion not implemented yet.");
+            else if (newValue.equals(Units.Angles.class)) handleAngleConversionSelected(null);
         });
     }
 
@@ -181,7 +181,7 @@ public class ConverterSceneController implements Initializable {
     private void equalsButtonClicked() {
         Units.Unit firstUnit = firstUnitSelector.getValue();
         Units.Unit secondUnit = secondUnitSelector.getValue();
-        MyNumber result = App.convert(new RealValue(new BigDecimal(inputField.getText(), Converter.TODO_DELETE_THIS_TEMPORARY_PRECISION_AND_REPLACE_IT_WITH_APP_DOT_GET_PRECISION_METHOD)), firstUnit, secondUnit);
+        MyNumber result = App.convert(new RealValue(new BigDecimal(inputField.getText(), App.getPrecision())), firstUnit, secondUnit);
         String resultString = result.toString();
         switchHistory(inputField.getText() + firstUnit.getSymbol(), resultString + secondUnit.getSymbol());
         inputField.setText(resultString);
@@ -314,6 +314,19 @@ public class ConverterSceneController implements Initializable {
         replaceSelectorItems(secondUnitSelector, values);
         firstUnitSelector.setValue(Units.Time.SECOND);
         secondUnitSelector.setValue(Units.Time.SECOND);
+    }
+
+    /**
+     * Defines the conversion as a conversion of angles. Sets the appropriate available units in the menus and set the
+     * texts of the menus accordingly.
+     */
+    @FXML
+    private void handleAngleConversionSelected(ActionEvent actionEvent) {
+        Units.Angles[] values = Units.Angles.values();
+        replaceSelectorItems(firstUnitSelector, values);
+        replaceSelectorItems(secondUnitSelector, values);
+        firstUnitSelector.setValue(Units.Angles.DEGREE);
+        secondUnitSelector.setValue(Units.Angles.DEGREE);
     }
 
     /**

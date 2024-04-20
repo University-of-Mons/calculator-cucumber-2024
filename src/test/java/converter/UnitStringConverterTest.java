@@ -27,6 +27,8 @@ class UnitStringConverterTest {
         assertEquals("km", converter.toString(Units.Distance.KILOMETER));
         assertEquals("s", converter.toString(Units.Time.SECOND));
         assertEquals("h", converter.toString(Units.Time.HOUR));
+        assertEquals("deg", converter.toString(Units.Angles.DEGREE));
+        assertEquals("rad", converter.toString(Units.Angles.RADIAN));
         assertNull(converter.toString(null));
     }
 

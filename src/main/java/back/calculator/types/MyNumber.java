@@ -1,15 +1,22 @@
 package back.calculator.types;
 
-import back.calculator.ComplexRepresentation;
+import back.calculator.App;
+import back.calculator.ComplexForm;
 import back.calculator.Expression;
 import back.calculator.Operation;
 import back.visitor.Visitor;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
  * which are a special kind of Expressions, just like operations are.
+ *
+ * <p>
+ *   A number is represented by a real part and an imaginary part which are both {@link AbstractValue}.
+ *   If the imaginary part is zero, the number is considered real.
+ * </p>
  *
  * @see Expression
  * @see Operation
@@ -17,20 +24,20 @@ import java.math.BigDecimal;
 public class MyNumber implements Expression {
 
 
+    // The real part of the number
     private final AbstractValue real;
-    // INT - REAL - RATIONAL
-
+    // The imaginary part of the number
     private final AbstractValue imaginary;
-    // INT - REAL - RATIONAL
-
-    private ComplexRepresentation representation = ComplexRepresentation.CARTESIAN;
+    // The representation of the number. (Cartesian, Polar or Exponential)
+    private ComplexForm representation = ComplexForm.CARTESIAN;
+    // The precision of the object. (Use to create RealValue objects in the operations)
+    private final MathContext precision = App.getPrecision();
 
     /**
-     * getter method to obtain the value contained in the object
+     * getter method to obtain the real part of the object
      *
-     * @return The integer number contained in the object
+     * @return The real part of the object
      */
-
     public AbstractValue getReal() {
         return real;
     }
@@ -44,6 +51,10 @@ public class MyNumber implements Expression {
         return imaginary;
     }
 
+    /**
+     * Constructor method for real numbers
+     * @param v An AbstractValue object that represents the real number
+     */
     public MyNumber(AbstractValue v) {
         real = v;
         switch (v.getType()) {
@@ -55,10 +66,14 @@ public class MyNumber implements Expression {
                 break;
             default:
                 imaginary = new IntValue(0);
-
+                break;
         }
     }
 
+    /**
+     * Constructor method for real numbers with an integer value
+     * @param v The integer value of the real number
+     */
     public MyNumber(int v) {
         real = new IntValue(v);
         imaginary = new IntValue(0);
@@ -75,13 +90,18 @@ public class MyNumber implements Expression {
         this.imaginary = imaginary;
     }
 
+    /**
+     * Constructor method for complex numbers with integer values
+     * @param real The integer value of the real part
+     * @param imaginary The integer value of the imaginary part
+     */
     public MyNumber(int real, int imaginary) {
         this.real = new IntValue(real);
         this.imaginary = new IntValue(imaginary);
     }
 
     /**
-     * Method to check if the number is imaginary
+     * Method to check if the number is imaginary. A number is imaginary if the imaginary part is not zero.
      *
      * @return True if the number is imaginary, false otherwise.
      */
@@ -89,21 +109,59 @@ public class MyNumber implements Expression {
         return !imaginary.isEqualsZero();
     }
 
+
+    /**
+     * Method to convert the MyNumber values to real
+     *
+     * @return A MyNumber object that represents the number in real form
+     */
+    public MyNumber convertToReal(){
+        if (this instanceof NotANumber){
+            return new NotANumber();
+        }
+
+        AbstractValue newReal = convertValueToReal(this.real);
+        AbstractValue newImaginary = convertValueToReal(this.imaginary);
+
+        return new MyNumber(newReal, newImaginary);
+    }
+
+    /**
+     * Annex method to convert a value to real
+     * @param value AbstractValue to convert in real
+     * @return a new AbstractValue that represents the value in real
+     */
+    private AbstractValue convertValueToReal(AbstractValue value){
+        AbstractValue newValue = value;
+        if (value.getType() == Type.INT){
+            IntValue number = (IntValue) value;
+            newValue = new RealValue(new BigDecimal(number.getValue(), precision));
+        } else{
+            if (value.getType() == Type.RATIONAL){
+                RationalValue number = (RationalValue) value;
+                newValue = number.convertToReal();
+            }
+            // If REAL, newValue = value (no need to convert)
+        }
+        return newValue;
+    }
+
+
     /**
      * Method to check if the number is represented in polar, cartesian or exponential form
-     * @see ComplexRepresentation
+     * @see ComplexForm
      * @return The representation of the number
      */
-    public ComplexRepresentation getRepresentation() {
+    public ComplexForm getForm() {
         return representation;
     }
 
     /**
      * Method to set the representation of the number
-     * @see ComplexRepresentation
+     * @see ComplexForm
      * @param representation The representation to set
      */
-    public void setRepresentation(ComplexRepresentation representation) {
+    public void setForm(ComplexForm representation) {
         this.representation = representation;
     }
 
@@ -122,6 +180,13 @@ public class MyNumber implements Expression {
     /**
      * Convert a number into a String to allow it to be printed.
      *
+     * <p>
+     *     The number will be printed according to its representation. <br>
+     *     Cartesian: a + bi <br>
+     *     Polar: r(cos(theta) + i sin(theta)) <br>
+     *     Exponential: r exp(theta i)
+     * </p>
+     * @see ComplexForm
      * @return The String that is the result of the conversion.
      */
     @Override
@@ -167,6 +232,13 @@ public class MyNumber implements Expression {
 
 
     private String toStringPolar() {
+        if (!isImaginary()) {
+            if (real.isPositive()) {
+                return real + "(cos(0)+isin(0))";
+            } else {
+                return real + "(cos(pi)+isin(pi))";
+            }
+        }
         // = modulus cos(theta) + i sin(theta)
         AbstractValue modulus = real.mul(real).add(imaginary.mul(imaginary)).sqrt();
 
@@ -176,6 +248,13 @@ public class MyNumber implements Expression {
     }
 
     private String toStringExp() {
+        if (!isImaginary()) {
+            if (real.isPositive()) {
+                return real + "exp(0)";
+            } else {
+                return real + "exp(pii)";
+            }
+        }
         // val = modulus exp(i theta)
         AbstractValue modulus = real.mul(real).add(imaginary.mul(imaginary)).sqrt();
 

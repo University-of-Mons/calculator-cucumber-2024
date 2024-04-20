@@ -4,14 +4,13 @@ import back.calculator.Expression;
 import back.calculator.IllegalConstruction;
 import back.calculator.Notation;
 import back.calculator.Operation;
-import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 
 import java.util.List;
 
 /**
- * This class represents the complex modulus operation "modulus".
+ * This class represents the arithmetic sinus operation "sin".
  * The class extends an abstract superclass Operation.
  * Other subclasses of Operation represent other arithmetic operations.
  *
@@ -22,61 +21,60 @@ import java.util.List;
  * @see Exponential
  * @see Sqrt
  * @see Logarithm
- * @see Sinus
- * @see Cosine
  * @see Divides
+ * @see Cosine
+ * @see Modulus
  */
-public class Modulus extends Operation {
+public class Sinus extends Operation {
     /**
-     * Class constructor specifying a number of Expressions to compute the modulus on.
-     * @param elist The list of Expressions to compute the modulus on
+     * Class constructor specifying a number of Expressions to compute the sinus on.
+     * @param elist The list of Expressions to compute the sinus on
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter or if the list contains more than one element
-     * @see #Modulus
+     * @see #Sinus
      */
-    public Modulus(List<Expression> elist) throws IllegalConstruction {
+    public Sinus(List<Expression> elist) throws IllegalConstruction {
         this(elist, null);
     }
 
     /**
-     * Class constructor specifying a number of Expressions to compute the modulus on and the notation.
-     * @param elist The list of Expressions to compute the modulus on
+     * Class constructor specifying a number of Expressions to compute the sinus on and the notation.
+     * @param elist The list of Expressions to compute the sinus on
      * @param n The notation of the operation
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter or if the list contains more than one element
      */
-    public Modulus(List<Expression> elist, Notation n) throws IllegalConstruction {
-        // Modulus is a unary operator
+    public Sinus(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
         if (elist.size() > 1)
-            // Modulus is a unary operator
             throw new IllegalConstruction();
-        symbol = "modulus";
-        neutral = 1;
+        symbol = "sin";
+        neutral = 0;
     }
 
     /**
-     * This method is not supported as Modulus is a unary operator.
+     * This method is not supported as Sinus is a unary operator.
      * @param l The left operand
      * @param r The right operand
      * @throws UnsupportedOperationException Always, as this operation is not supported.
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        throw new UnsupportedOperationException("Modulus is a unary operator");
+        throw new UnsupportedOperationException("Sinus is a unary operator");
     }
 
     /**
-     * Computes the modulus of a complex number.
-     * @param l The complex number
-     * @return The modulus of the complex number
+     * Computes the sinus of a number.
+     * @param l The number
+     * @return The sinus of the number
+     * @throws UnsupportedOperationException If the number is complex, as Sinus is not defined for complex numbers in this calculator
      */
     @Override
     public MyNumber op(MyNumber l) {
         if (l instanceof NotANumber)
             return new NotANumber();
-        // |a + bi| = sqrt(a^2 + b^2)
-        AbstractValue a = l.getReal();
-        AbstractValue b = l.getImaginary();
-        return new MyNumber(a.mul(a).add(b.mul(b)).sqrt());
+        if (l.isImaginary())
+            throw new UnsupportedOperationException("Sinus is not defined for complex numbers in this calculator");
+
+        return new MyNumber(l.getReal().sin());
     }
 
     /**

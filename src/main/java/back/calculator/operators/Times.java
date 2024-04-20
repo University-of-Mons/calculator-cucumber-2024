@@ -14,8 +14,14 @@ import java.util.List;
  *
  * @see Operation
  * @see Minus
- * @see Plus
  * @see Divides
+ * @see Plus
+ * @see Exponential
+ * @see Sqrt
+ * @see Logarithm
+ * @see Sinus
+ * @see Cosine
+ * @see Modulus
  */
 public final class Times extends Operation {
     /**

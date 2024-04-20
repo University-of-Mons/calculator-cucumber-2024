@@ -101,7 +101,7 @@ public class Units {
         DEGREE {
             @Override
             public String getSymbol() {
-                return "°";
+                return "deg";
             }
         },
         RADIAN {

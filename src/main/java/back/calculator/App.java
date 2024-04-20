@@ -13,6 +13,8 @@ import front.scenes.Scenes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.MathContext;
+
 
 /**
  * A very simple calculator in Java
@@ -21,6 +23,10 @@ import org.slf4j.LoggerFactory;
  * Faculty of Sciences
  *
  * @author tommens
+ * @author LicorneRose7
+ * @author frix
+ * @author ThomasBernard28
+ * @author Nephty
  */
 public class App extends Application {
     /**
@@ -30,15 +36,19 @@ public class App extends Application {
 
     private static String userInput = "";
 
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
-    private static boolean isRationalMode = true; // TODO : Turn this on
+    /**
+     * Static variable holding the precision of the calculator used for RealValue construction using BigDecimal.
+     */
+    private static MathContext precision = new MathContext(5);
 
     private static final Calculator calculator = new Calculator();
 
     public static void main(String[] args) {
-        logger.info("Starting the application");
+        LOGGER.info("Starting the application");
         launch(args);
+        LOGGER.info("Application stopped");
     }
 
     @Override
@@ -59,11 +69,19 @@ public class App extends Application {
         stage.setScene(scene);
     }
 
+    @SuppressWarnings("unused")
+    public static void setPrecision(int precision) {
+        App.precision = new MathContext(precision);
+    }
+
+    public static MathContext getPrecision() {
+        return App.precision;
+    }
+
     public static Expression evalUserInput() {
         return calculator.eval(calculator.read(App.userInput));
     }
 
-    @SuppressWarnings("unused")
     public static String getUserInput() {
         return userInput;
     }
@@ -73,12 +91,9 @@ public class App extends Application {
     }
 
     public static Logger getLogger() {
-        return logger;
+        return LOGGER;
     }
 
-    public static boolean isRationalMode() {
-        return isRationalMode;
-    }
 
     public static MyNumber convert(RealValue value, Units.Unit from, Units.Unit to) {
         return Converter.convert(value, from, to);

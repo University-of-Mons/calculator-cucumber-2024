@@ -38,6 +38,11 @@ Feature: Complex arithmetic expressions
     And I provide a second complex number 2-1i
     Then the operation evaluates to '5+10i'
 
+  Scenario: Negation of a complex number
+    Given a complex operation '-'
+    When I provide a first complex number 5+2i
+    Then the operation evaluates to '-5-2i'
+
 
   Scenario: Dividing two complex numbers with floating point results (floored)
     Given a complex operation '/'
@@ -54,6 +59,41 @@ Feature: Complex arithmetic expressions
     Given a complex operation '|'
     When I provide a NaN number
     Then the operation evaluates to 'NaN'
+
+  Scenario: Compute the sinus of a complex number
+    Given a complex operation 'sin'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to 'NaN'
+
+  Scenario: Compute the cosinus of a complex number
+    Given a complex operation 'cos'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to 'NaN'
+
+  Scenario: Compute the exponential of a complex number
+    Given a complex operation 'exp'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to '-13.129-15.201i'
+
+  Scenario: Compute the square root of a complex number
+    Given a complex operation 'sqrt'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to '2+1i'
+
+  Scenario: Compute the square root of a negative number
+    Given a complex operation 'sqrt'
+    When I provide a first number -4
+    Then the operation evaluates to '2i'
+
+  Scenario: Compute the logarithm of a complex number
+    Given a complex operation 'ln'
+    When I provide a first complex number 3+4i
+    Then the operation evaluates to '1.6095+0.92728i'
+
+  Scenario: Compute the logarithm of a negative number
+    Given a complex operation 'ln'
+    When I provide a first number -4
+    Then the operation evaluates to '1.3863+3.1416i'
 
   ################################### Complex representation ##################################
 
@@ -132,4 +172,26 @@ Feature: Complex arithmetic expressions
   Scenario: Parsing a modulus operation in Postfix notation
     Given the following expression '| ((1 2 3) +) |'
     Then its parsing is 'modulus((1, 2, 3) +)'
+
+  Scenario: Parsing a cartesian operation
+    Given the following expression '5+2i'
+    Then its parsing is '5+2i'
+
+  Scenario: Parsing a cartesian with float
+    Given the following expression '5.6569+2.6569i'
+    Then its parsing is '5.6569+2.6569i'
+
+  Scenario: Parsing a polar operation
+    Given the following expression '5.6569(cos(0.7854)+isin(0.7854))'
+    Then its parsing is '5.657(cos(0.7854)+isin(0.7854))'
+
+  Scenario: Parsing a exponential operation
+   Given the following expression '5.6569exp(0.7854i)'
+   Then its parsing is '5.657exp(0.7854i)'
+
+  Scenario: Parsing a polar with different angle
+    Given the following expression '5.6569(cos(0.7854)+isin(2))'
+    Then its parsing is 'NaN'
+
+
 

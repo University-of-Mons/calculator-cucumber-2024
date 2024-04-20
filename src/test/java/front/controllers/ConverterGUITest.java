@@ -44,7 +44,7 @@ class ConverterGUITest extends ApplicationTest {
      */
     private static final String inputFieldId = "#inputField";
 
-    private Logger logger = LoggerFactory.getLogger(ConverterGUITest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConverterGUITest.class);
 
     /**
      * Will be called with {@code @Before} semantics, i.e. before each test method.
@@ -142,7 +142,10 @@ class ConverterGUITest extends ApplicationTest {
                 .toList();
         checkAvailableUnits(robot, expectedItems, 3);
     }
-    /*
+
+    /**
+     * Helper for checkAvailableUnits with the angles units.
+     */
     @Test
     void checkAvailableAnglesUnits(FxRobot robot){
         List<String> expectedItems = Arrays.stream(Units.Angles.values())
@@ -150,7 +153,6 @@ class ConverterGUITest extends ApplicationTest {
                 .toList();
         checkAvailableUnits(robot, expectedItems, 4);
     }
-     */
 
     /**
      * Selects the unit type and triggers the verification of the available units.

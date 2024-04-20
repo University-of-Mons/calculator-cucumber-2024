@@ -1,6 +1,5 @@
 package front.controllers;
 
-import front.scenes.SceneLoader;
 import front.scenes.Scenes;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -23,7 +22,7 @@ import java.util.concurrent.TimeoutException;
 class GUITest extends ApplicationTest {
     private static Stage stage;
 
-    private static final String outputField = "#outputField";
+    private static final String OUTPUT_FIELD = "#outputField";
 
     /**
      * Will be called with {@code @Before} semantics, i.e. before each test method.
@@ -52,7 +51,7 @@ class GUITest extends ApplicationTest {
     @BeforeEach
     void clear() {
         clickOn("#clear");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("");
     }
 
     @Test
@@ -71,7 +70,7 @@ class GUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("123456789.,000");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("123456789.,000");
     }
 
     @Test
@@ -85,24 +84,76 @@ class GUITest extends ApplicationTest {
         clickOn("#modulus");
         clickOn("#eNotation");
         clickOn("#i");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("+-*/()|Ei");
+        clickOn("#pi");
+        clickOn("#exp");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("+-*/()|Eipiexp");
     }
     @Test
     void checkSinButton(FxRobot robot) {
         clickOn("#sin");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("sin");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("sin");
     }
 
     @Test
     void checkCosButton(FxRobot robot) {
         clickOn("#cos");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("cos");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("cos");
     }
 
     @Test
     void checkLnButton(FxRobot robot) {
         clickOn("#ln");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("ln");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("ln");
+    }
+
+    @Test
+    void testFormButton(FxRobot robot) {
+        // create 4+4i
+        clickOn("#four");
+        clickOn("#add");
+        clickOn("#four");
+        clickOn("#i");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("4+4i");
+
+        clickOn("#formSelector");
+        // Select cartesian
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("4+4i");
+
+        // Select polar
+        clickOn("#formSelector");
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        // 4 sqrt(2) (cos(pi/4)+isin(pi/4))
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("5.6569(cos(0.7854)+isin(0.7854))");
+
+        clickOn("#clear");
+        // create 4+4i
+        clickOn("#four");
+        clickOn("#add");
+        clickOn("#four");
+        clickOn("#i");
+        clickOn("#formSelector");
+        // Select Exp
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        // 4 sqrt(2) e^(i pi/4)
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("5.6569exp(0.7854i)");
+
+
+    }
+
+    @Test
+    void checkRealButton(FxRobot robot){
+        clickOn("#one");
+        clickOn("#divide");
+        clickOn("#two");
+        clickOn("#real");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("0.5");
     }
 
     @Test
@@ -111,12 +162,12 @@ class GUITest extends ApplicationTest {
         clickOn("#add");
         clickOn("#four");
         clickOn("#equals");
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("5");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("5");
         clickOn("#clear");
         clickOn("#one");
         clickOn("#add");
         clickOn("#four");
         type(KeyCode.ENTER);
-        Assertions.assertThat((TextField) lookup(outputField).query()).hasText("5");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("5");
     }
 }
