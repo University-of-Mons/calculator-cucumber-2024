@@ -30,8 +30,8 @@ class UnitsTest {
     void testSpeedSymbols() {
         assertEquals("m/s", Units.Speed.METERS_PER_SECOND.getSymbol());
         assertEquals("m/h", Units.Speed.METERS_PER_HOUR.getSymbol());
-        assertEquals("km/s", Units.Speed.KILOMETER_PER_SECOND.getSymbol());
-        assertEquals("km/h", Units.Speed.KILOMETER_PER_HOUR.getSymbol());
+        assertEquals("km/s", Units.Speed.KILOMETERS_PER_SECOND.getSymbol());
+        assertEquals("km/h", Units.Speed.KILOMETERS_PER_HOUR.getSymbol());
     }
 
     /**
@@ -63,7 +63,7 @@ class UnitsTest {
 
     /**
      * Tests the getSymbol method of the Angles enum.
-
+aa
      */
     @Test
     void testAnglesSymbols() {

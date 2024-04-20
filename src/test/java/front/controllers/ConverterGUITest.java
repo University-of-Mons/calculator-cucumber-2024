@@ -55,7 +55,6 @@ class ConverterGUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        type(KeyCode.A); // Increase branches coverage of inputField key pressed handler
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
         stage.setScene(Scenes.CONVERTER_SCENE);
@@ -76,6 +75,11 @@ class ConverterGUITest extends ApplicationTest {
     void clear() {
         clickOn("#clear");
         Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("");
+    }
+
+    @Test
+    void testKeyEventHandlerElseBranch() {
+        assertDoesNotThrow(() -> type(KeyCode.A)); // Increase branches coverage of inputField key pressed handler
     }
 
     /**

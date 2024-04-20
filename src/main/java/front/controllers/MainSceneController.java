@@ -4,6 +4,7 @@ import back.calculator.App;
 import back.calculator.ComplexForm;
 import back.calculator.Expression;
 import back.calculator.types.MyNumber;
+import front.scenes.Scenes;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainSceneController implements Initializable {
+    @FXML
+    ComboBox<String> calculatorModeSelector;
     @FXML
     Button clear;
     @FXML
@@ -131,6 +134,39 @@ public class MainSceneController implements Initializable {
                 equalsButtonClicked();
             }
         });
+
+        prepareCalculatorModeComboBox();
+    }
+
+    /**
+     * Prepares the calculator mode combo box by giving it values (basic, conversion) and setting a
+     * default value.
+     */
+    private void prepareCalculatorModeComboBox() {
+        calculatorModeSelector.getItems().addAll(App.BASIC_MODE, App.CONVERSION_MODE);
+        calculatorModeSelector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(App.BASIC_MODE)) handleBasicModeSelected();
+            else if (newValue.equals(App.CONVERSION_MODE)) handleConversionModeSelected();
+        });
+        calculatorModeSelector.setOnShowing(event -> calculatorModeSelector.setValue(App.BASIC_MODE));
+    }
+
+    /**
+     * Switches to the basic view.
+     * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
+     */
+    @FXML
+    private void handleBasicModeSelected() {
+        App.setScene(Scenes.MAIN_SCENE);
+    }
+
+    /**
+     * Stays on the converter view.
+     * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
+     */
+    @FXML
+    private void handleConversionModeSelected() {
+        App.setScene(Scenes.CONVERTER_SCENE);
     }
 
     @FXML

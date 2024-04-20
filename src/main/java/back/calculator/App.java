@@ -35,6 +35,9 @@ public class App extends Application {
 
     private static String userInput = "";
 
+    public final static String BASIC_MODE = "Basic";
+    public final static String CONVERSION_MODE = "Conversion";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
     /**
