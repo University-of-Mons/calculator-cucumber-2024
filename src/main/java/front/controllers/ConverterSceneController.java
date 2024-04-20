@@ -116,11 +116,11 @@ public class ConverterSceneController implements Initializable {
 
         // Set listener for selection changes
         conversionModeSelector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals(Units.Speed.class)) handleSpeedConversionSelected(null);
-            else if (newValue.equals(Units.Weight.class)) handleWeightConversionSelected(null);
-            else if (newValue.equals(Units.Distance.class)) handleDistanceConversionSelected(null);
-            else if (newValue.equals(Units.Time.class)) handleTimeConversionSelected(null);
-            else if (newValue.equals(Units.Angles.class)) handleAngleConversionSelected(null);
+            if (newValue.equals(Units.Speed.class)) handleSpeedConversionSelected();
+            else if (newValue.equals(Units.Weight.class)) handleWeightConversionSelected();
+            else if (newValue.equals(Units.Distance.class)) handleDistanceConversionSelected();
+            else if (newValue.equals(Units.Time.class)) handleTimeConversionSelected();
+            else if (newValue.equals(Units.Angles.class)) handleAngleConversionSelected();
         });
     }
 
@@ -129,11 +129,13 @@ public class ConverterSceneController implements Initializable {
      * default value.
      */
     private void prepareCalculatorModeComboBox() {
-        calculatorModeSelector.getItems().addAll("Basic", "Conversion");
+        calculatorModeSelector.getItems().addAll(App.BASIC_MODE, App.CONVERSION_MODE);
         calculatorModeSelector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("Basic")) handleBasicModeSelected(null);
-            else if (newValue.equals("Conversion")) handleConversionModeSelected(null);
+            if (newValue.equals(App.BASIC_MODE)) handleBasicModeSelected();
+            else if (newValue.equals(App.CONVERSION_MODE)) handleConversionModeSelected();
         });
+        calculatorModeSelector.setValue(App.CONVERSION_MODE);
+        calculatorModeSelector.setOnShowing(event -> calculatorModeSelector.setValue(App.CONVERSION_MODE));
     }
 
     /**
@@ -144,7 +146,7 @@ public class ConverterSceneController implements Initializable {
         conversionModes.addAll(Units.getUnitClasses());
         conversionModeSelector.setItems(conversionModes);
         conversionModeSelector.setValue(conversionModes.get(0)); // Set default
-        handleSpeedConversionSelected(null); // Set units for default
+        handleSpeedConversionSelected(); // Set units for default
     }
 
     /**
@@ -244,7 +246,7 @@ public class ConverterSceneController implements Initializable {
      * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
      */
     @FXML
-    private void handleBasicModeSelected(ActionEvent actionEvent) {
+    private void handleBasicModeSelected() {
         App.setScene(Scenes.MAIN_SCENE);
     }
 
@@ -253,7 +255,7 @@ public class ConverterSceneController implements Initializable {
      * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
      */
     @FXML
-    private void handleConversionModeSelected(ActionEvent actionEvent) {
+    private void handleConversionModeSelected() {
         App.setScene(Scenes.CONVERTER_SCENE);
     }
 
@@ -262,7 +264,7 @@ public class ConverterSceneController implements Initializable {
      * texts of the menus accordingly.
      */
     @FXML
-    private void handleSpeedConversionSelected(ActionEvent actionEvent) {
+    private void handleSpeedConversionSelected() {
         Units.Speed[] values = Units.Speed.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -275,7 +277,7 @@ public class ConverterSceneController implements Initializable {
      * texts of the menus accordingly.
      */
     @FXML
-    private void handleWeightConversionSelected(ActionEvent actionEvent) {
+    private void handleWeightConversionSelected() {
         Units.Weight[] values = Units.Weight.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -288,7 +290,7 @@ public class ConverterSceneController implements Initializable {
      * texts of the menus accordingly.
      */
     @FXML
-    private void handleDistanceConversionSelected(ActionEvent actionEvent) {
+    private void handleDistanceConversionSelected() {
         Units.Distance[] values = Units.Distance.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -301,7 +303,7 @@ public class ConverterSceneController implements Initializable {
      * texts of the menus accordingly.
      */
     @FXML
-    private void handleTimeConversionSelected(ActionEvent actionEvent) {
+    private void handleTimeConversionSelected() {
         Units.Time[] values = Units.Time.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);
@@ -314,7 +316,7 @@ public class ConverterSceneController implements Initializable {
      * texts of the menus accordingly.
      */
     @FXML
-    private void handleAngleConversionSelected(ActionEvent actionEvent) {
+    private void handleAngleConversionSelected() {
         Units.Angles[] values = Units.Angles.values();
         replaceSelectorItems(firstUnitSelector, values);
         replaceSelectorItems(secondUnitSelector, values);

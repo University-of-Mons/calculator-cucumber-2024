@@ -28,18 +28,8 @@
                   <RowConstraints />
                     </rowConstraints>
                     <children>
-                  <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Mode" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="2">
-                    <items>
-                      <MenuItem mnemonicParsing="false" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="Basic" />
-                      <MenuItem mnemonicParsing="false" style="-fx-text-fill: white;" text="Avanced" />
-                    </items>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </MenuButton>
+                        <ComboBox fx:id="calculatorModeSelector" prefHeight="47.0" prefWidth="143.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3">
+                        </ComboBox>
                         <MenuButton fx:id="formSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Form" textFill="WHITE" GridPane.columnIndex="5" GridPane.columnSpan="2">
                             <items>
                                 <MenuItem fx:id="cartesian" mnemonicParsing="false" onAction="#formSelected" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="cartesian" />
