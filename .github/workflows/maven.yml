@@ -4,9 +4,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master, 14-refactor-countingvisitor ]
+    branches: [ master, dev ]
   pull_request:
-    branches: [ master, 14-refactor-countingvisitor ]
+    branches: [ master, dev ]
     
 jobs:
   build:
