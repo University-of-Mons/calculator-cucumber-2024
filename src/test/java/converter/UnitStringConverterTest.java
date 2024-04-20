@@ -19,8 +19,8 @@ class UnitStringConverterTest {
         UnitStringConverter converter = new UnitStringConverter();
         assertEquals("m/s", converter.toString(Units.Speed.METERS_PER_SECOND));
         assertEquals("m/h", converter.toString(Units.Speed.METERS_PER_HOUR));
-        assertEquals("km/s", converter.toString(Units.Speed.KILOMETER_PER_SECOND));
-        assertEquals("km/h", converter.toString(Units.Speed.KILOMETER_PER_HOUR));
+        assertEquals("km/s", converter.toString(Units.Speed.KILOMETERS_PER_SECOND));
+        assertEquals("km/h", converter.toString(Units.Speed.KILOMETERS_PER_HOUR));
         assertEquals("g", converter.toString(Units.Weight.GRAM));
         assertEquals("kg", converter.toString(Units.Weight.KILOGRAM));
         assertEquals("m", converter.toString(Units.Distance.METER));
