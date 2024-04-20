@@ -30,7 +30,7 @@ class ConverterTest {
         assertEquals(new MyNumber(360), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
-                Units.Speed.KILOMETER_PER_HOUR));
+                Units.Speed.KILOMETERS_PER_HOUR));
         assertEquals(new MyNumber(360000), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
@@ -38,7 +38,7 @@ class ConverterTest {
         assertEquals(new MyNumber(1), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(1000), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
-                Units.Speed.KILOMETER_PER_SECOND));
+                Units.Speed.KILOMETERS_PER_SECOND));
         assertEquals(new MyNumber(100), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(100), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
@@ -47,11 +47,11 @@ class ConverterTest {
                 Converter.convert(
                         new RealValue(new BigDecimal(Integer.toString(1), App.getPrecision())),
                         Units.Speed.METERS_PER_SECOND,
-                        Units.Speed.KILOMETER_PER_HOUR));
+                        Units.Speed.KILOMETERS_PER_HOUR));
         assertEquals(new MyNumber(1), Converter.convert(
                 new RealValue(new BigDecimal(Integer.toString(1000), App.getPrecision())),
                 Units.Speed.METERS_PER_SECOND,
-                Units.Speed.KILOMETER_PER_SECOND));
+                Units.Speed.KILOMETERS_PER_SECOND));
     }
 
     /**

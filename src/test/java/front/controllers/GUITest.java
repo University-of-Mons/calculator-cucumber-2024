@@ -17,6 +17,8 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 import java.util.concurrent.TimeoutException;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 
 @ExtendWith(ApplicationExtension.class)
 class GUITest extends ApplicationTest {
@@ -33,7 +35,6 @@ class GUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        type(KeyCode.A); // Increase branches coverage of inputField key pressed handler
         stage.setResizable(false);
         stage.setTitle("Please use gradle instead of maven");
         stage.setScene(Scenes.MAIN_SCENE);
@@ -52,6 +53,11 @@ class GUITest extends ApplicationTest {
     void clear() {
         clickOn("#clear");
         Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("");
+    }
+
+    @Test
+    void testKeyEventHandlerElseBranch() {
+        assertDoesNotThrow(() -> type(KeyCode.A)); // Increase branches coverage of inputField key pressed handler
     }
 
     @Test
