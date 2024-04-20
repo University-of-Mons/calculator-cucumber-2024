@@ -3,9 +3,7 @@ package calculator;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
 import calculator.numbers.MyTime;
-import visitor.CountingVisitor;
 import visitor.Evaluator;
-import visitor.ExpressionVisitor;
 
 /**
  * This class represents the core logic of a Calculator.
