@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * This class is a visitor that will parse the input string and create the corresponding expression tree.
+ * This class is a visitor that will parse the input string and create the corresponding expression tree
+ * for a time expression.
  * It will also evaluate the expression tree and return the result.
  */
 public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression> {
@@ -90,7 +91,7 @@ public class TimeParserVisitor extends CalculatorExprTimeBaseVisitor<Expression>
     }
 
     /**
-     * Visit the infix time expression with addition or subtraction.
+     * Visit the infix time addition or subtraction expression.
      *
      * @param ctx the parse tree
      * @return the evaluated time expression with addition or subtraction.

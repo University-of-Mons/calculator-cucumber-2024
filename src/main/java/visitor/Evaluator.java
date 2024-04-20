@@ -9,7 +9,7 @@ import calculator.numbers.MyTime;
 import java.util.ArrayList;
 
 /** Evaluation is a concrete visitor that serves to
- * compute and evaluate the results of arithmetic expressions.
+ * compute and evaluate the results of arithmetic and time expressions.
  */
 public class Evaluator extends Visitor {
 

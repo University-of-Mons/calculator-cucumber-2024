@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /** ExpressionVisitor is a concrete visitor that serves to
- * compute the expression string matching the notation of arithmetic expressions.
+ * compute the expression string matching the notation of arithmetic and time expressions.
  */
 public class ExpressionVisitor extends Visitor {
 

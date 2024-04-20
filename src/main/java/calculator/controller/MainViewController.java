@@ -20,9 +20,6 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
 
-    // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
-    //  à l'intérieur de la classe de contrôleur.
-
     public static final String STANDARD_MODE = "Standard";
     public static final String RATIONAL_MODE = "Rational";
     public static final String COMPLEX_MODE = "Complex";
@@ -143,8 +140,6 @@ public class MainViewController implements Initializable {
 
         if (resource == null) {
             logger.error("FXML file for " + mode + " mode not found : " + fxmlFile);
-            // Vous pouvez gérer l'erreur comme bon vous semble ici
-            // TODO : afficher une pop up erreur utilisateur?
         } else {
             try {
                 FXMLLoader loader = new FXMLLoader(resource);

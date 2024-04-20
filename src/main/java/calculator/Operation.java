@@ -9,10 +9,9 @@ import java.util.List;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
- * which are a special kind of Expressions, just like numbers are.
+ * which are a special kind of Expressions.
  *
  * @see Expression
- * @see MyNumber
  */
 public abstract class Operation implements Expression
 {
