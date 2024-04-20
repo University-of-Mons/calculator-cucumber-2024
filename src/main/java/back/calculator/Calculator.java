@@ -3,17 +3,34 @@ package back.calculator;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 import back.visitor.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This class represents the core logic of a Calculator.
- * It can be used to print and evaluate artihmetic expressions.
+ * It can be used to print and evaluate arithmetic expressions.
  *
  * @author tommens
  */
 public class Calculator {
+
+    // Logger of the calculator : Use it to log messages coming from operations
+    private final static Logger LOGGER = LoggerFactory.getLogger(Calculator.class);
+    // The parser used to parse arithmetic expressions
     private final ExpressionParser parser;
 
+    /**
+     * Get the Logger of the calculator. (use it to log messages from operations and evaluations)
+     * @return the Logger of the calculator
+     */
+    public static Logger getLogger() {
+        return LOGGER;
+    }
+
+    /**
+     * Class constructor - creates a new Calculator with a specific parser
+     */
     public Calculator() {
         parser = new ExpressionParser();
     }
@@ -29,10 +46,21 @@ public class Calculator {
         Evaluator v = new Evaluator();
         // and ask the expression to accept this visitor to start the evaluation process
         e.accept(v);
+
+        // if the result is not a number, log a warning
+        if (v.getResult() instanceof NotANumber) {
+            LOGGER.warn("The result of the evaluation of {} is NaN", e);
+        }
+
         // and return the result of the evaluation at the end of the process
         return v.getResult();
     }
 
+    /**
+     * Parse the string s and return the corresponding expression
+     * @param s the string to parse
+     * @return the corresponding {@link Expression}
+     */
     public Expression read(String s) {
         try {
             return parser.parse(s);
@@ -40,13 +68,6 @@ public class Calculator {
             return new NotANumber();
         }
     }
-
-    /*
-     We could also have other methods, e.g. to verify whether an expression is syntactically correct
-     public Boolean validate(Expression e)
-     or to simplify some expression
-     public Expression simplify(Expression e)
-    */
 
     public String format(Expression e, Notation notation) {
         Printer visitor = new Printer(notation);

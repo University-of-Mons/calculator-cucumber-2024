@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test for the Units class.
  */
-public class UnitsTest {
+class UnitsTest {
     /**
      * Tests the getUnitClasses method of the Units class.
      */
@@ -59,5 +59,15 @@ public class UnitsTest {
     void testTimeSymbols() {
         assertEquals("s", Units.Time.SECOND.getSymbol());
         assertEquals("h", Units.Time.HOUR.getSymbol());
+    }
+
+    /**
+     * Tests the getSymbol method of the Angles enum.
+
+     */
+    @Test
+    void testAnglesSymbols() {
+        assertEquals("deg", Units.Angles.DEGREE.getSymbol());
+        assertEquals("rad", Units.Angles.RADIAN.getSymbol());
     }
 }

@@ -228,7 +228,7 @@ public class Printer extends Visitor {
     }
 
     private void appendUnaryOperation(StringBuilder bobTheBuilder, String value, String symbol) {
-        bobTheBuilder.append(symbol).append("(").append(value).append(")");
+        bobTheBuilder.append(symbol).append('(').append(value).append(')');
     }
 
     /**

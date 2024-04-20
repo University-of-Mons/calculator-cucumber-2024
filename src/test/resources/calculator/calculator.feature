@@ -13,23 +13,59 @@ Feature: Integer Arithmetic Expressions
 
 
   ##################################### Evaluation of simple expression tests #####################################
+  Scenario Outline: Operations between two integer numbers
+    Given an integer operation <op>
+    When I provide a first number <n1>
+    And I provide a second number <n2>
+    Then the operation evaluates to <result>
 
-  Scenario: Adding two integer numbers
-    Given an integer operation '+'
-    When I provide a first number 4
-    And I provide a second number 5
-    Then the operation evaluates to 9
+    Examples:
+      | op  | n1 | n2 | result |
+      | '+' | 4  | 5  | 9      |
+      | '-' | 7  | 5  | 2      |
+      | '*' | 7  | 5  | 35     |
+      | '/' | 7  | 5  | "7/5"  |
+      | '/' | 7  | 7  | 1      |
+      | '/' | 7  | 1  | 7      |
+
+
+  Scenario Outline: Unary operations on integer numbers
+    Given an integer operation <op>
+    When I provide a first number <n1>
+    Then the operation evaluates to <result>
+
+    Examples:
+      | op     | n1 | result |
+      | 'sqrt' | 4  | 2      |
+      | 'exp'  | 2  | 7.3891  |
+      | 'ln'   | 10 | 2.3026  |
+      | 'cos'  | 0  | 1      |
+      | 'sin'  | 0  | 0      |
+
+  Scenario Outline: Unary operations with NaN
+    Given an integer operation <op>
+    When I provide a NaN number
+    Then the operation evaluates to "NaN"
+
+    Examples:
+      | op     |
+      | 'sqrt' |
+      | 'exp'  |
+      | 'ln'   |
+      | 'cos'  |
+      | 'sin'  |
+
 
   Scenario: Adding an integer number
     Given an integer operation '+'
     When I provide a first number 7
     Then the operation evaluates to 7
 
-  Scenario: Subtracting two integer numbers
-    Given an integer operation '-'
-    When I provide a first number 7
-    And I provide a second number 5
-    Then the operation evaluates to 2
+  Scenario: Adding an integer number with a NaN
+    Given an integer operation '+'
+    When I provide a NaN number
+    And I provide a second number 7
+    Then the operation evaluates to "NaN"
 
   Scenario: Subtracting an integer number
     Given an integer operation '-'
@@ -41,27 +77,29 @@ Feature: Integer Arithmetic Expressions
     When I provide a NaN number
     Then the operation evaluates to "NaN"
 
-  Scenario: Multiplying two integer numbers
-    Given an integer operation '*'
-    When I provide a first number 7
-    And I provide a second number 5
-    Then the operation evaluates to 35
-
   Scenario: Multiplying an integer number
     Given an integer operation '*'
     When I provide a first number 7
     Then the operation evaluates to 7
 
-  Scenario: Dividing two integer numbers
-    Given an integer operation '/'
-    When I provide a first number 7
-    And I provide a second number 5
-    Then the operation evaluates to "7/5"
 
   Scenario: Dividing an integer number
     Given an integer operation '/'
     When I provide a first number 7
     Then the operation evaluates to 7
+
+  Scenario Outline: Operations between integer and rational numbers
+    Given an integer operation <op>
+    When I provide a first number <int>
+    And I provide a second rational number <rat>
+    Then the operation evaluates to <res>
+
+    Examples:
+      | op  | int | rat | res   |
+      | '+' | 1   | 1/2 | "3/2" |
+      | '-' | 1   | 1/2 | "1/2" |
+      | '*' | 1   | 1/2 | "1/2" |
+      | '/' | 1   | 1/2 | "2"   |
 
       # A scenario outline (or template) is a scenario that is parameterised
   # with different values. The outline comes with a set of examples.

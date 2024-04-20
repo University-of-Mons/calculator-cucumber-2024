@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestOperation {
 
@@ -27,6 +27,11 @@ class TestOperation {
         List<Expression> params3 = Arrays.asList(new Plus(params1), new Minus(params2), new MyNumber(7));
         o = new Divides(params3);
         o2 = new Divides(params3);
+    }
+
+    @Test
+    void testEmptyConstructor(){
+        assertThrows(IllegalConstruction.class, () -> o = new Divides(null));
     }
 
     @Test

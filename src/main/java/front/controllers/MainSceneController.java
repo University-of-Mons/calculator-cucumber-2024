@@ -1,13 +1,14 @@
 package front.controllers;
 
 import back.calculator.App;
+import back.calculator.ComplexForm;
 import back.calculator.Expression;
+import back.calculator.types.MyNumber;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
@@ -70,6 +71,21 @@ public class MainSceneController implements Initializable {
     Button sin;
     @FXML
     Button cos;
+    @FXML
+    Button real;
+    @FXML
+    Button pi;
+    @FXML
+    Button exp;
+
+    @FXML
+    MenuButton formSelector;
+    @FXML
+    MenuItem cartesian;
+    @FXML
+    MenuItem polar;
+    @FXML
+    MenuItem exponential;
 
     @FXML
     Label lastExpression;
@@ -93,6 +109,7 @@ public class MainSceneController implements Initializable {
     Label lastResult4;
     @FXML
     TextField outputField;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -142,6 +159,47 @@ public class MainSceneController implements Initializable {
         outputField.positionCaret(outputField.getText().length());
     }
 
+    @FXML
+    private void realButtonClicked(MouseEvent event){
+        App.setUserInput(outputField.getText());
+        Expression result = App.evalUserInput();
+        MyNumber resultNumber = (MyNumber) result;
+
+        MyNumber realNumber = resultNumber.convertToReal();
+
+        // Log the new result on the GUI
+        switchHistory(App.getUserInput(), realNumber.toString());
+
+        // Set the answer in the textField
+        outputField.setText(realNumber.toString());
+
+        // Set the cursor at the end of the text
+        outputField.positionCaret(outputField.getText().length());
+    }
+
+    @FXML
+    private void formSelected(ActionEvent event) {
+        // This method is called when the user selects a form
+
+        MenuItem source = (MenuItem) event.getSource();
+        String form = source.getText();
+
+        ComplexForm complexForm = ComplexForm.valueOf(form.toUpperCase());
+
+        App.setUserInput(outputField.getText());
+        Expression result = App.evalUserInput();
+        MyNumber resultNumber = (MyNumber) result;
+        resultNumber.setForm(complexForm);
+
+        switchHistory(App.getUserInput(), resultNumber.toString());
+
+        // Set the answer in the textField
+        outputField.setText(resultNumber.toString());
+
+        // Set the cursor at the end of the text
+        outputField.positionCaret(outputField.getText().length());
+    }
+
     private void switchHistory(String newExpression, String newResult){
         // This method logs the new result and shift last results
 
@@ -150,9 +208,9 @@ public class MainSceneController implements Initializable {
         Label[] resultHistory = new Label[5];
         resultHistory[0] = lastResult; resultHistory[1] = lastResult1; resultHistory[2] = lastResult2; resultHistory[3] = lastResult3; resultHistory[4] = lastResult4;
 
-        for(int i = 4; i > 0; i--){
-            expressionHistory[i].setText(expressionHistory[i-1].getText());
-            resultHistory[i].setText(resultHistory[i-1].getText());
+        for(int j = 4; j > 0; j--){
+            expressionHistory[j].setText(expressionHistory[j-1].getText());
+            resultHistory[j].setText(resultHistory[j-1].getText());
         }
         expressionHistory[0].setText(newExpression);
         resultHistory[0].setText(newResult);
@@ -168,12 +226,18 @@ public class MainSceneController implements Initializable {
         Button button = (Button) event.getSource();
         String buttonText = button.getText();
 
+        if (buttonText.equals("π")) {
+            buttonText = "pi";
+        } else if (buttonText.equals("e")) {
+            buttonText = "exp";
+        }
+
         int cursorPosition = outputField.getCaretPosition();
         outputField.insertText(cursorPosition, buttonText);
         App.setUserInput(outputField.getText());
 
         // Move the cursor to the right of the new character
-        outputField.positionCaret(cursorPosition + 1);
+        outputField.positionCaret(outputField.getText().length());
     }
 
     private void clearOutputField() {

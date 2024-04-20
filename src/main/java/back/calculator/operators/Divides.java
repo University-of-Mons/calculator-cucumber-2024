@@ -4,7 +4,7 @@ import back.calculator.*;
 import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
-import back.calculator.types.RationalValue;
+import org.slf4j.Logger;
 
 import java.util.List;
 
@@ -17,6 +17,12 @@ import java.util.List;
  * @see Minus
  * @see Times
  * @see Plus
+ * @see Exponential
+ * @see Sqrt
+ * @see Logarithm
+ * @see Sinus
+ * @see Cosine
+ * @see Modulus
  */
 public final class Divides extends Operation {
 
@@ -40,7 +46,6 @@ public final class Divides extends Operation {
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
      * @see #Divides
      * @see Operation#Operation
-     *
      */
     public Divides(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
@@ -57,7 +62,13 @@ public final class Divides extends Operation {
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
-        if ((r.getReal().isEqualsZero() && r.getImaginary().isEqualsZero()) || l instanceof NotANumber || r instanceof NotANumber)
+        if ((r.getReal().isEqualsZero() && r.getImaginary().isEqualsZero())) {
+            Logger logger = Calculator.getLogger();
+            if (logger.isErrorEnabled())
+                logger.error("Division by zero is not allowed");
+            return new NotANumber();
+        }
+        if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
         if (l.isImaginary() || r.isImaginary()) {
             // (a + bi) / (c + di) = (ac + bd) + (bc - ad)i / (c^2 + d^2)

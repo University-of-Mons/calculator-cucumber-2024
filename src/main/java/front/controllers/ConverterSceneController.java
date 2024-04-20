@@ -126,7 +126,7 @@ public class ConverterSceneController implements Initializable {
             } else if (newValue.equals(Units.Time.class)) {
                 handleTimeConversionSelected(null);
             } else if (newValue.equals(Units.Angles.class)) {
-                logger.error("Angles conversion not implemented yet.");
+                handleAngleConversionSelected(null);
             } else {
                 handleSpeedConversionSelected(null);
                 logger.error("Invalid unit type selected. Defaulted to speed.");
@@ -303,6 +303,19 @@ public class ConverterSceneController implements Initializable {
         replaceSelectorItems(secondUnitSelector, values);
         firstUnitSelector.setValue(Units.Time.SECOND);
         secondUnitSelector.setValue(Units.Time.SECOND);
+    }
+
+    /**
+     * Defines the conversion as a conversion of angles. Sets the appropriate available units in the menus and set the
+     * texts of the menus accordingly.
+     */
+    @FXML
+    private void handleAngleConversionSelected(ActionEvent actionEvent) {
+        Units.Angles[] values = Units.Angles.values();
+        replaceSelectorItems(firstUnitSelector, values);
+        replaceSelectorItems(secondUnitSelector, values);
+        firstUnitSelector.setValue(Units.Angles.DEGREE);
+        secondUnitSelector.setValue(Units.Angles.DEGREE);
     }
 
     /**

@@ -14,9 +14,15 @@ import java.util.List;
  * Other subclasses of Operation represent other arithmetic operations.
  *
  * @see Operation
- * @see Plus
- * @see Times
  * @see Divides
+ * @see Times
+ * @see Plus
+ * @see Exponential
+ * @see Sqrt
+ * @see Logarithm
+ * @see Sinus
+ * @see Cosine
+ * @see Modulus
  */
 public final class Minus extends Operation {
 
