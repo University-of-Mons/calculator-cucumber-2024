@@ -10,7 +10,7 @@ public class UnitStringConverter extends StringConverter<Units.Unit> {
     @Override
     public String toString(Units.Unit unit) {
         if (unit != null) {
-            return unit.getSymbol();
+            return formatUnit(unit) + " (" + unit.getSymbol() + ")";
         }
         return null;
     }
@@ -18,5 +18,12 @@ public class UnitStringConverter extends StringConverter<Units.Unit> {
     @Override
     public Units.Unit fromString(String string) {
         return null; // Not needed for our use case
+    }
+
+    public static String formatUnit(Units.Unit unit) {
+        String string = unit.toString();
+        string = string.replace("_", " ");
+        string = string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
+        return string;
     }
 }
