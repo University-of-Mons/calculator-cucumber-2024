@@ -2,6 +2,7 @@ package front.controllers;
 
 import back.calculator.App;
 import back.calculator.types.MyNumber;
+import back.calculator.types.RealValue;
 import back.converter.UnitClassStringConverter;
 import back.converter.UnitStringConverter;
 import back.converter.Units;
@@ -18,11 +19,14 @@ import javafx.scene.input.MouseEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ConverterSceneController implements Initializable {
+    @FXML
+    ComboBox<String> calculatorModeSelector;
     @FXML
     ComboBox<Units.Unit> firstUnitSelector;
     @FXML
@@ -86,12 +90,6 @@ public class ConverterSceneController implements Initializable {
      */
     private ObservableList<Class<? extends Units.Unit>> conversionModes = FXCollections.observableArrayList();
 
-    private static Logger logger;
-
-    static {
-        logger = LoggerFactory.getLogger(ConverterSceneController.class);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // At startup, the focus is set on the textField
@@ -107,30 +105,34 @@ public class ConverterSceneController implements Initializable {
         // Set the equals button event
         inputField.setOnKeyPressed(event -> {
             if (Objects.requireNonNull(event.getCode()) == KeyCode.ENTER) {
-                equalsButtonClicked(null);
+                equalsButtonClicked();
             }
         });
 
         // Prepare combo boxes
+        prepareCalculatorModeComboBox();
         prepareConversionModeComboBox();
         prepareComboBoxConverters();
 
         // Set listener for selection changes
         conversionModeSelector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals(Units.Speed.class)) {
-                handleSpeedConversionSelected(null);
-            } else if (newValue.equals(Units.Weight.class)) {
-                handleWeightConversionSelected(null);
-            } else if (newValue.equals(Units.Distance.class)) {
-                handleDistanceConversionSelected(null);
-            } else if (newValue.equals(Units.Time.class)) {
-                handleTimeConversionSelected(null);
-            } else if (newValue.equals(Units.Angles.class)) {
-                handleAngleConversionSelected(null);
-            } else {
-                handleSpeedConversionSelected(null);
-                logger.error("Invalid unit type selected. Defaulted to speed.");
-            }
+            if (newValue.equals(Units.Speed.class)) handleSpeedConversionSelected(null);
+            else if (newValue.equals(Units.Weight.class)) handleWeightConversionSelected(null);
+            else if (newValue.equals(Units.Distance.class)) handleDistanceConversionSelected(null);
+            else if (newValue.equals(Units.Time.class)) handleTimeConversionSelected(null);
+            else if (newValue.equals(Units.Angles.class)) handleAngleConversionSelected(null);
+        });
+    }
+
+    /**
+     * Prepares the calculator mode combo box by giving it values (basic, conversion) and setting a
+     * default value.
+     */
+    private void prepareCalculatorModeComboBox() {
+        calculatorModeSelector.getItems().addAll("Basic", "Conversion");
+        calculatorModeSelector.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("Basic")) handleBasicModeSelected(null);
+            else if (newValue.equals("Conversion")) handleConversionModeSelected(null);
         });
     }
 
@@ -161,18 +163,18 @@ public class ConverterSceneController implements Initializable {
     public void characterButtonClicked(MouseEvent event) {
         Button source = (Button) event.getSource();
 
-        if (source.equals(equals)) equalsButtonClicked(event);
-        else if (source.equals(clear)) clearButtonClicked(event);
+        if (source.equals(equals)) equalsButtonClicked();
+        else if (source.equals(clear)) clearButtonClicked();
         else regularButtonClicked(event);
     }
 
     /**
      * Handles the behavior that the app should have when the equals button is clicked.
      */
-    private void equalsButtonClicked(MouseEvent event) {
+    private void equalsButtonClicked() {
         Units.Unit firstUnit = firstUnitSelector.getValue();
         Units.Unit secondUnit = secondUnitSelector.getValue();
-        MyNumber result = App.convert(Float.parseFloat(inputField.getText()), firstUnit, secondUnit);
+        MyNumber result = App.convert(new RealValue(new BigDecimal(inputField.getText(), App.getPrecision())), firstUnit, secondUnit);
         String resultString = result.toString();
         switchHistory(inputField.getText() + firstUnit.getSymbol(), resultString + secondUnit.getSymbol());
         inputField.setText(resultString);
@@ -198,7 +200,7 @@ public class ConverterSceneController implements Initializable {
     /**
      * Handles the behavior that the app should have when the clear button is clicked.
      */
-    private void clearButtonClicked(MouseEvent event) {
+    private void clearButtonClicked() {
         clearInputField();
     }
 
@@ -239,6 +241,7 @@ public class ConverterSceneController implements Initializable {
 
     /**
      * Switches to the basic view.
+     * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
      */
     @FXML
     private void handleBasicModeSelected(ActionEvent actionEvent) {
@@ -246,11 +249,12 @@ public class ConverterSceneController implements Initializable {
     }
 
     /**
-     * Switches to the advanced view.
+     * Stays on the converter view.
+     * Note : this is untestable, since tests have their own stage that's separate from the stage in the App class.
      */
     @FXML
-    private void handleAdvancedModeSelected(ActionEvent actionEvent) {
-        App.setScene(Scenes.MAIN_SCENE);
+    private void handleConversionModeSelected(ActionEvent actionEvent) {
+        App.setScene(Scenes.CONVERTER_SCENE);
     }
 
     /**

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class Calculator {
 
     // Logger of the calculator : Use it to log messages coming from operations
-    private final static Logger LOGGER = LoggerFactory.getLogger(Calculator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Calculator.class);
     // The parser used to parse arithmetic expressions
     private final ExpressionParser parser;
 

@@ -1,6 +1,7 @@
 package back.calculator;
 
 import back.calculator.types.MyNumber;
+import back.calculator.types.RealValue;
 import back.converter.Converter;
 import back.converter.Units;
 import javafx.application.Application;
@@ -50,8 +51,8 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage _stage) {
-        stage = _stage;
+    public void start(Stage s) {
+        stage = s;
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
         setScene(Scenes.MAIN_SCENE);
@@ -93,7 +94,7 @@ public class App extends Application {
     }
 
 
-    public static MyNumber convert(float value, Units.Unit from, Units.Unit to) {
+    public static MyNumber convert(RealValue value, Units.Unit from, Units.Unit to) {
         return Converter.convert(value, from, to);
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -28,7 +27,8 @@
                         <RowConstraints />
                     </rowConstraints>
                     <children>
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0" prefWidth="160.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Mode" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="2">
+                        <!--
+                        <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="167.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" text="Mode" textFill="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="2">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#handleBasicModeSelected" style="-fx-padding: 0 107 0 0; -fx-text-fill: white;" text="Basic" />
                                 <MenuItem mnemonicParsing="false" onAction="#handleAdvancedModeSelected" style="-fx-text-fill: white;" text="Advanced" />
@@ -40,6 +40,9 @@
                                 <Cursor fx:constant="DEFAULT" />
                             </cursor>
                         </MenuButton>
+                        -->
+                        <ComboBox fx:id="calculatorModeSelector" prefHeight="47.0" prefWidth="167.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3">
+                        </ComboBox>
                         <!--
                         <MenuButton fx:id="conversionModeSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
                                     prefWidth="160.0"
@@ -64,7 +67,7 @@
                             </cursor>
                         </MenuButton>
                         -->
-                        <ComboBox fx:id="conversionModeSelector" prefHeight="93.0" prefWidth="160.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                        <ComboBox fx:id="conversionModeSelector" prefHeight="47.0" prefWidth="167.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1">
                         </ComboBox>
                         <!--
                         <MenuButton fx:id="firstUnitSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
@@ -80,7 +83,7 @@
                             </cursor>
                         </MenuButton>
                         -->
-                        <ComboBox fx:id="firstUnitSelector" prefHeight="93.0" prefWidth="160.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                        <ComboBox fx:id="firstUnitSelector" prefHeight="47.0" prefWidth="167.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2">
                         </ComboBox>
                         <!--
                         <MenuButton fx:id="secondUnitSelector" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="93.0"
@@ -96,7 +99,7 @@
                             </cursor>
                         </MenuButton>
                         -->
-                        <ComboBox fx:id="secondUnitSelector" prefHeight="93.0" prefWidth="160.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3">
+                        <ComboBox fx:id="secondUnitSelector" prefHeight="47.0" prefWidth="168.0" style="-fx-background-color: grey; -fx-background-radius: 10px; -fx-background-insets: 2px;" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="3">
                         </ComboBox>
                         <Button fx:id="clear" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="C" textAlignment="CENTER">
                             <font>
@@ -153,7 +156,7 @@
                                 <Font name="System Bold" size="15.0" />
                             </font>
                         </Button>
-                        <Button fx:id="dot" layoutX="90.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="," textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <Button fx:id="dot" layoutX="90.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#characterButtonClicked" prefHeight="93.0" prefWidth="88.0" style="-fx-background-color: #4a4a4a; -fx-background-radius: 10px; -fx-text-fill: white; -fx-background-insets: 2px;" text="." textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4">
                             <font>
                                 <Font name="System Bold" size="15.0" />
                             </font>

@@ -1,6 +1,7 @@
 package converter;
 
 import back.converter.UnitClassStringConverter;
+import back.converter.UnitStringConverter;
 import back.converter.Units;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,6 +24,18 @@ class UnitClassStringConverterTest {
         assertEquals("Time", converter.toString(Units.Time.class));
         assertEquals("Angles", converter.toString(Units.Angles.class));
         assertNull(converter.toString(null));
+    }
+
+    /**
+     * Test the fromString method of the UnitClassStringConverter class.
+     */
+    @Test
+    void testFromString() {
+        UnitClassStringConverter converter = new UnitClassStringConverter();
+        Class<Units.Time> clazz = Units.Time.class;
+        assertNull(converter.fromString(clazz.toString()));
+        assertNull(converter.fromString(null));
+        assertNull(converter.fromString(""));
     }
 }
 

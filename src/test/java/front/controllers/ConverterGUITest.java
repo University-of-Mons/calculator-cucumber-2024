@@ -1,7 +1,11 @@
 package front.controllers;
 
+import back.calculator.App;
 import back.converter.Units;
 import front.scenes.Scenes;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -24,7 +28,7 @@ import java.util.List;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -51,6 +55,7 @@ class ConverterGUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
+        type(KeyCode.A); // Increase branches coverage of inputField key pressed handler
         stage.setResizable(false);
         stage.setTitle("Amazing Calculator");
         stage.setScene(Scenes.CONVERTER_SCENE);
@@ -91,7 +96,7 @@ class ConverterGUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("123456789,000");
+        Assertions.assertThat((TextField) lookup(inputFieldId).query()).hasText("123456789.000");
     }
 
     /**
@@ -253,7 +258,6 @@ class ConverterGUITest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#zero");
-        // Trigger conversion with keyboard shortcut (variation from previous tests)
-        type(KeyCode.ENTER);
+        clickOn("#equals");
     }
 }

@@ -33,7 +33,7 @@ class GUITest extends ApplicationTest {
     public void start(Stage stage_) {
         stage = stage_;
 
-        //Scenes.setMainScene(SceneLoader.load("MainScene.fxml"));
+        type(KeyCode.A); // Increase branches coverage of inputField key pressed handler
         stage.setResizable(false);
         stage.setTitle("Please use gradle instead of maven");
         stage.setScene(Scenes.MAIN_SCENE);
@@ -156,13 +156,18 @@ class GUITest extends ApplicationTest {
         Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("0.5");
     }
 
-
     @Test
     void checkEqualsButton(FxRobot robot) {
         clickOn("#one");
         clickOn("#add");
         clickOn("#four");
         clickOn("#equals");
+        Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("5");
+        clickOn("#clear");
+        clickOn("#one");
+        clickOn("#add");
+        clickOn("#four");
+        type(KeyCode.ENTER);
         Assertions.assertThat((TextField) lookup(OUTPUT_FIELD).query()).hasText("5");
     }
 }

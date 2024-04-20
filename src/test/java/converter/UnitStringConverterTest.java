@@ -3,8 +3,8 @@ package converter;
 import back.converter.UnitStringConverter;
 import back.converter.Units;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the UnitStringConverter class.
@@ -30,5 +30,18 @@ class UnitStringConverterTest {
         assertEquals("deg", converter.toString(Units.Angles.DEGREE));
         assertEquals("rad", converter.toString(Units.Angles.RADIAN));
         assertNull(converter.toString(null));
+    }
+
+    /**
+     * Test the fromString method of the UnitStringConverter class.
+     */
+    @Test
+    void testFromString() {
+        UnitStringConverter converter = new UnitStringConverter();
+        Units.Unit unit = Units.Time.HOUR;
+        String symbol = unit.getSymbol();
+        assertNull(converter.fromString(symbol));
+        assertNull(converter.fromString(null));
+        assertNull(converter.fromString(""));
     }
 }

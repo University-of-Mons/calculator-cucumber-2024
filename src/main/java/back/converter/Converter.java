@@ -1,15 +1,14 @@
 package back.converter;
 
-import back.calculator.App;
+import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
+
 import back.calculator.types.RealValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.util.HashMap;
+import java.util.EnumMap;
+import back.calculator.App;
 import java.util.Map;
 
 /**
@@ -19,29 +18,23 @@ public class Converter {
     /**
      * Holds the conversion factors from all speed units to all speed units.
      */
-    private static final Map<Units.Speed, Map<Units.Speed, Float>> speedConversionFactors = new HashMap<>();
+    private static final Map<Units.Speed, Map<Units.Speed, RealValue>> speedConversionFactors = new EnumMap<>(Units.Speed.class);
     /**
      * Holds the conversion factors from all weight units to all speed units.
      */
-    private static final Map<Units.Weight, Map<Units.Weight, Float>> weightConversionFactors = new HashMap<>();
+    private static final Map<Units.Weight, Map<Units.Weight, RealValue>> weightConversionFactors = new EnumMap<>(Units.Weight.class);
     /**
      * Holds the conversion factors from all distance units to all speed units.
      */
-    private static final Map<Units.Distance, Map<Units.Distance, Float>> distanceConversionFactors = new HashMap<>();
+    private static final Map<Units.Distance, Map<Units.Distance, RealValue>> distanceConversionFactors = new EnumMap<>(Units.Distance.class);
     /**
      * Holds the conversion factors from all time units to all speed units.
      */
-    private static final Map<Units.Time, Map<Units.Time, Float>> timeConversionFactors = new HashMap<>();
-
+    private static final Map<Units.Time, Map<Units.Time, RealValue>> timeConversionFactors = new EnumMap<>(Units.Time.class);
     /**
      * Holds the conversion factors from all angles units to all angles units.
      */
-    private static final Map<Units.Angles, Map<Units.Angles, Float>> anglesConversionFactors = new HashMap<>();
-
-    /**
-     * The precision of the calculator used for RealValue construction using BigDecimal.
-     */
-    private static final MathContext precision = App.getPrecision();
+    private static final Map<Units.Angles, Map<Units.Angles, RealValue>> anglesConversionFactors = new EnumMap<>(Units.Angles.class);
 
     static {
         initializeSpeedConversionFactors();
@@ -49,6 +42,10 @@ public class Converter {
         initializeDistanceConversionFactors();
         initializeTimeConversionFactors();
         initializeAnglesConversionFactors();
+    }
+
+    private Converter() {
+        throw new IllegalStateException("Utility class");
     }
 
     /**
@@ -65,11 +62,11 @@ public class Converter {
      * Initializes the conversion factors for meters per second.
      */
     private static void initializeSpeedConversionFactorsMetersPerSecond() {
-        Map<Units.Speed, Float> factors = new HashMap<>();
-        factors.put(Units.Speed.METERS_PER_SECOND, 1f);
-        factors.put(Units.Speed.METERS_PER_HOUR, 3600f);
-        factors.put(Units.Speed.KILOMETER_PER_SECOND, 1f/1000);
-        factors.put(Units.Speed.KILOMETER_PER_HOUR, 3.6f);
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
+        factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
+        factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(3600f), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/1000), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_HOUR, new RealValue(new BigDecimal(Float.toString(3.6f), App.getPrecision())));
         speedConversionFactors.put(Units.Speed.METERS_PER_SECOND, factors);
     }
 
@@ -77,11 +74,11 @@ public class Converter {
      * Initializes the conversion factors for meters per hour.
      */
     private static void initializeSpeedConversionFactorsMetersPerHour() {
-        Map<Units.Speed, Float> factors = new HashMap<>();
-        factors.put(Units.Speed.METERS_PER_SECOND, 1f/3600);
-        factors.put(Units.Speed.METERS_PER_HOUR, 1f);
-        factors.put(Units.Speed.KILOMETER_PER_SECOND, 1f/3600000);
-        factors.put(Units.Speed.KILOMETER_PER_HOUR, 1f/1000);
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
+        factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3600), App.getPrecision())));
+        factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3600000), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_HOUR, new RealValue(new BigDecimal(Float.toString(1f/1000), App.getPrecision())));
         speedConversionFactors.put(Units.Speed.METERS_PER_HOUR, factors);
     }
 
@@ -89,11 +86,11 @@ public class Converter {
      * Initializes the conversion factors for meters per second.
      */
     private static void initializeSpeedConversionFactorsKilometersPerSecond() {
-        Map<Units.Speed, Float> factors = new HashMap<>();
-        factors.put(Units.Speed.METERS_PER_SECOND, 1000f);
-        factors.put(Units.Speed.METERS_PER_HOUR, 3600000f);
-        factors.put(Units.Speed.KILOMETER_PER_SECOND, 1f);
-        factors.put(Units.Speed.KILOMETER_PER_HOUR, 3600f);
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
+        factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1000f), App.getPrecision())));
+        factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(3600000f), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_HOUR, new RealValue(new BigDecimal(Float.toString(3600f), App.getPrecision())));
         speedConversionFactors.put(Units.Speed.KILOMETER_PER_SECOND, factors);
     }
 
@@ -101,11 +98,11 @@ public class Converter {
      * Initializes the conversion factors for meters per hour.
      */
     private static void initializeSpeedConversionFactorsKilometersPerHour() {
-        Map<Units.Speed, Float> factors = new HashMap<>();
-        factors.put(Units.Speed.METERS_PER_SECOND, 1f/3.6f);
-        factors.put(Units.Speed.METERS_PER_HOUR, 1000f);
-        factors.put(Units.Speed.KILOMETER_PER_SECOND, 1f/3600f);
-        factors.put(Units.Speed.KILOMETER_PER_HOUR, 1f);
+        Map<Units.Speed, RealValue> factors = new EnumMap<>(Units.Speed.class);
+        factors.put(Units.Speed.METERS_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3.6f), App.getPrecision())));
+        factors.put(Units.Speed.METERS_PER_HOUR, new RealValue(new BigDecimal(Float.toString(1000f), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_SECOND, new RealValue(new BigDecimal(Float.toString(1f/3600f), App.getPrecision())));
+        factors.put(Units.Speed.KILOMETER_PER_HOUR, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
         speedConversionFactors.put(Units.Speed.KILOMETER_PER_HOUR, factors);
     }
 
@@ -121,9 +118,9 @@ public class Converter {
      * Initializes the conversion factors for gram.
      */
     private static void initializeWeightConversionFactorsGram() {
-        Map<Units.Weight, Float> factors = new HashMap<>();
-        factors.put(Units.Weight.GRAM, 1f);
-        factors.put(Units.Weight.KILOGRAM, 1f/1000);
+        Map<Units.Weight, RealValue> factors = new EnumMap<>(Units.Weight.class);
+        factors.put(Units.Weight.GRAM, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
+        factors.put(Units.Weight.KILOGRAM, new RealValue(new BigDecimal(Float.toString(1f/1000), App.getPrecision())));
         weightConversionFactors.put(Units.Weight.GRAM, factors);
     }
 
@@ -131,9 +128,9 @@ public class Converter {
      * Initializes the conversion factors for kilogram.
      */
     private static void initializeWeightConversionFactorsKilogram() {
-        Map<Units.Weight, Float> factors = new HashMap<>();
-        factors.put(Units.Weight.GRAM, 1000f);
-        factors.put(Units.Weight.KILOGRAM, 1f);
+        Map<Units.Weight, RealValue> factors = new EnumMap<>(Units.Weight.class);
+        factors.put(Units.Weight.GRAM, new RealValue(new BigDecimal(Float.toString(1000f), App.getPrecision())));
+        factors.put(Units.Weight.KILOGRAM, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
         weightConversionFactors.put(Units.Weight.KILOGRAM, factors);
     }
 
@@ -149,9 +146,9 @@ public class Converter {
      * Initializes the conversion factors for meter.
      */
     private static void initializeDistanceConversionFactorsMeter() {
-        Map<Units.Distance, Float> factors = new HashMap<>();
-        factors.put(Units.Distance.METER, 1f);
-        factors.put(Units.Distance.KILOMETER, 1f/1000);
+        Map<Units.Distance, RealValue> factors = new EnumMap<>(Units.Distance.class);
+        factors.put(Units.Distance.METER, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
+        factors.put(Units.Distance.KILOMETER, new RealValue(new BigDecimal(Float.toString(1f/1000), App.getPrecision())));
         distanceConversionFactors.put(Units.Distance.METER, factors);
     }
 
@@ -159,9 +156,9 @@ public class Converter {
      * Initializes the conversion factors for kilometer.
      */
     private static void initializeDistanceConversionFactorsKilometer() {
-        Map<Units.Distance, Float> factors = new HashMap<>();
-        factors.put(Units.Distance.METER, 1000f);
-        factors.put(Units.Distance.KILOMETER, 1f);
+        Map<Units.Distance, RealValue> factors = new EnumMap<>(Units.Distance.class);
+        factors.put(Units.Distance.METER, new RealValue(new BigDecimal(Float.toString(1000f), App.getPrecision())));
+        factors.put(Units.Distance.KILOMETER, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
         distanceConversionFactors.put(Units.Distance.KILOMETER, factors);
     }
 
@@ -177,9 +174,9 @@ public class Converter {
      * Initializes the conversion factors for second.
      */
     private static void initializeTimeConversionFactorsSecond() {
-        Map<Units.Time, Float> factors = new HashMap<>();
-        factors.put(Units.Time.SECOND, 1f);
-        factors.put(Units.Time.HOUR, 1f/3600);
+        Map<Units.Time, RealValue> factors = new EnumMap<>(Units.Time.class);
+        factors.put(Units.Time.SECOND, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
+        factors.put(Units.Time.HOUR, new RealValue(new BigDecimal(Float.toString(1f/3600), App.getPrecision())));
         timeConversionFactors.put(Units.Time.SECOND, factors);
     }
 
@@ -187,9 +184,9 @@ public class Converter {
      * Initializes the conversion factors for hour.
      */
     private static void initializeTimeConversionFactorsHour() {
-        Map<Units.Time, Float> factors = new HashMap<>();
-        factors.put(Units.Time.SECOND, 3600f);
-        factors.put(Units.Time.HOUR, 1f);
+        Map<Units.Time, RealValue> factors = new EnumMap<>(Units.Time.class);
+        factors.put(Units.Time.SECOND, new RealValue(new BigDecimal(Float.toString(3600f), App.getPrecision())));
+        factors.put(Units.Time.HOUR, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
         timeConversionFactors.put(Units.Time.HOUR, factors);
     }
 
@@ -205,58 +202,62 @@ public class Converter {
      * Initializes the conversion factors for degree.
      */
     private static void initializeAnglesConversionFactorsDegree() {
-        Map<Units.Angles, Float> factors = new HashMap<>();
-        factors.put(Units.Angles.DEGREE, 1f);
-        factors.put(Units.Angles.RADIAN, (float) Math.PI / 180);
+        Map<Units.Angles, RealValue> factors = new EnumMap<>(Units.Angles.class);
+        factors.put(Units.Angles.DEGREE, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
+        factors.put(Units.Angles.RADIAN, new RealValue(new BigDecimal(Float.toString((float) Math.PI / 180), App.getPrecision())));
         anglesConversionFactors.put(Units.Angles.DEGREE, factors);
     }
     /**
      * Initializes the conversion factors for radian.
      */
     private static void initializeAnglesConversionFactorsRadian() {
-        Map<Units.Angles, Float> factors = new HashMap<>();
-        factors.put(Units.Angles.DEGREE, 180f / (float) Math.PI);
-        factors.put(Units.Angles.RADIAN, 1f);
+        Map<Units.Angles, RealValue> factors = new EnumMap<>(Units.Angles.class);
+        factors.put(Units.Angles.DEGREE, new RealValue(new BigDecimal(Float.toString(180f / (float) Math.PI), App.getPrecision())));
+        factors.put(Units.Angles.RADIAN, new RealValue(new BigDecimal(Float.toString(1f), App.getPrecision())));
         anglesConversionFactors.put(Units.Angles.RADIAN, factors);
     }
 
     /**
      * Retrieve the conversion factor when converting from the first given unit to the second given unit.
+     *
      * @param from The unit of the value
-     * @param to The unit of the result
+     * @param to   The unit of the result
      * @return The conversion factor
      */
-    private static float getSpeedFactor(Units.Speed from, Units.Speed to) {
+    private static RealValue getSpeedFactor(Units.Speed from, Units.Speed to) {
         return speedConversionFactors.get(from).get(to);
     }
 
     /**
      * Retrieve the conversion factor when converting from the first given unit to the second given unit.
+     *
      * @param from The unit of the value
-     * @param to The unit of the result
+     * @param to   The unit of the result
      * @return The conversion factor
      */
-    private static float getWeightFactor(Units.Weight from, Units.Weight to) {
+    private static RealValue getWeightFactor(Units.Weight from, Units.Weight to) {
         return weightConversionFactors.get(from).get(to);
     }
 
     /**
      * Retrieve the conversion factor when converting from the first given unit to the second given unit.
+     *
      * @param from The unit of the value
-     * @param to The unit of the result
+     * @param to   The unit of the result
      * @return The conversion factor
      */
-    private static float getDistanceFactor(Units.Distance from, Units.Distance to) {
+    private static RealValue getDistanceFactor(Units.Distance from, Units.Distance to) {
         return distanceConversionFactors.get(from).get(to);
     }
 
     /**
      * Retrieve the conversion factor when converting from the first given unit to the second given unit.
+     *
      * @param from The unit of the value
-     * @param to The unit of the result
+     * @param to   The unit of the result
      * @return The conversion factor
      */
-    private static float getTimeFactor(Units.Time from, Units.Time to) {
+    private static RealValue getTimeFactor(Units.Time from, Units.Time to) {
         return timeConversionFactors.get(from).get(to);
     }
 
@@ -266,7 +267,7 @@ public class Converter {
      * @param to The unit of the result
      * @return The conversion factor
      */
-    private static float getAngleFactor(Units.Angles from, Units.Angles to) {
+    private static RealValue getAngleFactor(Units.Angles from, Units.Angles to) {
         return anglesConversionFactors.get(from).get(to);
     }
 
@@ -277,8 +278,8 @@ public class Converter {
      * @param to The unit of the result
      * @return The converted value
      */
-    private static float convertSpeed(float value, Units.Speed from, Units.Speed to) {
-        return value * getSpeedFactor(from, to);
+    private static AbstractValue convertSpeed(RealValue value, Units.Speed from, Units.Speed to) {
+        return value.mul(getSpeedFactor(from, to));
     }
 
     /**
@@ -288,8 +289,8 @@ public class Converter {
      * @param to The unit of the result
      * @return The converted value
      */
-    private static float convertWeight(float value, Units.Weight from, Units.Weight to) {
-        return value * getWeightFactor(from, to);
+    private static AbstractValue convertWeight(RealValue value, Units.Weight from, Units.Weight to) {
+        return value.mul(getWeightFactor(from, to));
     }
 
     /**
@@ -299,8 +300,8 @@ public class Converter {
      * @param to The unit of the result
      * @return The converted value
      */
-    private static float convertDistance(float value, Units.Distance from, Units.Distance to) {
-        return value * getDistanceFactor(from, to);
+    private static AbstractValue convertDistance(RealValue value, Units.Distance from, Units.Distance to) {
+        return value.mul(getDistanceFactor(from, to));
     }
 
     /**
@@ -310,46 +311,44 @@ public class Converter {
      * @param to The unit of the result
      * @return The converted value
      */
-    private static float convertTime(float value, Units.Time from, Units.Time to) {
-        return value * getTimeFactor(from, to);
+    private static AbstractValue convertTime(RealValue value, Units.Time from, Units.Time to) {
+        return value.mul(getTimeFactor(from, to));
     }
 
-    private static float convertAngle(float value, Units.Angles from, Units.Angles to) {
-        return value * getAngleFactor(from, to);
+    private static AbstractValue convertAngle(RealValue value, Units.Angles from, Units.Angles to) {
+        return value.mul(getAngleFactor(from, to));
     }
 
     /**
      * Converts the given value from the first given unit to the second given units.
      * This method performs the necessary checks and returns NotANumber if the units cannot be converted one to another.
+     *
      * @param value The value to convert
-     * @param from The unit of the value
-     * @param to The unit of the result
+     * @param from  The unit of the value
+     * @param to    The unit of the result
      * @return The converted value
      */
-    public static MyNumber convert(float value, Units.Unit from, Units.Unit to) {
-        // TODO Use real numbers from issue #7
-        if (from instanceof Units.Speed && to instanceof Units.Speed) {
-            float result = convertSpeed(value, (Units.Speed) from, (Units.Speed) to);
-            return new MyNumber((int) result);
+    public static MyNumber convert(RealValue value, Units.Unit from, Units.Unit to) {
+        if (from instanceof Units.Speed fromSpeed && to instanceof Units.Speed toSpeed) {
+            AbstractValue result = convertSpeed(value, fromSpeed, toSpeed);
+            return new MyNumber(result);
         }
-        if (from instanceof Units.Weight && to instanceof Units.Weight) {
-            float result = convertWeight(value, (Units.Weight) from, (Units.Weight) to);
-            return new MyNumber((int) result);
+        if (from instanceof Units.Weight fromWeight && to instanceof Units.Weight toWeight) {
+            AbstractValue result = convertWeight(value, fromWeight, toWeight);
+            return new MyNumber(result);
         }
-        if (from instanceof Units.Distance && to instanceof Units.Distance) {
-            float result = convertDistance(value, (Units.Distance) from, (Units.Distance) to);
-            return new MyNumber((int) result);
+        if (from instanceof Units.Distance fromDistance && to instanceof Units.Distance toDistance) {
+            AbstractValue result = convertDistance(value, fromDistance, toDistance);
+            return new MyNumber(result);
         }
-        if (from instanceof Units.Time && to instanceof Units.Time) {
-            float result = convertTime(value, (Units.Time) from, (Units.Time) to);
-            return new MyNumber((int) result);
+        if (from instanceof Units.Time fromTime && to instanceof Units.Time toTime) {
+            AbstractValue result = convertTime(value, fromTime, toTime);
+            return new MyNumber(result);
         }
-
-        if (from instanceof Units.Angles && to instanceof Units.Angles) {
-            float result = convertAngle(value, (Units.Angles) from, (Units.Angles) to);
-            return new MyNumber(new RealValue(new BigDecimal(Float.toString(result), precision)));
+        if (from instanceof Units.Angles fromAngle && to instanceof Units.Angles toAngle) {
+            AbstractValue result = convertAngle(value, fromAngle, toAngle);
+            return new MyNumber(result);
         }
-
         return new NotANumber();
     }
 }

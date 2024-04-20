@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Units {
+    private Units() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * @return A list of all unit types (speed, weight...) as classes.
      */
