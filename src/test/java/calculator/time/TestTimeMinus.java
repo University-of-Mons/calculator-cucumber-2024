@@ -2,6 +2,7 @@ package calculator.time;
 
 import calculator.IllegalConstruction;
 import calculator.numbers.Expression;
+import calculator.numbers.MyNotATime;
 import calculator.numbers.MyTime;
 import calculator.operators.time.Minus;
 import calculator.operators.time.Plus;
@@ -55,6 +56,16 @@ public class TestTimeMinus {
             assertNotEquals(e, new Plus(new ArrayList<>(Arrays.asList(time3, time1))));
         }
         catch(IllegalConstruction e) { fail(); }
+    }
+
+    @Test
+    void testNaT1(){
+        assertInstanceOf(MyNotATime.class, op.op(new MyNotATime(), time1));
+    }
+
+    @Test
+    void testNaT2(){
+        assertInstanceOf(MyNotATime.class, op.op(time1, new MyNotATime()));
     }
 
     @SuppressWarnings("ConstantConditions")
