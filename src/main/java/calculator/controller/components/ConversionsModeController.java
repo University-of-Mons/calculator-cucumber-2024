@@ -293,9 +293,9 @@ public class ConversionsModeController implements Initializable, ModeController 
             textFieldTo1.clear();
             textFieldTo2.clear();
             resetDisplay = false;
-        } else if (focusOnFrom1) {
+        } else if (focusOnFrom1 && !textFieldFrom1.getText().isEmpty()) {
             textFieldFrom1.setText(textFieldFrom1.getText(0, textFieldFrom1.getText().length() - 1));
-        } else {
+        } else if (!focusOnFrom1 && !textFieldFrom2.getText().isEmpty()) {
             textFieldFrom2.setText(textFieldFrom2.getText(0, textFieldFrom2.getText().length() - 1));
         }
     }

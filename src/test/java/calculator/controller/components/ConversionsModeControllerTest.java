@@ -5,6 +5,7 @@ import calculator.conversions.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,12 +61,14 @@ class ConversionsModeControllerTest {
 
     @Test
     void testDelete(FxRobot fxRobot){
+        Assertions.assertDoesNotThrow(() -> fxRobot.clickOn("#btnDelete"));
         fxRobot.clickOn("#btn3");
         fxRobot.clickOn("#btn1");
         fxRobot.clickOn("#btnDelete");
         TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
         assertEquals("3", textFieldFrom1.getText());
         fxRobot.clickOn("#textFieldFrom2");
+        Assertions.assertDoesNotThrow(() -> fxRobot.clickOn("#btnDelete"));
         fxRobot.clickOn("#btn4");
         fxRobot.clickOn("#btn7");
         fxRobot.clickOn("#btnDelete");
