@@ -202,7 +202,7 @@ public class ConversionsModeController implements Initializable, ModeController 
             resetDisplay = false;
         }
         if (focusOnFrom1 && textFieldFrom1.getText().length() < 10) {
-                textFieldFrom1.appendText(text);
+            textFieldFrom1.appendText(text);
         } else if (!focusOnFrom1 && textFieldFrom2.getText().length() < 10){
             textFieldFrom2.appendText(text);
         }
