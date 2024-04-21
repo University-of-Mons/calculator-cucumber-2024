@@ -36,8 +36,7 @@ public final class Minus extends TimeOperation {
      * the result is a negative time.
      */
     public MyTime op(MyTime l, MyTime r) {
-        if (l.getTime().isBefore(neutralTime) || r.getTime().isBefore(neutralTime) ||
-                l instanceof MyNotATime || r instanceof MyNotATime)
+        if (l instanceof MyNotATime || r instanceof MyNotATime)
             return new MyNotATime();
         Duration duration = Duration.between(neutralTime, r.getTime());
         LocalDateTime result = l.getTime().minus(duration);

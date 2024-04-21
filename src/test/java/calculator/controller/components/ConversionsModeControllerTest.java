@@ -4,7 +4,9 @@ import calculator.AppStarter;
 import calculator.conversions.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The ConversionsModeControllerTest class is responsible for testing the GUI of the Conversions Mode.
@@ -67,6 +70,7 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btnDelete");
         TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
         assertEquals("3", textFieldFrom1.getText());
+
         fxRobot.clickOn("#textFieldFrom2");
         Assertions.assertDoesNotThrow(() -> fxRobot.clickOn("#btnDelete"));
         fxRobot.clickOn("#btn4");
@@ -74,6 +78,13 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btnDelete");
         TextField textFieldFrom2 = fxRobot.lookup("#textFieldFrom2").queryAs(TextField.class);
         assertEquals("4", textFieldFrom2.getText());
+
+        fxRobot.clickOn("#btnConvert");
+        fxRobot.clickOn("#btnDelete");
+        TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
+        assertEquals("", textFieldTo1.getText());
+        TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
+        assertEquals("", textFieldTo2.getText());
     }
 
     @Test
@@ -83,12 +94,21 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#btnClear");
         TextField textFieldFrom1 = fxRobot.lookup("#textFieldFrom1").queryAs(TextField.class);
         assertEquals("", textFieldFrom1.getText());
+
         fxRobot.clickOn("#textFieldFrom2");
         fxRobot.clickOn("#btn5");
         fxRobot.clickOn("#btn7");
-        fxRobot.clickOn("#btnDelete");
+        fxRobot.clickOn("#btnClear");
         TextField textFieldFrom2 = fxRobot.lookup("#textFieldFrom2").queryAs(TextField.class);
-        assertEquals("5", textFieldFrom2.getText());
+        assertEquals("", textFieldFrom2.getText());
+
+        fxRobot.clickOn("#btn5");
+        fxRobot.clickOn("#btnConvert");
+        fxRobot.clickOn("#btnClear");
+        TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
+        assertEquals("", textFieldTo1.getText());
+        TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
+        assertEquals("", textFieldTo2.getText());
     }
 
     @Test
@@ -132,9 +152,34 @@ class ConversionsModeControllerTest {
     }
 
     @Test
+    void testEraseOutputAfterConvert(FxRobot fxRobot){
+        fxRobot.clickOn("#btn1");
+        fxRobot.clickOn("#btnConvert");
+        TextField textFieldTo1 = fxRobot.lookup("#textFieldTo1").queryAs(TextField.class);
+        assertEquals("100", textFieldTo1.getText());
+        TextField textFieldTo2 = fxRobot.lookup("#textFieldTo2").queryAs(TextField.class);
+        assertEquals("0", textFieldTo2.getText());
+        fxRobot.clickOn("#btn2");
+        assertEquals("", textFieldTo1.getText());
+        assertEquals("", textFieldTo2.getText());
+
+        fxRobot.clickOn("#btnConvert");
+        assertEquals("200", textFieldTo1.getText());
+        assertEquals("0", textFieldTo2.getText());
+        ComboBox comboBoxToUnit = fxRobot.lookup("#comboBoxToUnit").queryAs(ComboBox.class);
+        fxRobot.interact(() -> comboBoxToUnit.getSelectionModel().select(0));
+        fxRobot.clickOn("#btnConvert");
+        assertEquals("", textFieldTo1.getText());
+        assertEquals("", textFieldTo2.getText());
+    }
+
+    @Test
     void testUnitChange(FxRobot fxRobot){
         ComboBox comboBox = fxRobot.lookup("#unitTypeComboBox").queryAs(ComboBox.class);
         assertEquals(UnitType.LENGTH, comboBox.getValue());
+        fxRobot.clickOn("#unitTypeComboBox");
+        fxRobot.clickOn("Time");
+        assertEquals(UnitType.TIME, comboBox.getValue());
         fxRobot.clickOn("#unitTypeComboBox");
         fxRobot.clickOn("Time");
         assertEquals(UnitType.TIME, comboBox.getValue());
@@ -218,14 +263,44 @@ class ConversionsModeControllerTest {
         fxRobot.clickOn("#unitTypeComboBox");
         fxRobot.clickOn("Power");
         fxRobot.clickOn("#unitTypeComboBox");
-        fxRobot.clickOn("Temperature");
-        fxRobot.clickOn("#unitTypeComboBox");
         fxRobot.clickOn("Speed");
         fxRobot.clickOn("#unitTypeComboBox");
         fxRobot.clickOn("Area");
         fxRobot.clickOn("#unitTypeComboBox");
         fxRobot.clickOn("Energy");
+        fxRobot.clickOn("#unitTypeComboBox");
+        for (int i = 0; i < 3; i++) {
+            fxRobot.type(KeyCode.DOWN);
+        }
+        fxRobot.clickOn("Temperature");
         ComboBox comboBoxFromUnit = fxRobot.lookup("#comboBoxFromUnit").queryAs(ComboBox.class);
-        assertEquals(EnergyUnit.JOULE, comboBoxFromUnit.getValue());
+        assertEquals(TemperatureUnit.CELSIUS, comboBoxFromUnit.getValue());
+    }
+
+    @Test
+    void testUnitTypeComboBoxStringConverter(FxRobot fxRobot) {
+        ComboBox<UnitType> unitTypeComboBox = fxRobot.lookup("#unitTypeComboBox").queryAs(ComboBox.class);
+        StringConverter<UnitType> converter = unitTypeComboBox.getConverter();
+        for (UnitType unitType : UnitType.values()) {
+            String expectedName = unitType.getName();
+            String actualName = converter.toString(unitType);
+            assertEquals(expectedName, actualName);
+        }
+        assertNull(converter.toString(null));
+        assertNull(converter.fromString("Any string"));
+    }
+
+    @Test
+    void testUnitComboBoxStringConverter(FxRobot fxRobot) {
+        ComboBox<Unit> comboBoxToUnit = fxRobot.lookup("#comboBoxToUnit").queryAs(ComboBox.class);
+        StringConverter<Unit> converter = comboBoxToUnit.getConverter();
+
+        for (LengthUnit unit : LengthUnit.values()) {
+            String expectedName = unit.getName();
+            String actualName = converter.toString(unit);
+            assertEquals(expectedName, actualName);
+        }
+        assertNull(converter.toString(null));
+        assertNull(converter.fromString("Any string"));
     }
 }

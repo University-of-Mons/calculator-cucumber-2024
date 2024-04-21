@@ -33,6 +33,7 @@ class TestOperation {
 	@Test
 	void testEquals() {
 		assertEquals(o,o2);
+		assertNotEquals(o,null);
 	}
 
 	@Test
