@@ -205,5 +205,11 @@ class TestRationalParser {
         String postfixExpr2 = "((((1÷2, 1÷2) *, 3÷2) +,1÷2) -, 1÷2) +";
         MyRationalNumber expected2 = new MyRationalNumber(7, 4);
         equalsExpressionTest(infixExpr2, prefixExpr2, postfixExpr2, expected2);
+
+        String infixExpr3 = "-(3÷2 + 1÷2 * 1÷2 - 1÷2)";
+        String prefixExpr3 = "-(- (+ (3÷2, * (1÷2, 1÷2)), 1÷2))";
+        String postfixExpr3 = "(((3÷2, (1÷2, 1÷2) *) +, 1÷2) -)-";
+        MyRationalNumber expected3 = new MyRationalNumber(-5, 4);
+        equalsExpressionTest(infixExpr3, prefixExpr3, postfixExpr3, expected3);
     }
 }

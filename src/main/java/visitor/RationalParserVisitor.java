@@ -43,7 +43,16 @@ public class RationalParserVisitor extends RationalExprBaseVisitor<Expression> {
      */
     @Override
     public Expression visitParensInfix(RationalExprParser.ParensInfixContext ctx) {
-        return visit(ctx.infix());
+        try {
+            if (ctx.SUB() != null) {
+                List<Expression> params = new ArrayList<>(Arrays.asList(new MyRationalNumber(-1), visit(ctx.infix())));
+                return c.eval(new Times(params));
+            }
+            return visit(ctx.infix());
+        }
+        catch (IllegalConstruction e) {
+            return new MyNotANumber();
+        }
     }
 
     /**
@@ -109,7 +118,16 @@ public class RationalParserVisitor extends RationalExprBaseVisitor<Expression> {
      */
     @Override
     public Expression visitParensPrefix(RationalExprParser.ParensPrefixContext ctx) {
-        return visit(ctx.prefix());
+        try {
+            if (ctx.SUB() != null) {
+                List<Expression> params = new ArrayList<>(Arrays.asList(new MyRationalNumber(-1), visit(ctx.prefix())));
+                return c.eval(new Times(params));
+            }
+            return visit(ctx.prefix());
+        }
+        catch (IllegalConstruction e) {
+            return new MyNotANumber();
+        }
     }
 
     /**
@@ -175,7 +193,16 @@ public class RationalParserVisitor extends RationalExprBaseVisitor<Expression> {
      */
     @Override
     public Expression visitParensPostfix(RationalExprParser.ParensPostfixContext ctx) {
-        return visit(ctx.postfix());
+        try {
+            if (ctx.SUB() != null) {
+                List<Expression> params = new ArrayList<>(Arrays.asList(new MyRationalNumber(-1), visit(ctx.postfix())));
+                return c.eval(new Times(params));
+            }
+            return visit(ctx.postfix());
+        }
+        catch (IllegalConstruction e) {
+            return new MyNotANumber();
+        }
     }
 
     /**
