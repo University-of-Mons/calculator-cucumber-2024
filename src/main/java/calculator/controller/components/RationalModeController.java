@@ -66,7 +66,7 @@ public class RationalModeController implements Initializable, ModeController {
                 RationalParser parser = new RationalParser(display.getText(), calculator);
                 display.setText(((MyRationalNumber)parser.evaluate()).getCanonicalForm().toString());}
             catch (Exception e){
-                display.setText("Error");
+                display.setText("NaN");
             }
             resetDisplay = true;
         }
