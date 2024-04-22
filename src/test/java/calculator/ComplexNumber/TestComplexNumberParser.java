@@ -114,6 +114,30 @@ class TestComplexNumberParser {
 
     @ParameterizedTest
     @CsvSource({
+            "cis(40+5)",
+            "cis(+(40 5))",
+            "cis((40 5)+)",
+    })
+    void testCis(String par){
+        Calculator calculator = new Calculator();
+        ComplexNumberParser parser = new ComplexNumberParser(par,calculator);
+        assertEquals("1 * cis(45)", parser.evaluate().toString());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "e(i*40+5)",
+            "e(i*+(40 5))",
+            "e(i*(40 5)+)",
+    })
+    void testE(String par){
+        Calculator calculator = new Calculator();
+        ComplexNumberParser parser = new ComplexNumberParser(par,calculator);
+        assertEquals("1 * e(i*45)", parser.evaluate().toString());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
             "intoPolar(sqrt(2)+sqrt(2)i)",
             "intoPolar(sqrt(+(1 1))+sqrt(+(1 1))i)",
             "intoPolar(sqrt((1 1)+)+sqrt((1 1)+)i)",
