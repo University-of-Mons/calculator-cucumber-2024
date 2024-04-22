@@ -30,11 +30,13 @@ public class TimeModeController implements Initializable, ModeController {
 
     private boolean resetDisplay = false;
     private MyTime time;
-    private final String pattern = "##0.00";
     private final LocalDateTime origin = LocalDateTime.of(0,1,1,0,0,0);
+    private static final String PATTERN = "##0.00";
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Nothing to do here
+    }
 
     // Button click event handlers
     @FXML
@@ -98,7 +100,7 @@ public class TimeModeController implements Initializable, ModeController {
 
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
-        DecimalFormat format = new DecimalFormat("##0.00", symbols);
+        DecimalFormat format = new DecimalFormat(PATTERN, symbols);
 
         appendToDisplay(format.format(days) + " days");
     }
@@ -110,7 +112,7 @@ public class TimeModeController implements Initializable, ModeController {
 
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
-        DecimalFormat format = new DecimalFormat("##0.00", symbols);
+        DecimalFormat format = new DecimalFormat(PATTERN, symbols);
 
         appendToDisplay(format.format(hours) + " hours");
     }
@@ -122,7 +124,7 @@ public class TimeModeController implements Initializable, ModeController {
 
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
-        DecimalFormat format = new DecimalFormat("##0.00", symbols);
+        DecimalFormat format = new DecimalFormat(PATTERN, symbols);
 
         appendToDisplay(format.format(minutes) + " minutes");
     }
