@@ -6,6 +6,7 @@ import calculator.numbers.Expression;
 import calculator.IllegalConstruction;
 import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
+import calculator.numbers.MyRationalNumber;
 
 import java.util.List;
 
@@ -46,10 +47,15 @@ public final class Times extends Operation
   public MyNumber op(MyNumber l, MyNumber r) {
     if (l instanceof MyNotANumber || r instanceof MyNotANumber)
         return new MyNotANumber();
+    if (l instanceof MyRationalNumber rationalL && r instanceof MyRationalNumber rationalR) {
+        int numerator = rationalL.getNumerator() * rationalR.getNumerator();
+        int denominator = rationalL.getDenominator() * rationalR.getDenominator();
+        return new MyRationalNumber(numerator, denominator);
+    }
     if (l instanceof ComplexNumber || r instanceof ComplexNumber){
         return new ComplexNumber(l.getReal() * r.getReal() - l.getImaginary() * r.getImaginary(), l.getReal() * r.getImaginary() + l.getImaginary() * r.getReal());
     }
-    return new MyNumber( (double) l.getValue() * r.getValue());
+    return new MyNumber((double) l.getValue() * r.getValue());
   }
 
  }
