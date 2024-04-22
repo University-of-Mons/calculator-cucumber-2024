@@ -54,7 +54,7 @@ public class MyRationalNumber extends MyNumber {
      *
      * @return The canonical form of the rational number.
      */
-    private MyRationalNumber getCanonicalForm() {
+    public MyRationalNumber getCanonicalForm() {
         int gcd = greatestCommonDivisor(numerator, denominator);
         int canonicalNumerator = (denominator < 0 ? -numerator : numerator) / gcd;
         int canonicalDenominator = Math.abs(denominator) / gcd;
