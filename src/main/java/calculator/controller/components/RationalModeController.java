@@ -1,7 +1,7 @@
 package calculator.controller.components;
 
 import calculator.Calculator;
-import calculator.Parser;
+import calculator.RationalParser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,7 +54,7 @@ public class RationalModeController implements Initializable, ModeController {
     }
 
     public void onFraction() {
-        appendToDisplay("/");
+        appendToDisplay("÷");
     }
 
     public void onEquals() {
@@ -62,7 +62,7 @@ public class RationalModeController implements Initializable, ModeController {
             expression.setText(display.getText()+" = ");
             Calculator calculator = new Calculator();
             try{
-                Parser parser = new Parser(display.getText(), calculator);
+                RationalParser parser = new RationalParser(display.getText(), calculator);
                 display.setText(parser.evaluate().toString());}
             catch (Exception e){
                 display.setText("Error");
