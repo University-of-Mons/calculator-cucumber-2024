@@ -13,7 +13,7 @@ public class MyRationalNumber extends MyNumber {
      * @param denominator The denominator of the rational number, different from 0.
      */
     public MyRationalNumber(int numerator, int denominator) {
-        super(0);
+        super(numerator);
         if (denominator == 0) {
             throw new IllegalArgumentException("Denominator cannot be 0");
         }
