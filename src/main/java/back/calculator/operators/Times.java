@@ -1,6 +1,7 @@
 package back.calculator.operators;
 
 import back.calculator.*;
+import back.calculator.types.AbstractValue;
 import back.calculator.types.MyNumber;
 import back.calculator.types.NotANumber;
 
@@ -13,8 +14,14 @@ import java.util.List;
  *
  * @see Operation
  * @see Minus
- * @see Plus
  * @see Divides
+ * @see Plus
+ * @see Exponential
+ * @see Sqrt
+ * @see Logarithm
+ * @see Sinus
+ * @see Cosine
+ * @see Modulus
  */
 public final class Times extends Operation {
     /**
@@ -22,7 +29,7 @@ public final class Times extends Operation {
      *
      * @param elist The list of Expressions to multiply
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Times(List< Expression >, Notation )
+     * @see #Times
      */
     public /*constructor*/ Times(List<Expression> elist) throws IllegalConstruction {
         this(elist, null);
@@ -35,8 +42,8 @@ public final class Times extends Operation {
      * @param elist The list of Expressions to multiply
      * @param n     The Notation to be used to represent the operation
      * @throws IllegalConstruction If an empty list of expressions if passed as parameter
-     * @see #Times(List<Expression>)
-     * @see Operation#Operation(List<Expression>,Notation)
+     * @see #Times
+     * @see Operation#Operation
      */
     public Times(List<Expression> elist, Notation n) throws IllegalConstruction {
         super(elist, n);
@@ -45,16 +52,37 @@ public final class Times extends Operation {
     }
 
     /**
-     * The actual computation of the (binary) arithmetic multiplication of two integers
+     * The actual computation of the (binary) arithmetic multiplication of two numbers
      *
-     * @param l The first integer
-     * @param r The second integer that should be multiplied with the first
-     * @return The integer that is the result of the multiplication
+     * @param l The first number
+     * @param r The second number that should be multiplied with the first
+     * @return The number that is the result of the multiplication
      */
     @Override
     public MyNumber op(MyNumber l, MyNumber r) {
         if (l instanceof NotANumber || r instanceof NotANumber)
             return new NotANumber();
-        return new MyNumber(l.getValue() * r.getValue());
+        if (l.isImaginary() || r.isImaginary()) {
+            // (a + bi) * (c + di) = (ac - bd) + (ad + bc)i
+            AbstractValue a = l.getReal();
+            AbstractValue b = l.getImaginary();
+            AbstractValue c = r.getReal();
+            AbstractValue d = r.getImaginary();
+            AbstractValue real = a.mul(c).sub(b.mul(d));
+            AbstractValue imaginary = a.mul(d).add(b.mul(c));
+            return new MyNumber(real, imaginary);
+        }
+        return new MyNumber(l.getReal().mul(r.getReal()));
+    }
+
+    /**
+     * The actual computation of the (unary) arithmetic multiplication of a number.
+     *
+     * @param l The argument of the unary operation
+     * @return The result of the unary operation. (The argument itself)
+     */
+    @Override
+    public MyNumber op(MyNumber l) {
+        return l;
     }
 }

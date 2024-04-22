@@ -28,12 +28,13 @@ public final class SceneLoader {
      * @return the Scene that was created from the FXML file
      */
     public static Scene load(String sceneName) {
-        if (!sceneName.endsWith(".fxml")) sceneName += ".fxml";
-        URL url = App.class.getResource("/xml/scenes/" + sceneName);
+        String updatedSceneName = sceneName;
+        if (!updatedSceneName.endsWith(".fxml")) updatedSceneName += ".fxml";
+        URL url = App.class.getResource("/xml/scenes/" + updatedSceneName);
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         try {
             Parent sceneParent = fxmlLoader.load();
-            return new Scene(sceneParent, 400, 500);
+            return new Scene(sceneParent, 500, 500);
         } catch (IOException e) {
             Logger logger = LoggerFactory.getLogger(SceneLoader.class);
             String errorMessage = "FATAL ERROR while trying to load scene " + url;

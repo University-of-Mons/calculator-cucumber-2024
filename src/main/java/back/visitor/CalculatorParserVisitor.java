@@ -1,16 +1,15 @@
 package back.visitor;
 
 import back.calculator.*;
-import back.calculator.operators.Divides;
-import back.calculator.operators.Minus;
-import back.calculator.operators.Plus;
-import back.calculator.operators.Times;
-import back.calculator.types.MyNumber;
-import back.calculator.types.NotANumber;
+import back.calculator.operators.*;
+import back.calculator.types.*;
 import org.antlr.v4.runtime.Token;
 import back.parser.calculatorBaseVisitor;
 import back.parser.calculatorParser;
+import org.slf4j.Logger;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +24,10 @@ import static back.parser.calculatorLexer.*;
  * </p>
  */
 public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
+
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(CalculatorParserVisitor.class);
+
+    private final MathContext precision = App.getPrecision();
 
     private Expression getExpression(List<Expression> params, Token op, Notation notation) {
         try {
@@ -61,6 +64,86 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
         return params;
     }
 
+    private AbstractValue getValueFromAtom(calculatorParser.AtomContext ctx) {
+        // Since this visitor can only return Expression object,
+        // We have to return MyNumber for atom with their value as real part.
+        MyNumber val = (MyNumber) visit(ctx);
+        return val.getReal();
+    }
+
+    @Override
+    public Expression visitCartesian(calculatorParser.CartesianContext ctx) {
+        AbstractValue real = getValueFromAtom(ctx.real);
+        AbstractValue imaginary;
+        if (ctx.im != null) {
+            imaginary = getValueFromAtom(ctx.im);
+        } else {
+            imaginary = new IntValue(1);
+        }
+        if (ctx.op.getType() == SUB) {
+            imaginary = imaginary.mul(new IntValue(-1));
+        }
+        return new MyNumber(real, imaginary);
+    }
+
+    @Override
+    public Expression visitPolar(calculatorParser.PolarContext ctx) {
+        AbstractValue modulus = getValueFromAtom(ctx.r);
+
+        MyNumber val1 = (MyNumber) visit(ctx.theta1);
+        MyNumber val2 = (MyNumber) visit(ctx.theta2);
+
+        AbstractValue arg1 = val1.getReal();
+        AbstractValue arg2 = val2.getReal();
+        if (!arg1.equals(arg2)) {
+            LOGGER.warn("The two angles are different. Please check the input. {} != {}", arg1, arg2);
+            return new NotANumber();
+        }
+
+        MyNumber res = new MyNumber(modulus.mul(arg1.cos()), modulus.mul(arg1.sin()));
+        res.setForm(ComplexForm.POLAR);
+        return res;
+    }
+
+    @Override
+    public Expression visitExponential(calculatorParser.ExponentialContext ctx) {
+        // Same as polar in this case
+        AbstractValue modulus = getValueFromAtom(ctx.r);
+        MyNumber val = (MyNumber) visit(ctx.theta);
+        AbstractValue argument = val.getReal();
+        MyNumber res = new MyNumber(modulus.mul(argument.cos()), modulus.mul(argument.sin()));
+        res.setForm(ComplexForm.EXPONENTIAL);
+        return res;
+    }
+
+
+    @Override
+    public Expression visitAngle(calculatorParser.AngleContext ctx) {
+        AbstractValue val1 = getValueFromAtom(ctx.atom(0));
+
+        AbstractValue res = val1;
+        if (ctx.op != null) {
+            AbstractValue val2 = getValueFromAtom(ctx.atom(1));
+
+            res = val1.div(val2);
+        }
+        return new MyNumber(res);
+
+    }
+
+    // ================================= INFIX =============================================
+    @Override
+    public Expression visitModulusInfix(calculatorParser.ModulusInfixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
 
     @Override
     public Expression visitMulDivInfix(calculatorParser.MulDivInfixContext ctx) {
@@ -87,12 +170,81 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitNumberInfix(calculatorParser.NumberInfixContext ctx) {
-        if (ctx.SUB() != null)
-            // '-' Infix
-            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
-        // NUMBER
-        return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+    public Expression visitLnInfix(calculatorParser.LnInfixContext ctx){
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Logarithm(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSqrtInfix(calculatorParser.SqrtInfixContext ctx) {
+        // 'sqrt' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Sqrt(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitExpInfix(calculatorParser.ExpInfixContext ctx) {
+        // 'exp' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Exponential(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitCosInfix(calculatorParser.CosInfixContext ctx) {
+        // 'cos' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Cosine(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSinInfix(calculatorParser.SinInfixContext ctx) {
+        // 'sin' Infix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.infix()));
+        try {
+            return new Sinus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    // ================================= PREFIX =============================================
+
+    @Override
+    public Expression visitModulusPrefix(calculatorParser.ModulusPrefixContext ctx) {
+        // '|' Infix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Modulus(params, Notation.INFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
     }
 
     @Override
@@ -120,12 +272,84 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitNumberPrefix(calculatorParser.NumberPrefixContext ctx) {
-        if (ctx.SUB() != null)
-            // '-' Prefix
-            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
-        // NUMBER
-        return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+    public Expression visitLnPrefix(calculatorParser.LnPrefixContext ctx){
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Logarithm(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSqrtPrefix(calculatorParser.SqrtPrefixContext ctx) {
+        // 'sqrt' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Sqrt(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitExpPrefix(calculatorParser.ExpPrefixContext ctx) {
+        // 'exp' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Exponential(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitCosPrefix(calculatorParser.CosPrefixContext ctx) {
+        // 'cos' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Cosine(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSinPrefix(calculatorParser.SinPrefixContext ctx) {
+        // 'sin' Prefix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.prefix()));
+        try {
+            return new Sinus(params, Notation.PREFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
+    }
+
+
+
+
+    // ================================= POSTFIX =============================================
+
+    @Override
+    public Expression visitModulusPostfix(calculatorParser.ModulusPostfixContext ctx) {
+        // '|' Postfix '|'
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Modulus(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            // Shouldn't happen since it would be detected by the parser as a syntax error before.
+            return new NotANumber();
+        }
     }
 
     @Override
@@ -153,12 +377,144 @@ public class CalculatorParserVisitor extends calculatorBaseVisitor<Expression> {
     }
 
     @Override
-    public Expression visitNumberPostfix(calculatorParser.NumberPostfixContext ctx) {
-        if (ctx.SUB() != null)
-            // Postfix '-'
-            return new MyNumber(-Integer.parseInt(ctx.NUMBER().getText()));
-        // NUMBER
-        return new MyNumber(Integer.parseInt(ctx.NUMBER().getText()));
+    public Expression visitLnPostfix(calculatorParser.LnPostfixContext ctx){
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Logarithm(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
     }
 
+    @Override
+    public Expression visitSqrtPostfix(calculatorParser.SqrtPostfixContext ctx) {
+        // 'sqrt' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Sqrt(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitExpPostfix(calculatorParser.ExpPostfixContext ctx) {
+        // 'exp' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Exponential(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitCosPostfix(calculatorParser.CosPostfixContext ctx) {
+        // 'cos' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Cosine(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+    @Override
+    public Expression visitSinPostfix(calculatorParser.SinPostfixContext ctx) {
+        // 'sin' Postfix
+        List<Expression> params = new ArrayList<>();
+        params.add(visit(ctx.postfix()));
+        try {
+            return new Sinus(params, Notation.POSTFIX);
+        } catch (IllegalConstruction e) {
+            return new NotANumber();
+        }
+    }
+
+
+    // ================================= ATOMS =============================================
+
+    /**
+     * Visit a FloatAtom and return a MyNumber object with the value of the float as its real part.
+     *
+     * <p>
+     *     This method returns a MyNumber object and not an AbstractValue object because the parser
+     *     can only return Expression objects in this configuration.
+     * </p>
+     * @param ctx A FloatAtomContext object that represents a float number in the parse tree.
+     * @return A MyNumber object with the value of the float as its real part.
+     */
+    @Override
+    public Expression visitFloatAtom(calculatorParser.FloatAtomContext ctx) {
+        BigDecimal real = new BigDecimal(ctx.FLOAT().getText(), precision);
+        if (ctx.getChild(0) == ctx.SUB()){
+            real = real.negate();
+
+        }
+        RealValue realValue = new RealValue(real);
+        return new MyNumber(realValue);
+    }
+
+    /**
+     * Visit a ENotationAtom and return a MyNumber object with the value of the float as its real part.
+     *
+     * <p>
+     *     This method returns a MyNumber object and not an AbstractValue object because the parser
+     *     can only return Expression objects in this configuration.
+     * </p>
+     * @param ctx A ENotationAtomContext object that represents an ENotation number in the parse tree.
+     * @return A MyNumber object with the value of the float as its real part.
+     */
+    @Override
+    public Expression visitENotationAtom(calculatorParser.ENotationAtomContext ctx){
+        BigDecimal real = new BigDecimal(ctx.getText(), precision);
+        RealValue realValue = new RealValue(real);
+        return new MyNumber(realValue);
+    }
+
+    /**
+     * Visit a IntAtom and return a MyNumber object with the value of the int as its real part.
+     *
+     * <p>
+     *     This method returns a MyNumber object and not an AbstractValue object because the parser
+     *     can only return Expression objects in this configuration.
+     * </p>
+     * @param ctx A IntAtomContext object that represents an int number in the parse tree.
+     * @return A MyNumber object with the value of the int as its real part.
+     */
+    @Override
+    public Expression visitIntAtom(calculatorParser.IntAtomContext ctx) {
+        int real = Integer.parseInt(ctx.NUMBER().getText());
+        IntValue res;
+        if (ctx.SUB() != null) {
+            res = new IntValue(-real);
+        } else {
+            res = new IntValue(real);
+        }
+        return new MyNumber(res);
+    }
+
+    @Override
+    public Expression visitPiAtom(calculatorParser.PiAtomContext ctx) {
+        return new MyNumber(new RealValue(new BigDecimal(Double.toString(Math.PI), precision)));
+    }
+
+    @Override
+    public Expression visitImAtom(calculatorParser.ImAtomContext ctx) {
+        if (ctx.atom() == null) {
+            // Only 'i'
+            return new MyNumber(new IntValue(0), new IntValue(1));
+        }
+        AbstractValue imaginary = getValueFromAtom(ctx.atom());
+        return new MyNumber(new IntValue(0), imaginary);
+    }
+
+    @Override
+    public Expression visitReAtom(calculatorParser.ReAtomContext ctx) {
+        return new MyNumber(getValueFromAtom(ctx.atom()));
+    }
 }

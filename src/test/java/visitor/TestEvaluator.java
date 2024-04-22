@@ -7,7 +7,9 @@ import back.calculator.operators.Divides;
 import back.calculator.operators.Minus;
 import back.calculator.operators.Plus;
 import back.calculator.operators.Times;
+import back.calculator.types.IntValue;
 import back.calculator.types.MyNumber;
+import back.calculator.types.RationalValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,7 +49,7 @@ class TestEvaluator {
                 case "+" -> assertEquals(new MyNumber(value1 + value2), calc.eval(new Plus(params)));
                 case "-" -> assertEquals(new MyNumber(value1 - value2), calc.eval(new Minus(params)));
                 case "*" -> assertEquals(new MyNumber(value1 * value2), calc.eval(new Times(params)));
-                case "/" -> assertEquals(new MyNumber(value1 / value2), calc.eval(new Divides(params)));
+                case "/" -> assertEquals(new MyNumber(new RationalValue(new IntValue(value1), new IntValue(value2))), calc.eval(new Divides(params)));
                 default -> fail();
             }
         } catch (IllegalConstruction e) {
