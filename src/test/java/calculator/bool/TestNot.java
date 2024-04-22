@@ -3,6 +3,7 @@ package calculator.bool;
 import calculator.IllegalConstruction;
 import calculator.numbers.Expression;
 import calculator.numbers.MyBool;
+import calculator.numbers.MyNotANumber;
 import calculator.numbers.MyNumber;
 import calculator.operators.boolean_operators.Not;
 import calculator.operators.boolean_operators.Or;
@@ -58,6 +59,11 @@ class TestNot {
         catch(IllegalConstruction e) { fail(); }
     }
 
+    @Test
+    void testOp(){
+        assertInstanceOf(MyNotANumber.class, op.op(new MyNotANumber()));
+    }
+
     @SuppressWarnings("ConstantConditions")
     @Test
     void testNull() {
@@ -99,6 +105,30 @@ class TestNot {
             assertTrue(logMsg.contains("Not is an unary operator, keeping only the first number"));
         }
         catch (IllegalConstruction | MyBool.InvalidNumberException e) {
+            fail();
+        } finally {
+            logger.removeHandler(handler);
+        }
+    }
+
+    @Test
+    void testLogMessageIsSent2() {
+        Logger logger = Logger.getLogger(Not.class.getName());
+
+        Formatter formatter = new SimpleFormatter();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Handler handler = new StreamHandler(out, formatter);
+        logger.addHandler(handler);
+
+        try {
+            Not instance = new Not(new ArrayList<>());
+            instance.op(new MyNumber(4));
+            handler.flush();
+            String logMsg = out.toString();
+            assertNotNull(logMsg);
+            assertTrue(logMsg.contains("Invalid number entered. Number should be either 0 or 1."));
+        }
+        catch (IllegalConstruction e) {
             fail();
         } finally {
             logger.removeHandler(handler);

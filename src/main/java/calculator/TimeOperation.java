@@ -31,8 +31,6 @@ public abstract class TimeOperation implements Expression {
      */
     protected LocalDateTime neutralTime;
 
-    String errorMessage = "Error in counting times";
-
     /** It is not allowed to construct a TimeOperation with a null list of expressions.
      * Note that it is allowed to have an EMPTY list of arguments.
      *
@@ -75,14 +73,6 @@ public abstract class TimeOperation implements Expression {
      */
     public abstract MyTime op(MyTime l, MyTime r);
     // the operation itself is specified in the subclasses
-
-    /** Add more parameters to the existing list of parameters
-     *
-     * @param params	The list of parameters to be added
-     */
-    public void addMoreParams(List<Expression> params) {
-        args.addAll(params);
-    }
 
     /**
      * Accept method to implement the visitor design pattern to traverse time expressions.

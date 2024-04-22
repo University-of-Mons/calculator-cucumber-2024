@@ -62,6 +62,13 @@ class TestImply {
         catch(IllegalConstruction e) { fail(); }
     }
 
+    @Test
+    void testOp(){
+        assertInstanceOf(MyNotANumber.class, op.op(new MyNotANumber(), new MyNotANumber()));
+        assertInstanceOf(MyNotANumber.class, op.op(new MyNumber(1), new MyNotANumber()));
+        assertInstanceOf(MyNotANumber.class, op.op(new MyNotANumber(), new MyNumber(0)));
+    }
+
     @SuppressWarnings("ConstantConditions")
     @Test
     void testNull() {

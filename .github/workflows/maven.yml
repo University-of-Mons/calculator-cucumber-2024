@@ -4,8 +4,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master, dev, New-test-for-complexNumber
-    ]
+    branches: [ master, dev, code-coverage ]
   pull_request:
     branches: [ master, dev ]
 

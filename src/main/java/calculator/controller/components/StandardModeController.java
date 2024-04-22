@@ -24,7 +24,9 @@ public class StandardModeController implements Initializable, ModeController {
     private boolean resetDisplay = false;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Nothing to do here
+    }
 
     // Button click event handlers
     @FXML

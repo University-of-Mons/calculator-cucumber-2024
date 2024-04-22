@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -51,7 +50,6 @@ public class MainViewController implements Initializable {
     private Stage stage;
     private List<CheckMenuItem> modeMenuItems;
     private String currentMode;
-    private boolean resetDisplay = false; // maybe protected variable
     private boolean fromConversionsMode = false;
 
     @Override
@@ -68,7 +66,6 @@ public class MainViewController implements Initializable {
             String retrieved = expressionString.substring(index + 2);
             if (!retrieved.equals(display.getText())) {
                 display.setText(display.getText() + retrieved);
-                resetDisplay = false;
             }
         }
     }
@@ -139,7 +136,7 @@ public class MainViewController implements Initializable {
         URL resource = getClass().getResource(fxmlFile);
 
         if (resource == null) {
-            logger.error("FXML file for " + mode + " mode not found : " + fxmlFile);
+            logger.error("FXML file for {} mode not found : {}", mode, fxmlFile);
         } else {
             try {
                 FXMLLoader loader = new FXMLLoader(resource);
@@ -167,7 +164,7 @@ public class MainViewController implements Initializable {
                 ModeController modeController = loader.getController();
 
                 // Resize the window to the mode controller's preferred size
-                if(this.stage != null) {
+                if (this.stage != null) {
                     stage.setWidth(modeController.getPreferredWidth());
                     stage.setHeight(modeController.getPreferredHeight() + getTitleBarHeight());
                 }
@@ -176,7 +173,7 @@ public class MainViewController implements Initializable {
                 modeController.setDisplayTextField(display);
                 modeController.setExpressionTextField(expression);
             } catch (IOException e) {
-                logger.error("Error loading buttons for the" + mode + "mode.", e);
+                logger.error("Error loading buttons for the {} mode.", mode, e);
             }
         }
     }
@@ -186,12 +183,12 @@ public class MainViewController implements Initializable {
     }
 
     // Display event handlers
-    public void handleExpressionFieldClick(MouseEvent mouseEvent) {
+    public void handleExpressionFieldClick() {
         onRetrieve();
         root.requestFocus();
     }
 
-    public void handleDisplayFieldClick(MouseEvent mouseEvent) {
+    public void handleDisplayFieldClick() {
         root.requestFocus();
     }
 
@@ -212,10 +209,6 @@ public class MainViewController implements Initializable {
     }
 
     public void onDelete() {
-        if (resetDisplay) {
-            expression.appendText(display.getText());
-            display.clear();
-        }
         if (!display.getText().isEmpty()) {
             display.setText(display.getText(0, display.getText().length() - 1));
         }
