@@ -30,8 +30,6 @@ public abstract class Operation implements Expression
    */
   protected int neutral;
 
-  String errorMessage = "Error in counting numbers";
-
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
    *

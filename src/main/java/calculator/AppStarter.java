@@ -1,10 +1,7 @@
 package calculator;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Set;
-import java.util.HashSet;
 
 import calculator.controller.MainViewController;
 import javafx.application.Application;
@@ -24,8 +21,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AppStarter extends Application {
 
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/", "=")); // unused
+    private static final Logger logger = LoggerFactory.getLogger(AppStarter.class);
 
     /** The start method of the Application class.
      * The method is used to start the application and load the main view.
@@ -67,7 +63,6 @@ public class AppStarter extends Application {
 
                 if (isModifierDown) {
                     switch (event.getCode()) {
-                        case EQUALS:
                         case ADD:
                             mainViewController.displayZoomIn();
                             break;
