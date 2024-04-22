@@ -87,6 +87,21 @@ class TestMyRationalNumber {
 
         MyRationalNumber rationalNumber4 = new MyRationalNumber(-1, -2);
         assertEquals("-1÷-2", rationalNumber4.toString());
+
+        MyRationalNumber rationalNumber5 = new MyRationalNumber(0, 1);
+        assertEquals("0", rationalNumber5.toString());
+
+        MyRationalNumber rationalNumber6 = new MyRationalNumber(0, -1);
+        assertEquals("0", rationalNumber6.toString());
+
+        MyRationalNumber rationalNumber7 = new MyRationalNumber(1, 1);
+        assertEquals("1", rationalNumber7.toString());
+
+        MyRationalNumber rationalNumber8 = new MyRationalNumber(-1, 1);
+        assertEquals("-1", rationalNumber8.toString());
+
+        MyRationalNumber rationalNumber9 = new MyRationalNumber(1, -1);
+        assertEquals("1÷-1", rationalNumber9.toString());
     }
 
     @Test

@@ -2,6 +2,7 @@ package calculator.controller.components;
 
 import calculator.Calculator;
 import calculator.RationalParser;
+import calculator.numbers.MyRationalNumber;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,7 +64,7 @@ public class RationalModeController implements Initializable, ModeController {
             Calculator calculator = new Calculator();
             try{
                 RationalParser parser = new RationalParser(display.getText(), calculator);
-                display.setText(parser.evaluate().toString());}
+                display.setText(((MyRationalNumber)parser.evaluate()).getCanonicalForm().toString());}
             catch (Exception e){
                 display.setText("Error");
             }
