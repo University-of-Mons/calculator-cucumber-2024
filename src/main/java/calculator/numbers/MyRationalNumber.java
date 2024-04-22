@@ -97,7 +97,7 @@ public class MyRationalNumber extends MyNumber {
      */
     @Override
     public String toString() {
-        return numerator + "/" + denominator;
+        return numerator + "÷" + denominator;
     }
 
     /**

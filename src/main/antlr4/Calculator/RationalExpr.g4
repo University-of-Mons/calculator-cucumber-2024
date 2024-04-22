@@ -13,7 +13,6 @@ exp : infix
     ;
 
 // infix expression
-
 infix : infix op=(MUL | DIV) infix                          # MulDivInfix
       | infix op=(ADD | SUB) infix                          # AddSubInfix
       | rational                                            # rationalInfix
@@ -21,7 +20,6 @@ infix : infix op=(MUL | DIV) infix                          # MulDivInfix
       ;
 
 // prefix expression
-
 prefix :  op=(MUL | DIV) '(' prefix  ((',')? prefix)+ ')'   # MulDivPrefix
         | op=(ADD | SUB) '(' prefix ((',')? prefix)+ ')'    # AddSubPrefix
         | rational                                          # rationalPrefix
@@ -35,15 +33,17 @@ postfix : '(' postfix ((',')? postfix)+ ')' op=(MUL | DIV)  # MulDivPostfix
         | '(' postfix ')'                                   # parensPostfix
         ;
 
-// Rational numbers
-
-rational: SUB? NUMBER (FRAC (SUB?) NUMBER)?                 # rationalNumber
+// numbers expression
+rational: integer (FRAC integer)?                           # rationalNumber
         ;
 
+integer: SUB? NUMBER                                        # integerNumber
+       ;
+
 MUL : '*';
-DIV : '÷';
+DIV : '/';
 ADD : '+';
 SUB : '-';
-FRAC : '/';
+FRAC : '÷';
 NUMBER : [0-9]+ ;
 WS : [ \t\n\r]+ -> skip ;
