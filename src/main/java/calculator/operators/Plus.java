@@ -1,6 +1,7 @@
 package calculator.operators;
 
 import calculator.Operation;
+import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.IllegalConstruction;
 import calculator.numbers.MyNotANumber;
@@ -20,7 +21,7 @@ import java.util.List;
 public final class Plus extends Operation
  {
 
-  /**
+     /**
    * Class constructor specifying a number of Expressions to add,
    * as well as the Notation used to represent the operation.
    *
@@ -51,6 +52,8 @@ public final class Plus extends Operation
         int denominator = rationalL.getDenominator() * rationalR.getDenominator();
         return new MyRationalNumber(numerator, denominator);
     }
+    if (l instanceof ComplexNumber || r instanceof ComplexNumber)
+        return new ComplexNumber(l.getReal() + r.getReal(), l.getImaginary() + r.getImaginary());
     return new MyNumber(l.getValue() + r.getValue());
   }
 }

@@ -1,6 +1,7 @@
 package calculator.operators;
 
 import calculator.Operation;
+import calculator.numbers.ComplexNumber;
 import calculator.numbers.Expression;
 import calculator.IllegalConstruction;
 import calculator.numbers.MyNotANumber;
@@ -20,7 +21,7 @@ import java.util.List;
 public final class Times extends Operation
  {
 
-  /**
+     /**
    * Class constructor specifying a number of Expressions to multiply,
    * as well as the Notation used to represent the operation.
    *
@@ -51,6 +52,10 @@ public final class Times extends Operation
         int denominator = rationalL.getDenominator() * rationalR.getDenominator();
         return new MyRationalNumber(numerator, denominator);
     }
-    return new MyNumber(l.getValue() * r.getValue());
+    if (l instanceof ComplexNumber || r instanceof ComplexNumber){
+        return new ComplexNumber(l.getReal() * r.getReal() - l.getImaginary() * r.getImaginary(), l.getReal() * r.getImaginary() + l.getImaginary() * r.getReal());
+    }
+    return new MyNumber((double) l.getValue() * r.getValue());
   }
+
  }

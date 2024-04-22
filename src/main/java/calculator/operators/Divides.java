@@ -1,10 +1,7 @@
 package calculator.operators;
 
 import calculator.*;
-import calculator.numbers.Expression;
-import calculator.numbers.MyNotANumber;
-import calculator.numbers.MyNumber;
-import calculator.numbers.MyRationalNumber;
+import calculator.numbers.*;
 
 import java.util.List;
 
@@ -41,7 +38,7 @@ public final class Divides extends Operation {
    * @return True if the operation is invalid, otherwise false.
   */
   private boolean isInvalidDivision(MyNumber l, MyNumber r) {
-      return l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0
+      return l instanceof MyNotANumber || r instanceof MyNotANumber || r.getValue() == 0 && r.getImaginary() == 0
               || (l instanceof MyRationalNumber rationalL && rationalL.getDenominator() == 0)
               || (r instanceof MyRationalNumber rationalR &&
                     (rationalR.getNumerator() == 0 || rationalR.getDenominator() == 0));
@@ -49,7 +46,8 @@ public final class Divides extends Operation {
 
   /**
    * The actual computation of the (binary) arithmetic division of two integers.
-   * If either of the numbers is a MyNotANumber instance or the second number is zero, the method returns a new MyNotANumber instance.
+   * If either of the numbers is a MyNotANumber instance or the second number is zero,
+   * the method returns a new MyNotANumber instance.
    *
    * @param l The first number.
    * @param r The second number that the first number should be divided by.
@@ -62,7 +60,14 @@ public final class Divides extends Operation {
         int numerator = rationalL.getNumerator() * rationalR.getDenominator();
         int denominator = rationalL.getDenominator() * rationalR.getNumerator();
         return new MyRationalNumber(numerator, denominator);
+    }      
+    if (l instanceof ComplexNumber || r instanceof ComplexNumber) {
+        double denominator = r.getReal() * r.getReal() + r.getImaginary() * r.getImaginary();
+        double real = (l.getReal() * r.getReal() + l.getImaginary() * r.getImaginary()) / denominator;
+        double imaginary = (l.getImaginary() * r.getReal() - l.getReal() * r.getImaginary()) / denominator;
+        return new ComplexNumber(real, imaginary);
     }
-      return new MyNumber(l.getValue() / r.getValue());
+    return new MyNumber((double) l.getValue() / r.getValue());
   }
+
 }
