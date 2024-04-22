@@ -24,9 +24,7 @@ class TestRationalParser {
         RationalParser infixParser = new RationalParser(infixExpr, calculator);
         RationalParser prefixParser = new RationalParser(prefixExpr, calculator);
         RationalParser postfixParser = new RationalParser(postfixExpr, calculator);
-        System.out.println("infixParser.evaluate() = " + infixParser.evaluate());
-        System.out.println("prefixParser.evaluate() = " + prefixParser.evaluate());
-        System.out.println("postfixParser.evaluate() = " + postfixParser.evaluate());
+
         assertEquals(expectedValue, infixParser.evaluate());
         assertEquals(expectedValue, prefixParser.evaluate());
         assertEquals(expectedValue, postfixParser.evaluate());
