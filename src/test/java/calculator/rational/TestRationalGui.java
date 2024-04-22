@@ -455,7 +455,7 @@ public class TestRationalGui {
         TextField display1 = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("NaN", display1.getText());
     }
-
+    
     @Test
     void testRationalDivideIntegerSimple(FxRobot fxRobot) {
         fxRobot.clickOn("#btnClear");
@@ -464,10 +464,10 @@ public class TestRationalGui {
         fxRobot.clickOn("#btnFraction");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnDivide");
-        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn3");
         fxRobot.clickOn("#btnEquals");
         TextField display1 = fxRobot.lookup("#display").queryAs(TextField.class);
-        Assertions.assertEquals("3÷4", display1.getText());
+        Assertions.assertEquals("1÷2", display1.getText());
 
         fxRobot.clickOn("#btnClear");
 
@@ -477,7 +477,7 @@ public class TestRationalGui {
         fxRobot.clickOn("#btnFraction");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnComma");
-        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn3");
         fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnEquals");
         TextField display2 = fxRobot.lookup("#display").queryAs(TextField.class);
@@ -490,7 +490,7 @@ public class TestRationalGui {
         fxRobot.clickOn("#btnFraction");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnComma");
-        fxRobot.clickOn("#btn2");
+        fxRobot.clickOn("#btn3");
         fxRobot.clickOn("#btnCloseParenthesis");
         fxRobot.clickOn("#btnDivide");
         fxRobot.clickOn("#btnEquals");
