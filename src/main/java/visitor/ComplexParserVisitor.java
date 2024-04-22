@@ -386,9 +386,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
         Collections.addAll(params, number1, number2);
         try {
-            if(ctx.prefix().size() == 1){
-                return visit(ctx.prefix(0));
-            }
             if(ctx.op.getType() == ComplexExprParser.MUL)
                 return c.eval(new Times(params));
             return c.eval(new Divides(params));
@@ -412,9 +409,6 @@ public class ComplexParserVisitor  extends ComplexExprBaseVisitor<Expression> {
 
         Collections.addAll(params, number1, number2);
         try {
-            if(ctx.prefix().size() == 1){
-                return visit(ctx.prefix(0));
-            }
             if(ctx.op.getType() == ComplexExprParser.ADD)
                 return c.eval(new Plus(params));
             return c.eval(new Minus(params));

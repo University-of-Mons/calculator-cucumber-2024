@@ -48,6 +48,15 @@ class TestComplexNumberParser {
         assertEquals("i", parser.evaluate().toString());
     }
 
+    @Test
+    void testComplexNumberNoReal2(){
+        Calculator calculator = new Calculator();
+        ComplexNumberParser parser = new ComplexNumberParser("-1i",calculator);
+        assertEquals(0.0,parser.evaluate().getReal());
+        assertEquals(-1.0,parser.evaluate().getImaginary());
+        assertEquals("-i", parser.evaluate().toString());
+    }
+
     @ParameterizedTest
     @CsvSource({
             "-5+3i + -2-i , -7 + 2i",
@@ -105,6 +114,30 @@ class TestComplexNumberParser {
 
     @ParameterizedTest
     @CsvSource({
+            "cis(40+5)",
+            "cis(+(40 5))",
+            "cis((40 5)+)",
+    })
+    void testCis(String par){
+        Calculator calculator = new Calculator();
+        ComplexNumberParser parser = new ComplexNumberParser(par,calculator);
+        assertEquals("1 * cis(45)", parser.evaluate().toString());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "e(i*40+5)",
+            "e(i*+(40 5))",
+            "e(i*(40 5)+)",
+    })
+    void testE(String par){
+        Calculator calculator = new Calculator();
+        ComplexNumberParser parser = new ComplexNumberParser(par,calculator);
+        assertEquals("1 * e(i*45)", parser.evaluate().toString());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
             "intoPolar(sqrt(2)+sqrt(2)i)",
             "intoPolar(sqrt(+(1 1))+sqrt(+(1 1))i)",
             "intoPolar(sqrt((1 1)+)+sqrt((1 1)+)i)",
@@ -137,6 +170,21 @@ class TestComplexNumberParser {
         Calculator calculator = new Calculator();
         ComplexNumberParser parser = new ComplexNumberParser(par,calculator);
         assertEquals("2 * e(i*45)", parser.evaluate().toString());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "| 5+ (-i)|",
+            "| +(5 -i)|",
+            "|(5 -i)+|",
+            "| 5+ (-1i)|",
+            "| +(5 -1i)|",
+            "|(5 -1i)+|",
+    })
+    void testComplexNumberIntoExponential2(String par){
+        Calculator calculator = new Calculator();
+        ComplexNumberParser parser = new ComplexNumberParser(par,calculator);
+        assertEquals("5", parser.evaluate().toString());
     }
 
 

@@ -15,19 +15,20 @@ import org.testfx.framework.junit5.Start;
 class TestComplexGui {
 
     private final AppStarter guiStarter = new AppStarter();
+
     @Start
     private void start(Stage stage) {
         guiStarter.start(stage);
     }
 
     @BeforeEach
-    void setUp(FxRobot fxRobot){
+    void setUp(FxRobot fxRobot) {
         fxRobot.clickOn("#modeMenu");
         fxRobot.clickOn("#complexMode");
     }
 
     @Test
-    void testSumComplex(FxRobot fxRobot){
+    void testSumComplex(FxRobot fxRobot) {
         fxRobot.clickOn("#btn5");
         fxRobot.clickOn("#btnPlus");
         fxRobot.clickOn("#btn2");
@@ -38,7 +39,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testMinusComplex(FxRobot fxRobot){
+    void testMinusComplex(FxRobot fxRobot) {
         fxRobot.clickOn("#btn7");
         fxRobot.clickOn("#btnMinus");
         fxRobot.clickOn("#btn4");
@@ -50,7 +51,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testMultiplyComplex(FxRobot fxRobot){
+    void testMultiplyComplex(FxRobot fxRobot) {
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn6");
         fxRobot.clickOn("#btnPlus");
@@ -70,7 +71,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testDivideComplex(FxRobot fxRobot){
+    void testDivideComplex(FxRobot fxRobot) {
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn7");
         fxRobot.clickOn("#btnPlus");
@@ -90,7 +91,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testModulusComplex(FxRobot fxRobot){
+    void testModulusComplex(FxRobot fxRobot) {
         fxRobot.clickOn("#btnModulus");
         fxRobot.clickOn("#btn4");
         fxRobot.clickOn("#btnPlus");
@@ -103,7 +104,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testSqrt(FxRobot fxRobot){
+    void testSqrt(FxRobot fxRobot) {
         fxRobot.clickOn("#btnSqrt");
         fxRobot.clickOn("#btn9");
         fxRobot.clickOn("#btnCloseParenthesis");
@@ -113,7 +114,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testIntoCartesian(FxRobot fxRobot){
+    void testIntoCartesian(FxRobot fxRobot) {
         fxRobot.clickOn("#zoomMenu");
         fxRobot.clickOn("#zoomOut");
         fxRobot.clickOn("#btnCartesianForm");
@@ -131,7 +132,7 @@ class TestComplexGui {
 
 
     @Test
-    void testIntoPolar(FxRobot fxRobot){
+    void testIntoPolar(FxRobot fxRobot) {
         fxRobot.clickOn("#btnPolarForm");
         fxRobot.clickOn("#btnSqrt");
         fxRobot.clickOn("#btn2");
@@ -148,7 +149,8 @@ class TestComplexGui {
     }
 
     @Test
-    void testIntoE(FxRobot fxRobot){
+    void testIntoE(FxRobot fxRobot) {
+        fxRobot.clickOn("#btnClear");
         fxRobot.clickOn("#btnEForm");
         fxRobot.clickOn("#btn2");
         fxRobot.clickOn("#btnMultiply");
@@ -163,7 +165,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testComplexNumberPrefix(FxRobot fxRobot){
+    void testComplexNumberPrefix(FxRobot fxRobot) {
         fxRobot.clickOn("#btnPlus");
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn5");
@@ -175,7 +177,7 @@ class TestComplexGui {
     }
 
     @Test
-    void testComplexNumberPostfix(FxRobot fxRobot){
+    void testComplexNumberPostfix(FxRobot fxRobot) {
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn5");
         fxRobot.clickOn("#btnComma");
@@ -189,7 +191,7 @@ class TestComplexGui {
 
 
     @Test
-    void testErrorComplex(FxRobot fxRobot){
+    void testErrorComplex(FxRobot fxRobot) {
         fxRobot.clickOn("#btnOpenParenthesis");
         fxRobot.clickOn("#btn7");
         fxRobot.clickOn("#btnPlus");
@@ -207,4 +209,31 @@ class TestComplexGui {
         TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
         Assertions.assertEquals("NaN", display.getText());
     }
+
+
+    @Test
+    void testInvalidEnter(FxRobot fxRobot) {
+        fxRobot.clickOn("#btnSqrt");
+        fxRobot.clickOn("#btn9");
+        fxRobot.clickOn("#btnEquals");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("Error", display.getText());
+    }
+
+    @Test
+    void testXCommaAfterEqual(FxRobot fxRobot) {
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btnComma");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("0,", display.getText());
+    }
+
+    @Test
+    void testClearAfterEqual(FxRobot fxRobot) {
+        fxRobot.clickOn("#btnEquals");
+        fxRobot.clickOn("#btnClear");
+        TextField display = fxRobot.lookup("#display").queryAs(TextField.class);
+        Assertions.assertEquals("", display.getText());
+    }
+
 }
