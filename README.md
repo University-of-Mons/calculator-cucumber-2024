@@ -1,4 +1,4 @@
-THIS REPOSITORY IS ARCHIVED. DO NOT USE IT OR FORK IT.
+# THIS REPOSITORY IS ARCHIVED. DO NOT USE IT OR FORK IT.
 
 Code quality: ![Maven Build](https://github.com/tommens/calculator-cucumber/actions/workflows/maven.yml/badge.svg)
 ![CodeQL](https://github.com/tommens/calculator-cucumber/actions/workflows/codeql.yml/badge.svg)
